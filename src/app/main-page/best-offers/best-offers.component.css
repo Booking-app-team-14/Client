@@ -1,0 +1,230 @@
+.middle_main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  width: fit-content;
+  margin-left: 200px;
+}
+
+.titles h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #65AEF2;
+}
+
+.titles h1 {
+  margin: 0;
+  font-size: 40px;
+  color: #333;
+}
+.titles-button {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+}
+.main-description {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+  margin-left: 200px;
+  max-width: 500px;
+}
+
+.view-all {
+  display: flex;
+
+  align-items: center;
+}
+.view-all input[type="submit"]:hover{
+  background-color: #4a8bd6;
+}
+
+.view-all input[type="submit"] {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #65AEF2;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.best-offers {
+  width: fit-content;
+  height: 100%;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.offers-container {
+  width: 90%;
+  height: auto;
+  margin: 0 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 20px;
+  gap: 20px;
+  border: 1px solid #ccc;
+  background-color: rgba(153, 153, 153, 0.34);
+  scrollbar-width: thin;
+  scrollbar-color: #999 transparent;
+}
+
+.offers-list {
+  display: inline-flex;
+  gap: 30px;
+  width: 100%;
+  height: auto;
+  position: relative;
+  overflow-x: auto;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+  background-color: rgba(100, 149, 237, 0.3);
+}
+
+
+.offers-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.offers-container::-webkit-scrollbar-track {
+  background: #ccc;
+  border-radius: 10px ;
+}
+
+.offers-container::-webkit-scrollbar-thumb {
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+
+.card {
+  border: 1px solid #65AEF2;
+  border-radius: 18px;
+  padding: 6px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  flex: 0 0 auto;
+  display: inline-block;
+  white-space: normal;
+  width: 18%;
+  height: 22vw;
+  position: relative;
+}
+
+.card img {
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+  border-radius: 18px;
+  margin-bottom: 2%;
+}
+
+.card h3 {
+  font-size: 14px;
+  text-align: left;
+}
+
+.card .name {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.card .details {
+  text-align: left;
+
+}
+
+.card .details p {
+  margin: 3px 0;
+}
+
+
+.card .guests {
+  text-align: right;
+  padding-left: 32%;
+  color: #65AEF2;
+  font-weight: bold;
+  display: inline-block;
+  align-items: center;
+}
+
+.card .guests-icon {
+  margin-right: 5px;
+}
+
+.card .guests-icon img {
+
+  width: 16px;
+  height: auto;
+}
+
+.card .guests-number {
+  font-weight: bold;
+}
+
+.card .name,
+.card .guests {
+  display: inline;
+  margin-right: 10px;
+}
+.card .description {
+  text-align: left;
+  font-size: 12px;
+  margin: 3px 0;
+}
+
+.card .price {
+  text-align: center;
+  font-size: x-large;
+  margin-top: 20px;
+  font-weight: bold;
+  display: flex;
+  color:#65AEF2;
+  align-items: center;
+  justify-content: center; /* Center price */
+}
+
+.card .price::before {
+  content: '$';
+  margin-right: 5px;
+}
+.card .price::after {
+  content: '/night';
+  margin-right: 5px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card .details,
+.card .guests,
+.card .description,
+.card .price {
+  margin-bottom: 10px;
+}
+
+.card .details p,
+.card .description {
+  margin: 5px 0;
+}
+
+.card .price::before,
+.card .price::after {
+  font-size: 14px;
+}

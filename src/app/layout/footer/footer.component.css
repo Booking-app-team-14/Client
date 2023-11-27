@@ -2,7 +2,7 @@ footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  background-color: rgb(224, 224, 224);
+  background-color: #FAFAFB;
   color: rgba(101, 174, 242, 0.87);
   padding: 30px 0;
 }
