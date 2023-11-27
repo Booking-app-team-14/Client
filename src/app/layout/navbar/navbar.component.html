@@ -1,1 +1,41 @@
-<p>navbar works!</p>
+<div class="navbar-container">
+
+    <div>
+        <a>About Us</a>
+        <a>Contact Us</a>
+    </div>
+
+    <img src="assets/logo_icon.svg" alt="logo" routerLink=""/>
+
+    <div class="navbar-navigation">
+
+        <ng-container *ngIf="role === ''">
+            <button id="non-primary-btn" routerLink="">Login</button>
+            <button routerLink="">Register</button>
+        </ng-container>
+
+        <ng-container *ngIf="role === 'guest'">
+            <button mat-icon-button class="fav-btn" routerLink="">
+                <mat-icon>favorite</mat-icon>
+            </button>
+            <button mat-icon-button class="fav-btn" routerLink="">
+                <mat-icon>notifications</mat-icon>
+            </button>
+            <button routerLink="">Profile</button>
+        </ng-container>
+
+        <ng-container *ngIf="role === 'host'">
+            <button mat-icon-button class="fav-btn" routerLink="">
+                <mat-icon>notifications</mat-icon>
+            </button>
+            <button id="non-primary-btn1" routerLink="">Post</button>
+            <button routerLink="">Profile</button>
+        </ng-container>
+
+        <ng-container *ngIf="role === 'admin'">
+            <button routerLink="">Profile</button>
+        </ng-container>
+
+    </div>
+
+</div>
