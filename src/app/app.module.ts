@@ -7,6 +7,8 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { BestOffersComponent } from './main-page/best-offers/best-offers.component';
+import { TestimonialsComponent } from './main-page/testimonials/testimonials.component';
+import { SearchSectionComponent } from './main-page/search-section/search-section.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { BestOffersComponent } from './main-page/best-offers/best-offers.compone
     NavbarComponent,
     HeaderComponent,
     FooterComponent,
-    BestOffersComponent
+    BestOffersComponent,
+    TestimonialsComponent,
+    SearchSectionComponent
   ],
   imports: [
     BrowserModule,

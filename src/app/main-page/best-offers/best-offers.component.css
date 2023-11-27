@@ -85,7 +85,7 @@
 
 .offers-list {
   display: inline-flex;
-  gap: 30px;
+  gap: 2%;
   width: 100%;
   height: auto;
   position: relative;
@@ -124,6 +124,7 @@
   width: 18%;
   height: 22vw;
   position: relative;
+  margin-right: 2%; /
 }
 
 .card img {
