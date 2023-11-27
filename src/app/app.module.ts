@@ -9,6 +9,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { BestOffersComponent } from './main-page/best-offers/best-offers.component';
 import { TestimonialsComponent } from './main-page/testimonials/testimonials.component';
 import { SearchSectionComponent } from './main-page/search-section/search-section.component';
+import { LayoutComponent } from './main-page/layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SearchSectionComponent } from './main-page/search-section/search-sectio
     FooterComponent,
     BestOffersComponent,
     TestimonialsComponent,
-    SearchSectionComponent
+    SearchSectionComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
