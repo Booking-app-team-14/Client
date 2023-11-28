@@ -12,9 +12,14 @@ body {
 
 }
 
+.subtitle{
+    color: #4F4F4F;
+}
+
+
 .login-form {
     box-sizing: border-box;
-    width: 60%;
+    width: 50%;
     top:2%;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
@@ -81,7 +86,20 @@ span.psw {
 }
 
 .radio1, .radio2 {
-    margin-right: 50px; /* Dodajte razmak između radio dugmadi */
+    margin-right: 50px;
+}
+
+.signin-text {
+    text-align: center;
+
+}
+.signin-link {
+    text-decoration: none;
+    color: #65AEF2;
+}
+
+.terms{
+    color: #65AEF2;
 }
 
 
