@@ -14,7 +14,9 @@ import { TestimonialsComponent } from './main-page/testimonials/testimonials.com
 import { SearchSectionComponent } from './main-page/search-section/search-section.component';
 import { CardListComponent } from './search-page/card-list/card-list.component';
 import { SidebarComponent } from './search-page/sidebar/sidebar.component';
-import { LayoutComponent } from './search-page/layout/layout.component';
+import { SearchPageComponent } from './layout/search-page/search-page.component';
+import { MainPageComponent } from './layout/main-page/main-page.component';
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -29,18 +31,20 @@ import { LayoutComponent } from './search-page/layout/layout.component';
     SearchSectionComponent,
     CardListComponent,
     SidebarComponent,
-    LayoutComponent,
+    SearchPageComponent,
+    MainPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration()
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

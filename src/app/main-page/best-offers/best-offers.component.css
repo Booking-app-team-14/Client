@@ -45,15 +45,15 @@
 
   align-items: center;
 }
-.view-all input[type="submit"]:hover{
+.view-all button:hover {
   background-color: #4a8bd6;
 }
 
-.view-all input[type="submit"] {
+.view-all button {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  background-color:var(--color_primary_blue);
+  background-color: var(--color_primary_blue);
   color: var(--color_white);
   font-size: 16px;
   cursor: pointer;
@@ -78,7 +78,7 @@
   padding: 20px;
   gap: 20px;
   border: 1px solid var(--color_white);
-  background-color: rgba(153, 153, 153, 0.34);
+  background-color: var(--color_white);
   scrollbar-width: thin;
   scrollbar-color: #999 transparent;
 }
@@ -98,6 +98,7 @@
 
 .offers-container::-webkit-scrollbar {
   width: 8px;
+
 }
 
 .offers-container::-webkit-scrollbar-track {
@@ -108,6 +109,9 @@
 .offers-container::-webkit-scrollbar-thumb {
   background-color: var(--color_white);
   border-radius: 10px;
+  border: 1px solid;
+  border-color: var(--color_primary_blue);
+
 }
 
 

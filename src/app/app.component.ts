@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: '.main-page/layout/layout.component.html',
-  styleUrl: '.main-page/layout/layout.component.css'
+  templateUrl: './layout/main-page/main-page.component.html',
+  styleUrl: './layout/main-page/main-page.component.css'
 })
 export class AppComponent {
   title = 'BAT14';
+
 }

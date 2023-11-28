@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
-  role: string = "";
+  role: string = "guest";
 
 }
