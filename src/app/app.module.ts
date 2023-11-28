@@ -14,6 +14,7 @@ import { TestimonialsComponent } from './main-page/testimonials/testimonials.com
 import { SearchSectionComponent } from './main-page/search-section/search-section.component';
 import { CardListComponent } from './search-page/card-list/card-list.component';
 import { SidebarComponent } from './search-page/sidebar/sidebar.component';
+import { LayoutComponent } from './search-page/layout/layout.component';
 
 
 
@@ -28,6 +29,7 @@ import { SidebarComponent } from './search-page/sidebar/sidebar.component';
     SearchSectionComponent,
     CardListComponent,
     SidebarComponent,
+    LayoutComponent,
   ],
   imports: [
     BrowserModule,
