@@ -5,7 +5,7 @@
 
 .testimonials h2 {
   font-size: 18px;
-  color: #65AEF2;
+  color: var(--color_primary_blue);
   margin-bottom: 10px;
 }
 
@@ -58,7 +58,7 @@
   margin-left: 20px;
 }
 .rating {
-  color:#65AEF2;
+  color:var(--color_primary_blue);
 }
 
 .comment {
