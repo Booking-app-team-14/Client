@@ -12,6 +12,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { BestOffersComponent } from './main-page/best-offers/best-offers.component';
 import { TestimonialsComponent } from './main-page/testimonials/testimonials.component';
 import { SearchSectionComponent } from './main-page/search-section/search-section.component';
+import { CardListComponent } from './search-page/card-list/card-list.component';
+import { SidebarComponent } from './search-page/sidebar/sidebar.component';
 
 
 
@@ -24,6 +26,8 @@ import { SearchSectionComponent } from './main-page/search-section/search-sectio
     BestOffersComponent,
     TestimonialsComponent,
     SearchSectionComponent,
+    CardListComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
