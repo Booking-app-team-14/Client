@@ -1,1 +1,32 @@
-<p>card-list works!</p>
+<div class="card-list">
+  <div class="sort-dropdown">
+    <select id="sortOptions" name="sortOptions" class="select-field">
+      <option value="rating">Sort by Rating</option>
+      <option value="price">Sort by Price</option>
+    </select>
+  </div>
+
+  <div class="card-list1">
+    <div class="card" *ngFor="let apartment of apartments">
+      <div class="card-image">
+        <img [src]="apartment.imageUrl" alt="Apartment Image" />
+      </div>
+      <div class="card-details">
+        <div class="card-name">{{ apartment.name }}</div>
+        <div class="card-rating" color= var(--color_primary_blue);>
+          ★  {{ apartment.rating }}   ({{ apartment.reviews }} reviews)
+        </div>
+        <div class="card-description">{{ apartment.description }}</div>
+        <div class="card-footer">
+          <button class="details-btn">Details</button>
+          <div class="price-per-night">${{ apartment.pricePerNight }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pagination">
+    <button *ngFor="let page of totalPages" (click)="changePage(page)" [class.active]="page === currentPage">
+      {{ page }}
+    </button>
+  </div>
+</div>

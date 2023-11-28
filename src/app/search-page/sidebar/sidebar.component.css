@@ -1,5 +1,6 @@
 body {
   font-family: Arial, sans-serif;
+  width: auto;
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
@@ -7,17 +8,16 @@ body {
 
 
 .sidebar {
-  width: 20%;
+  width: auto;
   padding: 20px;
   box-sizing: border-box;
-  background-color: #fff;
 }
 
 .filter-card {
   margin-bottom: 20px;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px #a1a1a1;
   border: 2px solid #bfbfbf;
   display: flex;
   flex-direction: column;
@@ -45,13 +45,14 @@ body {
 
 .checkbox-option {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 10px;
   width: 100%;
 }
 
 .checkbox-option input[type="checkbox"] {
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .checkbox-option label {
@@ -59,17 +60,41 @@ body {
   color: #555;
 }
 
-.input-field,
+.input-field {
+  width: 100%;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid #65AEF2;
+  font-size: 16px;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 15px;
+  outline: none;
+}
+
 .select-field {
   width: 100%;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+  border: 1px solid #65AEF2; /* Border color for select field */
+  font-size: 16px;
   box-sizing: border-box;
-  margin-bottom: 10px;
-  padding: 8px;
-  text-align: center;
-  margin-right: 10px;
+  padding: 10px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  outline: none;
+}
+
+
+.select-field::placeholder {
+  color: #999;
+}
+.select-field:after {
+  content: '\25BC';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .filter-section input[type="checkbox"],

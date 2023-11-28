@@ -1,0 +1,150 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.card-list {
+  width: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.sort-dropdown {
+  margin-bottom: 20px;
+  width: 200px;
+  margin-left: 73%;
+  position: relative;
+}
+
+.sort-dropdown select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 2px solid #65aef2;
+  border-radius: 8px;
+  appearance: none;
+  background-color: #fff;
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.sort-dropdown::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #65aef2;
+  pointer-events: none;
+}
+
+
+.sort-dropdown:hover select,
+.sort-dropdown select:focus {
+  border-color: #4a8bd6;
+}
+.sort-dropdown select:focus {
+  outline:#65AEF2;
+}
+.card-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  width: 95%;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px #333;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-image img {
+  width: 90%;
+  height: 90%;
+  margin:2px;
+  object-fit: cover;
+}
+
+.card-details {
+  width: 75%;
+  padding: 10px;
+}
+
+
+
+.card-name {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.card-rating {
+  margin-bottom: 8px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 8px;
+}
+.card-footer:last-child {
+  margin-right: -50px;
+}
+
+.price-per-night {
+  font-size: 30px;
+  color: #65aef2;
+  margin-left: 10%;
+}
+
+.details-btn {
+  background-color: #65aef2;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.details-btn:hover{
+  background-color: rgba(101, 174, 242, 0.68);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  padding: 8px 12px;
+  margin: 0 4px;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #65aef2;
+  color: white;
+}
