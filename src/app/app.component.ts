@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-
+  title = 'BAT14';
 }
 
 export const userRole: string = "guest";
