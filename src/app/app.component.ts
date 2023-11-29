@@ -9,4 +9,4 @@ export class AppComponent {
   title = 'BAT14';
 }
 
-export const userRole: string = "guest";
+export const userRole: string = "";

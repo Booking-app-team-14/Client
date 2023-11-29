@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  passwordVisibility : boolean = true;
+  passwordConfirmVisibility : boolean = true;
+  passwordType : string = "password";
+  passwordConfirmType : string = "password";
 
 }

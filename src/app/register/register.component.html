@@ -1,4 +1,4 @@
-<body>
+<div class="container-register">
 <form method="post" class="login-form">
     <div class="container">
         <h1>Register</h1>
@@ -8,12 +8,19 @@
         <label for="email"><b>Email</b></label>
         <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+      <div class="input-row">
+        <label> <b>Password </b></label>
+        <input [type]="passwordType" placeholder="Enter password" class="password">
+        <mat-icon *ngIf="passwordVisibility" (click)="passwordVisibility=false;passwordType='text'">visibility</mat-icon>
+        <mat-icon *ngIf="!passwordVisibility" (click)="passwordVisibility=true;passwordType='password'">visibility_off</mat-icon>
+      </div>
 
-        <label for="psw-repeat"><b>Confirm Password</b></label>
-        <input type="password" placeholder="Confirm Password" name="psw-repeat" id="psw-repeat" required>
-
+      <div class="input-row">
+        <label> <b>Confirm Password </b></label>
+        <input [type]="passwordType" placeholder="Confirm password" class="password">
+        <mat-icon *ngIf="passwordVisibility" (click)="passwordVisibility=false;passwordType='text'">visibility</mat-icon>
+        <mat-icon *ngIf="!passwordVisibility" (click)="passwordVisibility=true;passwordType='password'">visibility_off</mat-icon>
+      </div>
         <label for="first"><b>First Name</b></label>
         <input type="text" placeholder="Enter first name" name="first" id="first" required>
 
@@ -53,6 +60,6 @@
 
 </form>
 
-</body>
+</div>
 
 
