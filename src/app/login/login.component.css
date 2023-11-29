@@ -128,13 +128,11 @@ button:hover {
 span.psw {
     float: right;
 }
-
-#register-link {
-    color: #65AEF2;
-    text-decoration: none;
-    display: block;
-    margin: 0 auto;
+.signin-text {
     text-align: center;
-    font-size: 16px;
-    margin-top: 10px;
+
+}
+#register-link {
+    text-decoration: none;
+    color: #65AEF2;
 }

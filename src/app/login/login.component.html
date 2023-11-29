@@ -6,8 +6,11 @@
         quis nostrud exercitation ullamco laboris nisi ut aliquip ex <br> ea commodo consequat.</p>
 
     <div class="button-container">
-        <button class="get-started-button">Get Started</button>
+        <ng-container>
+            <button class="get-started-button"  routerLink="/main-page">Get Started</button>
+        </ng-container>
     </div>
+
 </div>
 
 <form method="post" class="login-form">
@@ -30,7 +33,7 @@
     </div>
 
 
-    <a routerLink="/register" id="register-link">Don't have an account? Register</a>
+    <p class="signin-text"> Don't have an account? <a routerLink="/register" id="register-link">Register</a></p>
 
 
 
