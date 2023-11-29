@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +30,7 @@ import { CardListComponent } from './search-page/card-list/card-list.component';
 import { SidebarComponent } from './search-page/sidebar/sidebar.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import {UserService} from "./login/user.service";
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { MainPageComponent } from './main-page/main-page.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -65,6 +68,7 @@ import { MainPageComponent } from './main-page/main-page.component';
     ReactiveFormsModule
   ],
   providers: [
+    [UserService],
     provideClientHydration()
   ],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { userRole } from '../../app.component';
+//import { userRole } from '../../app.component';
+import {UserService} from "../../login/user.service";
 
 @Component({
   selector: 'app-profile',
@@ -7,8 +8,8 @@ import { userRole } from '../../app.component';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
-  
-  userRole: string = userRole;
+
+  userRole: string = '';
 
   user: {
     firstName: string,
@@ -25,5 +26,12 @@ export class ProfileComponent {
     phone: '+381 66 0123456',
     avatarPath: 'assets/user-avatar.png'
   };
+  constructor(private userService: UserService) {}
+
+  ngOnInit(): void {
+    this.userService.userRole$.subscribe(role => {
+      this.userRole = role;
+    });
+  }
 
 }
