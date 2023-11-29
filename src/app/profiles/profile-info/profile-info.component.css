@@ -76,9 +76,10 @@
 }
 
 .account-actions button:hover {
-    background-color: var(--color_gray_text);
+    background-color: var(--color_background);
     cursor: pointer;
-    box-shadow: inset 0px 0px 0px 1px var(--color_black_text);
+    box-shadow: 0 0 0 1px var(--color_black_text);
+    transform: translateX(-8px);
 }
 
 .account-buttons {
