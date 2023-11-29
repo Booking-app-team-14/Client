@@ -13,9 +13,13 @@ import { GuestProfileComponent } from './profiles/guest-profile/guest-profile.co
 import { HostProfileComponent } from './profiles/host-profile/host-profile.component';
 import { AdminProfileComponent } from './profiles/admin-profile/admin-profile.component';
 import { ProfileInfoComponent } from './profiles/profile-info/profile-info.component';
-import { MatDialogModule } from '@angular/material/dialog';
 import { UpdateAccountComponent } from './profiles/profile-info/update-account/update-account.component';
 import { ProfileComponent } from './profiles/profile/profile.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatNativeDateModule} from '@angular/material/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,7 @@ import { ProfileComponent } from './profiles/profile/profile.component';
     AdminProfileComponent,
     ProfileInfoComponent,
     UpdateAccountComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,11 @@ import { ProfileComponent } from './profiles/profile/profile.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
-    MatDialogModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration()
