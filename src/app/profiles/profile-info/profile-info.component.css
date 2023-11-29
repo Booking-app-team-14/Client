@@ -24,7 +24,7 @@
     object-position: center;
     border-radius: 10%;
     border: 2px solid var(--color_black_text);
-    box-shadow: 0 0 5px 0 rgba(30, 30, 30, 0.3);   
+    box-shadow: 0 0 5px 0 rgba(30, 30, 30, 0.3);
 }
 
 .info {
@@ -76,7 +76,7 @@
 }
 
 .account-actions button:hover {
-    background-color: var(--color_grey_light);
+    background-color: var(--color_gray_text);
     cursor: pointer;
     box-shadow: inset 0px 0px 0px 1px var(--color_black_text);
 }

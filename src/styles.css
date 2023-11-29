@@ -4,7 +4,7 @@
     --color_primary_blue: #65AEF2;
     --color_background: #F4F4F4;
     --color_black_text: #1E1E1E;
-    --color_gray_text: #4F4F4F;
+    --color_gray_text: rgba(79, 79, 79, 0.35);
     --color_gray_icon: #BDBDBD;
     --color_white: #FFFFFF;
     --color_footer_background: #FAFAFB;

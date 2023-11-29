@@ -5,6 +5,8 @@ import { UpdateAccountComponent } from './profiles/profile-info/update-account/u
 import { ProfileComponent } from './profiles/profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import {MainPageComponent} from "./main-page/main-page.component";
+import {SearchPageComponent} from "./search-page/search-page.component";
 
 const routes: Routes = [
   {component: HeaderComponent, path: 'header'},
@@ -18,6 +20,8 @@ const routes: Routes = [
   },
   {component: ProfileComponent, path: 'profile'},
   {component: UpdateAccountComponent, path: 'profile/update-account'},
+  {component:MainPageComponent, path:''},
+  {component:SearchPageComponent,path:'search'}
 ];
 
 @NgModule({
