@@ -4,7 +4,7 @@
         <a>About Us</a>
         <a>Contact Us</a>
     </div>
-    
+
     <img src="assets/logo_icon.svg" alt="logo" routerLink=""/>
 
     <div class="navbar-navigation">
@@ -12,8 +12,8 @@
         <button id="non-primary-btn" routerLink="header">Dev Testing</button>
 
         <ng-container *ngIf="role === ''">
-            <button id="non-primary-btn" routerLink="">Login</button>
-            <button routerLink="">Register</button>
+            <button id="non-primary-btn" routerLink="/login">Login</button>
+            <button routerLink="/register">Register</button>
         </ng-container>
 
         <ng-container *ngIf="role === 'guest'">
