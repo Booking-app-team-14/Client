@@ -6,5 +6,30 @@ import { Component } from '@angular/core';
   styleUrl: './testimonials.component.css'
 })
 export class TestimonialsComponent {
-
+  owners = [
+    {
+      image: '/assets/BG.png',
+      rating: '★★★★★',
+      comment: 'A short comment about the experience...',
+      name: 'Douwe Louis'
+    },
+    {
+      image: '/assets/BG.jpg',
+      rating: '★★★★★',
+      comment: 'A short comment about the experience...',
+      name: 'Jennie Louis'
+    },
+    {
+      image: '/assets/BG.jpg',
+      rating: '★★★★★',
+      comment: 'A short comment about the experience...',
+      name: 'Jennie Louis'
+    },
+    {
+      image: '/assets/BG.png',
+      rating: '★★★★★',
+      comment: 'A short comment about the experience...',
+      name: 'Douwe Louis'
+    },
+  ];
 }

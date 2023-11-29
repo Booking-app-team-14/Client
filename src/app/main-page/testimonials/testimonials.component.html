@@ -4,58 +4,16 @@
     <p>Don't just take our words</p>
   </div>
   <div class="owners">
-    <div class="owner">
+    <div class="owner" *ngFor="let owner of owners">
       <div class="owner-details">
         <div class="owner-info">
           <div class="owner-image">
-            <img src="/assets/BG.jpg" alt="Owner 1">
+            <img [src]="owner.image" alt="{{ owner.name }}">
           </div>
           <div class="owner-text">
-            <div class="rating">★★★★★</div>
-            <p class="comment">A short comment about the experience...</p>
-            <p class="name">Jennie Louis</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="owner">
-      <div class="owner-details">
-        <div class="owner-info">
-          <div class="owner-image">
-            <img src="/assets/BG.jpg" alt="Owner 1">
-          </div>
-          <div class="owner-text">
-            <div class="rating">★★★★★</div>
-            <p class="comment">A short comment about the experience...</p>
-            <p class="name">Jennie Louis</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="owner">
-      <div class="owner-details">
-        <div class="owner-info">
-          <div class="owner-image">
-            <img src="/assets/BG.jpg" alt="Owner 1">
-          </div>
-          <div class="owner-text">
-            <div class="rating">★★★★★</div>
-            <p class="comment">A short comment about the experience...</p>
-            <p class="name">Jennie Louis</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="owner">
-      <div class="owner-details">
-        <div class="owner-info">
-          <div class="owner-image">
-            <img src="assets/BG.jpg" alt="Owner 1">
-          </div>
-          <div class="owner-text">
-            <div class="rating">★★★★★</div>
-            <p class="comment">A short comment about the experience...</p>
-            <p class="name">Jennie Louis</p>
+            <div class="rating">{{ owner.rating }}</div>
+            <p class="comment">{{ owner.comment }}</p>
+            <p class="name">{{ owner.name }}</p>
           </div>
         </div>
       </div>
