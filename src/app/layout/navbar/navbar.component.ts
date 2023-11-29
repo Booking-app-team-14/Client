@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { userRole } from '../../app.component';
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +8,6 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
-  role: string = "";
+  userRole: string = userRole;
 
 }
