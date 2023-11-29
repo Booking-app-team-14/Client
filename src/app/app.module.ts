@@ -14,8 +14,8 @@ import { TestimonialsComponent } from './main-page/testimonials/testimonials.com
 import { SearchSectionComponent } from './main-page/search-section/search-section.component';
 import { CardListComponent } from './search-page/card-list/card-list.component';
 import { SidebarComponent } from './search-page/sidebar/sidebar.component';
-import { SearchPageComponent } from './layout/search-page/search-page.component';
-import { MainPageComponent } from './layout/main-page/main-page.component';
+import { SearchPageComponent } from './search-page/search-page.component';
+import { MainPageComponent } from './main-page/main-page.component';
 import {FormsModule} from "@angular/forms";
 
 

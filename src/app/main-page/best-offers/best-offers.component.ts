@@ -7,6 +7,11 @@ import {Router} from "@angular/router";
   styleUrl: './best-offers.component.css'
 })
 export class BestOffersComponent {
+  constructor(private router: Router) {}
+
+  redirectToSearchPage() {
+    this.router.navigate(['/search']);
+  }
   offers = [
     {
       image: '/assets/mainPagePicture.jpg',
