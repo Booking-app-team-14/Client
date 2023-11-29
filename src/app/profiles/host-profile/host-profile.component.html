@@ -1,0 +1,27 @@
+<app-profile-info [user]="user"></app-profile-info>
+
+<div class="action-btns">
+    <button class="action-btn" routerLink="">Check reservations</button>
+    <button class="action-btn" routerLink="">Generate reports</button>
+    <button class="action-btn" routerLink="">My reviews</button>
+</div>
+
+<h2 class="titles">My accommodations</h2>
+
+<div class="filter">
+    <div class="filter-component">
+        <h3>Search by name</h3>
+        <input type="text" placeholder="eg. Lea">
+    </div>
+    <div class="filter-component">
+        <h3>Search by address</h3>
+        <input type="text" placeholder="eg. Some Address 123">
+    </div>
+    <button mat-icon-button class="fav-btn">
+        <mat-icon>search</mat-icon>
+    </button>
+</div>
+
+<div class="accommodations">
+    <h2 class="titles">You currently have no accommodations</h2>
+</div>

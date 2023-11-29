@@ -1,6 +1,6 @@
 <div class="navbar-container">
 
-    <div>
+    <div class="container-about-contact">
         <a>About Us</a>
         <a>Contact Us</a>
     </div>
@@ -9,33 +9,31 @@
 
     <div class="navbar-navigation">
 
-        <button id="non-primary-btn" routerLink="header">Dev Testing</button>
-
-        <ng-container *ngIf="role === ''">
-            <button id="non-primary-btn1" routerLink="">Login</button>
-            <button routerLink="">Register</button>
+        <ng-container *ngIf="userRole === ''">
+            <button id="non-primary-btn" routerLink="/login">Login</button>
+            <button routerLink="/register">Register</button>
         </ng-container>
 
-        <ng-container *ngIf="role === 'guest'">
+        <ng-container *ngIf="userRole === 'guest'">
             <button mat-icon-button class="fav-btn" routerLink="">
                 <mat-icon>favorite</mat-icon>
             </button>
             <button mat-icon-button class="fav-btn" routerLink="">
                 <mat-icon>notifications</mat-icon>
             </button>
-            <button routerLink="">Profile</button>
+            <button routerLink="/profile">Profile</button>
         </ng-container>
 
-        <ng-container *ngIf="role === 'host'">
+        <ng-container *ngIf="userRole === 'host'">
             <button mat-icon-button class="fav-btn" routerLink="">
                 <mat-icon>notifications</mat-icon>
             </button>
-            <button id="non-primary-btn2" routerLink="">Post</button>
-            <button routerLink="">Profile</button>
+            <button id="non-primary-btn" routerLink="">Post</button>
+            <button routerLink="/profile">Profile</button>
         </ng-container>
 
-        <ng-container *ngIf="role === 'admin'">
-            <button routerLink="">Profile</button>
+        <ng-container *ngIf="userRole === 'admin'">
+            <button routerLink="/profile">Profile</button>
         </ng-container>
 
     </div>

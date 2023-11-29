@@ -1,0 +1,9 @@
+<div class="container">
+
+    <app-guest-profile *ngIf="userRole=='guest'" [user]="user"></app-guest-profile>
+
+    <app-host-profile *ngIf="userRole=='host'" [user]="user"></app-host-profile>
+
+    <app-admin-profile *ngIf="userRole=='admin'" [user]="user"></app-admin-profile>
+
+</div>
