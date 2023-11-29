@@ -23,3 +23,73 @@
     border: 2px solid rgba(101, 174, 242, 0);
     color: var(--color_white);
 }
+
+.titles {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 1rem;
+    align-items: center;
+}
+
+.filter h3 {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+
+button[mat-icon-button] {
+    background-color: var(--color_primary_blue);
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+button[mat-icon-button]:hover {
+    background-color: rgba(101, 174, 242, 0.8);
+}
+
+button mat-icon {
+    color: var(--color_white);
+}
+
+input {
+    color: var(--color_gray_text);
+    width: 20rem;
+    background-color: var(--color_background);
+    font-size: 1rem;
+    padding: 0.6em;
+    box-sizing: border-box;
+    border: 2px solid var(--color_gray_icon);
+    border-radius: 4px;
+    outline: none;
+    transition: 0.5s;
+}
+
+input:focus {
+    border: 2px solid var(--color_black_text);
+}
+
+.filter-component {
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: 1px solid var(--color_black_text);
+    background-color: var(--color_white);
+}
+
+input::placeholder{
+    color: var(--color_gray_icon);
+}
+
+.accommodations {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

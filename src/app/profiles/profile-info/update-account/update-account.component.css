@@ -80,7 +80,6 @@ mat-icon:hover {
 
 input::placeholder{
     color: var(--color_gray_icon);
-
 }
 
 p {
