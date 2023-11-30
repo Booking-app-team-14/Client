@@ -1,1 +1,27 @@
-<p>reservation works!</p>
+<div class="reservation-container">
+  <h2>Make a Reservation</h2>
+
+  <!-- Date Selection -->
+  <div class="date-selection">
+    <label for="check-in">Check-in:</label>
+    <input type="date" id="check-in" name="check-in">
+
+    <label for="check-out">Check-out:</label>
+    <input type="date" id="check-out" name="check-out">
+  </div>
+
+  <!-- Guest Selection -->
+  <div class="guest-selection">
+    <label for="guests">Guests:</label>
+    <input type="number" id="guests" name="guests" min="1" value="1">
+  </div>
+
+  <!-- Reserve Button -->
+  <button class="reserve-button">Reserve</button>
+
+  <!-- Price Details -->
+  <div class="price-details">
+    <p>Price per night: $XXX</p>
+    <p>Total price: $XXX</p>
+  </div>
+</div>

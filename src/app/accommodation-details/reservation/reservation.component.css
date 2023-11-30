@@ -1,0 +1,56 @@
+.reservation-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.date-selection,
+.guest-selection,
+.reserve-button,
+.price-details {
+  margin-bottom: 20px;
+}
+
+.date-selection input,
+.guest-selection input,
+.reserve-button {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  width: calc(100% - 24px);
+  max-width: 300px;
+  margin: 0 auto;
+  display: block;
+}
+
+.date-selection input:focus,
+.guest-selection input:focus,
+.reserve-button:hover {
+  border-color: #007bff;
+}
+
+.reserve-button {
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reserve-button:hover {
+  background-color: #0056b3;
+}
+
+.price-details p {
+  font-size: 18px;
+  margin: 10px 0;
+}

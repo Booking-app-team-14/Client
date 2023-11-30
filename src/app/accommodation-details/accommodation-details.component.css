@@ -1,0 +1,14 @@
+.container{
+  display: flex;
+}
+app-round-up-details{
+  width:65%
+}
+app-location{
+  width: 35%;
+}
+
+app-facilities{
+  text-align: left;
+  width: 60%;
+}

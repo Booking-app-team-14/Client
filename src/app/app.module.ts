@@ -19,7 +19,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { BestOffersComponent } from './main-page/best-offers/best-offers.component';
@@ -40,7 +40,6 @@ import { FacilitiesComponent } from './accommodation-details/facilities/faciliti
 import {SlickCarouselModule} from "ngx-slick-carousel";
 import {NgOptimizedImage} from "@angular/common";
 import {UserService} from "./login/user.service";
-
 
 
 @NgModule({
@@ -86,7 +85,8 @@ import {UserService} from "./login/user.service";
     MatNativeDateModule,
     ReactiveFormsModule,
     SlickCarouselModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    FormsModule
   ],
   providers: [
     provideClientHydration(),

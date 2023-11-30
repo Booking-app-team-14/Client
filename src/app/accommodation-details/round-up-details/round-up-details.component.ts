@@ -1,10 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+interface Owner {
+  name: string;
+  picture: string;
+}
+
+interface place {
+  name: string;
+  address: string;
+  owner: Owner;
+  description: string;
+
+}
 
 @Component({
   selector: 'app-round-up-details',
   templateUrl: './round-up-details.component.html',
-  styleUrl: './round-up-details.component.css'
+  styleUrls: ['./round-up-details.component.css']
 })
 export class RoundUpDetailsComponent {
+  @Input() place: place;
 
+  constructor() {}
 }
