@@ -39,6 +39,8 @@ import { CommentsComponent } from './accommodation-details/comments/comments.com
 import { FacilitiesComponent } from './accommodation-details/facilities/facilities.component';
 import {SlickCarouselModule} from "ngx-slick-carousel";
 import {NgOptimizedImage} from "@angular/common";
+import {UserService} from "./login/user.service";
+
 
 
 @NgModule({
@@ -87,7 +89,8 @@ import {NgOptimizedImage} from "@angular/common";
     NgOptimizedImage
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    [UserService],
   ],
   bootstrap: [AppComponent]
 })

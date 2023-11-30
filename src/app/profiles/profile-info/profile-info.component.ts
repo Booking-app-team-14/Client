@@ -1,5 +1,6 @@
 import { AfterViewChecked, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import {UserService} from "../../login/user.service";
 
 @Component({
   selector: 'app-profile-info',
@@ -8,7 +9,9 @@ import { Router } from '@angular/router';
 })
 export class ProfileInfoComponent implements AfterViewChecked {
 
-  constructor(private _router: Router) { }
+  //constructor(private _router: Router) { }
+
+  constructor(private userService: UserService, private _router: Router) {}
 
   @Input()
   user: {
@@ -22,7 +25,7 @@ export class ProfileInfoComponent implements AfterViewChecked {
 
   ngAfterViewChecked(){
     // here, user has been passed in
-    
+
   }
 
   closeAccount() {
@@ -33,7 +36,7 @@ export class ProfileInfoComponent implements AfterViewChecked {
   }
 
   signOut() {
-    
+    this.userService.setUserRole('');
     // sign out user
     this._router.navigateByUrl("");
   }
