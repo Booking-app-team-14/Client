@@ -1,0 +1,96 @@
+.carousel-container {
+  position:relative;
+  margin:auto;
+  text-align: center;
+  width: auto;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px #dce1e1;
+}
+.carousel-container img{
+   display: none;
+  border-radius: 15px;
+}
+
+.carousel-container img.image-active{
+  display: block;
+  width: 100%;
+  height: 400px;
+}
+
+.carousel-dot-container{
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin-bottom: 1%;
+}
+
+.dot{
+  cursor: pointer;
+  height: 13px;
+  width: 13px;
+  margin: 0 5px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  transition: opacity 0.6s ease;
+  opacity:0.5;
+}
+
+.active,
+.dot:active{
+  opacity: 1;
+}
+
+.fade{
+  animation-name: fade;
+  animation-duration:1s;
+}
+
+.btn-carousel {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  z-index: 1;
+}
+
+
+.btn-prev{
+  left: 10px;
+}
+
+.btn-next{
+  right: 10px;
+}
+.icon-prev,
+.icon-next{
+  font-size: 35px;
+}
+.icon-carousel{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.5;
+  transition: all 0.15s ease;
+}
+
+.icon-carousel:hover{
+  opacity: 0.9;
+}
+.icon-carousel:active{
+  opacity: 0.5;
+}
+
+
+
+

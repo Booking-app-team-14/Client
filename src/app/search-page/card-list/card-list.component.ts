@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-card-list',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './card-list.component.css'
 })
 export class CardListComponent {
+  constructor(private router: Router) {}
   apartmentsPerPage = 4;
   apartments = [
     {
@@ -76,5 +78,9 @@ export class CardListComponent {
       pagesArray.push(i);
     }
     return pagesArray;
+  }
+
+  redirectToAccomodationDetailsPage() {
+    this.router.navigate(['/search/details']);
   }
 }

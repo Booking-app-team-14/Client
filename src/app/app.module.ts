@@ -29,6 +29,17 @@ import { CardListComponent } from './search-page/card-list/card-list.component';
 import { SidebarComponent } from './search-page/sidebar/sidebar.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { AccommodationDetailsComponent } from './accommodation-details/accommodation-details.component';
+import { ImageSliderComponent } from './accommodation-details/image-slider/image-slider.component';
+import { RoundUpDetailsComponent } from './accommodation-details/round-up-details/round-up-details.component';
+import { LocationComponent } from './accommodation-details/location/location.component';
+import { ReservationComponent } from './accommodation-details/reservation/reservation.component';
+import { RatingsComponent } from './accommodation-details/ratings/ratings.component';
+import { CommentsComponent } from './accommodation-details/comments/comments.component';
+import { FacilitiesComponent } from './accommodation-details/facilities/facilities.component';
+import {SlickCarouselModule} from "ngx-slick-carousel";
+import {NgOptimizedImage} from "@angular/common";
+
 
 @NgModule({
   declarations: [
@@ -50,7 +61,16 @@ import { MainPageComponent } from './main-page/main-page.component';
     SidebarComponent,
     CardListComponent,
     MainPageComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    AccommodationDetailsComponent,
+    ImageSliderComponent,
+    RoundUpDetailsComponent,
+    LocationComponent,
+    ReservationComponent,
+    RatingsComponent,
+    CommentsComponent,
+    FacilitiesComponent,
+    ImageSliderComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +82,9 @@ import { MainPageComponent } from './main-page/main-page.component';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SlickCarouselModule,
+    NgOptimizedImage
   ],
   providers: [
     provideClientHydration()
