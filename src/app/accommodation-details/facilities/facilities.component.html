@@ -1,0 +1,9 @@
+<div class="facilities-container">
+  <h2>Facilities</h2>
+  <ul class="facilities-list">
+    <li class="facility-item" *ngFor="let facility of facilities">
+      <img [src]="facility.icon" [alt]="facility.name + ' Icon'" class="facility-icon">
+      <span>{{ facility.name }}</span>
+    </li>
+  </ul>
+</div>

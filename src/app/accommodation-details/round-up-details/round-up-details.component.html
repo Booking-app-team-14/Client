@@ -1,0 +1,21 @@
+<div class="round-up-details-container">
+  <div class="upper-section">
+
+    <div class="name-address">
+      <h2 class="place-name">{{ place.name }}</h2>
+      <p class="address">
+        <span class="location-sign">📍</span> {{ place.address }}
+      </p>
+    </div>
+
+    <div class="owner-details">
+      <img [src]="place.owner.picture" alt="Owner Picture">
+      <p>{{ place.owner.name }}</p>
+    </div>
+  </div>
+
+
+  <div class="lower-section">
+    <p>{{ place.description }}</p>
+  </div>
+</div>

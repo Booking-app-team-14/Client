@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,7 +19,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { BestOffersComponent } from './main-page/best-offers/best-offers.component';
@@ -30,7 +29,18 @@ import { CardListComponent } from './search-page/card-list/card-list.component';
 import { SidebarComponent } from './search-page/sidebar/sidebar.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { AccommodationDetailsComponent } from './accommodation-details/accommodation-details.component';
+import { ImageSliderComponent } from './accommodation-details/image-slider/image-slider.component';
+import { RoundUpDetailsComponent } from './accommodation-details/round-up-details/round-up-details.component';
+import { LocationComponent } from './accommodation-details/location/location.component';
+import { ReservationComponent } from './accommodation-details/reservation/reservation.component';
+import { RatingsComponent } from './accommodation-details/ratings/ratings.component';
+import { CommentsComponent } from './accommodation-details/comments/comments.component';
+import { FacilitiesComponent } from './accommodation-details/facilities/facilities.component';
+import {SlickCarouselModule} from "ngx-slick-carousel";
+import {NgOptimizedImage} from "@angular/common";
 import {UserService} from "./login/user.service";
+
 
 @NgModule({
   declarations: [
@@ -52,11 +62,19 @@ import {UserService} from "./login/user.service";
     SidebarComponent,
     CardListComponent,
     MainPageComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    AccommodationDetailsComponent,
+    ImageSliderComponent,
+    RoundUpDetailsComponent,
+    LocationComponent,
+    ReservationComponent,
+    RatingsComponent,
+    CommentsComponent,
+    FacilitiesComponent,
+    ImageSliderComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -65,11 +83,14 @@ import {UserService} from "./login/user.service";
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SlickCarouselModule,
+    NgOptimizedImage,
+    FormsModule
   ],
   providers: [
+    provideClientHydration(),
     [UserService],
-    provideClientHydration()
   ],
   bootstrap: [AppComponent]
 })

@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {MainPageComponent} from "./main-page/main-page.component";
 import {SearchPageComponent} from "./search-page/search-page.component";
+import {AccommodationDetailsComponent} from "./accommodation-details/accommodation-details.component";
 
 const routes: Routes = [
   {component: HeaderComponent, path: 'header'},
@@ -21,7 +22,8 @@ const routes: Routes = [
   {component: ProfileComponent, path: 'profile'},
   {component: UpdateAccountComponent, path: 'profile/update-account'},
   {component:MainPageComponent, path:''},
-  {component:SearchPageComponent,path:'search'}
+  {component:SearchPageComponent,path:'search'},
+  {component:AccommodationDetailsComponent, path:'search/details'}
 ];
 
 @NgModule({

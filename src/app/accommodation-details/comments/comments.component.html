@@ -1,0 +1,24 @@
+<div class="comments-background">
+<div class="comments-section">
+  <h2>Comments</h2>
+
+  <div class="comments-container">
+    <div class="comments-grid">
+      <div *ngFor="let comment of displayedComments; let i = index" class="comment">
+        <div class="user-info">
+          <img [src]="comment.image" alt="User Image">
+          <div class="user-details">
+            <p class="username">{{ comment.name }}</p>
+            <p class="sent-at">{{ comment.sentAt | date }}</p>
+          </div>
+        </div>
+        <div class="comment-text">
+          <p>{{ comment.commentText }}</p>
+        </div>
+      </div>
+    </div>
+
+    <button *ngIf="comments.length > displayedComments.length" (click)="loadMoreComments()" class="more-btn">MORE COMMENTS</button>
+  </div>
+</div>
+</div>
