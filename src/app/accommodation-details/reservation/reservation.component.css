@@ -3,6 +3,7 @@
   margin: 0 auto;
   text-align: center;
   padding: 20px;
+  background: linear-gradient(to right,var(--color_white), var(--color_primary_blue));
   border: 1px solid #eee;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -36,7 +37,7 @@
 }
 
 .reserve-button {
-  background-color: #007bff;
+  background-color: var(--color_primary_blue);
   color: #fff;
   cursor: pointer;
   font-weight: bold;

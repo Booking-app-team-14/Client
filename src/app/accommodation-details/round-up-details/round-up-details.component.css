@@ -38,9 +38,9 @@
 
 
 .place-name {
-  font-size: 20px; /* Adjust the font size of the place name */
+  font-size: 20px;
   font-weight: bold;
-  margin-top: 5px; /* Add margin between the picture and the name */
+  margin-top: 5px;
 }
 
 .address {
@@ -57,6 +57,8 @@
 
 .lower-section {
   padding: 15px;
+  height: 100%;
+  width: 100%;
   font-size: 14px;
   line-height: 1.6;
   color: #333;

@@ -1,1 +1,19 @@
-<p>ratings works!</p>
+<div class="ratings-container">
+  <div class="average-rating">
+    <h2>Average Rating</h2>
+    <div class="stars">
+      <span class="star" [class.full]="i < averageRating" *ngFor="let i of [1, 2, 3, 4, 5]">&#9733;</span>
+    </div>
+    <p>{{ averageRating }}/5</p>
+    <p>{{ numberOfReviews }} Reviews</p>
+  </div>
+
+  <div class="ratings-bars">
+    <div class="rating-bar" *ngFor="let rating of ratings">
+      <div class="rating-label">{{ rating.aspect }}</div>
+      <div class="bar">
+        <div class="fill" [style.width.%]="rating.value * 20"></div>
+      </div>
+    </div>
+  </div>
+</div>

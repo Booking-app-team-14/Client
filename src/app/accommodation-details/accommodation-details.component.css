@@ -12,3 +12,16 @@ app-facilities{
   text-align: left;
   width: 60%;
 }
+.container2{
+  display: flex;
+
+}
+
+app-reservation{
+  width: 50%;
+
+}
+
+app-ratings{
+  width: 50%;
+}

@@ -1,6 +1,6 @@
 .location-container {
   width: 100%;
-  border: 1px solid #ddd;
+  border: 5px solid #ddd;
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 20px;
@@ -27,4 +27,8 @@
 
 .map-section {
   padding: 15px;
+}
+.map-section img {
+  width: auto;
+  height: auto;
 }
