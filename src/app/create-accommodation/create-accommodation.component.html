@@ -1,0 +1,52 @@
+<div class="container">
+  <h2>Create Accommodation</h2>
+  <form>
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+
+    <label for="description">Description:</label>
+    <textarea id="description" required></textarea>
+
+    <label for="images">Images:</label>
+    <input type="file" id="images" multiple accept="image/*" (change)="handleImageUpload($event)">
+    <div *ngIf="selectedImages" class="image-container">
+      <div *ngFor="let image of selectedImages" class="image-item">
+        <img [src]="image.url" alt="Selected Image" class="image-preview">
+      </div>
+    </div>
+
+
+
+
+    <label for="type">Type:</label>
+    <select id="type">
+      <option value="Apartment">Apartment</option>
+      <option value="Hotel">Hotel</option>
+      <option value="Hostel">Hostel</option>
+      <option value="Private Room">Private Room</option>
+      <option value="Guesthouse">Guesthouse</option>
+      <option value="Resort">Resort</option>
+    </select>
+
+    <div class="guests-container">
+      <label for="minGuests">Min Guests:</label>
+      <input type="number" id="minGuests" min="1">
+
+      <label for="maxGuests">Max Guests:</label>
+      <input type="number" id="maxGuests" min="1">
+    </div>
+
+    <fieldset>
+      <legend>Amenities:</legend>
+      <label><input type="checkbox" value="Air Condition"> Air Condition</label> <br>
+      <label><input type="checkbox" value="Spa"> Spa</label> <br>
+      <label><input type="checkbox" value="Beach front"> Beach front</label> <br>
+      <label><input type="checkbox" value="Hot tub/jacuzzi"> Hot tub/jacuzzi</label>
+    </fieldset>
+
+    <label>Location:</label>
+    <div id="map"></div>
+
+    <button type="submit">Create Accommodation</button>
+  </form>
+</div>
