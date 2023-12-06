@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import * as L from 'leaflet';
 
 @Component({
@@ -6,7 +6,7 @@ import * as L from 'leaflet';
   templateUrl: './create-accommodation.component.html',
   styleUrls: ['./create-accommodation.component.css']
 })
-export class CreateAccommodationComponent {
+export class CreateAccommodationComponent{
   enteredAddress: string = '';
 
   locateOnMap() {
@@ -17,6 +17,7 @@ export class CreateAccommodationComponent {
 
   accommodationData: any = {};
   selectedImages: { url: string, file: File }[] = [];
+
 
   handleImageUpload(event: any) {
     this.selectedImages = []; // da li resetovati listu ili dodavati sliku po sliku?
@@ -37,18 +38,16 @@ export class CreateAccommodationComponent {
   // ...
 
   createAccommodation() {
-    // Ovde možete koristiti this.selectedImages za dalje radnje
-    // ...
 
-    // Proverite da li postoji nešto odabrano pre nego što radite sa slikama
     if (this.selectedImages && this.selectedImages.length > 0) {
-      // Iterirajte kroz listu slika
+
       for (let i = 0; i < this.selectedImages.length; i++) {
         const image = this.selectedImages[i];
-        // Ovde možete raditi sa pojedinačnom slikom (na primer, slati na server)
+
       }
     }
   }
+
 
 
 }

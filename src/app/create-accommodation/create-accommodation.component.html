@@ -1,7 +1,6 @@
 <div class="container">
   <br>
-  <br>
-  <h2>Create Accommodation</h2>
+  <h1>Create Accommodation</h1>
   <form>
   <label for="images">Images:</label>
   <input type="file" id="images" multiple accept="image/*" (change)="handleImageUpload($event)">
@@ -55,6 +54,54 @@
 
 
     <div id="map" style="height: 400px;"></div>
+
+    <!-- Availability And Prices -->
+    <div class="availability-container">
+      <h2>Availability And Prices</h2>
+
+      <!-- Define Price -->
+      <fieldset>
+        <legend>Define Price</legend>
+        <label><input type="radio" name="priceType" value="PerNight"> Per Night</label> <br>
+        <label><input type="radio" name="priceType" value="PerGuest"> Per Guest</label>
+      </fieldset>
+
+      <!-- Price -->
+      <label for="price">Price:</label>
+      <input type="number" id="price" required>
+      <br>
+      <br>
+
+      <!-- Availability -->
+      <label >Availability:</label>
+      <div class="availability-dates">
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" required>
+
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" required>
+      </div>
+
+      <br>
+      <!-- Special Price -->
+      <div class="special-price-container">
+        <label >Special Prices:</label>
+        <div class="special-price-dates">
+          <label>From:</label>
+          <input type="date" id="specialPriceStartDate" name="specialPriceStartDate" required>
+          <label>To:</label>
+          <input type="date" id="specialPriceEndDate" name="specialPriceEndDate" required>
+        </div>
+        <label for="specialPriceAmount">Price:</label>
+        <input type="number" id="specialPriceAmount" name="specialPriceAmount" required>
+      </div>
+
+      <!-- Cancellation Deadline -->
+      <label for="cancellationDeadline">Cancellation Deadline:</label>
+      <input type="number" id="cancellationDeadline" required>
+
+      </div>
+    <br>
 
 
     <button type="submit">Create Accommodation</button>
