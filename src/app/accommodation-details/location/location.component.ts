@@ -1,23 +1,40 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
 import * as L from 'leaflet';
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import { isPlatformBrowser } from "@angular/common";
 
 @Component({
   selector: 'app-location',
   templateUrl: './location.component.html',
   styleUrls: ['./location.component.css']
 })
-export class LocationComponent {
-    latitude: number = 44.813041;
-    longitude: number = 20.505002;
-    googleMapsApiKey: string = 'AIzaSyAcGyGB1JyRQt6fAVOe_Nv8OVE7qHT0cew';
+export class LocationComponent implements AfterViewInit {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
-  constructor(private sanitizer: DomSanitizer) {}
+  ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => {
+        this.loadLeaflet();
+      }, 0);
+    }
+  }
 
-  getMapUrl(): SafeResourceUrl {
-    const apiKey = this.googleMapsApiKey;
-    const location = `${this.latitude},${this.longitude}`;
-    const mapUrl = `https://www.google.com/maps/embed/v1/view?key=${apiKey}&center=${location}&zoom=15`;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(mapUrl);
+  private loadLeaflet() {
+    import('leaflet').then((L) => {
+      this.initializeMap(L);
+    }).catch((err) => {
+      console.error('Leaflet failed to load', err);
+    });
+  }
+
+  private initializeMap(L: any) {
+    const map = L.map('mapContainer').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    L.marker([51.5, -0.09]).addTo(map)
+      .bindPopup('A sample location.')
+      .openPopup();
   }
 }

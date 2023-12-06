@@ -71,7 +71,7 @@ import {UserService} from "./login/user.service";
     RatingsComponent,
     CommentsComponent,
     FacilitiesComponent,
-    ImageSliderComponent
+    ImageSliderComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,7 +86,7 @@ import {UserService} from "./login/user.service";
     ReactiveFormsModule,
     SlickCarouselModule,
     NgOptimizedImage,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     provideClientHydration(),
