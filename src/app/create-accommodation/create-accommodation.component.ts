@@ -9,6 +9,8 @@ import { isPlatformBrowser } from "@angular/common";
 })
 export class CreateAccommodationComponent implements AfterViewInit{
   enteredAddress: string = '';
+  map: any;
+  marker: any;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -38,6 +40,36 @@ export class CreateAccommodationComponent implements AfterViewInit{
     L.marker([51.5, -0.09]).addTo(map)
       .bindPopup('A sample location.')
       .openPopup();
+
+    // Initialize marker without setting its location
+    this.marker = L.marker([0, 0]).addTo(this.map);
+  }
+
+  locateOnMap() {
+    // Geocode the entered address to get its coordinates
+    // For simplicity, you can use a geocoding service/library like OpenCage Geocoding API
+    // Replace 'YOUR_API_KEY' with your actual API key
+    const apiKey = '7234404387b94ae4bdc2c7d6bb31bf58';
+    const geocodingUrl = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(this.enteredAddress)}&key=${apiKey}`;
+
+    fetch(geocodingUrl)
+      .then(response => response.json())
+      .then(data => {
+        // Check if the geocoding was successful and has results
+        if (data.results && data.results.length > 0) {
+          const location = data.results[0].geometry;
+          const { lat, lng } = location;
+
+          // Update the marker's location and reposition the map
+          this.marker.setLatLng([lat, lng]);
+          this.map.setView([lat, lng], 13);
+        } else {
+          console.error('Geocoding failed. No results found.');
+        }
+      })
+      .catch(error => {
+        console.error('Error during geocoding', error);
+      });
   }
 
 

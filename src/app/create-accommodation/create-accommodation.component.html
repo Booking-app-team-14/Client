@@ -52,8 +52,8 @@
       </div>
       <br>
       <div class="input-button-container">
-        <input type="text" id="address" [(ngModel)]="enteredAddress" placeholder="Enter location">
-        <button mat-icon-button class="fav-btn">
+        <input type="text" id="address" placeholder="Enter location" name="location" [(ngModel)]="enteredAddress">
+        <button mat-icon-button class="fav-btn" (click)="locateOnMap()">
           <mat-icon>search</mat-icon>
         </button>
       </div>
