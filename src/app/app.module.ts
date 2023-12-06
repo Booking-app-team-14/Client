@@ -40,6 +40,7 @@ import { FacilitiesComponent } from './accommodation-details/facilities/faciliti
 import {SlickCarouselModule} from "ngx-slick-carousel";
 import {NgOptimizedImage} from "@angular/common";
 import {UserService} from "./login/user.service";
+import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import {UserService} from "./login/user.service";
     RatingsComponent,
     CommentsComponent,
     FacilitiesComponent,
-    ImageSliderComponent
+    ImageSliderComponent,
+    CreateAccommodationComponent
   ],
   imports: [
     BrowserModule,
