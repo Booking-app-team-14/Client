@@ -1,22 +1,20 @@
 <div class="container">
+  <br>
+  <br>
   <h2>Create Accommodation</h2>
   <form>
+  <label for="images">Images:</label>
+  <input type="file" id="images" multiple accept="image/*" (change)="handleImageUpload($event)">
+  <div *ngIf="selectedImages" class="image-container">
+    <div *ngFor="let image of selectedImages" class="image-item">
+      <img [src]="image.url" alt="Selected Image" class="image-preview">
+    </div>
+  </div>
     <label for="name">Name:</label>
     <input type="text" id="name" required>
 
     <label for="description">Description:</label>
     <textarea id="description" required></textarea>
-
-    <label for="images">Images:</label>
-    <input type="file" id="images" multiple accept="image/*" (change)="handleImageUpload($event)">
-    <div *ngIf="selectedImages" class="image-container">
-      <div *ngFor="let image of selectedImages" class="image-item">
-        <img [src]="image.url" alt="Selected Image" class="image-preview">
-      </div>
-    </div>
-
-
-
 
     <label for="type">Type:</label>
     <select id="type">
@@ -44,8 +42,20 @@
       <label><input type="checkbox" value="Hot tub/jacuzzi"> Hot tub/jacuzzi</label>
     </fieldset>
 
-    <label>Location:</label>
-    <div id="map"></div>
+    <div class="location-container">
+      <br>
+      <label for="address">Location:</label>
+      <div class="input-button-container">
+        <input type="text" id="address" [(ngModel)]="enteredAddress" placeholder="Enter location">
+        <button (click)="locateOnMap()" mat-icon-button class="fav-btn">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+    </div>
+
+
+    <div id="map" style="height: 400px;"></div>
+
 
     <button type="submit">Create Accommodation</button>
   </form>

@@ -57,3 +57,39 @@ button:hover {
   height: auto;
 }
 
+.location-container {
+  display: flex;
+  align-items: center;
+}
+
+.location-container label {
+  margin-right: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+#address {
+  margin-right: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.input-button-container {
+  display: flex;
+  align-items: center;
+}
+
+button[mat-icon-button] {
+  background-color: var(--color_primary_blue);
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+button[mat-icon-button]:hover {
+  background-color: rgba(101, 174, 242, 0.8);
+}
+
+button mat-icon {
+  color: var(--color_white);
+}
+
