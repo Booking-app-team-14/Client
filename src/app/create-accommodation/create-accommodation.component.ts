@@ -1,17 +1,43 @@
-import {Component} from '@angular/core';
+import { Component, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
 import * as L from 'leaflet';
+import { isPlatformBrowser } from "@angular/common";
 
 @Component({
   selector: 'app-create-accommodation',
   templateUrl: './create-accommodation.component.html',
   styleUrls: ['./create-accommodation.component.css']
 })
-export class CreateAccommodationComponent{
+export class CreateAccommodationComponent implements AfterViewInit{
   enteredAddress: string = '';
 
-  locateOnMap() {
-    // Implementirajte geokodiranje i postavljanje mape ovde
-    // Možete koristiti neki geokodirajući servis, kao što je Google Maps Geocoding API
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+  ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => {
+        this.loadLeaflet();
+      }, 0);
+    }
+  }
+
+  private loadLeaflet() {
+    import('leaflet').then((L) => {
+      this.initializeMap(L);
+    }).catch((err) => {
+      console.error('Leaflet failed to load', err);
+    });
+  }
+
+  private initializeMap(L: any) {
+    const map = L.map('mapContainer').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    L.marker([51.5, -0.09]).addTo(map)
+      .bindPopup('A sample location.')
+      .openPopup();
   }
 
 

@@ -42,18 +42,24 @@
     </fieldset>
 
     <div class="location-container">
+      <div class="location-header">
+        <span class="location-sign">📍</span>
+        <h2 class="location-caption">Location</h2>
+      </div>
+
+      <div class="map-frame">
+        <div id="mapContainer" style="height: 400px;"></div>
+      </div>
       <br>
-      <label for="address">Location:</label>
       <div class="input-button-container">
         <input type="text" id="address" [(ngModel)]="enteredAddress" placeholder="Enter location">
-        <button (click)="locateOnMap()" mat-icon-button class="fav-btn">
+        <button mat-icon-button class="fav-btn">
           <mat-icon>search</mat-icon>
         </button>
       </div>
+      <br>
     </div>
 
-
-    <div id="map" style="height: 400px;"></div>
 
     <!-- Availability And Prices -->
     <div class="availability-container">
