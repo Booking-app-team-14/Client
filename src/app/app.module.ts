@@ -41,6 +41,8 @@ import {SlickCarouselModule} from "ngx-slick-carousel";
 import {NgOptimizedImage} from "@angular/common";
 import {UserService} from "./login/user.service";
 import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
+import { ApproveAccommodationsComponent } from './admin-functions/approve-accommodations/approve-accommodations.component';
+import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/radio';
 
 
 @NgModule({
@@ -73,7 +75,8 @@ import { CreateAccommodationComponent } from './create-accommodation/create-acco
     CommentsComponent,
     FacilitiesComponent,
     ImageSliderComponent,
-    CreateAccommodationComponent
+    CreateAccommodationComponent,
+    ApproveAccommodationsComponent
   ],
   imports: [
     BrowserModule,
@@ -88,11 +91,16 @@ import { CreateAccommodationComponent } from './create-accommodation/create-acco
     ReactiveFormsModule,
     SlickCarouselModule,
     NgOptimizedImage,
-    FormsModule
+    FormsModule,
+    MatRadioModule
   ],
   providers: [
     provideClientHydration(),
     [UserService],
+    {
+      provide: MAT_RADIO_DEFAULT_OPTIONS,
+      useValue: { color: 'primary' }
+    }
   ],
   bootstrap: [AppComponent]
 })
