@@ -40,6 +40,7 @@ import { FacilitiesComponent } from './accommodation-details/facilities/faciliti
 import {SlickCarouselModule} from "ngx-slick-carousel";
 import {NgOptimizedImage} from "@angular/common";
 import {UserService} from "./login/user.service";
+import { HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import {UserService} from "./login/user.service";
     SlickCarouselModule,
     NgOptimizedImage,
     FormsModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration(),

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-card-list',
@@ -7,7 +8,7 @@ import {Router} from "@angular/router";
   styleUrl: './card-list.component.css'
 })
 export class CardListComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router,private http: HttpClient) {}
   apartmentsPerPage = 4;
   apartments = [
     {
