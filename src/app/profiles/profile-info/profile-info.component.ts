@@ -9,8 +9,6 @@ import {UserService} from "../../login/user.service";
 })
 export class ProfileInfoComponent implements AfterViewChecked {
 
-  //constructor(private _router: Router) { }
-
   constructor(private userService: UserService, private _router: Router) {}
 
   @Input()
@@ -31,13 +29,14 @@ export class ProfileInfoComponent implements AfterViewChecked {
   closeAccount() {
     if(!confirm("Are you sure you want to close your account?")) return;
 
+    // TODO: Implement close account functionality
+
     // delete user from database
     this._router.navigateByUrl("");
   }
 
   signOut() {
-    this.userService.setUserRole('');
-    // sign out user
+    this.userService.logout();
     this._router.navigateByUrl("");
   }
 
