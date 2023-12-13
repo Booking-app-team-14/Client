@@ -13,18 +13,18 @@
 <div class="offers-container">
   <div class="best-offers">
     <div class="card" *ngFor="let offer of offers">
-      <img [src]="offer.image" alt="Offer Image">
-      <h3>{{ offer.type }}</h3>
-      <div class="details">
-        <p class="name">{{ offer.location }}</p>
-        <p class="guests">
-          <span class="guests-icon"><img src="/assets/people.png" alt="Guests Icon"></span>
-          <span class="guests-number">{{ offer.guests }}</span>
-        </p>
-        <p class="description">{{ offer.description }}</p>
-      </div>
-      <p class="price">{{ offer.price }}</p>
-    </div>
+  <img [src]="offer.image" alt="Offer Image">
+  <h3>{{ offer.accommodationType }}</h3>
+  <div class="details">
+    <p class="name">{{ offer.name }}</p>
+    <p class="guests">
+      <span class="guests-icon"><img src="/assets/people.png" alt="Guests Icon"></span>
+      <span class="guests-number">{{ offer.maxNumberOfGuests }}</span>
+    </p>
+    <p class="description">{{ offer.description }}</p>
+  </div>
+  <p class="price">{{ offer.pricePerNight }}</p>
+</div>
   </div>
 </div>
 
