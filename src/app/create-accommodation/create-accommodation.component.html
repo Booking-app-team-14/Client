@@ -1,0 +1,115 @@
+<div class="container">
+  <br>
+  <h1>Create Accommodation</h1>
+  <form>
+  <label for="images">Images:</label>
+  <input type="file" id="images" multiple accept="image/*" (change)="handleImageUpload($event)">
+  <div *ngIf="selectedImages" class="image-container">
+    <div *ngFor="let image of selectedImages" class="image-item">
+      <img [src]="image.url" alt="Selected Image" class="image-preview">
+    </div>
+  </div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+
+    <label for="description">Description:</label>
+    <textarea id="description" required></textarea>
+
+    <label for="type">Type:</label>
+    <select id="type">
+      <option value="Apartment">Apartment</option>
+      <option value="Hotel">Hotel</option>
+      <option value="Hostel">Hostel</option>
+      <option value="Private Room">Private Room</option>
+      <option value="Guesthouse">Guesthouse</option>
+      <option value="Resort">Resort</option>
+    </select>
+
+    <div class="guests-container">
+      <label for="minGuests">Min Guests:</label>
+      <input type="number" id="minGuests" min="1">
+
+      <label for="maxGuests">Max Guests:</label>
+      <input type="number" id="maxGuests" min="1">
+    </div>
+
+    <fieldset>
+      <legend>Amenities:</legend>
+      <label><input type="checkbox" value="Air Condition"> Air Condition</label> <br>
+      <label><input type="checkbox" value="Spa"> Spa</label> <br>
+      <label><input type="checkbox" value="Beach front"> Beach front</label> <br>
+      <label><input type="checkbox" value="Hot tub/jacuzzi"> Hot tub/jacuzzi</label>
+    </fieldset>
+
+    <div class="location-container">
+      <div class="location-header">
+        <span class="location-sign">📍</span>
+        <h2 class="location-caption">Location</h2>
+      </div>
+
+      <div class="map-frame">
+        <div id="mapContainer" style="height: 400px;"></div>
+      </div>
+      <br>
+      <div class="input-button-container">
+        <input type="text" id="address" placeholder="Enter location" name="location" [(ngModel)]="enteredAddress">
+        <button mat-icon-button class="fav-btn" (click)="locateOnMap()">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+      <br>
+    </div>
+
+
+    <!-- Availability And Prices -->
+    <div class="availability-container">
+      <h2>Availability And Prices</h2>
+
+      <!-- Define Price -->
+      <fieldset>
+        <legend>Define Price</legend>
+        <label><input type="radio" name="priceType" value="PerNight"> Per Night</label> <br>
+        <label><input type="radio" name="priceType" value="PerGuest"> Per Guest</label>
+      </fieldset>
+
+      <!-- Price -->
+      <label for="price">Price:</label>
+      <input type="number" id="price" required>
+      <br>
+      <br>
+
+      <!-- Availability -->
+      <label >Availability:</label>
+      <div class="availability-dates">
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" required>
+
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" required>
+      </div>
+
+      <br>
+      <!-- Special Price -->
+      <div class="special-price-container">
+        <label >Special Prices:</label>
+        <div class="special-price-dates">
+          <label>From:</label>
+          <input type="date" id="specialPriceStartDate" name="specialPriceStartDate" required>
+          <label>To:</label>
+          <input type="date" id="specialPriceEndDate" name="specialPriceEndDate" required>
+        </div>
+        <label for="specialPriceAmount">Price:</label>
+        <input type="number" id="specialPriceAmount" name="specialPriceAmount" required>
+      </div>
+
+      <!-- Cancellation Deadline -->
+      <label for="cancellationDeadline">Cancellation Deadline:</label>
+      <input type="number" id="cancellationDeadline" required>
+
+      </div>
+    <br>
+
+
+    <button type="submit">Create Accommodation</button>
+  </form>
+</div>
