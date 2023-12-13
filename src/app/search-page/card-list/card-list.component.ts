@@ -74,8 +74,8 @@ export class CardListComponent {
           next: (result: Accommodation[]) => {
             this.apartments = result;
             console.log('Sorted by price (ascending):', result);
-            this.isSortedByPrice = true; // Update sorting flag
-            this.isSortedByRating = false; // Reset other sorting flag
+            this.isSortedByPrice = true;
+            this.isSortedByRating = false;
           },
           error: (error: any) => {
             console.log('Error sorting by price ASC:', error);
