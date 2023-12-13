@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
+import {Accommodation} from "../../shared/accommodation.model";
+import {SearchPageService} from "../search-page.service";
 
 @Component({
   selector: 'app-card-list',
@@ -8,65 +10,18 @@ import {HttpClient} from "@angular/common/http";
   styleUrl: './card-list.component.css'
 })
 export class CardListComponent {
-  constructor(private router: Router,private http: HttpClient) {}
+  constructor(private router: Router, private service: SearchPageService) {
+  }
+
   apartmentsPerPage = 4;
-  apartments = [
-    {
-      id: 1,
-      name: 'Apartment 1',
-      imageUrl: '/assets/mainPagePicture.jpg',
-      rating: 4.5,
-      reviews: 120,
-      description: 'Description for Apartment 1',
-      pricePerNight: 100,
-    },
-    {
-      id: 2,
-      name: 'Apartment 2',
-      imageUrl: '/assets/mainPagePicture.jpg',
-      rating: 4.6,
-      reviews: 121,
-      description: 'Description for Apartment 2',
-      pricePerNight: 200,
-    },
-    {
-      id: 1,
-      name: 'Apartment 3',
-      imageUrl: '/assets/mainPagePicture.jpg',
-      rating: 4.9,
-      reviews: 220,
-      description: 'Description for Apartment 3',
-      pricePerNight: 1000,
-    },
-    {
-      id: 4,
-      name: 'Apartment 4',
-      imageUrl: '/assets/mainPagePicture.jpg',
-      rating: 4.5,
-      reviews: 120,
-      description: 'Description for Apartment 4',
-      pricePerNight: 100,
-    },
-    {
-      id: 5,
-      name: 'Apartment 5',
-      imageUrl: '/assets/mainPagePicture.jpg',
-      rating: 3.5,
-      reviews: 220,
-      description: 'Description for Apartment 5',
-      pricePerNight: 100,
-    },
-    {
-      id: 6,
-      name: 'Apartment 6',
-      imageUrl: '/assets/mainPagePicture.jpg',
-      rating: 4.5,
-      reviews: 120,
-      description: 'Description for Apartment 6',
-      pricePerNight: 100,
-    }
-  ];
+  apartments: Accommodation[] = [];
   currentPage = 1;
+  isSortedByPrice = false;
+  isSortedByRating = false;
+
+  ngOnInit(): void {
+    this.getAccommodations();
+  }
 
   changePage(pageNumber: number) {
     this.currentPage = pageNumber;
@@ -83,5 +38,68 @@ export class CardListComponent {
 
   redirectToAccomodationDetailsPage() {
     this.router.navigate(['/search/details']);
+  }
+
+  getAccommodations(): void {
+    this.service.getAllAccommodations().subscribe({
+      next: (result: Accommodation[]) => {
+        this.apartments = result;
+        console.log('Fetched default accommodations:', result);
+      },
+      error: (error: any) => {
+        console.log('Error fetching default accommodations:', error);
+      }
+    });
+  }
+
+  onSortChange(event: Event): void {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+
+
+    if (
+      (selectedValue === 'price' && this.isSortedByPrice) ||
+      (selectedValue === 'rating' && this.isSortedByRating)
+    ) {
+      this.getAccommodations();
+      return;
+    }
+
+    this.fetchSortedAccommodations(selectedValue);
+  }
+
+  fetchSortedAccommodations(sortBy: string): void {
+    switch (sortBy) {
+      case 'price':
+        this.service.getAllAccommodationsByPriceASC().subscribe({
+          next: (result: Accommodation[]) => {
+            this.apartments = result;
+            console.log('Sorted by price (ascending):', result);
+            this.isSortedByPrice = true; // Update sorting flag
+            this.isSortedByRating = false; // Reset other sorting flag
+          },
+          error: (error: any) => {
+            console.log('Error sorting by price ASC:', error);
+          }
+        });
+        break;
+
+      case 'rating':
+        this.service.getAllAccommodationsByRatingDESC().subscribe({
+          next: (result: Accommodation[]) => {
+            this.apartments = result;
+            console.log('Sorted by rating (descending):', result);
+            this.isSortedByRating = true; // Update sorting flag
+            this.isSortedByPrice = false; // Reset other sorting flag
+          },
+          error: (error: any) => {
+            console.log('Error sorting by rating DESC:', error);
+          }
+        });
+        break;
+
+      default:
+        console.log('Invalid sorting option');
+        break;
+    }
   }
 }
