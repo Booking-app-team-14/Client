@@ -1,0 +1,117 @@
+.container {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+mat-radio-group {
+    display: flex;
+    flex-direction: row;
+    gap: 4rem;
+}
+
+.radio-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.radio-container:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.radio-container mat-radio-button span {
+    font-size: 1.2rem;
+}
+
+mat-icon {
+    font-size: 1.6rem;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.accommodation-card {
+    /* width: 60rem; */
+    background-color: var(--color_white);
+    border-radius: 2rem;
+    box-shadow: 0 0 1rem 0 var(--color_gray_icon);
+    padding: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+button {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: white;
+}
+
+button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.reject {
+    background-color: red;
+}
+
+.approve {
+    background-color: green;
+}
+
+.divider {
+    width: 2px;
+    min-height: 20rem;
+    height: 100%;
+    background-color: #E4E4E7;
+}
+
+.action-btns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.info img {
+    width: 16rem;
+    height: 9rem;
+    border-radius: 2rem;
+    object-fit: cover;
+    border: 1px solid var(--color_black_text);
+}
+
+.stars mat-icon {
+    color: var(--color_primary_blue);
+}
+
+.owner-side .span-div {
+    width: 22rem;
+    max-height: 10rem;
+    overflow: auto;
+}
