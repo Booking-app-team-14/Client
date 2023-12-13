@@ -43,6 +43,8 @@ import {UserService} from "./login/user.service";
 import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
 import { ApproveAccommodationsComponent } from './admin-functions/approve-accommodations/approve-accommodations.component';
 import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/radio';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './jwt.interceptor';
 
 
 @NgModule({
@@ -92,7 +94,8 @@ import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/rad
     SlickCarouselModule,
     NgOptimizedImage,
     FormsModule,
-    MatRadioModule
+    MatRadioModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration(),
@@ -100,7 +103,8 @@ import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/rad
     {
       provide: MAT_RADIO_DEFAULT_OPTIONS,
       useValue: { color: 'primary' }
-    }
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
