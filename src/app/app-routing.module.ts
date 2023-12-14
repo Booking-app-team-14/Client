@@ -9,6 +9,7 @@ import {MainPageComponent} from "./main-page/main-page.component";
 import {SearchPageComponent} from "./search-page/search-page.component";
 import {AccommodationDetailsComponent} from "./accommodation-details/accommodation-details.component";
 import {CreateAccommodationComponent} from "./create-accommodation/create-accommodation.component";
+import { ApproveAccommodationsComponent } from './admin-functions/approve-accommodations/approve-accommodations.component';
 
 const routes: Routes = [
   {component: HeaderComponent, path: 'header'},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {component:SearchPageComponent,path:'search'},
   {component:AccommodationDetailsComponent, path:'search/details'},
   {component:CreateAccommodationComponent, path:'create-accommodation'},
+  {component: ApproveAccommodationsComponent, path: 'approve-accommodations'}
 ];
 
 @NgModule({
