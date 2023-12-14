@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -14,8 +14,14 @@ export class LoginComponent {
   passwordType : string = "password";
   passwordConfirmType : string = "password";
 
-
   username: string = '';
+  @ViewChild('passwordElement') passwordElement: ElementRef;
+
+  password: string = '';
+
+  passwordChangeEvent(){
+    this.password = this.passwordElement.nativeElement.value;
+  }
 
   constructor(private userService: UserService, private router: Router, private http: HttpClient) {}
 
@@ -36,8 +42,8 @@ export class LoginComponent {
     // this.userService.setUserRole(role);
 
     const body = {
-      "username": "admin@example.com",
-      "password": "12345678"
+      "username": this.username,
+      "password": this.password
     };
 
     this.http.post('http://localhost:8080/api/login', body, { responseType: 'text' }).subscribe({
@@ -50,7 +56,13 @@ export class LoginComponent {
       }
     });
 
-    this.userService.setUserRole("admin");
+    if (this.username.includes('owner')) {
+      this.userService.setUserRole("host");
+    } else if (this.username.includes('admin')) {
+      this.userService.setUserRole("admin");
+    } else if (this.username.includes('guest')) {
+      this.userService.setUserRole("guest");
+    }
 
     this.router.navigate([`/`]);
   }
