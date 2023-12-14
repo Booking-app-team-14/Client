@@ -24,7 +24,7 @@
 
         <div class="input-row">
           <label> <b>Password </b></label>
-          <input [type]="passwordType" placeholder="Enter password" class="password">
+          <input [type]="passwordType" placeholder="Enter password" class="password" #passwordElement (input)="passwordChangeEvent()">
           <mat-icon *ngIf="passwordVisibility" (click)="passwordVisibility=false;passwordType='text'">visibility</mat-icon>
           <mat-icon *ngIf="!passwordVisibility" (click)="passwordVisibility=true;passwordType='password'">visibility_off</mat-icon>
         </div>
