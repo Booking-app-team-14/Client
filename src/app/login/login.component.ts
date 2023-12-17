@@ -39,12 +39,9 @@ export class LoginComponent {
       next: (jwt: any) => {
         localStorage.setItem('currentUser', JSON.stringify({ token: jwt }));
 
-        // Ispravite putanju endpoint-a za dohvat korisničkih podataka
         this.http.get(`http://localhost:8080/api/users/byUsername/${this.username}`).subscribe({
           next: (userData: any) => {
-            // Provera da li postoji podatak o roli
             if (userData && userData.role) {
-              // Postavljanje uloge korisnika
               if (userData.role === "GUEST") {
                 this.userService.setUserRole("guest");
               } else if (userData.role === "OWNER") {
@@ -52,15 +49,11 @@ export class LoginComponent {
               } else if (userData.role === "ADMIN") {
                 this.userService.setUserRole("admin");
               } else {
-                // U slučaju nepoznate uloge, postavite podrazumevanu vrednost
                 this.userService.setUserRole("guest");
               }
             } else {
-              // Ako nema podataka o roli, postavite podrazumevanu vrednost
               this.userService.setUserRole("guest");
             }
-
-            // Redirekcija na početnu stranicu nakon uspešnog logovanja
             this.router.navigate(['/']);
           },
           error: (err) => {
@@ -69,7 +62,7 @@ export class LoginComponent {
           }
         });
 
-        // Obaveštenje o uspešnom logovanju
+
         alert("Login successful! Redirecting to the homepage...");
       },
       error: (err) => {
@@ -78,36 +71,6 @@ export class LoginComponent {
       }
     });
 
-
-
-
-    /*if (this.username.includes('owner')) {
-      this.userService.setUserRole("host");
-    } else if (this.username.includes('admin')) {
-      this.userService.setUserRole("admin");
-    } else if (this.username.includes('guest')) {
-      this.userService.setUserRole("guest");
-    }*/
-
-
-    /*this.http.get(`http://localhost:8080/api//users/byUsername/${this.username}`).subscribe({
-      next: (userData: any) => {
-
-        if (userData.role=="GUEST") {
-          this.userService.setUserRole("guest")
-        } else if (userData.role=="OWNER") {
-          this.userService.setUserRole("host")}
-        else if (userData.role=="ADMIN") {
-            this.userService.setUserRole("admin");
-        }
-
-        this.router.navigate([`/`]);
-      },
-      error: (err) => {
-        console.error(err);
-        alert("Error while fetching user data!");
-      }
-    });*/
 
     this.router.navigate([`/`]);
   }

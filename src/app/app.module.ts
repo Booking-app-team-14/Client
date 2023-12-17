@@ -46,6 +46,7 @@ import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/rad
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './jwt.interceptor';
 import { VerificationComponent } from './verification/verification.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -97,7 +98,8 @@ import { VerificationComponent } from './verification/verification.component';
     NgOptimizedImage,
     FormsModule,
     MatRadioModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule,
   ],
   providers: [
     provideClientHydration(),
