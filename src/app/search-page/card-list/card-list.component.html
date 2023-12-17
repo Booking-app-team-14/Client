@@ -20,7 +20,7 @@
         </div>
         <div class="card-description">{{ apartment.description }}</div>
         <div class="card-footer">
-          <button class="details-btn" (click)="redirectToAccomodationDetailsPage()">Details</button>
+          <button class="details-btn" (click)="redirectToAccomodationDetailsPage(apartment.id)">Details</button>
           <div class="price-per-night">${{ apartment.pricePerNight }}</div>
         </div>
       </div>

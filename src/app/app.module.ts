@@ -22,29 +22,24 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { BestOffersComponent } from './main-page/best-offers/best-offers.component';
-import { TestimonialsComponent } from './main-page/testimonials/testimonials.component';
-import { SearchSectionComponent } from './main-page/search-section/search-section.component';
-import { CardListComponent } from './search-page/card-list/card-list.component';
-import { SidebarComponent } from './search-page/sidebar/sidebar.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { AccommodationDetailsComponent } from './accommodation-details/accommodation-details.component';
-import { ImageSliderComponent } from './accommodation-details/image-slider/image-slider.component';
-import { RoundUpDetailsComponent } from './accommodation-details/round-up-details/round-up-details.component';
-import { LocationComponent } from './accommodation-details/location/location.component';
-import { ReservationComponent } from './accommodation-details/reservation/reservation.component';
-import { RatingsComponent } from './accommodation-details/ratings/ratings.component';
-import { CommentsComponent } from './accommodation-details/comments/comments.component';
-import { FacilitiesComponent } from './accommodation-details/facilities/facilities.component';
 import {SlickCarouselModule} from "ngx-slick-carousel";
 import {NgOptimizedImage} from "@angular/common";
 import {UserService} from "./login/user.service";
 import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
-import { ApproveAccommodationsComponent } from './admin-functions/approve-accommodations/approve-accommodations.component';
+import {AccommodationDetailsModule} from "./accommodation-details/accommodation-details.module";
+import {SearchPageModule} from "./search-page/search-page.module";
+import {MainPageModule} from "./main-page/main-page.module";
+import {SharedModule} from "./shared/shared.module";
 import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/radio';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS, provideHttpClient, withFetch} from '@angular/common/http';
 import { JwtInterceptor } from './jwt.interceptor';
+import {
+  ApproveAccommodationsComponent
+} from "./admin-functions/approve-accommodations/approve-accommodations.component";
+
 
 
 @NgModule({
@@ -61,24 +56,12 @@ import { JwtInterceptor } from './jwt.interceptor';
     ProfileComponent,
     LoginComponent,
     RegisterComponent,
-    BestOffersComponent,
-    SearchSectionComponent,
-    TestimonialsComponent,
-    SidebarComponent,
-    CardListComponent,
     MainPageComponent,
     SearchPageComponent,
     AccommodationDetailsComponent,
-    ImageSliderComponent,
-    RoundUpDetailsComponent,
-    LocationComponent,
-    ReservationComponent,
-    RatingsComponent,
-    CommentsComponent,
-    FacilitiesComponent,
-    ImageSliderComponent,
     CreateAccommodationComponent,
-    ApproveAccommodationsComponent
+    ApproveAccommodationsComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -94,12 +77,18 @@ import { JwtInterceptor } from './jwt.interceptor';
     SlickCarouselModule,
     NgOptimizedImage,
     FormsModule,
+    HttpClientModule,
+    AccommodationDetailsModule,
+    SearchPageModule,
+    MainPageModule,
+    SharedModule,
     MatRadioModule,
-    HttpClientModule
+
   ],
   providers: [
     provideClientHydration(),
     [UserService],
+    provideHttpClient(withFetch()),
     {
       provide: MAT_RADIO_DEFAULT_OPTIONS,
       useValue: { color: 'primary' }

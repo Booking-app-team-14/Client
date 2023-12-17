@@ -36,8 +36,8 @@ export class CardListComponent {
     return pagesArray;
   }
 
-  redirectToAccomodationDetailsPage() {
-    this.router.navigate(['/search/details']);
+  redirectToAccomodationDetailsPage(id:number) {
+    this.router.navigate(['/search/details', id]);
   }
 
   getAccommodations(): void {

@@ -25,7 +25,7 @@ const routes: Routes = [
   {component: UpdateAccountComponent, path: 'profile/update-account'},
   {component:MainPageComponent, path:''},
   {component:SearchPageComponent,path:'search'},
-  {component:AccommodationDetailsComponent, path:'search/details'},
+  {component:AccommodationDetailsComponent, path:'search/details/:id'},
   {component:CreateAccommodationComponent, path:'create-accommodation'},
   {component: ApproveAccommodationsComponent, path: 'approve-accommodations'}
 ];

@@ -25,5 +25,11 @@ export class SearchPageService {
   getAllAccommodationsByRatingDESC(): Observable<Accommodation[]> {
     return this.http.get<Accommodation[]>('http://localhost:8080/api/accommodations/sort/rating/desc');
   }
+  getAccommodationById(id: number): Observable<Accommodation>{
+    return this.http.get<Accommodation>(`http://localhost:8080/api/accommodations/${id}`);
+  }
+
+
+
 
 }
