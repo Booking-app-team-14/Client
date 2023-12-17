@@ -4,7 +4,7 @@ export interface AccommodationDTO {
   description: string;
   location: LocationDTO;
   type: AccommodationType;
-  images: string[]; // Array of image URLs
+  images: string[];
   amenities: AmenityDTO[];
   rating: number;
   minNumberOfGuests: number;
@@ -23,17 +23,15 @@ export interface LocationDTO {
 }
 
 export enum AccommodationType {
-  // Define your accommodation types if available
-  // For example:
   APARTMENT = 'Apartment',
   HOTEL = 'Hotel',
-  // Add more types as needed
+
 }
 
 export interface AvailabilityDTO {
   id: number;
-  startDate: string; // Change type to string if using ISO date string
-  endDate: string; // Change type to string if using ISO date string
+  startDate: string;
+  endDate: string;
   specialPrice: number;
 }
 
