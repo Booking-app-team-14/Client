@@ -45,6 +45,7 @@ import { ApproveAccommodationsComponent } from './admin-functions/approve-accomm
 import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/radio';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './jwt.interceptor';
+import { VerificationComponent } from './verification/verification.component';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { JwtInterceptor } from './jwt.interceptor';
     FacilitiesComponent,
     ImageSliderComponent,
     CreateAccommodationComponent,
-    ApproveAccommodationsComponent
+    ApproveAccommodationsComponent,
+    VerificationComponent
   ],
   imports: [
     BrowserModule,
