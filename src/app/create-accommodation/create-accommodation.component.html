@@ -2,13 +2,13 @@
   <br>
   <h1>Create Accommodation</h1>
   <form>
-  <label for="images">Images:</label>
-  <input type="file" id="images" multiple accept="image/*" (change)="handleImageUpload($event)">
-  <div *ngIf="selectedImages" class="image-container">
-    <div *ngFor="let image of selectedImages" class="image-item">
-      <img [src]="image.url" alt="Selected Image" class="image-preview">
+    <label for="images">Images:</label>
+    <input type="file" id="images" multiple accept="image/*" (change)="handleImageUpload($event)">
+    <div *ngIf="selectedImages" class="image-container">
+      <div *ngFor="let image of selectedImages" class="image-item">
+        <img [src]="image.url" alt="Selected Image" class="image-preview">
+      </div>
     </div>
-  </div>
     <label for="name">Name:</label>
     <input type="text" id="name" required>
 
@@ -106,7 +106,7 @@
       <label for="cancellationDeadline">Cancellation Deadline:</label>
       <input type="number" id="cancellationDeadline" required>
 
-      </div>
+    </div>
     <br>
 
 

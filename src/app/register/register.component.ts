@@ -1,45 +1,58 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import {RegisterService} from "./register.service";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  passwordVisibility : boolean = true;
-  passwordConfirmVisibility : boolean = true;
-  passwordType : string = "password";
+  passwordVisibility: boolean = true;
+  passwordType: string = 'password';
   passwordConfirmType : string = "password";
+  passwordConfirmVisibility : boolean = true;
 
-  constructor(private _router: Router, private http: HttpClient) { }
+  username: string = '';
+  password: string = '';
+  confirmPassword: string = '';
+  firstName: string = '';
+  lastName: string = '';
+  address: string = '';
+  phoneNumber: string = '';
+  role: string = 'GUEST';
+  //passwordConfirmType: any;
+
+  constructor(private _router: Router, private http: HttpClient, private registerService: RegisterService, private snackBar: MatSnackBar ) {}
 
   register() {
-    
-    // TODO: Implement register functionality dependant on input fields
-
     const body = {
-      "username": "admin@example.com",
-      "password": "12345678",
-      "firstName": "Adminko",
-      "lastName": "Adminkovic",
-      "address": "Adminska 2, Novi Sad",
-      "phoneNumber": "+381012345678",
-      "role": "ADMIN",
-      "isBlocked": false,
-      "numberOfReports": 0
+      username: this.username,
+      password: this.password,
+      confirmPassword: this.confirmPassword,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      address: this.address,
+      phoneNumber: this.phoneNumber,
+      role: this.role,
+      isBlocked: false,
+      numberOfReports: 0
     };
 
-    this.http.post('http://localhost:8080/api/register/users?type=ADMIN', body).subscribe({
+    this.registerService.registerUser(body, this.role).subscribe({
+      next: (userId) => {
+        console.log('User registered with ID:', userId);
+
+        alert('Registration successful! Please check your email for the activation link.')
+
+        this._router.navigateByUrl('/login');
+      },
       error: (err) => {
         console.error(err);
-        alert("Error while sending the POST request!");
+        alert('Error while sending the POST request!');
       }
     });
-
-    this._router.navigateByUrl("/login");
-
   }
-
 }

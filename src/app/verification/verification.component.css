@@ -1,0 +1,11 @@
+.verification-container {
+  text-align: center;
+  margin-top: 50px;
+}
+/* styles.css */
+
+.verification-container a {
+  color: #65AEF2;
+  text-decoration: underline;
+  cursor: pointer;
+}

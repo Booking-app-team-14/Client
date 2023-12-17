@@ -45,6 +45,8 @@ import { ApproveAccommodationsComponent } from './admin-functions/approve-accomm
 import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/radio';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './jwt.interceptor';
+import { VerificationComponent } from './verification/verification.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -78,7 +80,8 @@ import { JwtInterceptor } from './jwt.interceptor';
     FacilitiesComponent,
     ImageSliderComponent,
     CreateAccommodationComponent,
-    ApproveAccommodationsComponent
+    ApproveAccommodationsComponent,
+    VerificationComponent
   ],
   imports: [
     BrowserModule,
@@ -95,7 +98,8 @@ import { JwtInterceptor } from './jwt.interceptor';
     NgOptimizedImage,
     FormsModule,
     MatRadioModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule,
   ],
   providers: [
     provideClientHydration(),

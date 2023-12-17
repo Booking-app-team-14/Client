@@ -109,5 +109,3 @@ export class CreateAccommodationComponent implements AfterViewInit{
 
 
 }
-
-
