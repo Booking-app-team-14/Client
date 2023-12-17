@@ -1,5 +1,4 @@
 import { Component, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
-import * as L from 'leaflet';
 import { isPlatformBrowser } from "@angular/common";
 import {AccommodationService} from "./createaccommodation.service";
 import { HttpClient } from '@angular/common/http';
