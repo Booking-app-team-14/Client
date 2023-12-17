@@ -7,6 +7,7 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { RatingsComponent } from './ratings/ratings.component';
 import { CommentsComponent } from './comments/comments.component';
 import { FacilitiesComponent } from './facilities/facilities.component';
+import {AccommodationDetailsComponent} from "./accommodation-details.component";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FacilitiesComponent } from './facilities/facilities.component';
     ReservationComponent,
     RatingsComponent,
     CommentsComponent,
-    FacilitiesComponent
+    FacilitiesComponent,
+    AccommodationDetailsComponent
   ],
   exports: [
     ImageSliderComponent,
@@ -26,7 +28,8 @@ import { FacilitiesComponent } from './facilities/facilities.component';
     FacilitiesComponent,
     ReservationComponent,
     RatingsComponent,
-    CommentsComponent
+    CommentsComponent,
+    AccommodationDetailsComponent
   ],
   imports: [
     CommonModule,

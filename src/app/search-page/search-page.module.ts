@@ -3,17 +3,20 @@ import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { CardListComponent } from './card-list/card-list.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import {SearchSectionComponent} from "./search-section/search-section.component";
+import {SearchPageComponent} from "./search-page.component";
 
 @NgModule({
   declarations: [
     CardListComponent,
     SidebarComponent,
-    SearchSectionComponent
+    SearchSectionComponent,
+    SearchPageComponent
   ],
   exports: [
     SidebarComponent,
     CardListComponent,
-    SearchSectionComponent
+    SearchSectionComponent,
+    SearchPageComponent
   ],
   imports: [
     CommonModule,
