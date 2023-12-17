@@ -1,10 +1,6 @@
 import { Component, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
 import * as L from 'leaflet';
 import { isPlatformBrowser } from "@angular/common";
-import {AccommodationService} from "./createaccommodation.service";
-import { HttpClient } from '@angular/common/http';
-import {Router} from "@angular/router";
-import {RegisterService} from "../register/register.service";
 
 @Component({
   selector: 'app-create-accommodation',
@@ -16,14 +12,7 @@ export class CreateAccommodationComponent implements AfterViewInit{
   map: any;
   marker: any;
 
-  //constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
-  /*constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private accommodationService: AccommodationService
-  ) {}*/
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,
-              private _router: Router, private http: HttpClient, private accommodationService: AccommodationService) {}
-
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -106,79 +95,17 @@ export class CreateAccommodationComponent implements AfterViewInit{
 
   // ...
 
-  name: string = '';
-  description: string = '';
-  accommodationType: string = '';
-  minGuests: string = '';
-
-  accommodation = {
-    name: '',
-    description: '',
-    type: '',
-    minGuests: '',
-    maxGuests: '',
-    amenities: {
-      airCondition: false,
-      spa: false,
-      beachFront: false,
-      hotTub: false
-    },
-    location: {
-      address: ''
-    },
-    priceType: '',
-    price: 0,
-    availability: {
-      startDate: '',
-      endDate: ''
-    },
-    specialPrice: {
-      startDate: '',
-      endDate: '',
-      amount: 0
-    },
-    cancellationDeadline: 0
-  };
-
-  // ... ostatak postojećeg koda
-
   createAccommodation() {
-    if (this.selectedImages && this.selectedImages.length > 0) {
-      // Priprema podataka za slanje na backend
-      const accommodationDTO = {
-        name: this.accommodation.name,
-        description: this.accommodation.description,
-        type: this.accommodation.type,
-        minGuests: this.accommodation.minGuests,
-        maxGuests: this.accommodation.maxGuests,
-        amenities: this.accommodation.amenities,
-        location: this.accommodation.location,
-        priceType: this.accommodation.priceType,
-        price: this.accommodation.price,
-        availability: this.accommodation.availability,
-        specialPrice: this.accommodation.specialPrice,
-        cancellationDeadline: this.accommodation.cancellationDeadline
-        // Dodajte ostale potrebne podatke
-      };
 
-      // Pozivamo servis za slanje podataka na backend
-      this.accommodationService.addAccommodation(accommodationDTO).subscribe(
-        (accommodationId) => {
-          console.log('Accommodation added successfully. ID:', accommodationId);
-          // Dodajte dalje korake kao što su dodavanje slika, itd.
-        },
-        (error) => {
-          console.error('Error adding accommodation:', error);
-        }
-      );
+    if (this.selectedImages && this.selectedImages.length > 0) {
+
+      for (let i = 0; i < this.selectedImages.length; i++) {
+        const image = this.selectedImages[i];
+
+      }
     }
   }
 
 
 
-
-
-
 }
-
-

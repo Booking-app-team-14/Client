@@ -1,17 +1,22 @@
-<!-- app.component.html -->
-
 <div class="container">
   <br>
   <h1>Create Accommodation</h1>
-  <form (ngSubmit)="createAccommodation()" #accommodationForm="ngForm">
-  <label for="name">Name:</label>
-    <input type="text" id="name" required [(ngModel)]="accommodation.name">
+  <form>
+    <label for="images">Images:</label>
+    <input type="file" id="images" multiple accept="image/*" (change)="handleImageUpload($event)">
+    <div *ngIf="selectedImages" class="image-container">
+      <div *ngFor="let image of selectedImages" class="image-item">
+        <img [src]="image.url" alt="Selected Image" class="image-preview">
+      </div>
+    </div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
 
     <label for="description">Description:</label>
-    <textarea id="description" required [(ngModel)]="accommodation.description"></textarea>
+    <textarea id="description" required></textarea>
 
     <label for="type">Type:</label>
-    <select id="type" [(ngModel)]="accommodation.type">
+    <select id="type">
       <option value="Apartment">Apartment</option>
       <option value="Hotel">Hotel</option>
       <option value="Hostel">Hostel</option>
@@ -22,18 +27,18 @@
 
     <div class="guests-container">
       <label for="minGuests">Min Guests:</label>
-      <input type="number" id="minGuests" min="1" [(ngModel)]="accommodation.minGuests">
+      <input type="number" id="minGuests" min="1">
 
       <label for="maxGuests">Max Guests:</label>
-      <input type="number" id="maxGuests" min="1" [(ngModel)]="accommodation.maxGuests">
+      <input type="number" id="maxGuests" min="1">
     </div>
 
     <fieldset>
       <legend>Amenities:</legend>
-      <label><input type="checkbox" value="Air Condition" [(ngModel)]="accommodation.amenities.airCondition"> Air Condition</label> <br>
-      <label><input type="checkbox" value="Spa" [(ngModel)]="accommodation.amenities.spa"> Spa</label> <br>
-      <label><input type="checkbox" value="Beach front" [(ngModel)]="accommodation.amenities.beachFront"> Beach front</label> <br>
-      <label><input type="checkbox" value="Hot tub/jacuzzi" [(ngModel)]="accommodation.amenities.hotTub"> Hot tub/jacuzzi</label>
+      <label><input type="checkbox" value="Air Condition"> Air Condition</label> <br>
+      <label><input type="checkbox" value="Spa"> Spa</label> <br>
+      <label><input type="checkbox" value="Beach front"> Beach front</label> <br>
+      <label><input type="checkbox" value="Hot tub/jacuzzi"> Hot tub/jacuzzi</label>
     </fieldset>
 
     <div class="location-container">
@@ -47,7 +52,7 @@
       </div>
       <br>
       <div class="input-button-container">
-        <input type="text" id="address" placeholder="Enter location" name="location" [(ngModel)]="accommodation.location.address">
+        <input type="text" id="address" placeholder="Enter location" name="location" [(ngModel)]="enteredAddress">
         <button mat-icon-button class="fav-btn" (click)="locateOnMap()">
           <mat-icon>search</mat-icon>
         </button>
@@ -55,46 +60,56 @@
       <br>
     </div>
 
+
+    <!-- Availability And Prices -->
     <div class="availability-container">
       <h2>Availability And Prices</h2>
 
+      <!-- Define Price -->
       <fieldset>
         <legend>Define Price</legend>
-        <label><input type="radio" name="priceType" value="PerNight" [(ngModel)]="accommodation.priceType"> Per Night</label> <br>
-        <label><input type="radio" name="priceType" value="PerGuest" [(ngModel)]="accommodation.priceType"> Per Guest</label>
+        <label><input type="radio" name="priceType" value="PerNight"> Per Night</label> <br>
+        <label><input type="radio" name="priceType" value="PerGuest"> Per Guest</label>
       </fieldset>
 
+      <!-- Price -->
       <label for="price">Price:</label>
-      <input type="number" id="price" required [(ngModel)]="accommodation.price">
+      <input type="number" id="price" required>
       <br>
       <br>
 
-      <label>Availability:</label>
+      <!-- Availability -->
+      <label >Availability:</label>
       <div class="availability-dates">
         <label for="startDate">Start Date:</label>
-        <input type="date" id="startDate" required [(ngModel)]="accommodation.availability.startDate">
+        <input type="date" id="startDate" required>
 
         <label for="endDate">End Date:</label>
-        <input type="date" id="endDate" required [(ngModel)]="accommodation.availability.endDate">
+        <input type="date" id="endDate" required>
       </div>
 
+      <br>
+      <!-- Special Price -->
       <div class="special-price-container">
-        <label>Special Prices:</label>
+        <label >Special Prices:</label>
         <div class="special-price-dates">
           <label>From:</label>
-          <input type="date" id="specialPriceStartDate" name="specialPriceStartDate" required [(ngModel)]="accommodation.specialPrice.startDate">
+          <input type="date" id="specialPriceStartDate" name="specialPriceStartDate" required>
           <label>To:</label>
-          <input type="date" id="specialPriceEndDate" name="specialPriceEndDate" required [(ngModel)]="accommodation.specialPrice.endDate">
+          <input type="date" id="specialPriceEndDate" name="specialPriceEndDate" required>
         </div>
         <label for="specialPriceAmount">Price:</label>
-        <input type="number" id="specialPriceAmount" name="specialPriceAmount" required [(ngModel)]="accommodation.specialPrice.amount">
+        <input type="number" id="specialPriceAmount" name="specialPriceAmount" required>
       </div>
 
+      <!-- Cancellation Deadline -->
       <label for="cancellationDeadline">Cancellation Deadline:</label>
-      <input type="number" id="cancellationDeadline" required [(ngModel)]="accommodation.cancellationDeadline">
+      <input type="number" id="cancellationDeadline" required>
 
     </div>
     <br>
+
+
     <button type="submit">Create Accommodation</button>
   </form>
 </div>
