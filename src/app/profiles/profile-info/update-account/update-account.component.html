@@ -4,34 +4,39 @@
 
     <div class="input-row">
         <label>New email address</label>
-        <input type="email" placeholder="Enter email address">
-        <p>Current: {{ user.email }}</p>
+        <input type="email" placeholder="Enter email address" [(ngModel)]="email">
+        <p>Current: {{ user.username }}</p>
     </div>
     
     <div class="input-row">
         <label>New password</label>
-        <input [type]="passwordType" placeholder="Enter password" class="password">
+        <input [type]="passwordType" placeholder="Enter password" class="password" [(ngModel)]="password">
         <mat-icon *ngIf="passwordVisibility" (click)="passwordVisibility=false;passwordType='text'">visibility</mat-icon>
         <mat-icon *ngIf="!passwordVisibility" (click)="passwordVisibility=true;passwordType='password'">visibility_off</mat-icon>
     </div>
 
     <div class="input-row"> 
         <label>Confirm password</label>
-        <input [type]="passwordConfirmType" placeholder="Enter password" class="password">
+        <input [type]="passwordConfirmType" placeholder="Enter password" class="password" [(ngModel)]="passwordConfirm">
         <mat-icon *ngIf="passwordConfirmVisibility" (click)="passwordConfirmVisibility=false;passwordConfirmType='text'">visibility</mat-icon>
         <mat-icon *ngIf="!passwordConfirmVisibility" (click)="passwordConfirmVisibility=true;passwordConfirmType='password'">visibility_off</mat-icon>
     </div>
 
     <div class="input-row">
         <label>New phone number</label>
-        <input type="text" placeholder="Enter phone number">
-        <p>Current: {{ user.phone }}</p>
+        <input type="text" placeholder="Enter phone number" [(ngModel)]="phone">
+        <p>Current: {{ user.phoneNumber }}</p>
     </div>
 
     <div class="input-row">
         <label>New address</label>
-        <input type="text" placeholder="Enter address">
+        <input type="text" placeholder="Enter address" [(ngModel)]="address">
         <p>Current: {{ user.address }}</p>
+    </div>
+
+    <div class="input-row">
+        <label>Profile Image</label>
+        <input type="file" (change)="onFileSelected($event)">
     </div>
 
     <button (click)="updateDetails()">Update changed details</button>

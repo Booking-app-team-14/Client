@@ -13,13 +13,19 @@ export class NavbarComponent {
   //userRole: string = userRole;
   userRole: string = '';
 
-  constructor(private userService: UserService) {}
-
-
-  ngOnInit(): void {
+  constructor(private userService: UserService) {
     this.userService.userRole$.subscribe(role => {
       this.userRole = role;
     });
+  }
+
+
+  ngOnInit(): void {
+    
+    try {
+      this.userRole = this.userService.getUserRole();
+    } catch (error) { }
+
   }
 
 
