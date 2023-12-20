@@ -21,7 +21,7 @@
 
         <ng-container *ngFor="let accommodation of accommodations">
 
-            <div *ngIf="accommodation.requestType === type" class="accommodation-card" id="card-{{accommodation.id}}">
+            <div *ngIf="accommodation.requestType === type" class="accommodation-card" id="card-{{accommodation.accommodationId}}">
             
                 <div class="owner-side">
                     <div class="owner-data">
@@ -31,7 +31,7 @@
                             <span class="username">{{accommodation.ownerUsername}}</span>
                         </div>
 
-                        <span class="date">({{accommodation.dateRequested}})</span>
+                        <span class="date">({{accommodation.date}})</span>
 
                     </div>
                     <div class="span-div">
@@ -57,7 +57,7 @@
                                         </div>
                                     </div>
                                     <div class="posted-ago">
-                                        <span>{{accommodation.postedAgo}} mins ago</span>
+                                        <span>{{accommodation.postedAgo}}</span>
                                     </div>
                                 </div>
                                 <div class="b">
@@ -69,15 +69,15 @@
                             </div>
                             
                             <div class="view-details">
-                                <button (click)="viewDetails(accommodation.id)">View details</button>
+                                <button (click)="viewDetails(accommodation.accommodationId)">View details</button>
                             </div>
                         </div>
 
                     </div>
 
                     <div class="action-btns">
-                        <button (click)="reject(accommodation.id)" class="reject">Reject</button>
-                        <button (click)="approve(accommodation.id)" class="approve">Approve</button>
+                        <button (click)="reject(accommodation.accommodationId)" class="reject">Reject</button>
+                        <button (click)="approve(accommodation.accommodationId)" class="approve">Approve</button>
                     </div>
 
                 </div>
