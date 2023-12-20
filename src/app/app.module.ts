@@ -48,7 +48,6 @@ import { JwtInterceptor } from './jwt.interceptor';
 import { VerificationComponent } from './verification/verification.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,7 +98,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     FormsModule,
     MatRadioModule,
     HttpClientModule,
-    MatSnackBarModule,
+    MatSnackBarModule
   ],
   providers: [
     provideClientHydration(),

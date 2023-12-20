@@ -14,7 +14,8 @@ export class HostProfileComponent {
     email: string,
     address: string,
     phone: string,
-    avatarPath: string
+    avatarImageType: string,
+    avatarBytes: string
   };
 
 }

@@ -4,7 +4,7 @@
         
         <div class="info-container">
 
-            <img [src]="user.avatarPath" alt="avatar">
+            <img [src]="'data:image/' + user.avatarImageType + ';base64,' + user.avatarBytes" alt="avatar">
             <div class="info labels">
                 <h3>Email:</h3>
                 <h3>First name:</h3>
