@@ -78,7 +78,7 @@
 }
 
 
-.form-overlay input[type="submit"] {
+.button {
   width: calc(100% - 15px);
   color: var(--color_white);
   background-color: var(--color_primary_blue);
@@ -92,6 +92,6 @@
   box-sizing: border-box;
 }
 
-.form-overlay input[type="submit"]:hover {
+.button:hover {
   background-color: #4a8bd6;
 }

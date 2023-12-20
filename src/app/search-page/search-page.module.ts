@@ -4,6 +4,7 @@ import { CardListComponent } from './card-list/card-list.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import {SearchSectionComponent} from "./search-section/search-section.component";
 import {SearchPageComponent} from "./search-page.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -18,9 +19,10 @@ import {SearchPageComponent} from "./search-page.component";
     SearchSectionComponent,
     SearchPageComponent
   ],
-  imports: [
-    CommonModule,
-    NgOptimizedImage,
-  ]
+    imports: [
+        CommonModule,
+        NgOptimizedImage,
+        FormsModule,
+    ]
 })
 export class SearchPageModule { }

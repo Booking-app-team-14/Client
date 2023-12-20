@@ -1,5 +1,8 @@
 import {Component, ElementRef, Input, signal, ViewChild} from '@angular/core';
 import {ReservationService} from "./reservation.service";
+import {HttpClient} from "@angular/common/http";
+import * as http from "http";
+import {AccommodationDetailsService} from "../accommodation-details.service";
 
 interface Availability{
   id: number;
@@ -8,6 +11,7 @@ interface Availability{
   specialPrice: number;
 }
 interface Reservation{
+  accommodationId:number;
   pricePerNight:number;
   minGuests:number;
   maxGuests:number;
@@ -21,14 +25,15 @@ interface Reservation{
 })
 export class ReservationComponent {
   @ViewChild('guestsInput') guestsInput!: ElementRef;
-  @Input() availabilities: Availability[]=[];
+  @Input() availabilities: Availability[];
   @Input() reservationRequirements: Reservation;
   defaultCheckInDate: string;
   defaultCheckOutDate: string;
   totalPrice: number = 0;
+  private userId: number;
 
 
-  constructor( private reservationService: ReservationService) {
+  constructor( private reservationService: ReservationService,private accService: AccommodationDetailsService) {
     const today = new Date();
     const nextDay = new Date();
     nextDay.setDate(today.getDate() + 1);
@@ -58,7 +63,7 @@ export class ReservationComponent {
   validateDates(): void {
     const checkIn = new Date(this.defaultCheckInDate);
     const checkOut = new Date(this.defaultCheckOutDate);
-
+    //console.log(this.availabilities);
     if (checkOut < checkIn || checkOut.getTime() === checkIn.getTime()) {
       alert('Check-out date should be after the check-in date');
       this.defaultCheckOutDate = this.defaultCheckInDate;
@@ -69,8 +74,10 @@ export class ReservationComponent {
       alert('Minimum reservation duration is one night');
       this.defaultCheckOutDate = this.defaultCheckInDate;
     }
-    this.calculateTotalPrice();
-  }
+
+      this.calculateTotalPrice();
+    }
+
   calculateTotalPrice(): void {
     const checkIn = new Date(this.defaultCheckInDate);
     const checkOut = new Date(this.defaultCheckOutDate);
@@ -89,14 +96,26 @@ export class ReservationComponent {
   }
 
   makeReservation(): void {
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    this.accService.getUserById(currentUser).subscribe(
+      (userData: any) => {
+        this.userId = userData;
+        console.log('User ID:', this.userId);
+      },
+      (error) => {
+        console.error('Error fetching user data:', error);
+      }
+    );
+    console.log(this.reservationRequirements);
     const reservationData = {
       startDate: this.defaultCheckInDate,
       endDate: this.defaultCheckOutDate,
       numberOfGuests: +this.guestsInput.nativeElement.value,
       requestStatus: 'SENT',
       totalPrice: this.totalPrice,
-      accommodationId:123 ,
-      guestId: 456
+      accommodationId:this.reservationRequirements.accommodationId ,
+      guestId: 17
     };
 
     this.reservationService.sendReservation(reservationData).subscribe(

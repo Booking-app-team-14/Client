@@ -6,7 +6,47 @@ body {
   background-color: #f4f4f4;
 }
 
+.filter-section {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 5%
+}
 
+.input-field {
+  box-sizing: border-box;
+  padding: 12px;
+  margin-right: 10px;
+  width: 80%;
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input-field::placeholder {
+  color: #999;
+}
+
+.input-field:focus {
+  border-color: #2980b9;
+}
+
+.search-button {
+  border: none;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: white;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #2980b9;
+}
 .sidebar {
   width: auto;
   padding: 20px;

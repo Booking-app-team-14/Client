@@ -1,11 +1,11 @@
 <app-image-slider [images]="images"></app-image-slider>
 <div class="container">
 <app-round-up-details [place]="places" [owner] = "owner"></app-round-up-details>
-  <app-location></app-location>
+  <app-location [location] ="location"></app-location>
 </div>
-<app-facilities></app-facilities>
+<app-facilities [facilities] = "amenitiesList"></app-facilities>
 <div class="container2">
-<app-reservation></app-reservation>
+    <app-reservation [reservationRequirements]="reservationRequirements" [availabilities]="availableDates"></app-reservation>
   <app-ratings></app-ratings>
 </div>
 

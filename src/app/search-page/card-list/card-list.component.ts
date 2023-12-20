@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
 import {Accommodation} from "../../shared/accommodation.model";
 import {SearchPageService} from "../search-page.service";
+import {Observable, Subscription} from "rxjs";
+import {FilterService} from "../../shared/filter.service";
 
 @Component({
   selector: 'app-card-list',
@@ -10,19 +11,73 @@ import {SearchPageService} from "../search-page.service";
   styleUrl: './card-list.component.css'
 })
 export class CardListComponent {
-  constructor(private router: Router, private service: SearchPageService) {
+  constructor(private router: Router, private service: SearchPageService, private filterService:FilterService) {
   }
-
   apartmentsPerPage = 4;
   apartments: Accommodation[] = [];
+  subscription: Subscription;
+  originalApartments: Accommodation[] = []
+  filteredAccommodations: Accommodation[] = [];
   currentPage = 1;
   isSortedByPrice = false;
   isSortedByRating = false;
 
   ngOnInit(): void {
     this.getAccommodations();
+    this.listenToSearchQueryChanges();
+    this.filterAccommodations();
   }
 
+  getAccommodations(): void {
+    // Fetch default accommodations
+    this.service.getAllAccommodations().subscribe({
+      next: (result: Accommodation[]) => {
+        this.apartments = result;
+        console.log('Fetched default accommodations:', result);
+      },
+      error: (error: any) => {
+        console.log('Error fetching default accommodations:', error);
+      }
+    });
+  }
+
+  listenToSearchQueryChanges(): void {
+    this.service.getSearchQuery().subscribe(query => {
+      if (query.trim().length === 0) {
+        this.getAccommodations();
+      } else {
+
+        this.service.searchAccommodations(query).subscribe({
+          next: (accommodations: Accommodation[]) => {
+            this.apartments = accommodations;
+            console.log('Filtered accommodations:', accommodations);
+          },
+          error: (error: any) => {
+            console.log('Error fetching filtered accommodations:', error);
+          }
+        });
+      }
+    });
+  }
+
+  filterAccommodations(): void {
+    this.filteredAccommodations = this.filterService.getSavedResults();
+    console.log(this.filteredAccommodations);
+    if (this.filteredAccommodations.length == 0) {
+      this.getAccommodations();
+      return;
+    }
+
+    this.subscription = this.filterService.filteredResults$.subscribe(
+      (results: Accommodation[]) => {
+        this.apartments = results;
+        console.log('Filtered accommodations:', results);
+      },
+      (error: any) => {
+        console.error('Error fetching filtered results:', error);
+      }
+    );
+  }
   changePage(pageNumber: number) {
     this.currentPage = pageNumber;
   }
@@ -40,17 +95,7 @@ export class CardListComponent {
     this.router.navigate(['/search/details', id]);
   }
 
-  getAccommodations(): void {
-    this.service.getAllAccommodations().subscribe({
-      next: (result: Accommodation[]) => {
-        this.apartments = result;
-        console.log('Fetched default accommodations:', result);
-      },
-      error: (error: any) => {
-        console.log('Error fetching default accommodations:', error);
-      }
-    });
-  }
+
 
   onSortChange(event: Event): void {
     const selectedValue = (event.target as HTMLSelectElement).value;

@@ -1,5 +1,4 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {SlickCarouselComponent} from "ngx-slick-carousel";
 
 interface  carouselImage{
   imageSrc: string;

@@ -51,7 +51,7 @@ export class LocationComponent implements AfterViewInit {
       this.locationService.search(address).subscribe(
         (data: any) => {
           if (data && data.length > 0) {
-            const { lat, lon } = data[0]; // Assuming the first result
+            const { lat, lon } = data[0];
             map.setView([lat, lon], 13);
             L.marker([lat, lon]).addTo(map)
               .bindPopup('Searched location: ' + address)

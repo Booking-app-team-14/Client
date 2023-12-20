@@ -25,6 +25,9 @@ export interface LocationDTO {
 export enum AccommodationType {
   APARTMENT = 'Apartment',
   HOTEL = 'Hotel',
+  ROOM = 'Room',
+  VILLA = 'VILLA',
+  STUDIO = 'StUDIO',
 
 }
 

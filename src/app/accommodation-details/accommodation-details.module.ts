@@ -8,6 +8,7 @@ import { RatingsComponent } from './ratings/ratings.component';
 import { CommentsComponent } from './comments/comments.component';
 import { FacilitiesComponent } from './facilities/facilities.component';
 import {AccommodationDetailsComponent} from "./accommodation-details.component";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {AccommodationDetailsComponent} from "./accommodation-details.component";
   ],
   imports: [
     CommonModule,
+    FormsModule,
 
   ]
 })

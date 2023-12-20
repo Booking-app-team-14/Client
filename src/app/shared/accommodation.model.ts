@@ -7,6 +7,7 @@ export  interface Accommodation {
   rating: number;
   maxNumberOfGuests: number;
   pricePerNight: number;
+  approved:boolean;
 
 }
 export  interface Accommodation {
