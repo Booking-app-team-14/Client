@@ -47,6 +47,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './jwt.interceptor';
 import { VerificationComponent } from './verification/verification.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UpdateAccommodationComponent } from './update-accommodation/update-accommodation.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ImageSliderComponent,
     CreateAccommodationComponent,
     ApproveAccommodationsComponent,
-    VerificationComponent
+    VerificationComponent,
+    UpdateAccommodationComponent
   ],
   imports: [
     BrowserModule,
