@@ -41,11 +41,13 @@ export class ProfileInfoComponent implements AfterViewChecked {
           next: (userId: any) => {
             this.http.delete("http://localhost:8080/api/users/" + userId).subscribe({
               next: () => {
-                this.signOut();
+                this.userService.logout();
+                this._router.navigateByUrl("");
               }
             });
           }
         });
+    alert("Account closing...");
   }
 
 }

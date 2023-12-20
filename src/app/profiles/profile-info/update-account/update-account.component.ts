@@ -25,9 +25,7 @@ export class UpdateAccountComponent {
     phoneNumber: string,
     role: string,
     isBlocked: false,
-    numberOfReports: 0,
-    avatarImageType: string,
-    avatarBytes: string
+    numberOfReports: 0
   } = {
     username: '',
     password: null,
@@ -37,9 +35,7 @@ export class UpdateAccountComponent {
     phoneNumber: '',
     role: '',
     isBlocked: false,
-    numberOfReports: 0,
-    avatarImageType: '',
-    avatarBytes: ''
+    numberOfReports: 0
   };
 
   updatedUser: {
@@ -51,10 +47,11 @@ export class UpdateAccountComponent {
     phoneNumber: string,
     role: string,
     isBlocked: false,
-    numberOfReports: 0,
-    avatarImageType: string,
-    avatarBytes: string
+    numberOfReports: 0
   };
+
+  avatarBytes: string;
+  avatarImageType: string;
 
   email: string;
   password: string;
@@ -78,8 +75,6 @@ export class UpdateAccountComponent {
                 this.user.role = userDTO.role;
                 this.user.isBlocked = userDTO.isBlocked;
                 this.user.numberOfReports = userDTO.numberOfReports;
-                this.user.avatarImageType = userDTO.profilePictureType;
-                this.user.avatarBytes = userDTO.profilePictureBytes;
 
                 this.updatedUser = this.user;
               },
@@ -96,19 +91,32 @@ export class UpdateAccountComponent {
         });
   }
 
+  fileUploaded: boolean = false;
   onFileSelected(event: any) {
     const file = event.target.files[0];
     const reader = new FileReader();
   
     reader.onload = (event: any) => {
-      this.updatedUser.avatarBytes = event.target.result.split(',')[1];
-      this.updatedUser.avatarImageType = file.type.split('/')[1];
+      this.avatarBytes = event.target.result.split(',')[1];
+      this.avatarImageType = file.type.split('/')[1];
     };
   
     reader.readAsDataURL(file);
+    this.fileUploaded = true;
   }
 
   updateDetails() {
+
+    if (this.fileUploaded) {
+      this.http.post(`http://localhost:8080/api/users/${this.userId}/image`, this.avatarBytes, { responseType: 'text' }).subscribe({
+        next: (r: any) => { },
+        error: (err) => {
+          console.error(err);
+          alert("Error while updating user avatar!");
+        }
+      });
+    }
+
     if (this.password != null && this.password != "") {
       if (this.password != this.passwordConfirm) {
         alert("Passwords do not match!");
@@ -139,7 +147,7 @@ export class UpdateAccountComponent {
 
     console.log(this.updatedUser);
     this.http.put(`http://localhost:8080/api/users/${this.userId}`, this.updatedUser, { responseType: 'text' }).subscribe({
-      next: () => {
+      next: (r: any) => {
         alert("OK!");
         this._router.navigateByUrl("/profile");
       },
@@ -148,6 +156,9 @@ export class UpdateAccountComponent {
         alert("Error while updating user data!");
       }
     });
+
+    
+
   }
 
 }
