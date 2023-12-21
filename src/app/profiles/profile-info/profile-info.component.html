@@ -1,30 +1,30 @@
 <h2 class="titles">Profile</h2>
 
-    <div class="profile-container">
-        
-        <div class="info-container">
+<div class="profile-container">
 
-            <img [src]="'data:image/' + user.avatarImageType + ';base64,' + user.avatarBytes" alt="avatar">
-            <div class="info labels">
-                <h3>Email:</h3>
-                <h3>First name:</h3>
-                <h3>Last name:</h3>
-                <h3>Address:</h3>
-                <h3>Phone number:</h3>
-            </div>
-            <div class="info">
-                <h3>{{user.email}}</h3>
-                <h3>{{user.firstName}}</h3>
-                <h3>{{user.lastName}}</h3>
-                <h3>{{user.address}}</h3>
-                <h3>{{user.phone}}</h3>
-            </div>
-        </div>
+  <div class="info-container">
 
-        <div class="account-actions">
-            <button class="account-buttons" (click)="closeAccount()"><mat-icon>close</mat-icon>Close account</button>
-            <button class="account-buttons" routerLink="/profile/update-account"><mat-icon>account_box</mat-icon>Update account</button>
-            <button (click)="signOut()"><mat-icon>keyboard_return</mat-icon>Sign out</button>
-        </div>
-
+    <img [src]="'data:image/' + user.avatarImageType + ';base64,' + user.avatarBytes" alt="avatar">
+    <div class="info labels">
+      <h3>Email:</h3>
+      <h3>First name:</h3>
+      <h3>Last name:</h3>
+      <h3>Address:</h3>
+      <h3>Phone number:</h3>
     </div>
+    <div class="info">
+      <h3>{{user.email}}</h3>
+      <h3>{{user.firstName}}</h3>
+      <h3>{{user.lastName}}</h3>
+      <h3>{{user.address}}</h3>
+      <h3>{{user.phone}}</h3>
+    </div>
+  </div>
+
+  <div class="account-actions">
+    <button class="account-buttons" (click)="closeAccount()"><mat-icon>close</mat-icon>Close account</button>
+    <button class="account-buttons" routerLink="/profile/update-account"><mat-icon>account_box</mat-icon>Update account</button>
+    <button (click)="signOut()"><mat-icon>keyboard_return</mat-icon>Sign out</button>
+  </div>
+
+</div>

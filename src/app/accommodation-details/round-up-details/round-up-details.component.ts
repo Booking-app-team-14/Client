@@ -8,9 +8,12 @@ interface Owner {
 interface place {
   name: string;
   address: string;
-  owner: Owner;
   description: string;
+}
 
+interface owner{
+  name: string;
+  picture: string;
 }
 
 @Component({
@@ -20,6 +23,7 @@ interface place {
 })
 export class RoundUpDetailsComponent {
   @Input() place: place;
+  @Input() owner!: owner;
 
   constructor() {}
 }

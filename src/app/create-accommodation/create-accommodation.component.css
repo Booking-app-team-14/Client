@@ -23,8 +23,13 @@ input, textarea, select, fieldset {
 }
 
 .guests-container {
-  display: flex;
+  padding: 15px;
   gap: 8px;
+}
+
+.guests-container input {
+  width: 100px;
+
 }
 
 #map {

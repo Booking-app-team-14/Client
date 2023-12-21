@@ -1,65 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {MainPageService} from "../main-page.service";
+import {PagedResult} from "../../shared/paged-result.model";
+import {Accommodation} from "../../shared/accommodation.model";
+
 
 @Component({
   selector: 'app-best-offers',
   templateUrl: './best-offers.component.html',
   styleUrl: './best-offers.component.css'
 })
-export class BestOffersComponent {
-  constructor(private router: Router) {}
+export class BestOffersComponent implements OnInit{
+  constructor(private router: Router, private  service:MainPageService) {}
 
+  offers: Accommodation[] = []
+
+  ngOnInit(): void{
+  this.service.getBestOffers().subscribe({
+    next: (result: Accommodation[]) => {
+    this.offers = result;
+    console.log(result);
+    },
+    error: (error:any) => {
+      console.log(error);
+    }
+  })
+  }
   redirectToSearchPage() {
     this.router.navigate(['/search']);
   }
-  offers = [
-    {
-      image: '/assets/mainPagePicture.jpg',
-      type: 'Apartment',
-      location: 'Novi Sad',
-      guests: 5,
-      description: 'Lorem ipsum',
-      price: 20
-    },
-    {
-      image: '/assets/mainPagePicture.jpg',
-      type: 'Apartment',
-      location: 'Novi Sad',
-      guests: 4,
-      description: 'Lorem ipsum',
-      price: 300
-    },
-    {
-      image: '/assets/mainPagePicture.jpg',
-      type: 'Apartment',
-      location: 'Novi Sad',
-      guests: 2,
-      description: 'Lorem ipsum',
-      price: 10
-    },
-    {
-      image: '/assets/mainPagePicture.jpg',
-      type: 'Apartment',
-      location: 'Novi Sad',
-      guests: 10,
-      description: 'Lorem ipsum',
-      price: 2000
-    },
-    {
-      image: '/assets/mainPagePicture.jpg',
-      type: 'Apartment',
-      location: 'Novi Sad',
-      guests: 6,
-      description: 'Lorem ipsum',
-      price: 200
-    },
-    {
-      image: '/assets/mainPagePicture.jpg',
-      type: 'Apartment',
-      location: 'Novi Sad',
-      guests: 17,
-      description: 'Lorem ipsum',
-      price: 2500
-    },
-  ];
+
+
 }

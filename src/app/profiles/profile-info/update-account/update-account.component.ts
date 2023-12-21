@@ -91,10 +91,14 @@ export class UpdateAccountComponent {
         });
   }
 
+  selectedImage: { url: string, file: File } = null;
   fileUploaded: boolean = false;
   onFileSelected(event: any) {
     const file = event.target.files[0];
     const reader = new FileReader();
+
+    const url = URL.createObjectURL(file);
+    this.selectedImage = { url, file };
   
     reader.onload = (event: any) => {
       this.avatarBytes = event.target.result.split(',')[1];

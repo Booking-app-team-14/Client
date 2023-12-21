@@ -1,0 +1,100 @@
+<div class="container">
+
+    <h1 style="margin-bottom: 32px;">Update accommodation details</h1>
+
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" placeholder="Enter description">
+        </div>
+        <div class="form-group">
+            <label for="type">Type:</label>
+            <select id="type">
+                <option value="Apartment">Apartment</option>
+                <option value="Hotel">Hotel</option>
+                <option value="Hostel">Hostel</option>
+                <option value="Private Room">Private Room</option>
+                <option value="Guesthouse">Guesthouse</option>
+                <option value="Resort">Resort</option>
+              </select>
+        </div>
+        <div class="form-group">
+            <label for="minGuests">Min Guests:</label>
+            <input type="number" id="minGuests" min="1">
+
+            <label for="maxGuests">Max Guests:</label>
+            <input type="number" id="maxGuests" min="1">
+        </div>
+        <fieldset style="margin-bottom: 1rem;">
+            <legend>Amenities:</legend>
+            <label><input type="checkbox" value="Air Condition"> Air Condition</label> <br>
+            <label><input type="checkbox" value="Spa"> Spa</label> <br>
+            <label><input type="checkbox" value="Beach front"> Beach front</label> <br>
+            <label><input type="checkbox" value="Hot tub/jacuzzi"> Hot tub/jacuzzi</label>
+          </fieldset>
+        <div class="form-group">
+            <div class="location-container">
+                <div class="location-header">
+                  <span class="location-sign">📍</span>
+                  <h2 class="location-caption">Location</h2>
+                </div>
+          
+                <div class="map-frame">
+                  <div id="mapContainer" style="height: 400px;"></div>
+                </div>
+                <div class="input-button-container">
+                  <input type="text" id="address" placeholder="Enter location" name="location" [(ngModel)]="enteredAddress">
+                  <button class="search-location" (click)="locateOnMap()">
+                    <mat-icon>search</mat-icon>
+                  </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="image">Images</label>
+            <input type="file" multiple accept="image/*" class="form-control" id="images" placeholder="Enter images" (change)="handleImageUpload($event)">
+            <div *ngIf="selectedImages" class="image-container" style="margin-top: 1rem;">
+                <div *ngFor="let image of selectedImages" class="image-item">
+                    <img [src]="image.url" alt="Selected Image" class="image-preview">
+                </div>
+            </div>
+        </div>
+        <fieldset>
+            <legend>Define Price:</legend>
+            <label><input type="radio" name="priceType" value="PerNight"> Per Night</label> <br>
+            <label><input type="radio" name="priceType" value="PerGuest"> Per Guest</label>
+          </fieldset>
+        <div class="form-group">
+            <label for="available">Availability</label>
+            <label for="price">Price</label>
+            <input type="number" class="form-control" id="price" placeholder="Enter price">
+        </div>
+        <div class="datepicker-container">
+            <mat-form-field style="width: 17rem;">
+                <mat-label>Enter a date range</mat-label>
+                <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                    <input matStartDate formControlName="start" placeholder="Start date" #startDateRef (dateChange)="startDateChangeEvent()">
+                    <input matEndDate formControlName="end" placeholder="End date" #endDateRef (dateChange)="endDateChangeEvent()">
+                </mat-date-range-input>
+                <mat-datepicker-toggle [for]="picker" style="position: absolute; top: 0.2rem; right: -0.6rem;"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker disabled="false" style="position: absolute; top: 70px; right: 0;">
+                    <mat-date-range-picker-actions>
+                        <button mat-button matDateRangePickerCancel>Cancel</button>
+                        <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+                    </mat-date-range-picker-actions>
+                </mat-date-range-picker>
+            </mat-form-field>
+        </div>
+        <button mat-raised-button color="primary" style="margin-top: 1rem; margin-bottom: 1rem;" (click)="addRange()">Add availability</button>
+        <div class="form-group">
+            <label for="cancelationDeadline">Cancelation deadline</label>
+            <input type="number" class="form-control" id="cancelation" placeholder="Enter cancelation deadline">
+        </div>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+    </form>
+
+</div>

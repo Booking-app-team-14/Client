@@ -68,7 +68,7 @@ export class LoginComponent {
         alert("Error while sending the POST request!");
       }
     });
-    
+
   }
 
 

@@ -25,10 +25,7 @@
   margin: 0;
 }
 
-.map-section {
+.map-frame {
   padding: 15px;
-}
-.map-section img {
-  width: auto;
-  height: auto;
+  border: 2px solid black;
 }

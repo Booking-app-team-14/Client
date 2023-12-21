@@ -22,21 +22,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { BestOffersComponent } from './main-page/best-offers/best-offers.component';
-import { TestimonialsComponent } from './main-page/testimonials/testimonials.component';
-import { SearchSectionComponent } from './main-page/search-section/search-section.component';
-import { CardListComponent } from './search-page/card-list/card-list.component';
-import { SidebarComponent } from './search-page/sidebar/sidebar.component';
-import { SearchPageComponent } from './search-page/search-page.component';
-import { MainPageComponent } from './main-page/main-page.component';
 import { AccommodationDetailsComponent } from './accommodation-details/accommodation-details.component';
-import { ImageSliderComponent } from './accommodation-details/image-slider/image-slider.component';
-import { RoundUpDetailsComponent } from './accommodation-details/round-up-details/round-up-details.component';
-import { LocationComponent } from './accommodation-details/location/location.component';
-import { ReservationComponent } from './accommodation-details/reservation/reservation.component';
-import { RatingsComponent } from './accommodation-details/ratings/ratings.component';
-import { CommentsComponent } from './accommodation-details/comments/comments.component';
-import { FacilitiesComponent } from './accommodation-details/facilities/facilities.component';
 import {SlickCarouselModule} from "ngx-slick-carousel";
 import {NgOptimizedImage} from "@angular/common";
 import {UserService} from "./login/user.service";
@@ -47,6 +33,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './jwt.interceptor';
 import { VerificationComponent } from './verification/verification.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UpdateAccommodationComponent } from './update-accommodation/update-accommodation.component';
+import { provideHttpClient, withFetch} from '@angular/common/http';
+import { HttpClient} from "@angular/common/http";
+import {AccommodationDetailsModule} from "./accommodation-details/accommodation-details.module";
+import {SearchPageModule} from "./search-page/search-page.module";
+import {MainPageModule} from "./main-page/main-page.module";
+import {SharedModule} from "./shared/shared.module";
+import {MainPageService} from "./main-page/main-page.service";
+import {provideRouter} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -62,25 +57,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ProfileComponent,
     LoginComponent,
     RegisterComponent,
-    BestOffersComponent,
-    SearchSectionComponent,
-    TestimonialsComponent,
-    SidebarComponent,
-    CardListComponent,
-    MainPageComponent,
-    SearchPageComponent,
-    AccommodationDetailsComponent,
-    ImageSliderComponent,
-    RoundUpDetailsComponent,
-    LocationComponent,
-    ReservationComponent,
-    RatingsComponent,
-    CommentsComponent,
-    FacilitiesComponent,
-    ImageSliderComponent,
     CreateAccommodationComponent,
     ApproveAccommodationsComponent,
-    VerificationComponent
+    VerificationComponent,
+    UpdateAccommodationComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +78,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     FormsModule,
     MatRadioModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MainPageModule,
+    SearchPageModule,
+    AccommodationDetailsModule,
+    SharedModule
   ],
   providers: [
     provideClientHydration(),
@@ -107,6 +91,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
       provide: MAT_RADIO_DEFAULT_OPTIONS,
       useValue: { color: 'primary' }
     },
+    provideHttpClient(withFetch()),
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

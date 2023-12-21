@@ -1,0 +1,22 @@
+<div class="header_main">
+  <img src="assets/mainPagePicture.jpg" class="background-image" height="416" width="1440" alt="imageSearch"/>
+  <h1>Find your perfect <span class="highlight-text">place</span> to stay!</h1>
+  <h2>Let us help you plan your next journey.</h2>
+  <div class="form-overlay">
+    <form>
+      <div class="form-types">
+        <input type="date" id="checkInDate" name="checkInDate" placeholder="Check-in Date" [(ngModel)]="filters.startDate" (ngModelChange)="onFilterChange()">
+        <input type="date" id="checkOutDate" name="checkOutDate" placeholder="Check-out Date" [(ngModel)]="filters.endDate" (ngModelChange)="onFilterChange()">
+        <input type="number" id="numberOfGuests" name="numberOfGuests" placeholder="Number of Guests" [(ngModel)]="filters.minGuests" (ngModelChange)="onFilterChange()">
+        <select id="accommodationType" name="accommodationType" [(ngModel)]="filters.accommodationType" (ngModelChange)="onFilterChange()">
+          <option value="" disabled selected hidden>Type</option>
+          <option value="hotel">Hotel</option>
+          <option value="apartment">Apartment</option>
+          <option value="villa">Villa</option>
+        </select>
+      </div>
+      <button class="button" (click)="onFilterClick()">Filter</button>
+    </form>
+
+  </div>
+</div>

@@ -39,28 +39,28 @@ export class ProfileComponent {
 
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.http.get(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe({
-          next: (userId: any) => {
-            this.http.get(`http://localhost:8080/api/users/${userId}`).subscribe({
-              next: (userDTO: any) => {
-                this.user.firstName = userDTO.firstName;
-                this.user.lastName = userDTO.lastName;
-                this.user.email = userDTO.username;
-                this.user.address = userDTO.address;
-                this.user.phone = userDTO.phoneNumber;
-                this.user.avatarImageType = userDTO.profilePictureType;
-                this.user.avatarBytes = userDTO.profilePictureBytes;
-              },
-              error: (err) => {
-                console.error(err);
-                alert("Error while fetching user data!");
-              }
-            });
+      next: (userId: any) => {
+        this.http.get(`http://localhost:8080/api/users/${userId}`).subscribe({
+          next: (userDTO: any) => {
+            this.user.firstName = userDTO.firstName;
+            this.user.lastName = userDTO.lastName;
+            this.user.email = userDTO.username;
+            this.user.address = userDTO.address;
+            this.user.phone = userDTO.phoneNumber;
+            this.user.avatarImageType = userDTO.profilePictureType;
+            this.user.avatarBytes = userDTO.profilePictureBytes;
           },
           error: (err) => {
             console.error(err);
-            alert("Error while fetching user data from token!");
+            alert("Error while fetching user data!");
           }
         });
+      },
+      error: (err) => {
+        console.error(err);
+        alert("Error while fetching user data from token!");
+      }
+    });
 
   }
 

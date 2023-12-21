@@ -11,8 +11,10 @@ import {AccommodationDetailsComponent} from "./accommodation-details/accommodati
 import {CreateAccommodationComponent} from "./create-accommodation/create-accommodation.component";
 import { ApproveAccommodationsComponent } from './admin-functions/approve-accommodations/approve-accommodations.component';
 import { VerificationComponent } from './verification/verification.component';
+import { UpdateAccommodationComponent } from './update-accommodation/update-accommodation.component';
 
 const routes: Routes = [
+  {component: UpdateAccommodationComponent, path: 'update-accommodation'},
   {component: HeaderComponent, path: 'header'},
   {
     path: 'login',
@@ -26,7 +28,7 @@ const routes: Routes = [
   {component: UpdateAccountComponent, path: 'profile/update-account'},
   {component:MainPageComponent, path:''},
   {component:SearchPageComponent,path:'search'},
-  {component:AccommodationDetailsComponent, path:'search/details'},
+  {component:AccommodationDetailsComponent, path:'search/details/:id'},
   {component:CreateAccommodationComponent, path:'create-accommodation'},
   {component: ApproveAccommodationsComponent, path: 'approve-accommodations'},
   { path: 'verify', component: VerificationComponent },

@@ -33,7 +33,6 @@ export class ApproveAccommodationsComponent {
       next: (accommodations: any[]) => {
 
         this.accommodations = accommodations;
-        alert(accommodations.length);
         for (let i = 0; i < this.accommodations.length; i++) {
           if(this.accommodations[i].requestType == "new") this.accommodations[i].requestType = "fiber_new";
           else if(this.accommodations[i].requestType == "updated") this.accommodations[i].requestType = "autorenew";
@@ -50,7 +49,7 @@ export class ApproveAccommodationsComponent {
       },
       error: (err) => {
         console.error(err);
-        alert("Error while fetching accommodations!");
+        alert("Error while fetching accommodation requests!");
       }
     });
 
