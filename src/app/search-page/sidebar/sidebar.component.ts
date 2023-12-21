@@ -20,7 +20,10 @@ export class SidebarComponent {
     AirCondition: 1,
     breakfast: 2,
     spa: 3,
-    // Add more amenities as per your mapping
+    Pool:4,
+    BeachFront:5,
+    Wifi: 6
+
   };
 
   constructor(private searchPageService: SearchPageService, private filterService: FilterService) {

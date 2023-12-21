@@ -91,3 +91,13 @@ p {
     left: 25.5rem;
     margin: 0;
 }
+
+.image-container img {
+    width: 12.5rem;
+    height: 12.5rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10%;
+    border: 2px solid var(--color_black_text);
+    box-shadow: 0 0 10px 0 rgba(30, 30, 30, 0.3);
+}

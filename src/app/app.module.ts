@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
@@ -25,22 +26,22 @@ import { AccommodationDetailsComponent } from './accommodation-details/accommoda
 import {SlickCarouselModule} from "ngx-slick-carousel";
 import {NgOptimizedImage} from "@angular/common";
 import {UserService} from "./login/user.service";
-import {HTTP_INTERCEPTORS, provideHttpClient, withFetch} from '@angular/common/http';
 import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
-import {HttpClientModule, HttpClient} from "@angular/common/http";
+import { ApproveAccommodationsComponent } from './admin-functions/approve-accommodations/approve-accommodations.component';
+import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/radio';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './jwt.interceptor';
+import { VerificationComponent } from './verification/verification.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UpdateAccommodationComponent } from './update-accommodation/update-accommodation.component';
+import { provideHttpClient, withFetch} from '@angular/common/http';
+import { HttpClient} from "@angular/common/http";
 import {AccommodationDetailsModule} from "./accommodation-details/accommodation-details.module";
 import {SearchPageModule} from "./search-page/search-page.module";
 import {MainPageModule} from "./main-page/main-page.module";
 import {SharedModule} from "./shared/shared.module";
 import {MainPageService} from "./main-page/main-page.service";
 import {provideRouter} from "@angular/router";
-import {
-  ApproveAccommodationsComponent
-} from "./admin-functions/approve-accommodations/approve-accommodations.component";
-import {VerificationComponent} from "./verification/verification.component";
-import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from "@angular/material/radio";
-import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {JwtInterceptor} from "./jwt.interceptor";
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {JwtInterceptor} from "./jwt.interceptor";
     RegisterComponent,
     CreateAccommodationComponent,
     ApproveAccommodationsComponent,
-    VerificationComponent
+    VerificationComponent,
+    UpdateAccommodationComponent
   ],
   imports: [
     BrowserModule,
@@ -84,15 +86,13 @@ import {JwtInterceptor} from "./jwt.interceptor";
   ],
   providers: [
     provideClientHydration(),
-
     [UserService],
     {
       provide: MAT_RADIO_DEFAULT_OPTIONS,
       useValue: { color: 'primary' }
     },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    provideHttpClient(withFetch())
-
+    provideHttpClient(withFetch()),
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

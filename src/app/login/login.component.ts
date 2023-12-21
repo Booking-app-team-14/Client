@@ -27,9 +27,6 @@ export class LoginComponent {
 
   loginUser(): void {
 
-    // TODO: Implement login functionality dependant on input fields
-
-
     const body = {
       "username": this.username,
       "password": this.password
@@ -64,6 +61,7 @@ export class LoginComponent {
 
 
         alert("Login successful! Redirecting to the homepage...");
+        this.router.navigate([`/`]);
       },
       error: (err) => {
         console.error(err);
@@ -71,8 +69,6 @@ export class LoginComponent {
       }
     });
 
-
-    this.router.navigate([`/`]);
   }
 
 
