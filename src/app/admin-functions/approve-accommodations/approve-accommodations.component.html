@@ -21,7 +21,7 @@
 
         <ng-container *ngFor="let accommodation of accommodations">
 
-            <div *ngIf="accommodation.requestType === type" class="accommodation-card" id="card-{{accommodation.id}}">
+            <div *ngIf="accommodation.requestType === type" class="accommodation-card" id="card-{{accommodation.accommodationId}}">
             
                 <div class="owner-side">
                     <div class="owner-data">
@@ -69,7 +69,7 @@
                             </div>
                             
                             <div class="view-details">
-                                <button (click)="viewDetails(accommodation.id)">View details</button>
+                                <button (click)="viewDetails(accommodation.accommodationId)">View details</button>
                             </div>
                         </div>
 
