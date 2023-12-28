@@ -49,8 +49,6 @@ export class ProfileComponent {
             this.user.phone = userDTO.phoneNumber;
             this.user.avatarImageType = userDTO.profilePictureType;
             this.user.avatarBytes = userDTO.profilePictureBytes;
-            alert(this.user.avatarImageType);
-            alert(this.user.avatarBytes.length);
           },
           error: (err) => {
             console.error(err);
