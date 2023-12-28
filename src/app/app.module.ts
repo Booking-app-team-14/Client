@@ -21,7 +21,6 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { AccommodationDetailsComponent } from './accommodation-details/accommodation-details.component';
 import {SlickCarouselModule} from "ngx-slick-carousel";
 import {NgOptimizedImage} from "@angular/common";
 import {UserService} from "./login/user.service";
@@ -41,6 +40,7 @@ import {VerificationComponent} from "./verification/verification.component";
 import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from "@angular/material/radio";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {JwtInterceptor} from "./jwt.interceptor";
+import { UpdateAccommodationComponent } from './update-accommodation/update-accommodation.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +58,8 @@ import {JwtInterceptor} from "./jwt.interceptor";
     RegisterComponent,
     CreateAccommodationComponent,
     ApproveAccommodationsComponent,
-    VerificationComponent
+    VerificationComponent,
+    UpdateAccommodationComponent
   ],
   imports: [
     BrowserModule,
