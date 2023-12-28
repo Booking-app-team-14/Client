@@ -42,6 +42,7 @@ import {MainPageModule} from "./main-page/main-page.module";
 import {SharedModule} from "./shared/shared.module";
 import {MainPageService} from "./main-page/main-page.service";
 import {provideRouter} from "@angular/router";
+import { OwnerReviewComponent } from './owner-review/owner-review.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import {provideRouter} from "@angular/router";
     CreateAccommodationComponent,
     ApproveAccommodationsComponent,
     VerificationComponent,
-    UpdateAccommodationComponent
+    UpdateAccommodationComponent,
+    OwnerReviewComponent
   ],
   imports: [
     BrowserModule,
