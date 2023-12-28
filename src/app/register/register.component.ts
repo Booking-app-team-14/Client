@@ -28,10 +28,21 @@ export class RegisterComponent {
   constructor(private _router: Router, private http: HttpClient, private registerService: RegisterService, private snackBar: MatSnackBar ) {}
 
   register() {
+
+    if (this.password !== this.confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
+
+    const phoneRegex = new RegExp('^\\+\\d{1,2}\\s?\\d{3}\\s?\\d{3}\\s?\\d{4}$');
+    if (!phoneRegex.test(this.phoneNumber)) {
+      alert("Phone number is not valid!");
+      return;
+    }
+
     const body = {
       username: this.username,
       password: this.password,
-      confirmPassword: this.confirmPassword,
       firstName: this.firstName,
       lastName: this.lastName,
       address: this.address,

@@ -69,7 +69,7 @@ export class ApproveAccommodationsComponent {
     this.animateCard(id);
     setTimeout(() => this.deleteCard(id), 1400);
   }
-  
+
   reject(id: number) {
     this.http.delete('http://localhost:8080/api/accommodations/requests/' + id).subscribe({
       next: (message: any) => {
@@ -84,7 +84,7 @@ export class ApproveAccommodationsComponent {
     this.animateCard(id);
     setTimeout(() => this.deleteCard(id), 1400);
   }
-  
+
   addCardClass(id: number, className: string) {
     let card = document.getElementById(`card-${id}`);
     if(card) {

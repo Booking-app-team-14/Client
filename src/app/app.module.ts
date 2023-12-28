@@ -31,8 +31,6 @@ import {AccommodationDetailsModule} from "./accommodation-details/accommodation-
 import {SearchPageModule} from "./search-page/search-page.module";
 import {MainPageModule} from "./main-page/main-page.module";
 import {SharedModule} from "./shared/shared.module";
-import {MainPageService} from "./main-page/main-page.service";
-import {provideRouter} from "@angular/router";
 import {
   ApproveAccommodationsComponent
 } from "./admin-functions/approve-accommodations/approve-accommodations.component";
