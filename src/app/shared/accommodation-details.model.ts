@@ -5,6 +5,8 @@ export interface AccommodationDTO {
   location: LocationDTO;
   type: AccommodationType;
   images: string[];
+  imagesType: string[],
+  imagesBytes: string[]
   amenities: AmenityDTO[];
   rating: number;
   minNumberOfGuests: number;
