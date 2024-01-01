@@ -40,21 +40,21 @@ export class ProfileInfoComponent implements AfterViewChecked {
 
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.http.get(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe({
-          next: (userId: any) => {
-            this.http.delete("http://localhost:8080/api/users/" + userId).subscribe({
-              next: (r: any) => {
-                alert("Account closed!");
-                this.userService.logout();
-                this._router.navigateByUrl("");
-              },
-              error: (err) => {
-                alert("Account closed!");
-                this.userService.logout();
-                this._router.navigateByUrl("");
-              }
-            });
+      next: (userId: any) => {
+        this.http.delete("http://localhost:8080/api/users/" + userId).subscribe({
+          next: (r: any) => {
+            alert("Account closed!");
+            this.userService.logout();
+            this._router.navigateByUrl("");
+          },
+          error: (err) => {
+            alert("Account closed!");
+            this.userService.logout();
+            this._router.navigateByUrl("");
           }
         });
+      }
+    });
   }
 
 }

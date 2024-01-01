@@ -96,17 +96,7 @@ export class ReservationComponent {
   }
 
   makeReservation(): void {
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-    this.accService.getUserById(currentUser).subscribe(
-      (userData: any) => {
-        this.userId = userData;
-        console.log('User ID:', this.userId);
-      },
-      (error) => {
-        console.error('Error fetching user data:', error);
-      }
-    );
     console.log(this.reservationRequirements);
     const reservationData = {
       startDate: this.defaultCheckInDate,
@@ -115,7 +105,7 @@ export class ReservationComponent {
       requestStatus: 'SENT',
       totalPrice: this.totalPrice,
       accommodationId:this.reservationRequirements.accommodationId ,
-      guestId: 17
+      guestId: 5
     };
 
     this.reservationService.sendReservation(reservationData).subscribe(

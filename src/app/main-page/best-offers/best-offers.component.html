@@ -13,7 +13,7 @@
 <div class="offers-container">
   <div class="best-offers">
     <div class="card" *ngFor="let offer of offers">
-  <img [src]="offer.image" alt="Offer Image">
+      <img [src]="'data:image/' + offer.imageType + ';base64,' + offer.imageBytes" alt="avatar">
   <h3>{{ offer.accommodationType }}</h3>
   <div class="details">
     <p class="name">{{ offer.name }}</p>

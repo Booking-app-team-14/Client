@@ -1,26 +1,26 @@
 .action-btn {
-    width: 100%;
-    margin-top: 1rem;
-    padding: 0.5rem;
-    color: var(--color_primary_blue);
-    background-color: var(--color_white);
-    border-radius: 8px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    border: 2px solid var(--color_black_text);
-    transition: all 0.1s;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  color: var(--color_primary_blue);
+  background-color: var(--color_white);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border: 2px solid var(--color_black_text);
+  transition: all 0.1s;
 }
 
 .action-btn:hover {
-    cursor: pointer;
-    background-color: rgba(101, 174, 242, 0.8);
-    border: 2px solid rgba(101, 174, 242, 0);
-    color: var(--color_white);
+  cursor: pointer;
+  background-color: rgba(101, 174, 242, 0.8);
+  border: 2px solid rgba(101, 174, 242, 0);
+  color: var(--color_white);
 }
 
 h2 {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
 }

@@ -1,91 +1,91 @@
 <div class="container">
 
-    <h1>Accomodation requests</h1>
+  <h1>Accomodation requests</h1>
 
-    <mat-radio-group [(ngModel)]="type">
-        <mat-radio-button value="fiber_new">
-            <div class="radio-container">
-                <span>New accommodations</span>
-                <mat-icon>fiber_new</mat-icon>
+  <mat-radio-group [(ngModel)]="type">
+    <mat-radio-button value="fiber_new">
+      <div class="radio-container">
+        <span>New accommodations</span>
+        <mat-icon>fiber_new</mat-icon>
+      </div>
+    </mat-radio-button>
+    <mat-radio-button value="autorenew">
+      <div class="radio-container">
+        <span>Updated accommodations</span>
+        <mat-icon>autorenew</mat-icon>
+      </div>
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <div class="card-container">
+
+    <ng-container *ngFor="let accommodation of accommodations">
+
+      <div *ngIf="accommodation.requestType === type" class="accommodation-card" id="card-{{accommodation.accommodationId}}">
+
+        <div class="owner-side">
+          <div class="owner-data">
+
+            <div class="owner">
+              <img [src]="'data:image/' + accommodation.ownerImageType + ';base64,' + accommodation.ownerProfilePictureBytes" alt="Owner profile picture">
+              <span class="username">{{accommodation.ownerUsername}}</span>
             </div>
-        </mat-radio-button>
-        <mat-radio-button value="autorenew">
-            <div class="radio-container">
-                <span>Updated accommodations</span>
-                <mat-icon>autorenew</mat-icon>
-            </div>
-        </mat-radio-button>
-    </mat-radio-group>
-    
-    <div class="card-container">
 
-        <ng-container *ngFor="let accommodation of accommodations">
+            <span class="date">({{accommodation.dateRequested}})</span>
 
-            <div *ngIf="accommodation.requestType === type" class="accommodation-card" id="card-{{accommodation.accommodationId}}">
-            
-                <div class="owner-side">
-                    <div class="owner-data">
-                        
-                        <div class="owner">
-                            <img [src]="'data:image/' + accommodation.ownerImageType + ';base64,' + accommodation.ownerProfilePictureBytes" alt="Owner profile picture">
-                            <span class="username">{{accommodation.ownerUsername}}</span>
-                        </div>
+          </div>
+          <div class="span-div">
+            <span>"{{accommodation.message}}"</span>
+          </div>
+        </div>
 
-                        <span class="date">({{accommodation.dateRequested}})</span>
+        <div class="divider"></div>
 
+        <div class="accommodation-side">
+
+          <div class="info">
+
+            <img [src]="'data:image/' + accommodation.imageType + ';base64,' + accommodation.mainPictureBytes" alt="Accommodation main picture">
+
+            <div class="sub-info">
+              <div class="ab">
+                <div class="a">
+                  <div class="type-stars">
+                    <span>{{accommodation.type}}</span>
+                    <div class="stars">
+                      <mat-icon *ngFor="let star of [].constructor(accommodation.stars)">star</mat-icon>
                     </div>
-                    <div class="span-div">
-                        <span>"{{accommodation.message}}"</span>
-                    </div>
+                  </div>
+                  <div class="posted-ago">
+                    <span>{{accommodation.postedAgo}} mins ago</span>
+                  </div>
                 </div>
-
-                <div class="divider"></div>
-
-                <div class="accommodation-side">
-
-                    <div class="info">
-
-                        <img [src]="'data:image/' + accommodation.imageType + ';base64,' + accommodation.mainPictureBytes" alt="Accommodation main picture">
-
-                        <div class="sub-info">
-                            <div class="ab">
-                                <div class="a">
-                                    <div class="type-stars">
-                                        <span>{{accommodation.type}}</span>
-                                        <div class="stars">
-                                            <mat-icon *ngFor="let star of [].constructor(accommodation.stars)">star</mat-icon>
-                                        </div>
-                                    </div>
-                                    <div class="posted-ago">
-                                        <span>{{accommodation.postedAgo}} mins ago</span>
-                                    </div>
-                                </div>
-                                <div class="b">
-                                    <div class="name">
-                                        <span>{{accommodation.name}}</span>
-                                    </div>
-                                    <mat-icon>{{accommodation.requestType}}</mat-icon>
-                                </div>
-                            </div>
-                            
-                            <div class="view-details">
-                                <button (click)="viewDetails(accommodation.accommodationId)">View details</button>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="action-btns">
-                        <button (click)="reject(accommodation.id)" class="reject">Reject</button>
-                        <button (click)="approve(accommodation.id)" class="approve">Approve</button>
-                    </div>
-
+                <div class="b">
+                  <div class="name">
+                    <span>{{accommodation.name}}</span>
+                  </div>
+                  <mat-icon>{{accommodation.requestType}}</mat-icon>
                 </div>
+              </div>
 
+              <div class="view-details">
+                <button (click)="viewDetails(accommodation.accommodationId)">View details</button>
+              </div>
             </div>
 
-        </ng-container>
+          </div>
 
-    </div>
+          <div class="action-btns">
+            <button (click)="reject(accommodation.accommodationId)" class="reject">Reject</button>
+            <button (click)="approve(accommodation.accommodationId)" class="approve">Approve</button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </ng-container>
+
+  </div>
 
 </div>

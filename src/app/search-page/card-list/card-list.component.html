@@ -11,7 +11,7 @@
   <div class="card-list1">
     <div class="card" *ngFor="let apartment of apartments">
       <div class="card-image">
-        <img [src]="apartment.image" alt="Apartment Image" />
+        <img [src]="'data:image/' + apartment.imageType + ';base64,' + apartment.imageBytes" alt="avatar">
       </div>
       <div class="card-details">
         <div class="card-name">{{ apartment.name }}</div>
