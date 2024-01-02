@@ -12,6 +12,7 @@ import {CreateAccommodationComponent} from "./create-accommodation/create-accomm
 import { ApproveAccommodationsComponent } from './admin-functions/approve-accommodations/approve-accommodations.component';
 import { VerificationComponent } from './verification/verification.component';
 import { UpdateAccommodationComponent } from './update-accommodation/update-accommodation.component';
+import {OwnerReviewComponent} from "./owner-review/owner-review.component";
 
 const routes: Routes = [
   {component: UpdateAccommodationComponent, path: 'update-accommodation'},
@@ -32,6 +33,7 @@ const routes: Routes = [
   {component:CreateAccommodationComponent, path:'create-accommodation'},
   {component: ApproveAccommodationsComponent, path: 'approve-accommodations'},
   { path: 'verify', component: VerificationComponent },
+  {path:'owner-review', component:OwnerReviewComponent},
 ];
 
 @NgModule({
