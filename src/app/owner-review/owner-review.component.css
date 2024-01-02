@@ -110,6 +110,10 @@
   bottom: 0;
 }
 
+.delete-comment{
+  margin-bottom: 30%;
+}
+
 .rate:not(:checked) > label {
   float: right;
   width: 1em;
@@ -232,6 +236,26 @@
 
 .more-btn:hover {
   background-color: #0056b3;
+}
+.delete-comment {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  border: none;
+  background-color: var(--color_white);
+  border-radius: 8px;
+  color: var(--color_gray_text);
+  transition: all 0.1s;
+}
+
+.delete-comment:hover {
+  background-color: var(--color_background);
+  cursor: pointer;
+  box-shadow: 0 0 0 1px var(--color_black_text);
+  transform: translateX(-8px);
 }
 
 

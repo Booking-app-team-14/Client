@@ -2,7 +2,6 @@
   <h2 class="titles">Your Review</h2>
 
   <div class="profile-container">
-    <!-- Podaci korisnika -->
     <div class="user-info-container">
       <img [src]="'data:image/' + user.avatarImageType + ';base64,' + user.avatarBytes" alt="avatar">
       <div class="info labels">
@@ -19,12 +18,10 @@
         <h3>{{user.address}}</h3>
         <h3>{{user.phone}}</h3>
       </div>
+      <button class="delete-comment"><mat-icon>close</mat-icon>Delete Comments</button>
     </div>
 
-
     <br>
-
-    <!-- Prikaz postojećih komentara -->
     <div class="comments-background">
       <div class="comments-section">
         <h2>Comments</h2>
@@ -51,8 +48,6 @@
     </div>
 
   <br>
-
-  <!-- Forma za ocenjivanje i komentarisanje -->
   <div class="ratings-container">
     <div class="average-rating">{{averageRating}}</div>
 
@@ -73,7 +68,7 @@
 
       <textarea [(ngModel)]="userComment" name="userComment" placeholder="Leave a comment..."></textarea>
 
-      <button (click)="submitRating()">Submit</button>
+      <button (click)="submitRating()">SUBMIT</button>
     </div>
   </div>
 </div>
