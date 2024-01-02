@@ -36,6 +36,9 @@
   border-color: #007bff;
 }
 
+input[type='date'].unavailable {
+  color: #999;
+}
 .reserve-button {
   background-color: var(--color_primary_blue);
   color: #fff;

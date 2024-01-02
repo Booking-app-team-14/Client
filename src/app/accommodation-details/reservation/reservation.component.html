@@ -4,11 +4,12 @@
   <!-- Date Selection -->
   <div class="date-selection">
     <label for="check-in">Check-in:</label>
-    <input type="date" id="check-in" name="check-in" [(ngModel)]="defaultCheckInDate" [attr.min]="getTodayDate()" (change)="updateCheckOutMinDate()">
+    <input type="date" id="check-in" name="check-in" [(ngModel)]="defaultCheckInDate" [attr.min]="getTodayDate()"
+           [ngModelOptions]="{standalone: true}" (change)="updateCheckOutMinDate()" [ngClass]="{'unavailable': !isDateAvailable(defaultCheckInDate)}">
 
     <label for="check-out">Check-out:</label>
-    <input type="date" id="check-out" name="check-out" [(ngModel)]="defaultCheckOutDate" [attr.min]="defaultCheckInDate" (change)="validateDates()">
-  </div>
+    <input type="date" id="check-out" name="check-out" [(ngModel)]="defaultCheckOutDate" [attr.min]="defaultCheckInDate"
+           [ngModelOptions]="{standalone: true}" (change)="validateDates()" [ngClass]="{'unavailable': !isDateAvailable(defaultCheckOutDate)}"> </div>
 
   <!-- Guest Selection -->
   <div class="guest-selection">
@@ -23,7 +24,7 @@
 
   <!-- Price Details -->
   <div class="price-details">
-    <p>Price per night: ${{reservationRequirements.pricePerNight}}</p>
+    <p>Price per night: ${{avail[0].specialPrice}}</p>
     <p>Total price:  ${{ totalPrice }} </p>
   </div>
 </div>

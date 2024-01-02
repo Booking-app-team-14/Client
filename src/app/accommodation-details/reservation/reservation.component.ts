@@ -1,8 +1,8 @@
-import {Component, ElementRef, Input, signal, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, signal, ViewChild} from '@angular/core';
 import {ReservationService} from "./reservation.service";
-import {HttpClient} from "@angular/common/http";
-import * as http from "http";
+
 import {AccommodationDetailsService} from "../accommodation-details.service";
+
 
 interface Availability{
   id: number;
@@ -23,27 +23,71 @@ interface Reservation{
   templateUrl: './reservation.component.html',
   styleUrl: './reservation.component.css'
 })
-export class ReservationComponent {
+export class ReservationComponent implements OnInit {
   @ViewChild('guestsInput') guestsInput!: ElementRef;
   @Input() availabilities: Availability[];
+  avail:Availability[]=[
+    { id: 1, startDate: '2024-01-01', endDate: '2024-01-10', specialPrice: 120 },
+    { id: 2, startDate: '2024-01-11', endDate: '2024-01-20', specialPrice: 140 },
+    { id: 3, startDate: '2024-01-21', endDate: '2024-01-31', specialPrice: 125},
+    { id: 4, startDate: '2024-02-01', endDate: '2024-02-10', specialPrice: 130 },
+    { id: 5, startDate: '2024-02-11', endDate: '2024-02-20', specialPrice: 135 },
+    { id: 6, startDate: '2024-02-21', endDate: '2024-02-28', specialPrice: 150 },
+    { id: 7, startDate: '2024-03-01', endDate: '2024-03-15', specialPrice: 150 },
+    { id: 8, startDate: '2024-03-16', endDate: '2024-03-31', specialPrice: 160 },
+    { id: 9, startDate: '2024-04-01', endDate: '2024-04-10', specialPrice: 165 },
+    { id: 10, startDate: '2024-04-11', endDate: '2024-04-20', specialPrice: 145 },
+    { id: 11, startDate: '2024-04-21', endDate: '2024-04-30', specialPrice: 150 },
+    { id: 12, startDate: '2024-12-20', endDate: '2024-12-31', specialPrice: 180 }]
   @Input() reservationRequirements: Reservation;
   defaultCheckInDate: string;
   defaultCheckOutDate: string;
   totalPrice: number = 0;
-  private userId: number;
+  private guestId: number;
+  availableDates: Availability[] = [];
 
 
   constructor( private reservationService: ReservationService,private accService: AccommodationDetailsService) {
+
+  }
+
+  ngOnInit(): void {
+    console.log('Availabilities received in ReservationComponent:', this.availabilities);
     const today = new Date();
     const nextDay = new Date();
     nextDay.setDate(today.getDate() + 1);
     const twoDaysAfter = new Date();
     twoDaysAfter.setDate(today.getDate() + 2);
+    this.reservationService.getGuestId().subscribe(
+      (userId: number) => {
 
+        this.guestId = userId;
+        console.log(this.guestId);
+      },
+      (error) => {
+        console.error('Error fetching user ID:', error);
+
+      }
+    );
 
     this.defaultCheckInDate = this.formatDate(nextDay);
     this.defaultCheckOutDate = this.formatDate(twoDaysAfter);
-  }
+    this.avail.forEach((availability: Availability) => {
+      const startDate = new Date(availability.startDate);
+      const endDate = new Date(availability.endDate);
+
+      while (startDate <= endDate) {
+        this.availableDates.push({
+          id: availability.id,
+          startDate: this.formatDate(startDate),
+          endDate: this.formatDate(endDate),
+          specialPrice: availability.specialPrice
+        });
+        startDate.setDate(startDate.getDate() + 1);
+      }
+    });
+    }
+
 
   private formatDate(date: Date): string {
     const year = date.getFullYear();
@@ -69,33 +113,83 @@ export class ReservationComponent {
       this.defaultCheckOutDate = this.defaultCheckInDate;
     }
 
+
     const oneDayInMillis = 24 * 60 * 60 * 1000;
     if ((checkOut.getTime() - checkIn.getTime()) < oneDayInMillis) {
       alert('Minimum reservation duration is one night');
       this.defaultCheckOutDate = this.defaultCheckInDate;
     }
 
+    if (!this.isDateRangeAvailable(this.defaultCheckInDate, this.defaultCheckOutDate)) {
+      alert('Selected date range is not available');
+      this.defaultCheckOutDate = this.defaultCheckInDate;
+    }
+
       this.calculateTotalPrice();
     }
+
+
+  isDateRangeAvailable(startDate: string, endDate: string): boolean {
+    const checkIn = new Date(startDate);
+    const checkOut = new Date(endDate);
+
+    while (checkIn <= checkOut) {
+      if (!this.isDateAvailable(this.formatDate(checkIn))) {
+        return false;
+      }
+      checkIn.setDate(checkIn.getDate() + 1);
+    }
+
+    return true;
+  }
+
+  isDateAvailable(dateToCheck: string): boolean {
+    return this.availableDates.some(date => this.isSameDate(dateToCheck, date.startDate));
+  }
+
+  isSameDate(date1: string, date2: string): boolean {
+    return date1 === date2;
+  }
 
   calculateTotalPrice(): void {
     const checkIn = new Date(this.defaultCheckInDate);
     const checkOut = new Date(this.defaultCheckOutDate);
 
+    let totalPrice = 0;
     const oneDayInMillis = 24 * 60 * 60 * 1000;
-    const nights = Math.round((checkOut.getTime() - checkIn.getTime()) / oneDayInMillis);
 
-    if (this.reservationRequirements.pricePerGuest)
-    this.totalPrice = nights * this.reservationRequirements.pricePerNight;
-    else
-      this.totalPrice = nights * this.reservationRequirements.pricePerNight * this.guestsInput.nativeElement.value;
+    while (checkIn < checkOut) {
+      const formattedDate = this.formatDate(checkIn);
+      const foundAvailability = this.availableDates.find(date => date.startDate === formattedDate);
+
+      if (foundAvailability) {
+        if (foundAvailability.specialPrice !== null) {
+          totalPrice += foundAvailability.specialPrice;
+        } else {
+          totalPrice += this.reservationRequirements.pricePerNight;
+        }
+      } else {
+        totalPrice += this.reservationRequirements.pricePerNight; // Use default price if date not found
+      }
+
+      checkIn.setDate(checkIn.getDate() + 1);
+    }
+
+    if (this.reservationRequirements.pricePerGuest) {
+      this.totalPrice = totalPrice;
+    } else {
+      this.totalPrice = totalPrice * this.guestsInput.nativeElement.value;
+    }
   }
+
+
 
   onGuestsChange(): void {
     this.calculateTotalPrice();
   }
 
   makeReservation(): void {
+
 
     console.log(this.reservationRequirements);
     const reservationData = {
@@ -105,7 +199,7 @@ export class ReservationComponent {
       requestStatus: 'SENT',
       totalPrice: this.totalPrice,
       accommodationId:this.reservationRequirements.accommodationId ,
-      guestId: 5
+      guestId: this.guestId
     };
 
     this.reservationService.sendReservation(reservationData).subscribe(

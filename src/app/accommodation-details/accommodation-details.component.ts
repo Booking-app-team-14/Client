@@ -88,6 +88,7 @@ export class AccommodationDetailsComponent implements OnInit {
             { id: 12, startDate: '2024-12-20', endDate: '2024-12-31', specialPrice: 180 }
           ];
 
+
           this.location = {
             address: this.accommodation.location.address,
             city: this.accommodation.location.city,
