@@ -1,14 +1,19 @@
-import {AfterViewChecked, Component, Input} from '@angular/core';
+import {AfterViewChecked, Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import { HttpClient } from '@angular/common/http';
 import {UserService} from "../login/user.service";
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import {ReportModalComponent} from "../report-modal/report-modal.component";
+import {Dialog} from "@angular/cdk/dialog";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-owner-review',
   templateUrl: './owner-review.component.html',
   styleUrl: './owner-review.component.css'
 })
-export class OwnerReviewComponent{
+export class OwnerReviewComponent implements OnInit{
   userRole: string = '';
 
   user: {
@@ -44,6 +49,7 @@ export class OwnerReviewComponent{
   ];
 
   displayedComments: any[];
+  //private id: number;
 
 
   loadMoreComments() {
@@ -52,19 +58,40 @@ export class OwnerReviewComponent{
     this.displayedComments = [...this.displayedComments, ...remainingComments];
   }
 
-  constructor(private userService: UserService, private http: HttpClient) {
+  constructor(public dialog: MatDialog,private userService: UserService, private http: HttpClient, private route: ActivatedRoute) {
     this.displayedComments = this.comments.slice(0, 4);
   }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(ReportModalComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
   ngOnInit(): void {
-    this.userService.userRole$.subscribe(role => {
-      this.userRole = role;
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      //const id=2;
+      this.fetchOwnerDetails(id);
     });
 
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.http.get(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe({
-      next: (userId: any) => {
-        this.http.get(`http://localhost:8080/api/users/${userId}`).subscribe({
+
+    // Uzmi trenutne parametre iz URL-a
+    //const accommodationId = +this.route.snapshot.paramMap.get('id');
+
+     /* this.route.params.subscribe(params => {
+        const accommodationId = +params['id'];  // '+' pretvara string u broj
+        this.fetchOwnerDetails(accommodationId);
+      });*/
+      //this.fetchOwnerDetails(accommodationId);
+    }
+
+  fetchOwnerDetails(id: number): void {
+    this.http.get(`http://localhost:8080/api/accommodations/${id}`).subscribe({
+      next: (accommodation: any) => {
+        const ownerId = accommodation.owner_Id;
+        this.http.get(`http://localhost:8080/api/accommodations/owners/${ownerId}`).subscribe({
           next: (userDTO: any) => {
             this.user.firstName = userDTO.firstName;
             this.user.lastName = userDTO.lastName;
@@ -82,17 +109,12 @@ export class OwnerReviewComponent{
       },
       error: (err) => {
         console.error(err);
-        alert("Error while fetching user data from token!");
+        alert("Error while fetching accommodation data!");
       }
     });
-
   }
 
   submitRating() {
-
-  }
-
-  cancel() {
 
   }
 }

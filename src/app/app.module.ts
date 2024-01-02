@@ -40,6 +40,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {JwtInterceptor} from "./jwt.interceptor";
 import { UpdateAccommodationComponent } from './update-accommodation/update-accommodation.component';
 import { OwnerReviewComponent } from './owner-review/owner-review.component';
+import { ReportModalComponent } from './report-modal/report-modal.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { OwnerReviewComponent } from './owner-review/owner-review.component';
     ApproveAccommodationsComponent,
     VerificationComponent,
     UpdateAccommodationComponent,
-    OwnerReviewComponent
+    OwnerReviewComponent,
+    ReportModalComponent,
   ],
   imports: [
     BrowserModule,

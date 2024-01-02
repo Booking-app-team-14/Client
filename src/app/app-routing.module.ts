@@ -13,6 +13,7 @@ import { ApproveAccommodationsComponent } from './admin-functions/approve-accomm
 import { VerificationComponent } from './verification/verification.component';
 import { UpdateAccommodationComponent } from './update-accommodation/update-accommodation.component';
 import {OwnerReviewComponent} from "./owner-review/owner-review.component";
+import {ReportModalComponent} from "./report-modal/report-modal.component";
 
 const routes: Routes = [
   {component: UpdateAccommodationComponent, path: 'update-accommodation'},
@@ -33,11 +34,12 @@ const routes: Routes = [
   {component:CreateAccommodationComponent, path:'create-accommodation'},
   {component: ApproveAccommodationsComponent, path: 'approve-accommodations'},
   { path: 'verify', component: VerificationComponent },
-  {path:'owner-review', component:OwnerReviewComponent},
+  {path:'search/details/:id/owner-review', component:OwnerReviewComponent},
+  {path:'report-modal', component:ReportModalComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

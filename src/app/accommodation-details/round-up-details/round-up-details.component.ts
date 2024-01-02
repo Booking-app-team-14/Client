@@ -9,6 +9,7 @@ interface place {
   name: string;
   address: string;
   description: string;
+  id:number;
 }
 
 interface owner{

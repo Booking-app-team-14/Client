@@ -18,7 +18,11 @@
         <h3>{{user.address}}</h3>
         <h3>{{user.phone}}</h3>
       </div>
-      <button class="delete-comment"><mat-icon>close</mat-icon>Report The Owner</button>
+
+      <button class="delete-comment" (click)="openDialog()">
+        <mat-icon>close</mat-icon>Report The Owner
+      </button>
+
     </div>
 
     <br>
