@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AccommodationDetailsService } from './accommodation-details.service';
-import {AccommodationDTO, AmenityDTO, AvailabilityDTO} from '../shared/accommodation-details.model';
+import {AccommodationDTO, AmenityDTO, AvailabilityDTO, OwnerDTO} from '../shared/accommodation-details.model';
 
 @Component({
   selector: 'app-accommodation-details',
@@ -17,7 +17,13 @@ export class AccommodationDetailsComponent implements OnInit {
   reservationRequirements: any;
   amenitiesList: AmenityDTO[] = [];
   owner: { name: string, picture: string } = { name: "Nick Jefferson", picture: 'assets/BG.png' };
+  //owner: { name: any, picture: string };
+  //ownerId: { ownerId: number };
   currentUser: any;
+  //owner: OwnerDTO | undefined;
+
+
+
 
 
   constructor(
@@ -25,6 +31,30 @@ export class AccommodationDetailsComponent implements OnInit {
     private accommodationService: AccommodationDetailsService
   ) {}
 
+ /* getOwnerByAccommodationId(accommodationId: number): void {
+    this.accommodationService.getOwnerByAccommodationId(accommodationId).subscribe(
+        (data: any) => {
+          this.owner = data;
+          console.log('Owner details:', this.owner);
+        },
+        (error) => {
+          console.error('Error fetching owner details:', error);
+        }
+    )
+  }
+*/
+
+  /*getOwnerByOwnerId(ownerId: number): void {
+    this.accommodationService.getOwnerByOwnerId(ownerId).subscribe(
+        (data: OwnerDTO) => {
+          this.owner = data;
+          console.log('Owner details:', this.owner);
+        },
+        (error) => {
+          console.error('Error fetching owner details:', error);
+        }
+    );
+  }*/
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const id = +params['id'];
@@ -33,6 +63,15 @@ export class AccommodationDetailsComponent implements OnInit {
         (data: AccommodationDTO) => {
           this.accommodation = data;
           console.log(this.accommodation);
+          /*this.accommodationService.getOwnerByOwnerId(this.accommodation.owner_Id).subscribe(
+              (ownerData: OwnerDTO) => {
+                this.owner = ownerData;
+                console.log('Owner details:', this.owner);
+              },
+              (ownerError) => {
+                console.error('Error fetching owner details:', ownerError);
+              }
+          );*/
           this.images = this.accommodation.images.map((imageSrc: string) => {
             return {
               imageSrc: imageSrc,
@@ -71,7 +110,9 @@ export class AccommodationDetailsComponent implements OnInit {
             name: this.accommodation.name,
             address: this.accommodation.location.address,
             description: this.accommodation.description,
+            id: this.accommodation.id,
           };
+
 
           this.availableDates=[
             { id: 1, startDate: '2024-01-01', endDate: '2024-01-10', specialPrice: 120 },

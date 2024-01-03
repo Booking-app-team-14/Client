@@ -1,0 +1,9 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-container">
+    <h2>Report The Owner</h2>
+    <textarea [(ngModel)]="reportReason" placeholder="Enter your report reason..."></textarea>
+    <button (click)="submitReport()">Submit</button>
+    <button (click)="closeModal()" >Cancel</button>
+  </div>
+</div>
+

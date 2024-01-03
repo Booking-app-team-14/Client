@@ -39,6 +39,10 @@ import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from "@angular/material/radio
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {JwtInterceptor} from "./jwt.interceptor";
 import { UpdateAccommodationComponent } from './update-accommodation/update-accommodation.component';
+import { OwnerReviewComponent } from './owner-review/owner-review.component';
+import { ReportModalComponent } from './report-modal/report-modal.component';
+import { DeleteReviewDialogComponent } from './delete-review-dialog/delete-review-dialog.component';
+import {MatDialogActions, MatDialogClose, MatDialogContent} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -57,7 +61,11 @@ import { UpdateAccommodationComponent } from './update-accommodation/update-acco
     CreateAccommodationComponent,
     ApproveAccommodationsComponent,
     VerificationComponent,
-    UpdateAccommodationComponent
+    UpdateAccommodationComponent,
+    OwnerReviewComponent,
+    ReportModalComponent,
+    DeleteReviewDialogComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -79,7 +87,11 @@ import { UpdateAccommodationComponent } from './update-accommodation/update-acco
     MainPageModule,
     SearchPageModule,
     AccommodationDetailsModule,
-    SharedModule
+    SharedModule,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+
   ],
   providers: [
     provideClientHydration(),

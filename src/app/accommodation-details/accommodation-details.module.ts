@@ -9,6 +9,7 @@ import { CommentsComponent } from './comments/comments.component';
 import { FacilitiesComponent } from './facilities/facilities.component';
 import {AccommodationDetailsComponent} from "./accommodation-details.component";
 import {FormsModule} from "@angular/forms";
+import {RouterLink} from "@angular/router";
 
 
 @NgModule({
@@ -32,10 +33,11 @@ import {FormsModule} from "@angular/forms";
     CommentsComponent,
     AccommodationDetailsComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
+    imports: [
+        CommonModule,
+        FormsModule,
+        RouterLink,
 
-  ]
+    ]
 })
 export class AccommodationDetailsModule { }
