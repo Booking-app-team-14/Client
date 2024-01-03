@@ -41,6 +41,8 @@ import {JwtInterceptor} from "./jwt.interceptor";
 import { UpdateAccommodationComponent } from './update-accommodation/update-accommodation.component';
 import { OwnerReviewComponent } from './owner-review/owner-review.component';
 import { ReportModalComponent } from './report-modal/report-modal.component';
+import { DeleteReviewDialogComponent } from './delete-review-dialog/delete-review-dialog.component';
+import {MatDialogActions, MatDialogClose, MatDialogContent} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -62,6 +64,7 @@ import { ReportModalComponent } from './report-modal/report-modal.component';
     UpdateAccommodationComponent,
     OwnerReviewComponent,
     ReportModalComponent,
+    DeleteReviewDialogComponent,
 
   ],
   imports: [
@@ -85,6 +88,9 @@ import { ReportModalComponent } from './report-modal/report-modal.component';
     SearchPageModule,
     AccommodationDetailsModule,
     SharedModule,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
 
   ],
   providers: [

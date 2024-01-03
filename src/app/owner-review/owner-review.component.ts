@@ -8,6 +8,7 @@ import {ReportModalComponent} from "../report-modal/report-modal.component";
 import {Dialog} from "@angular/cdk/dialog";
 import { ActivatedRoute } from '@angular/router';
 import {filter, map, Observable, of, switchMap} from "rxjs";
+import {DeleteReviewDialogComponent} from "../delete-review-dialog/delete-review-dialog.component";
 
 @Component({
   selector: 'app-owner-review',
@@ -80,6 +81,11 @@ export class OwnerReviewComponent implements OnInit{
   updateFilledStars(rating: number): void {
     this.filledStars = rating;
   }*/
+  private reviewId: number;
+
+  selectReview(comment: any): void {
+    this.reviewId = comment.id;
+  }
 
   fetchCommentsByOwnerId(ownerId: number): void {
 
@@ -90,7 +96,9 @@ export class OwnerReviewComponent implements OnInit{
           sentAt: review.timestamp,
           image: 'assets/BG.jpg',
           commentText: review.comment,
-          rating:review.rating
+          rating:review.rating,
+          id: review.id
+
         }));
         this.displayedComments = this.comments.slice(0, 4);
         /*if (this.comments.length > 0) {
@@ -106,6 +114,7 @@ export class OwnerReviewComponent implements OnInit{
   }
 
   private ownerId: number;
+
   fetchOwnerDetails(id: number): void {
     this.http.get(`http://localhost:8080/api/accommodations/${id}`).subscribe({
       next: (accommodation: any) => {
@@ -150,13 +159,39 @@ export class OwnerReviewComponent implements OnInit{
       next: (response: any) => {
         console.log('Review submitted successfully!', response);
         alert('Review submitted successfully:')
-        // You might want to update UI or handle success case
       },
       error: (err) => {
         console.error('Error while submitting review:', err);
         alert('Error while submitting review!')
-        // Handle error, show error message, etc.
       }
     });
   }
+
+  openDeleteReviewDialog(comment: any): void {
+    const dialogRef = this.dialog.open(DeleteReviewDialogComponent, {
+      data: { commentId: comment.id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        this.deleteReview(comment.id);
+      }
+    });
+  }
+
+  deleteReview(reviewId: number): void {
+    this.http.delete(`http://localhost:8080/api/reviews/${reviewId}`).subscribe({
+      next: () => {
+        console.log('Review deleted successfully!');
+        alert('Review deleted successfully!')
+        this.fetchCommentsByOwnerId(this.ownerId);
+
+      },
+      error: (err) => {
+        console.error('Error deleting review:', err);
+        alert('Error deleting review!');
+      }
+    });
+  }
+
 }
