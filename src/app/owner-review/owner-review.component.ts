@@ -78,42 +78,6 @@ export class OwnerReviewComponent implements OnInit{
     });
     }
 
-  /*filledStars: number = 0;
-  updateFilledStars(rating: number): void {
-    this.filledStars = rating;
-  }*/
-  private reviewId: number;
-
-  selectReview(comment: any): void {
-    this.reviewId = comment.id;
-  }
-
-  fetchCommentsByOwnerId(ownerId: number): void {
-
-    this.http.get(`http://localhost:8080/api/reviews/owner/${ownerId}`).subscribe(
-      (reviews: any[]) => {
-        this.comments = reviews.map(review => ({
-          name: review.sender.firstName + " " + review.sender.lastName,
-          sentAt: review.timestamp,
-          image: 'assets/BG.jpg',
-          commentText: review.comment,
-          rating:review.rating,
-          id: review.id
-
-        }));
-        this.displayedComments = this.comments.slice(0, 4);
-        /*if (this.comments.length > 0) {
-          this.updateFilledStars(this.comments[0].rating);
-        }*/
-
-      },
-      (error) => {
-        console.error(error);
-        //alert("Error while fetching review data!");
-      }
-    );
-  }
-
   private ownerId: number;
 
   fetchOwnerDetails(id: number): void {
@@ -143,6 +107,44 @@ export class OwnerReviewComponent implements OnInit{
     });
   }
 
+  fetchCommentsByOwnerId(ownerId: number): void {
+
+    this.http.get(`http://localhost:8080/api/reviews/owner/${ownerId}`).subscribe(
+      (reviews: any[]) => {
+        this.comments = reviews.map(review => ({
+          name: review.sender.firstName + " " + review.sender.lastName,
+          sentAt: review.timestamp,
+          image: 'assets/BG.jpg',
+          commentText: review.comment,
+          rating:review.rating,
+          id: review.id
+
+        }));
+        this.displayedComments = this.comments.slice(0, 4);
+        /*if (this.comments.length > 0) {
+          this.updateFilledStars(this.comments[0].rating);
+        }*/
+
+      },
+      (error) => {
+        console.error(error);
+        //alert("Error while fetching review data!");
+      }
+    );
+  }
+
+
+  /*filledStars: number = 0;
+  updateFilledStars(rating: number): void {
+    this.filledStars = rating;
+  }*/
+  private reviewId: number;
+
+  selectReview(comment: any): void {
+    this.reviewId = comment.id;
+  }
+
+
   userRating: number = 0;
 
   onStarClick(rating: number) {
@@ -160,6 +162,8 @@ export class OwnerReviewComponent implements OnInit{
       next: (response: any) => {
         console.log('Review submitted successfully!', response);
         alert('Review submitted successfully:')
+        this.fetchCommentsByOwnerId(this.ownerId);
+        this.fetchAverageRatingByOwnerId(this.ownerId);
       },
       error: (err) => {
         console.error('Error while submitting review:', err);
@@ -186,6 +190,7 @@ export class OwnerReviewComponent implements OnInit{
         console.log('Review deleted successfully!');
         alert('Review deleted successfully!')
         this.fetchCommentsByOwnerId(this.ownerId);
+        this.fetchAverageRatingByOwnerId(this.ownerId);
 
       },
       error: (err) => {
