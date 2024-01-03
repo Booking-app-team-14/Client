@@ -62,6 +62,7 @@ import { ReportModalComponent } from './report-modal/report-modal.component';
     UpdateAccommodationComponent,
     OwnerReviewComponent,
     ReportModalComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -83,7 +84,8 @@ import { ReportModalComponent } from './report-modal/report-modal.component';
     MainPageModule,
     SearchPageModule,
     AccommodationDetailsModule,
-    SharedModule
+    SharedModule,
+
   ],
   providers: [
     provideClientHydration(),

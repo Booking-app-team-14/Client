@@ -7,6 +7,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {ReportModalComponent} from "../report-modal/report-modal.component";
 import {Dialog} from "@angular/cdk/dialog";
 import { ActivatedRoute } from '@angular/router';
+import {filter, map, Observable, of, switchMap} from "rxjs";
 
 @Component({
   selector: 'app-owner-review',
@@ -35,17 +36,14 @@ export class OwnerReviewComponent implements OnInit{
   };
   userComment: any;
   averageRating: any;
-  userRating: any;
+
+
+  //userRating: any;
   commentDate1: any;
   commentDate2: any;
+
   comments = [
-    { name: 'John Doe', sentAt: new Date(), image: 'assets/BG.jpg', commentText: 'We are satisfied with the service of the host and the entire hotel. The whole staff is very friendly. We will be back again!\n' },
-    { name: 'John Doe', sentAt: new Date(), image: 'assets/BG.jpg', commentText: 'This is a comment.' },
-    { name: 'John Doe', sentAt: new Date(), image: 'assets/BG.jpg', commentText: 'This is a comment.' },
-    { name: 'John Doe', sentAt: new Date(), image: 'assets/BG.jpg', commentText: 'This is a comment.' },
-    { name: 'John Doe', sentAt: new Date(), image: 'assets/BG.jpg', commentText: 'This is a comment.' },
-    { name: 'John Doe', sentAt: new Date(), image: 'assets/BG.jpg', commentText: 'This is a comment.' },
-    { name: 'John Doe', sentAt: new Date(), image: 'assets/BG.jpg', commentText: 'This is a comment.' }
+
   ];
 
   displayedComments: any[];
@@ -74,24 +72,45 @@ export class OwnerReviewComponent implements OnInit{
       const id = params['id'];
       //const id=2;
       this.fetchOwnerDetails(id);
+      this.fetchCommentsByOwnerId(this.ownerId);
     });
-
-
-    // Uzmi trenutne parametre iz URL-a
-    //const accommodationId = +this.route.snapshot.paramMap.get('id');
-
-     /* this.route.params.subscribe(params => {
-        const accommodationId = +params['id'];  // '+' pretvara string u broj
-        this.fetchOwnerDetails(accommodationId);
-      });*/
-      //this.fetchOwnerDetails(accommodationId);
     }
 
+  /*filledStars: number = 0;
+  updateFilledStars(rating: number): void {
+    this.filledStars = rating;
+  }*/
+
+  fetchCommentsByOwnerId(ownerId: number): void {
+
+    this.http.get(`http://localhost:8080/api/reviews/owner/${ownerId}`).subscribe(
+      (reviews: any[]) => {
+        this.comments = reviews.map(review => ({
+          name: review.sender.firstName + " " + review.sender.lastName,
+          sentAt: review.timestamp,
+          image: 'assets/BG.jpg',
+          commentText: review.comment,
+          rating:review.rating
+        }));
+        this.displayedComments = this.comments.slice(0, 4);
+        /*if (this.comments.length > 0) {
+          this.updateFilledStars(this.comments[0].rating);
+        }*/
+
+      },
+      (error) => {
+        console.error(error);
+        //alert("Error while fetching review data!");
+      }
+    );
+  }
+
+  private ownerId: number;
   fetchOwnerDetails(id: number): void {
     this.http.get(`http://localhost:8080/api/accommodations/${id}`).subscribe({
       next: (accommodation: any) => {
-        const ownerId = accommodation.owner_Id;
-        this.http.get(`http://localhost:8080/api/accommodations/owners/${ownerId}`).subscribe({
+        this.ownerId = accommodation.owner_Id;
+        this.http.get(`http://localhost:8080/api/accommodations/owners/${this.ownerId}`).subscribe({
           next: (userDTO: any) => {
             this.user.firstName = userDTO.firstName;
             this.user.lastName = userDTO.lastName;
@@ -103,18 +122,41 @@ export class OwnerReviewComponent implements OnInit{
           },
           error: (err) => {
             console.error(err);
-            alert("Error while fetching user data!");
+            //alert("Error while fetching user data!");
           }
         });
       },
       error: (err) => {
         console.error(err);
-        alert("Error while fetching accommodation data!");
+        //alert("Error while fetching accommodation data!");
       }
     });
   }
 
-  submitRating() {
+  userRating: number = 0;
 
+  onStarClick(rating: number) {
+    this.userRating = rating;
+  }
+
+  submitRating() {
+    const reviewDTO = {
+      comment: this.userComment,
+      rating: this.userRating,
+      recipientId: this.ownerId
+    };
+
+    this.http.post('http://localhost:8080/api/reviews', reviewDTO).subscribe({
+      next: (response: any) => {
+        console.log('Review submitted successfully!', response);
+        alert('Review submitted successfully:')
+        // You might want to update UI or handle success case
+      },
+      error: (err) => {
+        console.error('Error while submitting review:', err);
+        alert('Error while submitting review!')
+        // Handle error, show error message, etc.
+      }
+    });
   }
 }
