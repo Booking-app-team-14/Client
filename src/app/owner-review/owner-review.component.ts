@@ -74,6 +74,7 @@ export class OwnerReviewComponent implements OnInit{
       //const id=2;
       this.fetchOwnerDetails(id);
       this.fetchCommentsByOwnerId(this.ownerId);
+      this.fetchAverageRatingByOwnerId(this.ownerId);
     });
     }
 
@@ -192,6 +193,16 @@ export class OwnerReviewComponent implements OnInit{
         alert('Error deleting review!');
       }
     });
+  }
+  fetchAverageRatingByOwnerId(ownerId: number): void {
+    this.http.get<number>(`http://localhost:8080/api/reviews/owner/${ownerId}/average-rating`).subscribe(
+      (averageRating) => {
+        this.averageRating = averageRating;
+      },
+      (error) => {
+        console.error('Error fetching average rating for owner', error);
+      }
+    );
   }
 
 }
