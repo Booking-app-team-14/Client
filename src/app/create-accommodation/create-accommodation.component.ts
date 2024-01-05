@@ -1,5 +1,10 @@
 import { Component, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from "@angular/common";
+import {AccommodationService} from "./createaccommodation.service";
+import {HttpClient} from "@angular/common/http";
+import { FormsModule } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-create-accommodation',
@@ -11,7 +16,7 @@ export class CreateAccommodationComponent implements AfterViewInit{
   map: any;
   marker: any;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,private http: HttpClient, private accommodationService: AccommodationService) {}
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -19,6 +24,78 @@ export class CreateAccommodationComponent implements AfterViewInit{
         this.loadLeaflet();
       }, 0);
     }
+  }
+
+  //dto
+  name: string = '';
+  description: string = '';
+  type: string = '';
+  minNumberOfGuests: any;
+  //amenities: [ ] ;
+  maxNumberOfGuests: any;
+  cancellationDeadline: any;
+  //enteredAddress: string='';
+
+  specialPrices: { startDate: any, endDate: any, amount: number }[] = [];
+
+    addSpecialPrice() {
+    this.specialPrices.push({
+      startDate: '',
+      endDate: '',
+      amount: null
+    });
+  }
+
+  removeSpecialPrice(index: number) {
+    this.specialPrices.splice(index, 1);
+  }
+  onSubmit() {
+
+    const availabilityData = this.specialPrices.map(specialPrice => {
+      return {
+        start: specialPrice.startDate,
+        end: specialPrice.endDate,
+        specialPrice: specialPrice.amount
+      };
+    });
+
+    const accommodationData = {
+      // prikupite podatke iz forme
+      name: this.name,
+      description: this.description,
+      location: {
+      country: this.enteredAddress.split(',')[2].trim(),
+      city: this.enteredAddress.split(',')[1].trim(),
+      address: this.enteredAddress.split(',')[0].trim()
+    },
+      type: this.type,
+      images: ["image4.jpg", "image5.jpg"],
+      amenities: [
+        {
+          "name": "Amenity 1 Name",
+          "description": "Description for Amenity 1",
+          "icon": "icon1.jpg"
+        }
+      ],
+      rating: 5.0,
+      minNumberOfGuests:this.minNumberOfGuests,
+      maxNumberOfGuests: this.maxNumberOfGuests,
+      availability: availabilityData,
+      pricePerNight : 1200.0,
+     pricePerGuest : true,
+      cancellationDeadline:this.cancellationDeadline
+    };
+
+    this.accommodationService.addAccommodation(accommodationData).subscribe(
+      (response) => {
+        console.log('Accommodation added successfully', response);
+
+        alert('Accommodation added successfully! Request sent to admin!');
+      },
+      (error) => {
+        console.error('Error adding accommodation', error);
+      }
+    );
   }
 
   private loadLeaflet() {
@@ -77,9 +154,8 @@ export class CreateAccommodationComponent implements AfterViewInit{
 
 
   handleImageUpload(event: any) {
-    this.selectedImages = []; // da li resetovati listu ili dodavati sliku po sliku?
+    this.selectedImages = [];
 
-    //onda mora i uklanjanje slike
 
     const files: FileList | null = event.target.files;
 

@@ -91,6 +91,7 @@ import {MatDialogActions, MatDialogClose, MatDialogContent} from "@angular/mater
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
+    FormsModule
 
   ],
   providers: [
