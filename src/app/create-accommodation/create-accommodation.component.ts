@@ -16,6 +16,7 @@ export class CreateAccommodationComponent implements AfterViewInit{
   map: any;
   marker: any;
 
+
   constructor(@Inject(PLATFORM_ID) private platformId: Object,private http: HttpClient, private accommodationService: AccommodationService) {}
 
   ngAfterViewInit() {
@@ -49,6 +50,58 @@ export class CreateAccommodationComponent implements AfterViewInit{
   removeSpecialPrice(index: number) {
     this.specialPrices.splice(index, 1);
   }
+
+  amenities = {
+    amenity1: false,
+    wifi: false,
+    jacuzzi: false,
+    gymCenter: false,
+    videoGames: false
+  };
+
+  accommodationData: any = {};
+  selectedImages: { url: string, file: File }[] = [];
+
+
+  handleImageUpload(event: any) {
+    this.selectedImages = [];
+
+
+    const files: FileList | null = event.target.files;
+
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const url = URL.createObjectURL(file);
+        this.selectedImages.push({ url, file });
+      }
+    }
+  }
+
+
+
+  selectedImage: { url: string, file: File } = null;
+  fileUploaded: boolean = false;
+  avatarBytes: string;
+  avatarImageType: string;
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    const url = URL.createObjectURL(file);
+    this.selectedImage = { url, file };
+
+    reader.onload = (event: any) => {
+      this.avatarBytes = event.target.result.split(',')[1];
+      this.avatarImageType = file.type.split('/')[1];
+    };
+
+    reader.readAsDataURL(file);
+    this.fileUploaded = true;
+  }
+  accommodationId: number;
+
+  currentStep: string = 'createAccommodation';
   onSubmit() {
 
     const availabilityData = this.specialPrices.map(specialPrice => {
@@ -59,8 +112,27 @@ export class CreateAccommodationComponent implements AfterViewInit{
       };
     });
 
+    const selectedAmenities = [];
+
+    if (this.amenities.amenity1) {
+      selectedAmenities.push({ "id": 1 });
+    }
+
+    if (this.amenities.wifi) {
+      selectedAmenities.push({ "id": 3 });
+    }
+    if (this.amenities.jacuzzi) {
+      selectedAmenities.push({ "id": 4 });
+    }
+    if (this.amenities.gymCenter) {
+      selectedAmenities.push({ "id": 5 });
+    }
+    if (this.amenities.videoGames) {
+      selectedAmenities.push({ "id": 6 });
+    }
+
     const accommodationData = {
-      // prikupite podatke iz forme
+
       name: this.name,
       description: this.description,
       location: {
@@ -70,13 +142,7 @@ export class CreateAccommodationComponent implements AfterViewInit{
     },
       type: this.type,
       images: ["image4.jpg", "image5.jpg"],
-      amenities: [
-        {
-          "name": "Amenity 1 Name",
-          "description": "Description for Amenity 1",
-          "icon": "icon1.jpg"
-        }
-      ],
+      amenities: selectedAmenities,
       rating: 5.0,
       minNumberOfGuests:this.minNumberOfGuests,
       maxNumberOfGuests: this.maxNumberOfGuests,
@@ -86,16 +152,32 @@ export class CreateAccommodationComponent implements AfterViewInit{
       cancellationDeadline:this.cancellationDeadline
     };
 
+    //if (this.currentStep === 'createAccommodation') {
     this.accommodationService.addAccommodation(accommodationData).subscribe(
       (response) => {
-        console.log('Accommodation added successfully', response);
+        this.accommodationId = response;
+        console.log('Accommodation added successfully', response );
 
-        alert('Accommodation added successfully! Request sent to admin!');
+        alert('Accommodation added successfully! Request sent to admin!'+ response);
+        //this.currentStep = 'upload';
+        if (this.fileUploaded) {
+          this.http.post(`http://localhost:8080/api/accommodations/${this.accommodationId}/image`, this.avatarBytes, { responseType: 'text' }).subscribe({
+            next: (r: any) => {
+              console.log('Image uploaded successfully', r);
+            },
+            error: (err) => {
+              console.error(err);
+              alert("Error while uploading accommodation image!");
+            }
+          });
+        }
       },
       (error) => {
         console.error('Error adding accommodation', error);
       }
     );
+
+
   }
 
   private loadLeaflet() {
@@ -148,38 +230,6 @@ export class CreateAccommodationComponent implements AfterViewInit{
       });
   }
 
-
-  accommodationData: any = {};
-  selectedImages: { url: string, file: File }[] = [];
-
-
-  handleImageUpload(event: any) {
-    this.selectedImages = [];
-
-
-    const files: FileList | null = event.target.files;
-
-    if (files) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const url = URL.createObjectURL(file);
-        this.selectedImages.push({ url, file });
-      }
-    }
-  }
-
-  // ...
-
-  createAccommodation() {
-
-    if (this.selectedImages && this.selectedImages.length > 0) {
-
-      for (let i = 0; i < this.selectedImages.length; i++) {
-        const image = this.selectedImages[i];
-
-      }
-    }
-  }
 
 
 
