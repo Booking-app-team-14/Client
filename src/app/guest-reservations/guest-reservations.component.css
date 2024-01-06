@@ -1,256 +1,198 @@
 .container {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
 }
 
 h1 {
-  font-size: 2rem;
-  font-weight: 500;
-  margin-bottom: 0;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-mat-radio-group {
+/* Stilizacija filter sekcije */
+.row {
   display: flex;
-  flex-direction: row;
-  gap: 4rem;
+  gap: 20px;
+}
+
+.filter-section {
+  flex: 1;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filter-section label {
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .radio-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
+  gap: 10px;
 }
 
-.radio-container:hover {
-  cursor: pointer;
-  opacity: 0.8;
+.mat-radio-button {
+  margin-right: 5px;
 }
 
-.radio-container mat-radio-button span {
-  font-size: 1.2rem;
+.date-filter {
+  display: flex;
+  gap: 10px;
 }
 
-mat-icon {
-  font-size: 1.6rem;
+.date-filter input[type="date"] {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
+
+input[type="text"],
+input[type="date"],
+input[type="radio"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="radio"]:focus {
+  outline: none;
+  border-color: #6a9cff;
+  box-shadow: 0 0 5px rgba(106, 156, 255, 0.5);
+}
+
+.date-filter .filter-item:nth-child(1) input[type="date"],
+.date-filter .filter-item:nth-child(2) input[type="date"] {
+  width: calc(50% - 7.5px);
+}
+
 
 .card-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* gap: 3rem; */
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .reservation-card {
-  background-color: var(--color_white);
-  border-radius: 2rem;
-  box-shadow: 0 0 2rem 0 var(--color_gray_icon);
-  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 30%;
+  margin-bottom: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 1rem;
-  height: 18rem;
-  margin-bottom: 3rem;
-  transition: all 0.8s;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
-button {
-  width: 8rem;
-  height: 3rem;
-  border-radius: 0.5rem;
-  border: none;
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: white;
-}
-
-button:hover {
-  cursor: pointer;
-  opacity: 0.8;
-}
-
-.divider {
-  width: 2px;
-  /* min-height: 10rem; */
-  height: 100%;
-  background-color: #E4E4E7;
-}
-
-.owner-side .span-div {
-  width: 22rem;
-  height: 100%;
-  overflow: auto;
-  text-align: justify;
-}
-
-.owner-data img {
-  width: 5rem;
-  height: 5rem;
+.header img {
+  width: 50px;
   border-radius: 50%;
-  border: 1px solid var(--color_black_text);
+  margin-right: 10px;
 }
 
-.owner-side {
+.owner-details {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
 
-.owner-data {
+.owner-details .username {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.date {
+  color: #777;
+}
+
+.accommodation-details {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.owner-data .date {
-  font-size: 0.7rem;
-  color: var(--color_gray_text);
-}
-
-.owner {
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  gap: 1rem;
+  margin-bottom: 15px;
 }
 
-.username {
-  font-size: 1rem;
-  font-weight: 500;
+.accommodation-details img {
+  width: 100px;
+  margin-right: 10px;
 }
 
-/* ACCOMMODATION SIDE */
+.info {}
 
-.accommodation-side {
+.additional-info {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
 
-.info img {
-  height: 10rem;
-  aspect-ratio: 16/9;
-  border-radius: 2rem;
-  object-fit: cover;
-  border: 1px solid var(--color_black_text);
+.basic-info .accommodation-name {
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-.action-btns {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.action-btns button {
-  width: 100%;
-  height: 3rem;
-}
-
-.reject {
-  background-color: var(--color_red);
-}
-
-.approve {
-  background-color: var(--color_green);
-}
-
-.info {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-}
-
-.sub-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.a {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 2rem;
-  justify-content: space-between;
-}
-
-.type-stars {
-  font-weight: 600;
-  color: var(--color_gray_text);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-}
-
-.posted-ago {
-  color: var(--color_gray_text);
+.basic-info .accommodation-type {
+  color: #777;
+  margin-bottom: 5px;
 }
 
 .stars {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  margin-bottom: 5px;
 }
 
 .stars mat-icon {
-  color: var(--color_primary_blue);
-  font-size: 1.3rem;
-  display: flex;
-  align-items: center;
+  color: gold;
+  margin-right: 3px;
+  position: relative;
+  top: 3px;
 }
 
-.b {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  font-weight: 800;
-  font-size: 1.6rem;
+.stars span {
+  display: inline-block;
+  vertical-align: middle;
+}
+.dates span,
+.price-guests span {
+  display: block;
+  margin-bottom: 5px;
 }
 
-.b .name {
-  margin-right: 0.5rem;
-  width: 25rem;
-  overflow-x: auto;
-  overflow-y: hidden;
+.price-guests span:first-child:after {
+  content: "$";
+  display: inline-block;
+  margin-right: 4px;
 }
 
-.b mat-icon {
-  font-size: 1.6rem;
+.actions button {
+  padding: 9px 16px;
+  margin-right: 10px;
 }
 
-.ab {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
+.actions button.reject {
+  background-color: #e74c3c;
+  color: #fff;
 }
 
-.view-details button{
-  background-color: var(--color_primary_blue);
-  text-align: center;
-  font-size: 1rem;
-  width: 100%;
-  height: 3rem;
+.actions button.approve {
+  background-color: #2ecc71;
+  color: #fff;
 }
 
-.rejected{
-  transform: translateX(-100px);
-  opacity: 0;
-}
-
-.approved{
-  transform: translateX(100px);
-  opacity: 0;
+.actions button:hover {
+  filter: brightness(0.9);
 }

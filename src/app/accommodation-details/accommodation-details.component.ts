@@ -70,6 +70,7 @@ export class AccommodationDetailsComponent implements OnInit {
             pricePerGuest:this.accommodation.pricePerGuest,
             cancellationDeadline:this.accommodation.cancellationDeadline,
           };
+          console.log(this.reservationRequirements);
 
           this.places = {
             ownerId:this.accommodation.owner_Id,

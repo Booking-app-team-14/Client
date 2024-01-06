@@ -15,6 +15,10 @@ export class GuestReservationsComponent implements OnInit{
   reservations: any[];
   private id: number;
   private userId:number;
+  accommodationNameFilter: string = '';
+  startDateFilter: Date;
+  endDateFilter: Date;
+  minEndDate: string;
 
   getPostedAgo(date: Date) {
     const now = Date.now();
@@ -97,70 +101,65 @@ export class GuestReservationsComponent implements OnInit{
       });
     }
   }
-/*
-  approve(id: number) {
-    this.http.put('http://localhost:8080/api/accommodations/requests/' + id, {}).subscribe({
-      next: (message: any) => {
-        console.log(message);
-      },
-      error: (err) => {
-        console.error(err);
-        alert("Error while sending the PUT request!");
+
+
+  applyAccommodationFilter(): void {
+    if (this.accommodationNameFilter) {
+      const filterValue = this.accommodationNameFilter.toLowerCase();
+      this.reservations = this.reservations.filter(reservation =>
+        reservation.accommodation.name.toLowerCase().includes(filterValue)
+      );
+    } else {
+      this.fetchReservations();
+    }
+  }
+
+  updateEndDateMin(): void {
+    if (this.startDateFilter) {
+      const minDate = new Date(this.startDateFilter);
+      minDate.setDate(minDate.getDate() + 1);
+      this.minEndDate = minDate.toISOString().split('T')[0];
+      this.filterReservations();
+    } else {
+      this.minEndDate = null;
+      this.filterReservations();
+    }
+  }
+  filterReservations(): void {
+    this.reservations = this.reservations.filter((reservation) => {
+      // Provera za requestStatus
+      if (this.type && reservation.requestStatus !== this.type) {
+        return false;
       }
+
+      // Provera za startDateFilter
+      if (this.startDateFilter && new Date(reservation.startDate) < new Date(this.startDateFilter)) {
+        return false;
+      }
+
+      // Provera za endDateFilter
+      if (this.endDateFilter && new Date(reservation.endDate) > new Date(this.endDateFilter)) {
+        return false;
+      }
+
+      // Provera za accommodationNameFilter
+      if (this.accommodationNameFilter && !reservation.accommodation.name.toLowerCase().includes(this.accommodationNameFilter.toLowerCase())) {
+        return false;
+      }
+
+      // Provera za opseg datuma
+      if (this.startDateFilter && this.endDateFilter) {
+        const resStartDate = new Date(reservation.startDate);
+        const resEndDate = new Date(reservation.endDate);
+        const startRange = new Date(this.startDateFilter);
+        const endRange = new Date(this.endDateFilter);
+        if (resStartDate < startRange || resEndDate > endRange) {
+          return false;
+        }
+      }
+
+      return true;
     });
-    this.addCardClass(id, "approved");
-    this.animateCard(id);
-    setTimeout(() => this.deleteCard(id), 1400);
   }
 
-  reject(id: number) {
-    this.http.delete('http://localhost:8080/api/accommodations/requests/' + id).subscribe({
-      next: (message: any) => {
-        console.log(message);
-      },
-      error: (err) => {
-        console.error(err);
-        alert("Error while sending the DELETE request!");
-      }
-    });
-    this.addCardClass(id, "rejected");
-    this.animateCard(id);
-    setTimeout(() => this.deleteCard(id), 1400);
-  }
-*/
-  addCardClass(id: number, className: string) {
-    let card = document.getElementById(`card-${id}`);
-    if(card) {
-      card.classList.add(className);
-    }
-  }
-
-  deleteCard(id: number) {
-    let card = document.getElementById(`card-${id}`);
-    if(card) {
-      card.remove();
-      let index = this.reservations.findIndex(obj => obj.id === id);
-      if (index !== -1) {
-        this.reservations.splice(index, 1);
-      }
-    }
-  }
-
-  animateCard(id: number) {
-    let card = document.getElementById(`card-${id}`);
-    if(card) {
-      setTimeout(() => {
-        card.style.height = `${card.offsetHeight}px`;
-        window.getComputedStyle(card).height;
-        card.style.height = '0';
-        card.style.padding = '0';
-        card.style.marginBottom = '0';
-      }, 600);
-    }
-  }
-
-  viewDetails(id: number) {
-    // TODO: open accommodation details page
-    alert("Accommodation " + id + " details!");
-  }
 }

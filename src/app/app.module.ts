@@ -17,7 +17,7 @@ import { ProfileComponent } from './profiles/profile/profile.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatNativeDateModule} from '@angular/material/core';
+import {MatNativeDateModule, MatOptionModule} from '@angular/material/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -40,6 +40,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {JwtInterceptor} from "./jwt.interceptor";
 import { UpdateAccommodationComponent } from './update-accommodation/update-accommodation.component';
 import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -81,7 +82,9 @@ import { GuestReservationsComponent } from './guest-reservations/guest-reservati
     MainPageModule,
     SearchPageModule,
     AccommodationDetailsModule,
-    SharedModule
+    SharedModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   providers: [
     provideClientHydration(),

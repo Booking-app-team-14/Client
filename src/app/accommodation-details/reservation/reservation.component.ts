@@ -32,7 +32,7 @@ interface Reservation{
 export class ReservationComponent implements OnInit {
   @ViewChild('guestsInput') guestsInput!: ElementRef;
   @Input() availabilities: any[];
-  userAccount:any
+  private userAccount:any
   avail:any[]=[
     { id: 1, startDate: '2024-01-01', endDate: '2024-01-10', specialPrice: 120 },
     { id: 2, startDate: '2024-01-11', endDate: '2024-01-20', specialPrice: 140 },
@@ -60,8 +60,8 @@ export class ReservationComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.reservationRequirement);
-    this.getUserAccount();
-    console.log('Availabilities received in ReservationComponent:', this.availabilities);
+
+    //console.log('Availabilities received in ReservationComponent:', this.availabilities);
     const today = new Date();
     const nextDay = new Date();
     nextDay.setDate(today.getDate() + 1);
@@ -198,51 +198,42 @@ export class ReservationComponent implements OnInit {
   }
 
   makeReservation(): void {
-/*
-        this.imageType = rdto.getImageType();
-        this.mainPictureBytes = rdto.getMainPictureBytes();
 
- */
+    this.reservationService.getUserAccount(this.reservationRequirement.ownerId).subscribe(
+      (userAccount: any) => {
+        this.userAccount=userAccount;
 
+        const reservationData = {
+          startDate: this.defaultCheckInDate,
+          endDate: this.defaultCheckOutDate,
+          numberOfGuests: +this.guestsInput.nativeElement.value,
+          requestStatus: 'SENT',
+          totalPrice: this.totalPrice,
+          accommodationId:this.reservationRequirement.accommodationId ,
+          guestId: this.guestId,
+          name: this.reservationRequirement.accommodationName,
+          type: this.reservationRequirement.accommodationType,
+          stars: this.reservationRequirement.accommodationRating,
+          dateRequested: new Date().toLocaleDateString(),
+          userUsername:this.userAccount.username,
+          userImageType:/*this.userAccount.userImageType*/"png",
+          userProfilePictureBytes:/*this.userAccount.userProfilePictureBytes*/"tdfhgjgh",
+          imageType:/*this.userAccount.userImageType*/"png",
+          mainPictureBytes:/*this.userAccount.userProfilePictureBytes*/"tdfhgjgh"};
 
-    console.log(this.reservationRequirement);
-    const reservationData = {
-      startDate: this.defaultCheckInDate,
-      endDate: this.defaultCheckOutDate,
-      numberOfGuests: +this.guestsInput.nativeElement.value,
-      requestStatus: 'SENT',
-      totalPrice: this.totalPrice,
-      accommodationId:this.reservationRequirement.accommodationId ,
-      guestId: this.guestId,
-      name: this.reservationRequirement.accommodationName,
-      type: this.reservationRequirement.accommodationType,
-      stars: this.reservationRequirement.accommodationRating,
-      dateRequested: Date.now(),
-      userUsername:this.userAccount.username,
-      userImageType:this.userAccount.userImageType,
-      userProfilePictureBytes:this.userAccount.userProfilePictureBytes,
-      imageType:this.userAccount.userImageType,
-      mainPictureBytes:this.userAccount.userProfilePictureBytes
-    };
-
-    console.log(reservationData);
-    this.reservationService.sendReservation(reservationData).subscribe(
-      (response) => {
-        alert('Reservation successful!');
-      },
-      (error) => {
-        error('Reservation failed:', error);
-      }
-    );
-  }
-
-  getUserAccount(): void {
-    this.reservationService.getUserAccount(/*this.reservationRequirement.ownerId*/2).subscribe(
-      (data: any) => {
-        this.userAccount = data;
+        this.reservationService.sendReservation(reservationData).subscribe(
+          (response) => {
+            alert('Reservation successful!');
+          },
+          (error) => {
+            console.error('Reservation failed:', error);
+            alert('Reservation failed!');
+          }
+        );
       },
       (error) => {
         console.error('Error fetching user account:', error);
+        alert('Error fetching user account!');
       }
     );
   }
