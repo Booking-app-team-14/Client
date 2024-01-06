@@ -11,6 +11,10 @@ export class AccommodationDetailsService {
 
   constructor(private http: HttpClient) { }
 
+  getUserAccountById(userId: number): Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/api/users/${userId}`);
+  }
+
   getAccommodationById(id: number): Observable<AccommodationDTO>{
     return this.http.get<AccommodationDTO>(`http://localhost:8080/api/accommodations/${id}`);
   }

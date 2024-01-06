@@ -15,6 +15,7 @@ export interface AccommodationDTO {
   pricePerNight: number;
   pricePerGuest: boolean;
   cancellationDeadline: number;
+  owner_Id:number;
 }
 
 export interface LocationDTO {

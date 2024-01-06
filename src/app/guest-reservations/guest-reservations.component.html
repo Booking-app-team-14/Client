@@ -1,0 +1,95 @@
+<div class="container">
+
+  <h1>Reservation requests</h1>
+
+  <mat-radio-group [(ngModel)]="type">
+    <mat-radio-button value="fiber_sent">
+      <div class="radio-container">
+        <span>On Wait</span>
+        <mat-icon>fiber_sent</mat-icon>
+      </div>
+    </mat-radio-button>
+    <mat-radio-button value="fiber_approved">
+      <div class="radio-container">
+        <span>Approved</span>
+        <mat-icon>fiber_approved</mat-icon>
+      </div>
+    </mat-radio-button>
+    <mat-radio-button value="fiber_declined">
+      <div class="radio-container">
+        <span>Declined</span>
+        <mat-icon>fiber_declined</mat-icon>
+      </div>
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <div class="card-container">
+
+    <ng-container *ngFor="let reservation of reservations">
+
+      <div *ngIf="reservation.requestStatus === type" class="reservation-card" id="card-{{reservation.id}}">
+
+        <div class="owner-side">
+          <div class="owner-data">
+
+            <div class="owner">
+              <img [src]="'data:image/' + reservation.user.profilePictureType + ';base64,' + reservation.user.profilePictureBytes" alt="Owner profile picture">
+              <span class="username">{{reservation.user.username}}</span>
+            </div>
+
+            <span class="date">({{reservation.dateRequested}})</span>
+                      </div>
+          <!--
+                                <div class="span-div">
+                                  <span>"{{accommodation.message}}"</span>
+                                </div>
+                                -->
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="accommodation-side">
+
+          <div class="info">
+
+            <img [src]="'data:image/' + reservation.accommodation.imageType + ';base64,' + reservation.accommodation.imageBytes" alt="Accommodation main picture">
+
+            <div class="sub-info">
+              <div class="ab">
+                <div class="a">
+                  <div class="type-stars">
+                    <span>{{reservation.accommodation.type}}</span>
+                    <div class="stars">
+                      <mat-icon *ngFor="let star of [].constructor(reservation.accommodation.stars)">star</mat-icon>
+                    </div>
+                  </div>
+                  <div class="posted-ago">
+                    <span>{{reservation.postedAgo}} mins ago</span>
+                  </div>
+                </div>
+                <div class="b">
+                  <div class="name">
+                    <span>{{reservation.accommodation.name}}</span>
+                  </div>
+                  <mat-icon>{{reservation.requestStatus}}</mat-icon>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+<!--
+          <div class="action-btns">
+            <button (click)="reject(accommodation.accommodationId)" class="reject">Reject</button>
+            <button (click)="approve(accommodation.accommodationId)" class="approve">Approve</button>
+          </div>
+-->
+        </div>
+
+      </div>
+
+    </ng-container>
+
+  </div>
+
+</div>

@@ -14,8 +14,8 @@
   <!-- Guest Selection -->
   <div class="guest-selection">
     <label for="guests">Guests:</label>
-    <input type="number" #guestsInput id="guests" name="guests" [attr.min]="reservationRequirements.minGuests"
-           [attr.max]="reservationRequirements.maxGuests" [value]="reservationRequirements.minGuests"
+    <input type="number" #guestsInput id="guests" name="guests" [attr.min]="reservationRequirement.minGuests"
+           [attr.max]="reservationRequirement.maxGuests" [value]="reservationRequirement.minGuests"
            (change)="onGuestsChange()" (keyup)="onGuestsChange()" (keydown)="onGuestsChange()" (input)="onGuestsChange()">
   </div>
 

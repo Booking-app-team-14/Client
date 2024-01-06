@@ -12,6 +12,7 @@ import {CreateAccommodationComponent} from "./create-accommodation/create-accomm
 import { ApproveAccommodationsComponent } from './admin-functions/approve-accommodations/approve-accommodations.component';
 import { VerificationComponent } from './verification/verification.component';
 import { UpdateAccommodationComponent } from './update-accommodation/update-accommodation.component';
+import {GuestReservationsComponent} from "./guest-reservations/guest-reservations.component";
 
 const routes: Routes = [
   {component: UpdateAccommodationComponent, path: 'update-accommodation'},
@@ -31,6 +32,7 @@ const routes: Routes = [
   {component:AccommodationDetailsComponent, path:'search/details/:id'},
   {component:CreateAccommodationComponent, path:'create-accommodation'},
   {component: ApproveAccommodationsComponent, path: 'approve-accommodations'},
+  {component: GuestReservationsComponent, path:'guest-requests'},
   { path: 'verify', component: VerificationComponent },
 ];
 

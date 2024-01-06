@@ -9,7 +9,7 @@
     </div>
 
     <div class="owner-details">
-      <img [src]="owner.picture" alt="Owner Picture">
+      <img [src]="'data:image/' + owner.picture + ';base64,' + owner.pictureBytes" alt="owner">
       <p>{{ owner.name }}</p>
     </div>
   </div>

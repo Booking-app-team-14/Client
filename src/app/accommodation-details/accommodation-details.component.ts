@@ -16,8 +16,9 @@ export class AccommodationDetailsComponent implements OnInit {
   location: any;
   reservationRequirements: any;
   amenitiesList: AmenityDTO[] = [];
-  owner: { name: string, picture: string } = { name: "Nick Jefferson", picture: 'assets/BG.png' };
+  owner: { name: string, picture: string, pictureBytes:string } = { name: "Nick Jefferson", picture: 'assets/BG.png', pictureBytes:null };
   currentUser: any;
+  userAccount: any;
 
 
   constructor(
@@ -32,7 +33,6 @@ export class AccommodationDetailsComponent implements OnInit {
       this.accommodationService.getAccommodationById(id).subscribe(
         (data: AccommodationDTO) => {
           this.accommodation = data;
-          console.log(this.accommodation);
           this.images = this.accommodation.images.map((imageSrc: string) => {
             return {
               imageSrc: imageSrc,
@@ -60,6 +60,10 @@ export class AccommodationDetailsComponent implements OnInit {
 
           this.reservationRequirements = {
             accommodationId:this.accommodation.id,
+            ownerId:this.accommodation.owner_Id,
+            accommodationName:this.accommodation.name,
+            accommodationType:this.accommodation.type,
+            accommodationRating:this.accommodation.rating,
             pricePerNight:this.accommodation.pricePerNight,
             minGuests:this.accommodation.minNumberOfGuests,
             maxGuests:this.accommodation.maxNumberOfGuests,
@@ -68,6 +72,7 @@ export class AccommodationDetailsComponent implements OnInit {
           };
 
           this.places = {
+            ownerId:this.accommodation.owner_Id,
             name: this.accommodation.name,
             address: this.accommodation.location.address,
             description: this.accommodation.description,
@@ -101,4 +106,5 @@ export class AccommodationDetailsComponent implements OnInit {
       );
     });
   }
+
 }

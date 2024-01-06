@@ -11,6 +11,8 @@ export class ReservationService {
   constructor(private http: HttpClient) {}
 
 
+
+
   getGuestId(): Observable<number> {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -20,6 +22,11 @@ export class ReservationService {
       })
     );
   }
+
+  getUserAccount(userId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/users/${userId}`);
+  }
+
   sendReservation(reservationData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/requests`, reservationData);
   }

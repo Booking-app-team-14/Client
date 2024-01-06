@@ -3,21 +3,27 @@ import {ReservationService} from "./reservation.service";
 
 import {AccommodationDetailsService} from "../accommodation-details.service";
 
-
+/*
 interface Availability{
   id: number;
   startDate: string;
   endDate: string;
   specialPrice: number;
 }
+
 interface Reservation{
   accommodationId:number;
+  ownerId:number;
+  accommodationName:string,
+  accommodationType:string,
+  accommodationRating:number,
   pricePerNight:number;
   minGuests:number;
   maxGuests:number;
   cancellationDeadline:number;
   pricePerGuest:boolean;
 }
+*/
 @Component({
   selector: 'app-reservation',
   templateUrl: './reservation.component.html',
@@ -25,8 +31,9 @@ interface Reservation{
 })
 export class ReservationComponent implements OnInit {
   @ViewChild('guestsInput') guestsInput!: ElementRef;
-  @Input() availabilities: Availability[];
-  avail:Availability[]=[
+  @Input() availabilities: any[];
+  userAccount:any
+  avail:any[]=[
     { id: 1, startDate: '2024-01-01', endDate: '2024-01-10', specialPrice: 120 },
     { id: 2, startDate: '2024-01-11', endDate: '2024-01-20', specialPrice: 140 },
     { id: 3, startDate: '2024-01-21', endDate: '2024-01-31', specialPrice: 125},
@@ -39,12 +46,12 @@ export class ReservationComponent implements OnInit {
     { id: 10, startDate: '2024-04-11', endDate: '2024-04-20', specialPrice: 145 },
     { id: 11, startDate: '2024-04-21', endDate: '2024-04-30', specialPrice: 150 },
     { id: 12, startDate: '2024-12-20', endDate: '2024-12-31', specialPrice: 180 }]
-  @Input() reservationRequirements: Reservation;
+  @Input() reservationRequirement: any;
   defaultCheckInDate: string;
   defaultCheckOutDate: string;
   totalPrice: number = 0;
   private guestId: number;
-  availableDates: Availability[] = [];
+  availableDates: any[] = [];
 
 
   constructor( private reservationService: ReservationService,private accService: AccommodationDetailsService) {
@@ -52,6 +59,8 @@ export class ReservationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.reservationRequirement);
+    this.getUserAccount();
     console.log('Availabilities received in ReservationComponent:', this.availabilities);
     const today = new Date();
     const nextDay = new Date();
@@ -72,7 +81,7 @@ export class ReservationComponent implements OnInit {
 
     this.defaultCheckInDate = this.formatDate(nextDay);
     this.defaultCheckOutDate = this.formatDate(twoDaysAfter);
-    this.avail.forEach((availability: Availability) => {
+    this.avail.forEach((availability: any) => {
       const startDate = new Date(availability.startDate);
       const endDate = new Date(availability.endDate);
 
@@ -166,16 +175,16 @@ export class ReservationComponent implements OnInit {
         if (foundAvailability.specialPrice !== null) {
           totalPrice += foundAvailability.specialPrice;
         } else {
-          totalPrice += this.reservationRequirements.pricePerNight;
+          totalPrice += this.reservationRequirement.pricePerNight;
         }
       } else {
-        totalPrice += this.reservationRequirements.pricePerNight; // Use default price if date not found
+        totalPrice += this.reservationRequirement.pricePerNight; // Use default price if date not found
       }
 
       checkIn.setDate(checkIn.getDate() + 1);
     }
 
-    if (this.reservationRequirements.pricePerGuest) {
+    if (this.reservationRequirement.pricePerGuest) {
       this.totalPrice = totalPrice;
     } else {
       this.totalPrice = totalPrice * this.guestsInput.nativeElement.value;
@@ -189,25 +198,51 @@ export class ReservationComponent implements OnInit {
   }
 
   makeReservation(): void {
+/*
+        this.imageType = rdto.getImageType();
+        this.mainPictureBytes = rdto.getMainPictureBytes();
+
+ */
 
 
-    console.log(this.reservationRequirements);
+    console.log(this.reservationRequirement);
     const reservationData = {
       startDate: this.defaultCheckInDate,
       endDate: this.defaultCheckOutDate,
       numberOfGuests: +this.guestsInput.nativeElement.value,
       requestStatus: 'SENT',
       totalPrice: this.totalPrice,
-      accommodationId:this.reservationRequirements.accommodationId ,
-      guestId: this.guestId
+      accommodationId:this.reservationRequirement.accommodationId ,
+      guestId: this.guestId,
+      name: this.reservationRequirement.accommodationName,
+      type: this.reservationRequirement.accommodationType,
+      stars: this.reservationRequirement.accommodationRating,
+      dateRequested: Date.now(),
+      userUsername:this.userAccount.username,
+      userImageType:this.userAccount.userImageType,
+      userProfilePictureBytes:this.userAccount.userProfilePictureBytes,
+      imageType:this.userAccount.userImageType,
+      mainPictureBytes:this.userAccount.userProfilePictureBytes
     };
 
+    console.log(reservationData);
     this.reservationService.sendReservation(reservationData).subscribe(
       (response) => {
         alert('Reservation successful!');
       },
       (error) => {
         error('Reservation failed:', error);
+      }
+    );
+  }
+
+  getUserAccount(): void {
+    this.reservationService.getUserAccount(/*this.reservationRequirement.ownerId*/2).subscribe(
+      (data: any) => {
+        this.userAccount = data;
+      },
+      (error) => {
+        console.error('Error fetching user account:', error);
       }
     );
   }

@@ -39,6 +39,7 @@ import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from "@angular/material/radio
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {JwtInterceptor} from "./jwt.interceptor";
 import { UpdateAccommodationComponent } from './update-accommodation/update-accommodation.component';
+import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { UpdateAccommodationComponent } from './update-accommodation/update-acco
     CreateAccommodationComponent,
     ApproveAccommodationsComponent,
     VerificationComponent,
-    UpdateAccommodationComponent
+    UpdateAccommodationComponent,
+    GuestReservationsComponent
   ],
   imports: [
     BrowserModule,
