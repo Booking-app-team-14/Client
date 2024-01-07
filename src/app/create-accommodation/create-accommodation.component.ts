@@ -80,16 +80,16 @@ export class CreateAccommodationComponent implements AfterViewInit{
       selectedAmenities.push({ "id": 1 });
     }
     if (this.amenities.wifi) {
-      selectedAmenities.push({ "id": 3 });
+      selectedAmenities.push({ "id": 2 });
     }
     if (this.amenities.jacuzzi) {
-      selectedAmenities.push({ "id": 4 });
+      selectedAmenities.push({ "id": 3 });
     }
     if (this.amenities.gymCenter) {
-      selectedAmenities.push({ "id": 5 });
+      selectedAmenities.push({ "id": 4 });
     }
     if (this.amenities.videoGames) {
-      selectedAmenities.push({ "id": 6 });
+      selectedAmenities.push({ "id": 5 });
     }
     const accommodationData = {
       name: this.name,
