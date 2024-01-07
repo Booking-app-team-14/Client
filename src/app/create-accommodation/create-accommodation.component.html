@@ -4,12 +4,12 @@
   <form>
 
     <div class="input-row">
-      <label>Profile Image</label>
+      <label>Upload Images</label>
       <input type="file" (change)="onFileSelected($event)">
     </div>
 
-    <div *ngIf="selectedImage" class="image-container">
-      <img [src]="selectedImage.url" alt="Selected Image">
+    <div *ngIf="selectedImage" class="image-container" name="selectedImage">
+      <img [src]="selectedImage.url" alt="Selected Image"  >
     </div>
 
 
@@ -38,11 +38,14 @@
 
     <fieldset>
       <legend id="amenities" [(ngModel)]="amenities">Amenities:</legend>
-      <label><input type="checkbox" value=1 [(ngModel)]="amenities.amenity1" name="amenity"> Amenity 1 Name</label> <br>
-      <label><input type="checkbox" value=3 [(ngModel)]="amenities.wifi" name="wifi"> WI-FI</label> <br>
-      <label><input type="checkbox" value=4 [(ngModel)]="amenities.jacuzzi" name="jacuzzi"> Jacuzzi</label> <br>
-      <label><input type="checkbox" value=5 [(ngModel)]="amenities.gymCenter" name="gymCenter"> Gym center</label> <br>
-      <label><input type="checkbox" value=6 [(ngModel)]="amenities.videoGames" name="videoGames"> Video games</label>
+       <input type="checkbox" value=4 [(ngModel)]="amenities.amenity1" name="amenity"> <label class="checkbox-parking checkbox-label"> Free parking</label> <br>
+
+       <input type="checkbox" value=1 [(ngModel)]="amenities.wifi" name="wifi" > <label class="checkbox-wifi checkbox-label"> WI-FI </label>
+       <br>
+
+      <input type="checkbox" value=2 [(ngModel)]="amenities.jacuzzi" name="jacuzzi"> <label class="checkbox-jacuzzi checkbox-label"> Jacuzzi</label> <br>
+       <input type="checkbox" value=5 [(ngModel)]="amenities.gymCenter" name="gymCenter"> <label class="checkbox-center checkbox-label"> Gym center</label> <br>
+      <input type="checkbox" value=3 [(ngModel)]="amenities.videoGames" name="videoGames"> <label class="checkbox-video checkbox-label"> Video games</label>
     </fieldset>
 
     <div class="location-container">
@@ -75,6 +78,9 @@
         <label><input type="radio" name="priceType" value="PerNight"> Per Night</label> <br>
         <label><input type="radio" name="priceType" value="PerGuest"> Per Guest</label>
       </fieldset>
+      <label for="price">Default Price</label>
+      <input type="number" id="price"   [(ngModel)]="price" name="price" required>
+
 
       <br>
 
@@ -87,7 +93,7 @@
           <input type="date" [(ngModel)]="specialPrice.endDate" name="endDate{{i}}" required format="yyyy-MM-dd" >
         </div>
         <label id="specialPriceAmount">Price:</label>
-        <input type="number" [(ngModel)]="specialPrice.amount" name="amount{{i}}" required>
+        <input type="number" [(ngModel)]="specialPrice.amount" name="amount{{i}}"  >
 
 
         <button type="button" (click)="removeSpecialPrice(i)">Remove</button>

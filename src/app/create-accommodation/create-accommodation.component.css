@@ -202,7 +202,33 @@ button mat-icon {
   display: block;
   margin-bottom: 8px;
 }
+.checkbox-wifi {
+  background: url('img.png') no-repeat 0 0;
+  padding-left: 20px;
+  background-size: 20px 20px;
+}
 
+.checkbox-parking {
+  background: url('img_1.png') no-repeat 0 0;
+  padding-left: 20px;
+  background-size: 20px 20px;
+}
+
+.checkbox-jacuzzi {
+  background: url('img_2.png') no-repeat 0 0;
+  padding-left: 20px;
+  background-size: 20px 20px;
+}
+.checkbox-center {
+  background: url('img_3.png') no-repeat 0 0;
+  padding-left: 20px;
+  background-size: 20px 20px;
+}
+.checkbox-video {
+  background: url('img_4.png') no-repeat 0 0;
+  padding-left: 20px;
+  background-size: 20px 20px;
+}
 
 .special-price-container input[type="number"] {
   width: 40%;
