@@ -84,7 +84,7 @@ export class OwnerReviewComponent implements OnInit{
     this.http.get(`http://localhost:8080/api/accommodations/${id}`).subscribe({
       next: (accommodation: any) => {
         this.ownerId = accommodation.owner_Id;
-        this.http.get(`http://localhost:8080/api/accommodations/owners/${this.ownerId}`).subscribe({
+        this.http.get(`http://localhost:8080/api/owners/${this.ownerId}`).subscribe({
           next: (userDTO: any) => {
             this.user.firstName = userDTO.firstName;
             this.user.lastName = userDTO.lastName;

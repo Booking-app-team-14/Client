@@ -22,6 +22,48 @@
     </button>
 </div>
 
+<div>
+    <h2 class="no-accommodations-title" *ngIf="!myAccommodations">You currently have no accommodations</h2>
+</div>
+
 <div class="accommodations">
-    <h2 class="titles">You currently have no accommodations</h2>
+
+    <div class="accommodation" *ngFor="let accommodation of myAccommodations">
+
+        <div class="accommodation-image">
+            <img [src]="'data:image/' + accommodation.imageType + ';base64,' + accommodation.mainPictureBytes" alt="Accommodation main picture">
+        </div>
+
+        <div class="type-stars">
+            <div class="accommodation-type">
+                <span>{{accommodation.type}}</span>
+            </div>
+            <div class="accommodation-stars">
+                <mat-icon *ngFor="let star of [].constructor(accommodation.stars)">star</mat-icon>
+            </div>
+        </div>
+
+        <div class="accommodation-name">
+            <span>{{accommodation.name}}</span>
+        </div>
+        <div class="guests">
+            <span>Max guests: {{accommodation.maxGuests}}</span>
+        </div>
+        <div class="accommodation-address">
+            <span>Address: {{accommodation.address}}</span>
+        </div>
+
+        <div class="update-details-price">
+            <button mat-icon-button class="fav-btn update-details-button" routerLink="/accommodation/{{accommodation.accommodationId}}">
+                <span>Update details</span>
+            </button>
+            <div class="accommodation-price">
+                <span>{{accommodation.price}}RSD</span><span> /night</span>
+            </div>
+        </div>
+            
+        <button mat-icon-button class="fav-btn go-to-page-button" routerLink="/accommodation/edit/{{accommodation.accommodationId}}">
+            <span>Go to the accommodation page</span>
+        </button>
+
 </div>
