@@ -2,6 +2,7 @@ import {Component, ElementRef, Input, OnInit, signal, ViewChild} from '@angular/
 import {ReservationService} from "./reservation.service";
 
 import {AccommodationDetailsService} from "../accommodation-details.service";
+import {UserService} from "../../login/user.service";
 
 /*
 interface Availability{
@@ -52,10 +53,13 @@ export class ReservationComponent implements OnInit {
   totalPrice: number = 0;
   private guestId: number;
   availableDates: any[] = [];
+  userRole: string ='';
 
 
-  constructor( private reservationService: ReservationService,private accService: AccommodationDetailsService) {
-
+  constructor( private reservationService: ReservationService,private accService: AccommodationDetailsService,  private userService: UserService) {
+    this.userService.userRole$.subscribe(role => {
+      this.userRole = role;
+    });
   }
 
   ngOnInit(): void {
@@ -95,6 +99,7 @@ export class ReservationComponent implements OnInit {
         startDate.setDate(startDate.getDate() + 1);
       }
     });
+    this.calculateTotalPrice();
     }
 
 
@@ -223,11 +228,11 @@ export class ReservationComponent implements OnInit {
 
         this.reservationService.sendReservation(reservationData).subscribe(
           (response) => {
-            alert('Reservation successful!');
+            alert('Reservation request successful sent!');
           },
           (error) => {
             console.error('Reservation failed:', error);
-            alert('Reservation failed!');
+            alert('Reservation request failed to send. The accommodation is taken in chosen date range!');
           }
         );
       },

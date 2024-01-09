@@ -1,19 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ReservationService} from "../accommodation-details/reservation/reservation.service";
 
-
 @Component({
-  selector: 'app-guest-reservations',
-  templateUrl: './guest-reservations.component.html',
-  styleUrl: './guest-reservations.component.css'
+  selector: 'app-owner-reservations',
+  templateUrl: './owner-reservations.component.html',
+  styleUrl: './owner-reservations.component.css'
 })
-export class GuestReservationsComponent implements OnInit{
+export class OwnerReservationsComponent {
 
   type: string = "fiber_sent";
-  ownerId:number;
+
   reservations: any[];
-  private id: number;
+  //private id: number;
+  private username:string;
   accommodationNameFilter: string = '';
   startDateFilter: Date;
   endDateFilter: Date;
@@ -38,19 +38,20 @@ export class GuestReservationsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.reservationService.getGuestId().subscribe(
-      (userId: number) => {
-        this.id = userId;
+    this.reservationService.getOwnerInfo().subscribe(
+      (userInfo: string) => {
+        //this.id = userInfo.id;
+        this.username = userInfo;
         this.fetchReservations();
       },
       (error) => {
-        console.error('Error fetching user ID:', error);
+        console.error('Error fetching user USERNAME:', error);
       }
     );
   }
 
   fetchReservations(): void {
-    this.http.get(`http://localhost:8080/api/requests/guest/${this.id}`).subscribe({
+    this.http.get(`http://localhost:8080/api/requests/owner/${this.username}`).subscribe({
       next: (reservations: any[]) => {
         this.reservations = reservations;
         for (let i = 0; i < this.reservations.length; i++) {
@@ -82,26 +83,25 @@ export class GuestReservationsComponent implements OnInit{
         next: (accommodation: any) => {
           this.reservations[i].accommodation = accommodation;
           console.log( this.reservations[i].accommodation);
-          this.ownerId=this.reservations[i].accommodation.owner_Id;
-          console.log(this.ownerId);
-          this.http.get(`http://localhost:8080/api/users/${this.ownerId}`).subscribe({
-
-            next: (user: any) => {
-              this.reservations[i].user = user;
-            },
-            error: (err) => {
-              console.error(err);
-              alert("Error while fetching user details!");
-            }
-          });
         },
         error: (err) => {
           console.error(err);
           alert("Error while fetching accommodation details!");
         }
       });
-  }
+
+      this.http.get(`http://localhost:8080/api/users/${this.reservations[i].guestId}`).subscribe({
+        next: (user: any) => {
+          this.reservations[i].user = user;
+        },
+        error: (err) => {
+          console.error(err);
+          alert("Error while fetching user details!");
+        }
+      });
     }
+  }
+
 
   applyAccommodationFilter(): void {
     if (this.accommodationNameFilter) {
@@ -161,5 +161,4 @@ export class GuestReservationsComponent implements OnInit{
       return true;
     });
   }
-
 }

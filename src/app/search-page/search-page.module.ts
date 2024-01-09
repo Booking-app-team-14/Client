@@ -5,6 +5,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import {SearchSectionComponent} from "./search-section/search-section.component";
 import {SearchPageComponent} from "./search-page.component";
 import {FormsModule} from "@angular/forms";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {FormsModule} from "@angular/forms";
         CommonModule,
         NgOptimizedImage,
         FormsModule,
+        MatIconModule,
     ]
 })
 export class SearchPageModule { }

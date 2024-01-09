@@ -88,6 +88,17 @@ export class SearchPageService {
   }
 
 
+  addFavoriteAccommodation(userId: number, accommodationId: number): Observable<any> {
+    const url = `http://localhost:8080/api/users/${userId}/favorite-accommodations/${accommodationId}`;
+    return this.http.put<any>(url, {});
+  }
 
+  removeFavoriteAccommodation(userId: number, accommodationId: number): Observable<any> {
+    const url = `http://localhost:8080/api/users/${userId}/favorite-accommodations/${accommodationId}`;
+    return this.http.delete<any>(url);
+  }
 
+  getFavouriteAccommodations(id: number) {
+    return this.http.get<any>(`http://localhost:8080/api/users/favorite/${id}`);
+  }
 }

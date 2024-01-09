@@ -13,6 +13,8 @@ import { ApproveAccommodationsComponent } from './admin-functions/approve-accomm
 import { VerificationComponent } from './verification/verification.component';
 import { UpdateAccommodationComponent } from './update-accommodation/update-accommodation.component';
 import {GuestReservationsComponent} from "./guest-reservations/guest-reservations.component";
+import {OwnerReservationsComponent} from "./owner-reservations/owner-reservations.component";
+import {FavoriteComponent} from "./favorite/favorite.component";
 
 const routes: Routes = [
   {component: UpdateAccommodationComponent, path: 'update-accommodation'},
@@ -33,6 +35,8 @@ const routes: Routes = [
   {component:CreateAccommodationComponent, path:'create-accommodation'},
   {component: ApproveAccommodationsComponent, path: 'approve-accommodations'},
   {component: GuestReservationsComponent, path:'guest-requests'},
+  {component: OwnerReservationsComponent, path:'owner-requests'},
+  {component: FavoriteComponent, path:'favorite'},
   { path: 'verify', component: VerificationComponent },
 ];
 

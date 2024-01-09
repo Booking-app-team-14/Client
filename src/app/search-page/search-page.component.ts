@@ -12,17 +12,33 @@ import {Accommodation} from "../shared/accommodation.model";
 })
 export class SearchPageComponent implements OnInit {
   filters: FilterModel = {}; // Shared filter object
+  apartments: any[] = [];
+
 
   constructor(private filterService: FilterService, private accommodationService: SearchPageService) {}
 
   ngOnInit() {
-    // Subscribe to filter changes from the shared service
+    this.getAccommodations();
     this.filterService.filters$.subscribe(filters => {
       this.filters = filters;
       this.applyFiltersAndFetchData();
     });
   }
 
+
+
+  getAccommodations(): void {
+    // Fetch default accommodations
+    this.accommodationService.getAllAccommodations().subscribe({
+      next: (result: Accommodation[]) => {
+        this.apartments = result;
+        console.log('Fetched default accommodations:', result);
+      },
+      error: (error: any) => {
+        console.log('Error fetching default accommodations:', error);
+      }
+    });
+  }
   applyFiltersAndFetchData() {
     this.accommodationService.filterAccommodations(this.filters)
       .subscribe({

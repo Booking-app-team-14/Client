@@ -41,6 +41,8 @@ import {JwtInterceptor} from "./jwt.interceptor";
 import { UpdateAccommodationComponent } from './update-accommodation/update-accommodation.component';
 import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component';
 import {MatSelectModule} from "@angular/material/select";
+import { OwnerReservationsComponent } from './owner-reservations/owner-reservations.component';
+import { FavoriteComponent } from './favorite/favorite.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import {MatSelectModule} from "@angular/material/select";
     ApproveAccommodationsComponent,
     VerificationComponent,
     UpdateAccommodationComponent,
-    GuestReservationsComponent
+    GuestReservationsComponent,
+    OwnerReservationsComponent,
+    FavoriteComponent
   ],
   imports: [
     BrowserModule,
