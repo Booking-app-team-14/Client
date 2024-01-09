@@ -1,14 +1,15 @@
-import { Component, ElementRef, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { isPlatformBrowser } from "@angular/common";
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-update-accommodation',
   templateUrl: './update-accommodation.component.html',
   styleUrl: './update-accommodation.component.css'
 })
-export class UpdateAccommodationComponent {
+export class UpdateAccommodationComponent implements OnInit {
 
   range: any = new FormGroup({
     start: new FormControl({ value: '', disabled: true }),
@@ -35,7 +36,7 @@ export class UpdateAccommodationComponent {
 
   imagesAlreadyUploaded: { url: string, file: File }[] = [];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private http: HttpClient) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private http: HttpClient, private activatedRoute: ActivatedRoute,) {
     // TODO: get details from server
 
     // get images from server and add them to imagesAlreadyUploaded
@@ -45,6 +46,14 @@ export class UpdateAccommodationComponent {
     // ...
   }
 
+  accommodationId: number;
+
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.accommodationId = +params['id'];
+    });
+  }
+  
   selectedImages: { url: string, file: File }[] = this.imagesAlreadyUploaded;
 
   handleImageUpload(event: any) {

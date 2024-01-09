@@ -16,7 +16,7 @@ import {OwnerReviewComponent} from "./owner-review/owner-review.component";
 import {ReportModalComponent} from "./report-modal/report-modal.component";
 
 const routes: Routes = [
-  {component: UpdateAccommodationComponent, path: 'update-accommodation'},
+  {component: UpdateAccommodationComponent, path: 'update-accommodation/:id'},
   {component: HeaderComponent, path: 'header'},
   {
     path: 'login',

@@ -54,7 +54,8 @@
         </div>
 
         <div class="update-details-price">
-            <button mat-icon-button class="fav-btn update-details-button" routerLink="/accommodation/{{accommodation.accommodationId}}">
+            <button mat-icon-button class="fav-btn update-details-button" (click)="editAccommodationDetails(accommodation.id)"> 
+                <!-- /{{accommodation.accommodationId}}"> -->
                 <span>Update details</span>
             </button>
             <div class="accommodation-price">
@@ -62,7 +63,7 @@
             </div>
         </div>
             
-        <button mat-icon-button class="fav-btn go-to-page-button" routerLink="/accommodation/edit/{{accommodation.accommodationId}}">
+        <button mat-icon-button class="fav-btn go-to-page-button" (click)="goToAccommodationPage(accommodation.id)">
             <span>Go to the accommodation page</span>
         </button>
 

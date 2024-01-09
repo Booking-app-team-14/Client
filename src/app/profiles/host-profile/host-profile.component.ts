@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewChecked, AfterViewInit, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-host-profile',
@@ -21,7 +22,7 @@ export class HostProfileComponent {
 
   myAccommodations: any[];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private _router: Router) {
 
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.http.get(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe({
@@ -44,5 +45,12 @@ export class HostProfileComponent {
 
   }
 
+  goToAccommodationPage(id: number) {
+    this._router.navigateByUrl('search/details/' + id);
+  }
+
+  editAccommodationDetails(id: number) {
+    this._router.navigateByUrl('update-accommodation/' + id);
+  }
 
 }
