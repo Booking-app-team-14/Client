@@ -17,6 +17,24 @@ export interface AccommodationDTO {
   cancellationDeadline: number;
   owner_Id:number;
 }
+export interface OwnerDTO {
+  role:"OWNER";
+  imagesRepository:{};
+  username: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  address: string;
+  phoneNumber: string;
+  verified: true;
+  numberOfReports: number;
+  profilePictureType: "png";
+  profilePictureBytes: "";
+  reservationsIds: [];
+  accommodationsIds: [];
+  blocked: boolean;
+
+}
 
 export interface LocationDTO {
   id: number;

@@ -46,7 +46,6 @@ body {
   transform: translateY(-50%);
   pointer-events: none;
 }
-
 .sort-dropdown select option {
   background-color: #fff;
   color: #333;
@@ -59,7 +58,7 @@ body {
 }
 
 .card {
-  width: 100%;
+  width: 18rem;
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;

@@ -1,100 +1,128 @@
 <div class="container">
 
-    <h1 style="margin-bottom: 32px;">Update accommodation details</h1>
+    <h1>Update accommodation details</h1>
 
-    <form (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Enter name">
-        </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <input type="text" class="form-control" id="description" placeholder="Enter description">
-        </div>
-        <div class="form-group">
-            <label for="type">Type:</label>
-            <select id="type">
-                <option value="Apartment">Apartment</option>
-                <option value="Hotel">Hotel</option>
-                <option value="Hostel">Hostel</option>
-                <option value="Private Room">Private Room</option>
-                <option value="Guesthouse">Guesthouse</option>
-                <option value="Resort">Resort</option>
-              </select>
-        </div>
-        <div class="form-group">
-            <label for="minGuests">Min Guests:</label>
-            <input type="number" id="minGuests" min="1">
+    <form>
 
-            <label for="maxGuests">Max Guests:</label>
-            <input type="number" id="maxGuests" min="1">
+        <label>Images:</label>
+        <input type="file" multiple accept="image/*" class="form-control" id="images" placeholder="Enter images"
+            (change)="handleImageUpload($event)">
+        <div *ngIf="selectedImages" class="image-container" style="margin-top: 1rem;">
+            <div *ngFor="let image of selectedImages" class="image-item">
+                <img [src]="image.url" alt="Selected Image" class="image-preview">
+                <button type="button" (click)="removeImage(image)" class="remove-image-btn">Remove</button>
+            </div>
         </div>
-        <fieldset style="margin-bottom: 1rem;">
-            <legend>Amenities:</legend>
-            <label><input type="checkbox" value="Air Condition"> Air Condition</label> <br>
-            <label><input type="checkbox" value="Spa"> Spa</label> <br>
-            <label><input type="checkbox" value="Beach front"> Beach front</label> <br>
-            <label><input type="checkbox" value="Hot tub/jacuzzi"> Hot tub/jacuzzi</label>
-          </fieldset>
-        <div class="form-group">
-            <div class="location-container">
-                <div class="location-header">
-                  <span class="location-sign">📍</span>
-                  <h2 class="location-caption">Location</h2>
-                </div>
-          
-                <div class="map-frame">
-                  <div id="mapContainer" style="height: 400px;"></div>
-                </div>
-                <div class="input-button-container">
-                  <input type="text" id="address" placeholder="Enter location" name="location" [(ngModel)]="enteredAddress">
-                  <button class="search-location" (click)="locateOnMap()">
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" [(ngModel)]="name" name="name" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" [(ngModel)]="description" name="description" style="resize: none;" required></textarea>
+
+        <label for="type">Type:</label>
+        <select id="type" [(ngModel)]="type" name="type">
+            <option value="STUDIO">STUDIO</option>
+            <option value="ROOM">ROOM</option>
+            <option value="APARTMENT">APARTMENT</option>
+            <option value="VILLA">VILLA</option>
+            <option value="HOTEL">HOTEL</option>
+        </select>
+
+        <div class="guests-container">
+            <label for="minNumberOfGuests">Min Guests:</label>
+            <input type="number" id="minNumberOfGuests" min="1" [(ngModel)]="minNumberOfGuests"
+                name="minNumberOfGuests">
+
+            <label for="maxNumberOfGuests">Max Guests:</label>
+            <input type="number" id="maxNumberOfGuests" min="1" [(ngModel)]="maxNumberOfGuests"
+                name="maxNumberOfGuests">
+        </div>
+
+        <fieldset class="amenities-fieldset">
+            <legend id="amenities" [(ngModel)]="amenities">Amenities:</legend>
+            <label class="checkbox-parking checkbox-label">
+            <input type="checkbox" value=4 [(ngModel)]="amenities.amenity1" name="amenity"> 
+                Free parking</label> <br>
+
+            <input type="checkbox" value=1 [(ngModel)]="amenities.wifi" name="wifi"> <label
+                class="checkbox-wifi checkbox-label">WI-FI </label>
+            <br>
+
+            <input type="checkbox" value=2 [(ngModel)]="amenities.jacuzzi" name="jacuzzi"> <label
+                class="checkbox-jacuzzi checkbox-label">Jacuzzi</label> <br>
+            <input type="checkbox" value=5 [(ngModel)]="amenities.gymCenter" name="gymCenter"> <label
+                class="checkbox-center checkbox-label">Gym center</label> <br>
+            <input type="checkbox" value=3 [(ngModel)]="amenities.videoGames" name="videoGames"> <label
+                class="checkbox-video checkbox-label">Video games</label>
+        </fieldset>
+
+        <div class="location-container">
+            <div class="location-header">
+                <span class="location-sign">📍</span>
+                <h2 class="location-caption">Location</h2>
+            </div>
+
+            <div class="map-frame">
+                <div id="mapContainer" style="height: 400px;"></div>
+            </div>
+            <br>
+            <div class="input-button-container">
+                <input type="text" id="enteredAddress" placeholder="Enter location" [(ngModel)]="enteredAddress"
+                    name="enteredAddress">
+                <button mat-icon-button class="fav-btn" (click)="locateOnMap()" class="search-location-btn">
                     <mat-icon>search</mat-icon>
-                  </button>
-                </div>
+                </button>
             </div>
+            <br>
         </div>
-        <div class="form-group">
-            <label for="image">Images</label>
-            <input type="file" multiple accept="image/*" class="form-control" id="images" placeholder="Enter images" (change)="handleImageUpload($event)">
-            <div *ngIf="selectedImages" class="image-container" style="margin-top: 1rem;">
-                <div *ngFor="let image of selectedImages" class="image-item">
-                    <img [src]="image.url" alt="Selected Image" class="image-preview">
+
+
+
+        <div class="availability-container">
+
+            <h2>Availability And Prices</h2>
+
+            <fieldset class="availability-fieldset">
+                <legend>Define Price</legend>
+                <label><input type="radio" name="priceType" value="PerNight"> Per Night</label> <br>
+                <label><input type="radio" name="priceType" value="PerGuest"> Per Guest</label>
+            </fieldset>
+            <label for="price">Default Price</label>
+            <input type="number" id="price" [(ngModel)]="price" name="price" required>
+
+
+            <br>
+
+            <div *ngFor="let specialPrice of specialPrices; let i = index" class="special-price-container">
+                <label>Availability {{ i + 1 }}:</label>
+                <div class="special-price-dates">
+                    <label>From:</label>
+                    <input type="date" [(ngModel)]="specialPrice.startDate" name="startDate{{i}}" required
+                        format="yyyy-MM-dd">
+                    <label>To:</label>
+                    <input type="date" [(ngModel)]="specialPrice.endDate" name="endDate{{i}}" required
+                        format="yyyy-MM-dd">
                 </div>
+                <label id="specialPriceAmount">Price:</label>
+                <input type="number" [(ngModel)]="specialPrice.amount" name="amount{{i}}">
+
+
+                <button type="button" (click)="removeSpecialPrice(i)" class="remove-availability-btn">Remove</button>
             </div>
+
+
+            <button type="button" (click)="addSpecialPrice()" class="add-availability-btn">Add Availability</button>
+
+
+            <label for="cancellationDeadline">Cancellation Deadline:</label>
+            <input type="number" id="cancellationDeadline" [(ngModel)]="cancellationDeadline"
+                name="cancellationDeadline" required>
+
         </div>
-        <fieldset>
-            <legend>Define Price:</legend>
-            <label><input type="radio" name="priceType" value="PerNight"> Per Night</label> <br>
-            <label><input type="radio" name="priceType" value="PerGuest"> Per Guest</label>
-          </fieldset>
-        <div class="form-group">
-            <label for="available">Availability</label>
-            <label for="price">Price</label>
-            <input type="number" class="form-control" id="price" placeholder="Enter price">
-        </div>
-        <div class="datepicker-container">
-            <mat-form-field style="width: 17rem;">
-                <mat-label>Enter a date range</mat-label>
-                <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-                    <input matStartDate formControlName="start" placeholder="Start date" #startDateRef (dateChange)="startDateChangeEvent()">
-                    <input matEndDate formControlName="end" placeholder="End date" #endDateRef (dateChange)="endDateChangeEvent()">
-                </mat-date-range-input>
-                <mat-datepicker-toggle [for]="picker" style="position: absolute; top: 0.2rem; right: -0.6rem;"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker disabled="false" style="position: absolute; top: 70px; right: 0;">
-                    <mat-date-range-picker-actions>
-                        <button mat-button matDateRangePickerCancel>Cancel</button>
-                        <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
-                    </mat-date-range-picker-actions>
-                </mat-date-range-picker>
-            </mat-form-field>
-        </div>
-        <button mat-raised-button color="primary" style="margin-top: 1rem; margin-bottom: 1rem;" (click)="addRange()">Add availability</button>
-        <div class="form-group">
-            <label for="cancelationDeadline">Cancelation deadline</label>
-            <input type="number" class="form-control" id="cancelation" placeholder="Enter cancelation deadline">
-        </div>
-        <button type="submit" mat-raised-button color="primary">Submit</button>
+
+        <button type="button" (click)="onSubmit()" class="update-btn">Update Accommodation</button>
+
     </form>
 
 </div>

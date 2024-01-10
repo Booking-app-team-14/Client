@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrl: './update-account.component.css'
 })
 export class UpdateAccountComponent {
-  
+
   constructor(private _router: Router, private http: HttpClient) { }
 
   passwordVisibility : boolean = true;
@@ -99,12 +99,12 @@ export class UpdateAccountComponent {
 
     const url = URL.createObjectURL(file);
     this.selectedImage = { url, file };
-  
+
     reader.onload = (event: any) => {
       this.avatarBytes = event.target.result.split(',')[1];
       this.avatarImageType = file.type.split('/')[1];
     };
-  
+
     reader.readAsDataURL(file);
     this.fileUploaded = true;
   }
@@ -161,7 +161,7 @@ export class UpdateAccountComponent {
       }
     });
 
-    
+
 
   }
 

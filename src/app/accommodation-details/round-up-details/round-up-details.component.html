@@ -9,7 +9,7 @@
     </div>
 
     <div class="owner-details">
-      <img [src]="'data:image/' + owner.picture + ';base64,' + owner.pictureBytes" alt="owner">
+      <img [src]="owner.picture" alt="Owner Picture" routerLink="/search/details/{{place.id}}/owner-review">
       <p>{{ owner.name }}</p>
     </div>
   </div>

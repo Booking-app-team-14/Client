@@ -32,7 +32,7 @@
     <ng-container *ngFor="let reservation of reservations">
       <div *ngIf="reservation.requestStatus === type" class="reservation-card" id="card-{{reservation.id}}">
         <div class="header">
-          <img [src]="'data:image/' + reservation.user.profilePictureType + ';base64,' + reservation.user.profilePictureBytes" alt="Guest profile picture">
+          <img [src]="'data:image/' + reservation.userImageType + ';base64,' + reservation.userProfilePictureBytes" alt="Guest profile picture">
           <div class="owner-details">
             <span class="username">{{reservation.user.username}}</span>
             <span class="date">({{reservation.dateRequested}}), {{reservation.user.numberOfCancellations}} cancellations</span>
@@ -43,7 +43,7 @@
         <div class="divider"></div>
 
         <div class="accommodation-details">
-          <img [src]="'data:image/' + reservation.accommodation.imageType + ';base64,' + reservation.accommodation.imageBytes" alt="Accommodation main picture">
+          <img [src]="'data:image/' + reservation.imageType + ';base64,' + reservation.mainPictureBytes" alt="Accommodation main picture">
           <div class="info">
             <div class="basic-info">
               <span class="accommodation-name">{{reservation.accommodation.name}}</span>

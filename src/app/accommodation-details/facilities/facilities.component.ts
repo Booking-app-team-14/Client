@@ -23,5 +23,5 @@ export class FacilitiesComponent {
   ];
 
   */
-  @Input() facilities: Amenities[]=[];
+  @Input() facilities: any[]=[];
 }

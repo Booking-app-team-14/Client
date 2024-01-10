@@ -25,10 +25,9 @@
   transform: translateY(-3px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
-.facility-icon {
-  width: 32px;
-  height: 32px;
+.img {
+  width: 2.5rem;
+  height: 2.5rem;
   margin-right: 10px;
 }
 

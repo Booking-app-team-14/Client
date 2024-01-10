@@ -13,6 +13,11 @@ interface place {
   name: string;
   address: string;
   description: string;
+  id:number;
+}
+interface owner1 {
+  name: string,
+  picture: string
 }
 
 interface owner{
@@ -28,7 +33,7 @@ interface owner{
 })
 export class RoundUpDetailsComponent implements OnInit {
   @Input() place: place;
-  @Input() owner!: owner;
+  @Input() owner!: owner1;
   userAccount:any;
   owner1:Owner;
 

@@ -39,6 +39,10 @@ import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from "@angular/material/radio
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {JwtInterceptor} from "./jwt.interceptor";
 import { UpdateAccommodationComponent } from './update-accommodation/update-accommodation.component';
+import { OwnerReviewComponent } from './owner-review/owner-review.component';
+import { ReportModalComponent } from './report-modal/report-modal.component';
+import { DeleteReviewDialogComponent } from './delete-review-dialog/delete-review-dialog.component';
+import {MatDialogActions, MatDialogClose, MatDialogContent} from "@angular/material/dialog";
 import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component';
 import {MatSelectModule} from "@angular/material/select";
 import { OwnerReservationsComponent } from './owner-reservations/owner-reservations.component';
@@ -64,7 +68,12 @@ import { FavoriteComponent } from './favorite/favorite.component';
     UpdateAccommodationComponent,
     GuestReservationsComponent,
     OwnerReservationsComponent,
-    FavoriteComponent
+    FavoriteComponent,
+    UpdateAccommodationComponent,
+    OwnerReviewComponent,
+    ReportModalComponent,
+    DeleteReviewDialogComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -86,6 +95,11 @@ import { FavoriteComponent } from './favorite/favorite.component';
     MainPageModule,
     SearchPageModule,
     AccommodationDetailsModule,
+    SharedModule,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+    FormsModule,
     SharedModule,
     MatOptionModule,
     MatSelectModule

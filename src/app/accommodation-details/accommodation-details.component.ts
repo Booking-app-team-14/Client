@@ -16,8 +16,14 @@ export class AccommodationDetailsComponent implements OnInit {
   location: any;
   reservationRequirements: any;
   amenitiesList: AmenityDTO[] = [];
-  owner: { name: string, picture: string, pictureBytes:string } = { name: "Nick Jefferson", picture: 'assets/BG.png', pictureBytes:null };
+  owner: { name: string, picture: string } = { name: "Nick Jefferson", picture: 'assets/BG.png' };
+  //owner: { name: any, picture: string };
+  //ownerId: { ownerId: number };
   currentUser: any;
+  //owner: OwnerDTO | undefined;
+
+
+
   userAccount: any;
 
 
@@ -33,6 +39,16 @@ export class AccommodationDetailsComponent implements OnInit {
       this.accommodationService.getAccommodationById(id).subscribe(
         (data: AccommodationDTO) => {
           this.accommodation = data;
+          console.log(this.accommodation);
+          /*this.accommodationService.getOwnerByOwnerId(this.accommodation.owner_Id).subscribe(
+              (ownerData: OwnerDTO) => {
+                this.owner = ownerData;
+                console.log('Owner details:', this.owner);
+              },
+              (ownerError) => {
+                console.error('Error fetching owner details:', ownerError);
+              }
+          );*/
           this.images = this.accommodation.images.map((imageSrc: string) => {
             return {
               imageSrc: imageSrc,
@@ -40,12 +56,14 @@ export class AccommodationDetailsComponent implements OnInit {
             };
           });
 
-          this.amenitiesList = this.accommodation.amenities.map((amenity: AmenityDTO) => {
+          this.amenitiesList = this.accommodation.amenities.map((amenity: any) => {
             return {
               id: amenity.id,
               name: amenity.name,
               description: amenity.description,
-              icon: amenity.icon
+              icon: amenity.icon,
+              iconType:amenity.iconType,
+              iconBytes: amenity.iconBytes
             };
           });
 
@@ -77,7 +95,9 @@ export class AccommodationDetailsComponent implements OnInit {
             name: this.accommodation.name,
             address: this.accommodation.location.address,
             description: this.accommodation.description,
+            id: this.accommodation.id,
           };
+
 
           this.availableDates=[
             { id: 1, startDate: '2024-01-01', endDate: '2024-01-10', specialPrice: 120 },
@@ -94,7 +114,6 @@ export class AccommodationDetailsComponent implements OnInit {
             { id: 12, startDate: '2024-12-20', endDate: '2024-12-31', specialPrice: 180 }
           ];
 
-
           this.location = {
             address: this.accommodation.location.address,
             city: this.accommodation.location.city,
@@ -107,5 +126,4 @@ export class AccommodationDetailsComponent implements OnInit {
       );
     });
   }
-
 }

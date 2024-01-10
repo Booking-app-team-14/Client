@@ -1,41 +1,19 @@
-import { Component, ElementRef, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { isPlatformBrowser } from "@angular/common";
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-update-accommodation',
   templateUrl: './update-accommodation.component.html',
   styleUrl: './update-accommodation.component.css'
 })
-export class UpdateAccommodationComponent {
-
-  range: any = new FormGroup({
-    start: new FormControl({ value: '', disabled: true }),
-    end: new FormControl({ value: '', disabled: true }),
-  });
-
-  @ViewChild('startDateRef') startDateElement: ElementRef;
-  @ViewChild('endDateRef') endDateElement: ElementRef;
-
-  startDate: Date;
-  endDate: Date;
-
-  startDateChangeEvent(){
-    this.startDate = this.startDateElement.nativeElement.value;
-  }
-
-  endDateChangeEvent(){
-    this.endDate = this.endDateElement.nativeElement.value;
-  }
-
-  addRange() {
-    throw new Error('Method not implemented.');
-  }
+export class UpdateAccommodationComponent implements OnInit, AfterViewInit {
 
   imagesAlreadyUploaded: { url: string, file: File }[] = [];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private http: HttpClient) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private http: HttpClient, private activatedRoute: ActivatedRoute,) {
     // TODO: get details from server
 
     // get images from server and add them to imagesAlreadyUploaded
@@ -45,6 +23,14 @@ export class UpdateAccommodationComponent {
     // ...
   }
 
+  accommodationId: number;
+
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.accommodationId = +params['id'];
+    });
+  }
+  
   selectedImages: { url: string, file: File }[] = this.imagesAlreadyUploaded;
 
   handleImageUpload(event: any) {
@@ -58,9 +44,11 @@ export class UpdateAccommodationComponent {
     }
   }
 
-  onSubmit() {
-    // TODO: submit (change the accommodation details)
-    throw new Error('Method not implemented.');
+  removeImage(image: { url: string, file: File }) {
+    const index = this.selectedImages.indexOf(image);
+    if (index > -1) {
+      this.selectedImages.splice(index, 1);
+    }
   }
 
   enteredAddress: string = '';
@@ -73,6 +61,42 @@ export class UpdateAccommodationComponent {
         this.loadLeaflet();
       }, 0);
     }
+  }
+
+  name: string = '';
+  description: string = '';
+  type: string = '';
+  minNumberOfGuests: any;
+  maxNumberOfGuests: any;
+  cancellationDeadline: any;
+  price:number;
+  specialPrices: { startDate: any, endDate: any, amount: number }[] = [];
+
+  addSpecialPrice() {
+    this.specialPrices.push({
+      startDate: '',
+      endDate: '',
+      amount: null
+    });
+  }
+
+  removeSpecialPrice(index: number) {
+    this.specialPrices.splice(index, 1);
+  }
+
+  // TODO: get amenities from server
+  amenities = {
+    amenity1: false,
+    wifi: false,
+    jacuzzi: false,
+    gymCenter: false,
+    videoGames: false
+  };
+
+
+  onSubmit() {
+    // TODO: submit (change the accommodation details)
+    throw new Error('Method not implemented.');
   }
 
   private loadLeaflet() {
@@ -93,27 +117,20 @@ export class UpdateAccommodationComponent {
     L.marker([51.5, -0.09]).addTo(map)
       .bindPopup('A sample location.')
       .openPopup();
-
-    // Initialize marker without setting its location
     this.marker = L.marker([0, 0]).addTo(this.map);
   }
 
   locateOnMap() {
-    // Geocode the entered address to get its coordinates
-    // For simplicity, you can use a geocoding service/library like OpenCage Geocoding API
-    // Replace 'YOUR_API_KEY' with your actual API key
+
     const apiKey = '7234404387b94ae4bdc2c7d6bb31bf58';
     const geocodingUrl = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(this.enteredAddress)}&key=${apiKey}`;
 
     fetch(geocodingUrl)
       .then(response => response.json())
       .then(data => {
-        // Check if the geocoding was successful and has results
         if (data.results && data.results.length > 0) {
           const location = data.results[0].geometry;
           const { lat, lng } = location;
-
-          // Update the marker's location and reposition the map
           this.marker.setLatLng([lat, lng]);
           this.map.setView([lat, lng], 13);
         } else {

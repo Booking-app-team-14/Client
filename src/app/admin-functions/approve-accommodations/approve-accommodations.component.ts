@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-approve-accommodations',
@@ -27,7 +28,7 @@ export class ApproveAccommodationsComponent {
     }
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private _router: Router) {
 
     this.http.get('http://localhost:8080/api/accommodations/requests').subscribe({
       next: (accommodations: any[]) => {
@@ -42,7 +43,7 @@ export class ApproveAccommodationsComponent {
             month: 'long',
             year: 'numeric'
           });
-          this.accommodations[i].date = formatter.format(date);
+          this.accommodations[i].dateRequested = formatter.format(date);
           this.accommodations[i].postedAgo = this.getPostedAgo(date);
         }
 
@@ -117,8 +118,7 @@ export class ApproveAccommodationsComponent {
   }
 
   viewDetails(id: number) {
-    // TODO: open accommodation details page
-    alert("Accommodation " + id + " details!");
+    this._router.navigateByUrl('search/details/' + id);
   }
 
 }
