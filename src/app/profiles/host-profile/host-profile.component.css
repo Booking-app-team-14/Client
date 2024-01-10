@@ -112,7 +112,7 @@ input::placeholder{
 }
 
 .accommodation {
-  width: 35%;
+  width: 25rem;
   border-radius: 2rem;
   box-shadow: 0 0 2rem 0.05rem var(--color_gray_icon);
   padding: 1.5rem;

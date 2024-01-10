@@ -9,7 +9,7 @@
             (change)="handleImageUpload($event)">
         <div *ngIf="selectedImages" class="image-container" style="margin-top: 1rem;">
             <div *ngFor="let image of selectedImages" class="image-item">
-                <img [src]="image.url" alt="Selected Image" class="image-preview">
+                <img [src]="image.url" alt="Accommodation image" class="image-preview">
                 <button type="button" (click)="removeImage(image)" class="remove-image-btn">Remove</button>
             </div>
         </div>
@@ -39,22 +39,15 @@
                 name="maxNumberOfGuests">
         </div>
 
-        <fieldset class="amenities-fieldset">
-            <legend id="amenities" [(ngModel)]="amenities">Amenities:</legend>
-            <label class="checkbox-parking checkbox-label">
-            <input type="checkbox" value=4 [(ngModel)]="amenities.amenity1" name="amenity"> 
-                Free parking</label> <br>
-
-            <input type="checkbox" value=1 [(ngModel)]="amenities.wifi" name="wifi"> <label
-                class="checkbox-wifi checkbox-label">WI-FI </label>
-            <br>
-
-            <input type="checkbox" value=2 [(ngModel)]="amenities.jacuzzi" name="jacuzzi"> <label
-                class="checkbox-jacuzzi checkbox-label">Jacuzzi</label> <br>
-            <input type="checkbox" value=5 [(ngModel)]="amenities.gymCenter" name="gymCenter"> <label
-                class="checkbox-center checkbox-label">Gym center</label> <br>
-            <input type="checkbox" value=3 [(ngModel)]="amenities.videoGames" name="videoGames"> <label
-                class="checkbox-video checkbox-label">Video games</label>
+        <fieldset class="amenities-fieldset" #amenitiesFieldset>
+            <legend id="amenities">Amenities:</legend>
+            <ng-container *ngFor="let amenity of amenities">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="{{ amenity.id }}" value="{{ amenity.name }}" [checked]="amenity.checked">
+                    <img [src]="'data:image/' + amenity.iconType + ';base64,' + amenity.iconBytes" alt="Amenity Icon" class="amenity-icon" />
+                    {{ amenity.name }}
+                </label>
+            </ng-container>
         </fieldset>
 
         <div class="location-container">
@@ -85,8 +78,8 @@
 
             <fieldset class="availability-fieldset">
                 <legend>Define Price</legend>
-                <label><input type="radio" name="priceType" value="PerNight"> Per Night</label> <br>
-                <label><input type="radio" name="priceType" value="PerGuest"> Per Guest</label>
+                <label><input type="radio" name="priceType" value="PerNight" [(ngModel)]="selectedPriceType"> Per Night</label> <br>
+                <label><input type="radio" name="priceType" value="PerGuest" [(ngModel)]="selectedPriceType"> Per Guest</label>
             </fieldset>
             <label for="price">Default Price</label>
             <input type="number" id="price" [(ngModel)]="price" name="price" required>
@@ -104,7 +97,7 @@
                     <input type="date" [(ngModel)]="specialPrice.endDate" name="endDate{{i}}" required
                         format="yyyy-MM-dd">
                 </div>
-                <label id="specialPriceAmount">Price:</label>
+                <label id="specialPriceAmount">Special price (leave empty if default):</label>
                 <input type="number" [(ngModel)]="specialPrice.amount" name="amount{{i}}">
 
 
@@ -120,6 +113,9 @@
                 name="cancellationDeadline" required>
 
         </div>
+
+        <label for="message">Reason for updating:</label>
+        <textarea id="message" [(ngModel)]="message" name="message" style="resize: none;" required></textarea>
 
         <button type="button" (click)="onSubmit()" class="update-btn">Update Accommodation</button>
 
