@@ -25,6 +25,6 @@ export class OwnerService {
     }
 
     getOwnerByOwnerId(ownerId: number): Observable<OwnerDTO>{
-        return this.http.get<OwnerDTO>(`http://localhost:8080/api/accommodations/owners/{ownerId}`);
+        return this.http.get<OwnerDTO>(`http://localhost:8080/api/owners/{ownerId}`);
     }
 }

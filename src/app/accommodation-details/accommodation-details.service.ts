@@ -12,6 +12,10 @@ export class AccommodationDetailsService {
 
   constructor(private http: HttpClient) { }
 
+  getUserAccountById(userId: number): Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/api/users/${userId}`);
+  }
+
   getAccommodationById(id: number): Observable<AccommodationDTO>{
     return this.http.get<AccommodationDTO>(`http://localhost:8080/api/accommodations/${id}`);
   }
@@ -26,10 +30,10 @@ export class AccommodationDetailsService {
 
   //getOwnerByAccommodationId(id: number):
   getOwnerByAccommodationId(accommodationId: number): Observable<OwnerDTO>{
-    return this.http.get<OwnerDTO>(`http://localhost:8080/api/accommodations/{accommodationId}/owner`);
+    return this.http.get<OwnerDTO>(`http://localhost:8080/api/{accommodationId}/owner`);
   }
 
   getOwnerByOwnerId(ownerId: number): Observable<OwnerDTO>{
-    return this.http.get<OwnerDTO>(`http://localhost:8080/api/accommodations/owners/{ownerId}`);
+    return this.http.get<OwnerDTO>(`http://localhost:8080/api/owners/{ownerId}`);
   }
 }

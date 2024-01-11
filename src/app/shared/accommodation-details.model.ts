@@ -15,7 +15,7 @@ export interface AccommodationDTO {
   pricePerNight: number;
   pricePerGuest: boolean;
   cancellationDeadline: number;
-  owner_Id: number;
+  owner_Id:number;
 }
 export interface OwnerDTO {
   role:"OWNER";

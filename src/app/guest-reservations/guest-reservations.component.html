@@ -1,0 +1,80 @@
+<div class="container">
+  <h1>Reservation Requests</h1>
+
+  <div class="row">
+    <!-- Filter section on the left side -->
+    <div class="filter-section">
+      <label>Status</label>
+      <mat-radio-group [(ngModel)]="type">
+        <div class="radio-container">
+          <mat-radio-button value="fiber_sent">On Wait</mat-radio-button>
+          <mat-radio-button value="fiber_approved">Approved</mat-radio-button>
+          <mat-radio-button value="fiber_declined">Declined</mat-radio-button>
+        </div>
+      </mat-radio-group>
+
+      <div class="date-filter">
+        <label for="startDate">Start Date</label>
+        <input type="date" id="startDate" [(ngModel)]="startDateFilter" (change)="updateEndDateMin()">
+
+        <label for="endDate">End Date</label>
+        <input type="date" id="endDate" [(ngModel)]="endDateFilter" [min]="minEndDate">
+      </div>
+
+      <label for="accommodationName">Accommodation Name</label>
+      <input type="text" id="accommodationName" [(ngModel)]="accommodationNameFilter" (keyup)="applyAccommodationFilter()" placeholder="Enter accommodation name">
+    </div>
+  </div>
+  <!-- Space between filter and cards -->
+  <div class="filter-card-divider"></div>
+
+  <div class="card-container">
+    <ng-container *ngFor="let reservation of reservations">
+      <div *ngIf="reservation.requestStatus === type" class="reservation-card" id="card-{{reservation.id}}">
+        <div class="header">
+          <img [src]="'data:image/' + reservation.userImageType + ';base64,' + reservation.userProfilePictureBytes" alt="Owner profile picture">
+          <div class="owner-details">
+            <span class="username">{{reservation.userUsername}}</span>
+            <span class="date">({{reservation.dateRequested}})</span>
+          </div>
+          <mat-icon>{{reservation.requestStatus}}</mat-icon>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="accommodation-details">
+          <img [src]="'data:image/' + reservation.imageType + ';base64,' + reservation.mainPictureBytes" alt="Accommodation main picture">
+          <div class="info">
+            <div class="basic-info">
+              <span class="accommodation-name">{{reservation.accommodation.name}}</span>
+              <br>
+              <span class="accommodation-type">{{reservation.accommodation.type}}</span>
+              <div class="stars">
+                <ng-container *ngFor="let star of [].constructor(reservation.accommodation.stars)">
+                  {{ reservation.accommodation.rating }}
+                  <mat-icon>star</mat-icon>
+                </ng-container>
+              </div>
+            </div>
+            <div class="additional-info">
+              <div class="dates">
+                <span><strong>From:</strong> {{ reservation.startDate | date: 'mediumDate' }}</span>
+                <span><strong>To:</strong> {{ reservation.endDate | date: 'mediumDate' }}</span>
+              </div>
+              <div class="price-guests">
+                <span><strong>Price:</strong> {{ reservation.totalPrice }}</span>
+                <span><strong>Guests:</strong> {{ reservation.numberOfGuests }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="reject">Reject</button>
+          <button class="approve">Approve</button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+</div>

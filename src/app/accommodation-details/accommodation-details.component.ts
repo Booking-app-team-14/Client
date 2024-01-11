@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AccommodationDetailsService } from './accommodation-details.service';
-import {AccommodationDTO, AmenityDTO, AvailabilityDTO, OwnerDTO} from '../shared/accommodation-details.model';
+import {AccommodationDTO, AmenityDTO, AvailabilityDTO} from '../shared/accommodation-details.model';
 
 @Component({
   selector: 'app-accommodation-details',
@@ -24,6 +24,7 @@ export class AccommodationDetailsComponent implements OnInit {
 
 
 
+  userAccount: any;
 
 
   constructor(
@@ -31,30 +32,6 @@ export class AccommodationDetailsComponent implements OnInit {
     private accommodationService: AccommodationDetailsService
   ) {}
 
- /* getOwnerByAccommodationId(accommodationId: number): void {
-    this.accommodationService.getOwnerByAccommodationId(accommodationId).subscribe(
-        (data: any) => {
-          this.owner = data;
-          console.log('Owner details:', this.owner);
-        },
-        (error) => {
-          console.error('Error fetching owner details:', error);
-        }
-    )
-  }
-*/
-
-  /*getOwnerByOwnerId(ownerId: number): void {
-    this.accommodationService.getOwnerByOwnerId(ownerId).subscribe(
-        (data: OwnerDTO) => {
-          this.owner = data;
-          console.log('Owner details:', this.owner);
-        },
-        (error) => {
-          console.error('Error fetching owner details:', error);
-        }
-    );
-  }*/
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const id = +params['id'];
@@ -79,12 +56,14 @@ export class AccommodationDetailsComponent implements OnInit {
             };
           });
 
-          this.amenitiesList = this.accommodation.amenities.map((amenity: AmenityDTO) => {
+          this.amenitiesList = this.accommodation.amenities.map((amenity: any) => {
             return {
               id: amenity.id,
               name: amenity.name,
               description: amenity.description,
-              icon: amenity.icon
+              icon: amenity.icon,
+              iconType:amenity.iconType,
+              iconBytes: amenity.iconBytes
             };
           });
 
@@ -99,14 +78,20 @@ export class AccommodationDetailsComponent implements OnInit {
 
           this.reservationRequirements = {
             accommodationId:this.accommodation.id,
+            ownerId:this.accommodation.owner_Id,
+            accommodationName:this.accommodation.name,
+            accommodationType:this.accommodation.type,
+            accommodationRating:this.accommodation.rating,
             pricePerNight:this.accommodation.pricePerNight,
             minGuests:this.accommodation.minNumberOfGuests,
             maxGuests:this.accommodation.maxNumberOfGuests,
             pricePerGuest:this.accommodation.pricePerGuest,
             cancellationDeadline:this.accommodation.cancellationDeadline,
           };
+          console.log(this.reservationRequirements);
 
           this.places = {
+            ownerId:this.accommodation.owner_Id,
             name: this.accommodation.name,
             address: this.accommodation.location.address,
             description: this.accommodation.description,

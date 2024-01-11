@@ -14,6 +14,15 @@
         <img [src]="'data:image/' + apartment.imageType + ';base64,' + apartment.imageBytes" alt="avatar">
       </div>
       <div class="card-details">
+        <ng-container *ngIf="userRole === 'guest'">
+        <mat-icon
+          class="favorite-icon"
+          [class.filled]="apartment.isFavorite"
+          (click)="toggleFavorite(apartment)"
+        >
+          {{ apartment.isFavorite ? 'favorite' : 'favorite_border' }}
+        </mat-icon>
+          </ng-container>
         <div class="card-name">{{ apartment.name }}</div>
         <div class="card-rating" color= var(--color_primary_blue);>
           ★  {{ apartment.rating }}   ({{ apartment.id }} reviews)
@@ -31,4 +40,5 @@
       {{ page }}
     </button>
   </div>
+</div>
 </div>

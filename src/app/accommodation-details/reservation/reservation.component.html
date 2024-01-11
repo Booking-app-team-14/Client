@@ -1,20 +1,22 @@
+<ng-container *ngIf="userRole === 'guest'">
 <div class="reservation-container">
   <h2>Make a Reservation</h2>
 
   <!-- Date Selection -->
   <div class="date-selection">
     <label for="check-in">Check-in:</label>
-    <input type="date" id="check-in" name="check-in" [(ngModel)]="defaultCheckInDate" [attr.min]="getTodayDate()" (change)="updateCheckOutMinDate()">
+    <input type="date" id="check-in" name="check-in" [(ngModel)]="defaultCheckInDate" [attr.min]="getTodayDate()"
+           [ngModelOptions]="{standalone: true}" (change)="updateCheckOutMinDate()" [ngClass]="{'unavailable': !isDateAvailable(defaultCheckInDate)}">
 
     <label for="check-out">Check-out:</label>
-    <input type="date" id="check-out" name="check-out" [(ngModel)]="defaultCheckOutDate" [attr.min]="defaultCheckInDate" (change)="validateDates()">
-  </div>
+    <input type="date" id="check-out" name="check-out" [(ngModel)]="defaultCheckOutDate" [attr.min]="defaultCheckInDate"
+           [ngModelOptions]="{standalone: true}" (change)="validateDates()" [ngClass]="{'unavailable': !isDateAvailable(defaultCheckOutDate)}"> </div>
 
   <!-- Guest Selection -->
   <div class="guest-selection">
     <label for="guests">Guests:</label>
-    <input type="number" #guestsInput id="guests" name="guests" [attr.min]="reservationRequirements.minGuests"
-           [attr.max]="reservationRequirements.maxGuests" [value]="reservationRequirements.minGuests"
+    <input type="number" #guestsInput id="guests" name="guests" [attr.min]="reservationRequirement.minGuests"
+           [attr.max]="reservationRequirement.maxGuests" [value]="reservationRequirement.minGuests"
            (change)="onGuestsChange()" (keyup)="onGuestsChange()" (keydown)="onGuestsChange()" (input)="onGuestsChange()">
   </div>
 
@@ -23,7 +25,8 @@
 
   <!-- Price Details -->
   <div class="price-details">
-    <p>Price per night: ${{reservationRequirements.pricePerNight}}</p>
+    <p>Price per night: ${{avail[0].specialPrice}}</p>
     <p>Total price:  ${{ totalPrice }} </p>
   </div>
 </div>
+</ng-container>

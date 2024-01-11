@@ -17,7 +17,7 @@ import { ProfileComponent } from './profiles/profile/profile.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatNativeDateModule} from '@angular/material/core';
+import {MatNativeDateModule, MatOptionModule} from '@angular/material/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -43,6 +43,10 @@ import { OwnerReviewComponent } from './owner-review/owner-review.component';
 import { ReportModalComponent } from './report-modal/report-modal.component';
 import { DeleteReviewDialogComponent } from './delete-review-dialog/delete-review-dialog.component';
 import {MatDialogActions, MatDialogClose, MatDialogContent} from "@angular/material/dialog";
+import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component';
+import {MatSelectModule} from "@angular/material/select";
+import { OwnerReservationsComponent } from './owner-reservations/owner-reservations.component';
+import { FavoriteComponent } from './favorite/favorite.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +65,10 @@ import {MatDialogActions, MatDialogClose, MatDialogContent} from "@angular/mater
     CreateAccommodationComponent,
     ApproveAccommodationsComponent,
     VerificationComponent,
+    UpdateAccommodationComponent,
+    GuestReservationsComponent,
+    OwnerReservationsComponent,
+    FavoriteComponent,
     UpdateAccommodationComponent,
     OwnerReviewComponent,
     ReportModalComponent,
@@ -91,7 +99,10 @@ import {MatDialogActions, MatDialogClose, MatDialogContent} from "@angular/mater
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
-
+    FormsModule,
+    SharedModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   providers: [
     provideClientHydration(),

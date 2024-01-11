@@ -1,27 +1,73 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {Accommodation} from "../../shared/accommodation.model";
 import {SearchPageService} from "../search-page.service";
 import {Observable, Subscription} from "rxjs";
 import {FilterService} from "../../shared/filter.service";
+import {UserService} from "../../login/user.service";
+import {ReservationService} from "../../accommodation-details/reservation/reservation.service";
 
 @Component({
   selector: 'app-card-list',
   templateUrl: './card-list.component.html',
   styleUrl: './card-list.component.css'
 })
-export class CardListComponent {
-  constructor(private router: Router, private service: SearchPageService, private filterService:FilterService) {
-  }
+export class CardListComponent implements OnInit {
   apartmentsPerPage = 4;
-  apartments: Accommodation[] = [];
+  @Input() apartments: Accommodation[] = [];
   subscription: Subscription;
   originalApartments: Accommodation[] = []
   filteredAccommodations: Accommodation[] = [];
   currentPage = 1;
   isSortedByPrice = false;
   isSortedByRating = false;
+  isFavorite: boolean = false;
+  id:number;
+  userRole: string = '';
+  constructor(private router: Router, private service: SearchPageService, private filterService:FilterService,
+              private userService: UserService, private reservationService: ReservationService) {
+    this.userService.userRole$.subscribe(role => {
+      this.userRole = role;
+    });
 
+  }
+
+
+  toggleFavorite(apartment: any): void {
+    apartment.isFavorite = !apartment.isFavorite;
+
+    this.reservationService.getGuestId().subscribe(
+      (userId: number) => {
+        this.id = userId;
+        console.log(apartment.id);
+        if (apartment.isFavorite) {
+          this.service.addFavoriteAccommodation(this.id,apartment.id).subscribe(
+            (response) => {
+              console.log('Accommodation added to favourites', response);
+            },
+            (error) => {
+              console.error('Error while adding:', error);
+
+            }
+          );
+        } else {
+          this.service.removeFavoriteAccommodation(this.id,apartment.id).subscribe(
+            (response) => {
+              console.log('Accommodation removed', response);
+
+            },
+            (error) => {
+              console.error('Error while removing:', error);
+
+            }
+          );
+        }
+      },
+      (error) => {
+        console.error('Error fetching user ID:', error);
+      }
+    );
+  }
   ngOnInit(): void {
     this.getAccommodations();
     this.listenToSearchQueryChanges();
@@ -46,7 +92,6 @@ export class CardListComponent {
       if (query.trim().length === 0) {
         this.getAccommodations();
       } else {
-
         this.service.searchAccommodations(query).subscribe({
           next: (accommodations: Accommodation[]) => {
             this.apartments = accommodations;
