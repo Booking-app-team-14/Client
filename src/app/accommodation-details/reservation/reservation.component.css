@@ -35,9 +35,8 @@
 .reserve-button:hover {
   border-color: #007bff;
 }
-
 input[type='date'].unavailable {
-  color: #999;
+  color: rgba(153, 153, 153, 0.69);
 }
 .reserve-button {
   background-color: var(--color_primary_blue);

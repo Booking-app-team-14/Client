@@ -114,8 +114,9 @@ export class ReservationComponent implements OnInit {
   }
 
   updateCheckOutMinDate(): void {
-    this.defaultCheckOutDate = this.defaultCheckInDate;
-
+    const checkIn = new Date(this.defaultCheckInDate);
+    const nextDay = new Date(checkIn.getTime() + 24 * 60 * 60 * 1000);
+    this.defaultCheckOutDate = this.formatDate(nextDay);
   }
 
   validateDates(): void {
@@ -124,19 +125,22 @@ export class ReservationComponent implements OnInit {
     //console.log(this.availabilities);
     if (checkOut < checkIn || checkOut.getTime() === checkIn.getTime()) {
       alert('Check-out date should be after the check-in date');
-      this.defaultCheckOutDate = this.defaultCheckInDate;
+      const nextDay = new Date(checkIn.getTime() + 24 * 60 * 60 * 1000);
+      this.defaultCheckOutDate = this.formatDate(nextDay);
     }
 
 
     const oneDayInMillis = 24 * 60 * 60 * 1000;
     if ((checkOut.getTime() - checkIn.getTime()) < oneDayInMillis) {
       alert('Minimum reservation duration is one night');
-      this.defaultCheckOutDate = this.defaultCheckInDate;
+      const nextDay = new Date(checkIn.getTime() + 24 * 60 * 60 * 1000);
+      this.defaultCheckOutDate = this.formatDate(nextDay);
     }
 
     if (!this.isDateRangeAvailable(this.defaultCheckInDate, this.defaultCheckOutDate)) {
       alert('Selected date range is not available');
-      this.defaultCheckOutDate = this.defaultCheckInDate;
+      const nextDay = new Date(checkIn.getTime() + 24 * 60 * 60 * 1000);
+      this.defaultCheckOutDate = this.formatDate(nextDay);
     }
 
       this.calculateTotalPrice();
@@ -158,7 +162,13 @@ export class ReservationComponent implements OnInit {
   }
 
   isDateAvailable(dateToCheck: string): boolean {
-    return this.availableDates.some(date => this.isSameDate(dateToCheck, date.startDate));
+    const checkDate = new Date(dateToCheck);
+
+    return this.availableDates.some(dateRange => {
+      const startDate = new Date(dateRange.startDate);
+      const endDate = new Date(dateRange.endDate);
+      return startDate <= checkDate && checkDate <= endDate;
+    });
   }
 
   isSameDate(date1: string, date2: string): boolean {
