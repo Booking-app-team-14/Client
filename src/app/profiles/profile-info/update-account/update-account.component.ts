@@ -152,7 +152,6 @@ export class UpdateAccountComponent {
     console.log(this.updatedUser);
     this.http.put(`http://localhost:8080/api/users/${this.userId}`, this.updatedUser, { responseType: 'text' }).subscribe({
       next: (r: any) => {
-        alert("OK!");
         this._router.navigateByUrl("/profile");
       },
       error: (err) => {

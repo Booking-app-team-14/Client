@@ -236,18 +236,17 @@ export class UpdateAccommodationComponent implements OnInit, AfterViewInit {
 
     console.log(availabilityData);
 
-    // TODO: submit (change the accommodation details)
-
     this.http.put(`http://localhost:8080/api/accommodations/update`, accommodationData).subscribe(
       (res) => {
-        alert('Accommodation updated successfully.');
       },
       (err) => {
         alert('An error occurred while updating the accommodation.');
       }
     );
 
-    this._router.navigateByUrl('profile');
+    this._router.navigate(['/profile'], { skipLocationChange: true }).then(() => {
+      this._router.navigate(['/profile']);
+    });
 
   }
 

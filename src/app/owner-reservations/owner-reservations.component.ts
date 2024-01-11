@@ -12,27 +12,13 @@ export class OwnerReservationsComponent {
   type: string = "fiber_sent";
 
   reservations: any[];
+  filteredReservations: any[];
   //private id: number;
   private username:string;
   accommodationNameFilter: string = '';
   startDateFilter: Date;
   endDateFilter: Date;
   minEndDate: string;
-
-  getPostedAgo(date: Date) {
-    const now = Date.now();
-    const difference = now - date.getTime();
-    const seconds = difference / 1000;
-    if (seconds < 60) {
-      return "just now";
-    } else if (seconds < 60 * 60) {
-      return Math.floor(seconds / 60) + " minutes ago";
-    } else if (seconds < 24 * 60 * 60) {
-      return Math.floor(seconds / (60 * 60)) + " hours ago";
-    } else {
-      return Math.floor(seconds / (24 * 60 * 60)) + " days ago";
-    }
-  }
 
   constructor(private http: HttpClient,private reservationService:ReservationService) {
   }
@@ -56,7 +42,7 @@ export class OwnerReservationsComponent {
         this.reservations = reservations;
         for (let i = 0; i < this.reservations.length; i++) {
           if(this.reservations[i].requestStatus == "SENT") this.reservations[i].requestStatus = "fiber_sent";
-          else if(this.reservations[i].requestStatus == "APPROVED") this.reservations[i].requestStatus = "fiber_approved";
+          else if(this.reservations[i].requestStatus == "ACCEPTED") this.reservations[i].requestStatus = "fiber_approved";
           else if(this.reservations[i].requestStatus == "DECLINED") this.reservations[i].requestStatus = "fiber_declined";
           const date = new Date(parseInt(this.reservations[i].dateRequested) * 1000);
           const formatter = new Intl.DateTimeFormat('en-US', {
@@ -65,8 +51,9 @@ export class OwnerReservationsComponent {
             year: 'numeric'
           });
           this.reservations[i].date = formatter.format(date);
-          this.reservations[i].postedAgo = this.getPostedAgo(date);
           this.getDetailsForReservations();
+          this.filteredReservations = this.reservations;
+          this.applyFilters();
         }
 
       },
@@ -102,15 +89,14 @@ export class OwnerReservationsComponent {
     }
   }
 
-
-  applyAccommodationFilter(): void {
+  applyAccommodationNameFilter(): void {
     if (this.accommodationNameFilter) {
       const filterValue = this.accommodationNameFilter.toLowerCase();
-      this.reservations = this.reservations.filter(reservation =>
+      this.filteredReservations = this.reservations.filter(reservation =>
         reservation.accommodation.name.toLowerCase().includes(filterValue)
       );
     } else {
-      this.fetchReservations();
+      this.filteredReservations = this.reservations;
     }
   }
 
@@ -119,34 +105,18 @@ export class OwnerReservationsComponent {
       const minDate = new Date(this.startDateFilter);
       minDate.setDate(minDate.getDate() + 1);
       this.minEndDate = minDate.toISOString().split('T')[0];
-      this.filterReservations();
     } else {
       this.minEndDate = null;
-      this.filterReservations();
     }
   }
+
   filterReservations(): void {
-    this.reservations = this.reservations.filter((reservation) => {
+    this.applyAccommodationNameFilter();
+    this.filteredReservations = this.filteredReservations.filter((reservation) => {
       // Provera za requestStatus
-      if (this.type && reservation.requestStatus !== this.type) {
-        return false;
-      }
-
-      // Provera za startDateFilter
-      if (this.startDateFilter && new Date(reservation.startDate) < new Date(this.startDateFilter)) {
-        return false;
-      }
-
-      // Provera za endDateFilter
-      if (this.endDateFilter && new Date(reservation.endDate) > new Date(this.endDateFilter)) {
-        return false;
-      }
-
-      // Provera za accommodationNameFilter
-      if (this.accommodationNameFilter && !reservation.accommodation.name.toLowerCase().includes(this.accommodationNameFilter.toLowerCase())) {
-        return false;
-      }
-
+      // if (this.type && reservation.requestStatus !== this.type) {
+      //   return false;
+      // }
       // Provera za opseg datuma
       if (this.startDateFilter && this.endDateFilter) {
         const resStartDate = new Date(reservation.startDate);
@@ -157,8 +127,40 @@ export class OwnerReservationsComponent {
           return false;
         }
       }
-
       return true;
     });
   }
+
+  applyFilters(): void {
+    this.filterReservations();
+  }
+
+  approve(reservationId: number) {
+    this.http.put(`http://localhost:8080/api/requests/approve/${reservationId}`,{}).subscribe({
+      next: () => {
+        alert("Request approved!");
+        this.fetchReservations();
+      },
+      error: (err) => {
+        alert("Request approved!");
+        this.fetchReservations();
+        console.error(err);
+      }
+    });
+  }
+
+  reject(reservationId: number) {  
+    this.http.put(`http://localhost:8080/api/requests/reject/${reservationId}`, {}).subscribe({
+      next: () => {
+        alert("Request rejected!");
+        this.fetchReservations();
+      },
+      error: (err) => {
+        alert("Request rejected!");
+        this.fetchReservations();
+        console.error(err);
+      }
+    });
+  }
+
 }
