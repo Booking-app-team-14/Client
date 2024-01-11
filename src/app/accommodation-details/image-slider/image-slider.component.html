@@ -1,6 +1,7 @@
 <div *ngIf= "images && images.length > 0" class="carousel-container">
   <img *ngFor= "let image of images; let i = index"
-       src="assets/mainPagePicture.jpg" [alt]="image.imageAlt"
+
+      [src]="'data:image/' + image.imageSrc + ';base64,' + image.imageAlt" alt="ACCOMMODATION"
     [ngClass]="{'image-active':selectedIndex === i}"
        class="fade"
   >
