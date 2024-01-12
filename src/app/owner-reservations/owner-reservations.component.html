@@ -22,19 +22,22 @@
       </div>
 
       <label for="accommodationName">Accommodation Name</label>
-      <input type="text" id="accommodationName" [(ngModel)]="accommodationNameFilter" (keyup)="applyAccommodationFilter()" placeholder="Enter accommodation name">
+      <input type="text" id="accommodationName" [(ngModel)]="accommodationNameFilter" placeholder="Enter accommodation name">
+    
+      <button class="filter-button" (click)="applyFilters()">Apply</button>
+
     </div>
   </div>
-  <!-- Space between filter and cards -->
+
   <div class="filter-card-divider"></div>
 
   <div class="card-container">
-    <ng-container *ngFor="let reservation of reservations">
+    <ng-container *ngFor="let reservation of filteredReservations">
       <div *ngIf="reservation.requestStatus === type" class="reservation-card" id="card-{{reservation.id}}">
         <div class="header">
           <img [src]="'data:image/' + reservation.userImageType + ';base64,' + reservation.userProfilePictureBytes" alt="Guest profile picture">
           <div class="owner-details">
-            <span class="username">{{reservation.user.username}}</span>
+            <span class="username">{{reservation.userUsername}}</span>
             <span class="date">({{reservation.dateRequested}}), {{reservation.user.numberOfCancellations}} cancellations</span>
           </div>
           <mat-icon>{{reservation.requestStatus}}</mat-icon>
@@ -43,15 +46,16 @@
         <div class="divider"></div>
 
         <div class="accommodation-details">
-          <img [src]="'data:image/' + reservation.imageType + ';base64,' + reservation.mainPictureBytes" alt="Accommodation main picture">
-          <div class="info">
+          <div class="image-container">
+            <img [src]="'data:image/' + reservation.imageType + ';base64,' + reservation.mainPictureBytes" alt="Accommodation main picture">
+          </div>
+            <div class="info">
             <div class="basic-info">
               <span class="accommodation-name">{{reservation.accommodation.name}}</span>
               <br>
               <span class="accommodation-type">{{reservation.accommodation.type}}</span>
               <div class="stars">
-                <ng-container *ngFor="let star of [].constructor(reservation.accommodation.stars)">
-                  {{ reservation.accommodation.rating }}
+                <ng-container *ngFor="let star of [].constructor(reservation.stars)">
                   <mat-icon>star</mat-icon>
                 </ng-container>
               </div>
@@ -62,17 +66,20 @@
                 <span><strong>To:</strong> {{ reservation.endDate | date: 'mediumDate' }}</span>
               </div>
               <div class="price-guests">
-                <span><strong>Price:</strong> {{ reservation.totalPrice }}</span>
+                <span><strong>Price:</strong> {{ reservation.totalPrice }}RSD</span>
                 <span><strong>Guests:</strong> {{ reservation.numberOfGuests }}</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="actions">
-          <button class="reject">Reject</button>
-          <button class="approve">Approve</button>
-        </div>
+        <ng-container *ngIf="reservation.requestStatus === 'fiber_sent'">
+          <div class="actions">
+            <button class="reject" (click)="reject(reservation.id)">Reject</button>
+            <button class="approve" (click)="approve(reservation.id)">Approve</button>
+          </div>
+        </ng-container>
+
       </div>
     </ng-container>
   </div>
