@@ -42,7 +42,7 @@ import { UpdateAccommodationComponent } from './update-accommodation/update-acco
 import { OwnerReviewComponent } from './owner-review/owner-review.component';
 import { ReportModalComponent } from './report-modal/report-modal.component';
 import { DeleteReviewDialogComponent } from './delete-review-dialog/delete-review-dialog.component';
-import {MatDialogActions, MatDialogClose, MatDialogContent} from "@angular/material/dialog";
+import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component';
 import {MatSelectModule} from "@angular/material/select";
 import { OwnerReservationsComponent } from './owner-reservations/owner-reservations.component';
@@ -75,35 +75,36 @@ import { FavoriteComponent } from './favorite/favorite.component';
     DeleteReviewDialogComponent,
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    ReactiveFormsModule,
-    SlickCarouselModule,
-    NgOptimizedImage,
-    FormsModule,
-    MatRadioModule,
-    HttpClientModule,
-    MatSnackBarModule,
-    MainPageModule,
-    SearchPageModule,
-    AccommodationDetailsModule,
-    SharedModule,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose,
-    FormsModule,
-    SharedModule,
-    MatOptionModule,
-    MatSelectModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        ReactiveFormsModule,
+        SlickCarouselModule,
+        NgOptimizedImage,
+        FormsModule,
+        MatRadioModule,
+        HttpClientModule,
+        MatSnackBarModule,
+        MainPageModule,
+        SearchPageModule,
+        AccommodationDetailsModule,
+        SharedModule,
+        MatDialogContent,
+        MatDialogActions,
+        MatDialogClose,
+        FormsModule,
+        SharedModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatDialogTitle
+    ],
   providers: [
     provideClientHydration(),
 

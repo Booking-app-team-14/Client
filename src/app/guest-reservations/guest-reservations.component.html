@@ -7,23 +7,22 @@
       <label>Status</label>
       <mat-radio-group [(ngModel)]="type">
         <div class="radio-container">
-          <mat-radio-button value="fiber_sent">On Wait</mat-radio-button>
-          <mat-radio-button value="fiber_approved">Approved</mat-radio-button>
-          <mat-radio-button value="fiber_declined">Declined</mat-radio-button>
+          <mat-radio-button value="sent">On Wait</mat-radio-button>
+          <mat-radio-button value="approved">Approved</mat-radio-button>
+          <mat-radio-button value="declined">Declined</mat-radio-button>
         </div>
       </mat-radio-group>
 
       <div class="date-filter">
         <label for="startDate">Start Date</label>
         <input type="date" id="startDate" [(ngModel)]="startDateFilter" (change)="updateEndDateMin()">
-
-        <label for="endDate">End Date</label>
-        <input type="date" id="endDate" [(ngModel)]="endDateFilter" [min]="minEndDate">
       </div>
 
       <label for="accommodationName">Accommodation Name</label>
       <input type="text" id="accommodationName" [(ngModel)]="accommodationNameFilter" (keyup)="applyAccommodationFilter()" placeholder="Enter accommodation name">
+      <button  class="cancel" (click)="clearFilters()">Clear Filters</button>
     </div>
+
   </div>
   <!-- Space between filter and cards -->
   <div class="filter-card-divider"></div>
@@ -70,8 +69,10 @@
         </div>
 
         <div class="actions">
-          <button class="reject">Reject</button>
-          <button class="approve">Approve</button>
+          <ng-container *ngIf="type !== 'declined'">
+          <button class="cancel" (click)="openCancelDialog(reservation.id)">CANCEL</button>
+          </ng-container>
+          <span class="request">STATUS: {{ reservation.requestStatus }}</span>
         </div>
       </div>
     </ng-container>

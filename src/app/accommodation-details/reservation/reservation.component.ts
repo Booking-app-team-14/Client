@@ -35,8 +35,8 @@ export class ReservationComponent implements OnInit {
   @Input() availabilities: any[];
   private userAccount:any
   avail:any[]=[
-    { id: 1, startDate: '2024-01-01', endDate: '2024-01-10', specialPrice: 120 },
-    { id: 2, startDate: '2024-01-11', endDate: '2024-01-20', specialPrice: 140 },
+    { id: 1, startDate: '2024-01-01', endDate: '2024-01-09', specialPrice: 120 },
+    { id: 2, startDate: '2024-01-11', endDate: '2024-01-12', specialPrice: 140 },
     { id: 3, startDate: '2024-01-21', endDate: '2024-01-31', specialPrice: 125},
     { id: 4, startDate: '2024-02-01', endDate: '2024-02-10', specialPrice: 130 },
     { id: 5, startDate: '2024-02-11', endDate: '2024-02-20', specialPrice: 135 },
@@ -50,7 +50,7 @@ export class ReservationComponent implements OnInit {
   @Input() reservationRequirement: any;
   defaultCheckInDate: string;
   defaultCheckOutDate: string;
-  totalPrice: number = 0;
+  totalPrice: number = this.avail[0].specialPrice;
   private guestId: number;
   availableDates: any[] = [];
   userRole: string ='';
@@ -115,8 +115,7 @@ export class ReservationComponent implements OnInit {
 
   updateCheckOutMinDate(): void {
     const checkIn = new Date(this.defaultCheckInDate);
-    const nextDay = new Date(checkIn.getTime() + 24 * 60 * 60 * 1000);
-    this.defaultCheckOutDate = this.formatDate(nextDay);
+    this.defaultCheckOutDate = this.defaultCheckInDate;
   }
 
   validateDates(): void {
@@ -125,22 +124,14 @@ export class ReservationComponent implements OnInit {
     //console.log(this.availabilities);
     if (checkOut < checkIn || checkOut.getTime() === checkIn.getTime()) {
       alert('Check-out date should be after the check-in date');
-      const nextDay = new Date(checkIn.getTime() + 24 * 60 * 60 * 1000);
-      this.defaultCheckOutDate = this.formatDate(nextDay);
+      this.defaultCheckOutDate = this.defaultCheckInDate;
     }
 
-
-    const oneDayInMillis = 24 * 60 * 60 * 1000;
-    if ((checkOut.getTime() - checkIn.getTime()) < oneDayInMillis) {
-      alert('Minimum reservation duration is one night');
-      const nextDay = new Date(checkIn.getTime() + 24 * 60 * 60 * 1000);
-      this.defaultCheckOutDate = this.formatDate(nextDay);
-    }
 
     if (!this.isDateRangeAvailable(this.defaultCheckInDate, this.defaultCheckOutDate)) {
       alert('Selected date range is not available');
-      const nextDay = new Date(checkIn.getTime() + 24 * 60 * 60 * 1000);
-      this.defaultCheckOutDate = this.formatDate(nextDay);
+
+      this.defaultCheckOutDate = this.defaultCheckInDate;
     }
 
       this.calculateTotalPrice();
@@ -171,9 +162,6 @@ export class ReservationComponent implements OnInit {
     });
   }
 
-  isSameDate(date1: string, date2: string): boolean {
-    return date1 === date2;
-  }
 
   calculateTotalPrice(): void {
     const checkIn = new Date(this.defaultCheckInDate);
