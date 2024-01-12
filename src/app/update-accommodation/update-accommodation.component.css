@@ -92,8 +92,22 @@
     background-color: #f0f0f0;
   }
 
-  .amenities-fieldset {
+  .amenities-fieldset, .confirmation-fieldset {
     padding: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .confirmation-fieldset fieldset {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  .confirmation-fieldset input {
+    margin-right: 1rem !important;
   }
   
   button {
@@ -129,9 +143,10 @@
   
   .location-container {
     width: 100%;
-    border: 5px solid #ddd;
+    border: 2px solid #ddd;
     border-radius: 10px;
     overflow: hidden;
+    margin-bottom: 10px;
   }
   
   .location-header {
@@ -144,7 +159,7 @@
   }
   
   .location-sign {
-    font-size: 24px;
+    font-size: 22px;
     margin-right: 10px;
   }
   
@@ -153,7 +168,8 @@
   }
   
   .map-frame {
-    padding: 15px;
+    margin: 15px;
+    margin-bottom: 0;
     border: 2px solid black;
   }
   
@@ -173,6 +189,7 @@
 
   #enteredAddress {
     margin-bottom: 0;
+    width: 20rem !important;
   }
 
   .input-button-container {
@@ -195,7 +212,6 @@
     color: var(--color_white);
   }
   .availability-container {
-    margin-top: 20px;
     border: 1px solid #ccc;
     padding: 15px;
     border-radius: 5px;
