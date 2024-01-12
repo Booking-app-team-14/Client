@@ -10,7 +10,6 @@ import { FacilitiesComponent } from './facilities/facilities.component';
 import {AccommodationDetailsComponent} from "./accommodation-details.component";
 import {FormsModule} from "@angular/forms";
 import {RouterLink} from "@angular/router";
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 
@@ -39,7 +38,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
         CommonModule,
         FormsModule,
         RouterLink,
-      BsDatepickerModule.forRoot(),
 
     ]
 })

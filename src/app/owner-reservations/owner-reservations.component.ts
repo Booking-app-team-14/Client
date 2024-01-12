@@ -113,10 +113,6 @@ export class OwnerReservationsComponent {
   filterReservations(): void {
     this.applyAccommodationNameFilter();
     this.filteredReservations = this.filteredReservations.filter((reservation) => {
-      // Provera za requestStatus
-      // if (this.type && reservation.requestStatus !== this.type) {
-      //   return false;
-      // }
       // Provera za opseg datuma
       if (this.startDateFilter && this.endDateFilter) {
         const resStartDate = new Date(reservation.startDate);
