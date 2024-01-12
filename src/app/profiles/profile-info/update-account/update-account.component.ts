@@ -15,6 +15,8 @@ export class UpdateAccountComponent {
   passwordConfirmVisibility : boolean = true;
   passwordType : string = "password";
   passwordConfirmType : string = "password";
+  firstName : string = "";
+  lastName : string = "";
 
   user: {
     username: string,
@@ -148,11 +150,24 @@ export class UpdateAccountComponent {
     } else {
       this.updatedUser.address = this.user.address;
     }
+    if (this.firstName != null && this.firstName != "") {
+      this.updatedUser.firstName = this.firstName;
+    } else {
+      this.updatedUser.firstName = this.user.firstName;
+    }
+    if (this.lastName != null && this.lastName != "") {
+      this.updatedUser.lastName = this.lastName;
+    } else {
+      this.updatedUser.lastName = this.user.lastName;
+    }
 
     console.log(this.updatedUser);
     this.http.put(`http://localhost:8080/api/users/${this.userId}`, this.updatedUser, { responseType: 'text' }).subscribe({
       next: (r: any) => {
-        this._router.navigateByUrl("/profile");
+        alert("User data updated successfully!");
+        this._router.navigate(['/profile'], { skipLocationChange: true }).then(() => {
+          this._router.navigate(['/profile']);
+        });
       },
       error: (err) => {
         console.error(err);

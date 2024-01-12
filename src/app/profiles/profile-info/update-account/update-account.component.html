@@ -1,12 +1,6 @@
 <h1>Update account details</h1>
 
 <div class="form-container">
-
-    <!-- <div class="input-row">
-        <label>New email address</label>
-        <input type="email" placeholder="Enter email address" [(ngModel)]="email">
-        <p>Current: {{ user.username }}</p>
-    </div> -->
     
     <div class="input-row">
         <label>New password</label>
@@ -32,6 +26,18 @@
         <label>New address</label>
         <input type="text" placeholder="Enter address" [(ngModel)]="address">
         <p>Current: {{ user.address }}</p>
+    </div>
+
+    <div class="input-row">
+        <label>First name</label>
+        <input type="text" placeholder="Enter first name" [(ngModel)]="firstName">
+        <p>Current: {{ user.firstName }}</p>
+    </div>
+
+    <div class="input-row">
+        <label>Last name</label>
+        <input type="text" placeholder="Enter last name" [(ngModel)]="lastName">
+        <p>Current: {{ user.lastName }}</p>
     </div>
 
     <div class="input-row">
