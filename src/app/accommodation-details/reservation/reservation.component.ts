@@ -35,12 +35,12 @@ export class ReservationComponent implements OnInit {
   @Input() availabilities: any[];
   private userAccount:any
   avail:any[]=[
-    { id: 1, startDate: '2024-01-01', endDate: '2024-01-09', specialPrice: 120 },
-    { id: 2, startDate: '2024-01-11', endDate: '2024-01-12', specialPrice: 140 },
+    { id: 1, startDate: '2024-01-01', endDate: '2024-01-10', specialPrice: 120 },
+    { id: 2, startDate: '2024-01-11', endDate: '2024-01-20', specialPrice: 140 },
     { id: 3, startDate: '2024-01-21', endDate: '2024-01-31', specialPrice: 125},
     { id: 4, startDate: '2024-02-01', endDate: '2024-02-10', specialPrice: 130 },
     { id: 5, startDate: '2024-02-11', endDate: '2024-02-20', specialPrice: 135 },
-    { id: 6, startDate: '2024-02-21', endDate: '2024-02-28', specialPrice: 150 },
+    { id: 6, startDate: '2024-02-21', endDate: '2024-02-29', specialPrice: 150 },
     { id: 7, startDate: '2024-03-01', endDate: '2024-03-15', specialPrice: 150 },
     { id: 8, startDate: '2024-03-16', endDate: '2024-03-31', specialPrice: 160 },
     { id: 9, startDate: '2024-04-01', endDate: '2024-04-10', specialPrice: 165 },

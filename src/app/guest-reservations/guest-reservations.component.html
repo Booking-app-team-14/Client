@@ -63,6 +63,7 @@
               <div class="price-guests">
                 <span><strong>Price:</strong> {{ reservation.totalPrice }}</span>
                 <span><strong>Guests:</strong> {{ reservation.numberOfGuests }}</span>
+                <span><strong>Cancel. deadline:</strong> {{ reservation.accommodation.cancellationDeadline }} days</span>
               </div>
             </div>
           </div>
@@ -70,7 +71,7 @@
 
         <div class="actions">
           <ng-container *ngIf="type !== 'declined'">
-          <button class="cancel" (click)="openCancelDialog(reservation.id)">CANCEL</button>
+          <button class="cancel" (click)="openCancelDialog(reservation.id, reservation.guestId)" [disabled]="isCancellationDisabled(reservation.startDate, reservation.accommodation.cancellationDeadline)">CANCEL</button>
           </ng-container>
           <span class="request">STATUS: {{ reservation.requestStatus }}</span>
         </div>

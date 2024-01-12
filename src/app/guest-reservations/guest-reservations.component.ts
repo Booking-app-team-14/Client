@@ -6,7 +6,6 @@ import {CancelDialogComponent} from "../shared/cancel-dialog/cancel-dialog.compo
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 
-
 @Component({
   selector: 'app-guest-reservations',
   templateUrl: './guest-reservations.component.html',
@@ -26,17 +25,18 @@ export class GuestReservationsComponent implements OnInit{
 
   constructor(private http: HttpClient,private router: Router,private reservationService:ReservationService, private dialog: MatDialog, private snackBar: MatSnackBar) {
   }
-  openCancelDialog(reservationId:number): void {
+  openCancelDialog(reservationId:number, guestId:number): void {
     const dialogRef = this.dialog.open(CancelDialogComponent, {
       width: '400px',
-      data: { reservationId: reservationId }
+      data: { reservationId: reservationId,
+              guestId: guestId}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'Yes') {
 
-        console.log(reservationId);
-        this.sendCancelRequest(reservationId);
+        console.log(guestId);
+        this.sendCancelRequest(reservationId, guestId);
       }
 
 
@@ -44,25 +44,34 @@ export class GuestReservationsComponent implements OnInit{
     });
   }
 
-  sendCancelRequest(reservationId: number): void {
-    const apiUrl = `http://localhost:8080/api/requests/${reservationId}`;
+  sendCancelRequest(reservationId: number, guestId: number): void {
+    const deleteUrl = `http://localhost:8080/api/requests/${reservationId}`;
+    const guestUrl = `http://localhost:8080/api/guest/${guestId}`;
 
-    this.http.delete(apiUrl).subscribe(
+    this.http.delete(deleteUrl).subscribe(
       () => {
-        this.snackBar.open('Request successfully canceled!', 'Close', {
-          duration: 3000,
-          verticalPosition: 'bottom',
-          horizontalPosition: 'center',
-        });
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-            this.router.navigate([this.router.url]);
-        });
+
       },
-      (error) => {
-        console.error('Error', error);
+      (deleteError) => {
+        alert('Request successfully canceled!');
+        this.http.put(guestUrl, {}).subscribe(
+          () => {
+            console.log('Guest account updated successfully');
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate([this.router.url]);
+            });
+          },
+          (putError) => {
+            console.error('Error updating guest account:', putError);
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate([this.router.url]);
+            });
+          }
+        );
       }
     );
   }
+
 
 
   getPostedAgo(date: Date) {
@@ -98,23 +107,23 @@ export class GuestReservationsComponent implements OnInit{
     this.http.get(`http://localhost:8080/api/requests/guest/${this.id}`).subscribe({
       next: (reservations: any[]) => {
         this.reservations = reservations;
-
         for (let i = 0; i < this.reservations.length; i++) {
           console.log(this.reservations[i].id);
           if(this.reservations[i].requestStatus == "SENT") this.reservations[i].requestStatus = "sent";
-          else if(this.reservations[i].requestStatus == "APPROVED") this.reservations[i].requestStatus = "approved";
+          else if(this.reservations[i].requestStatus == "ACCEPTED") this.reservations[i].requestStatus = "approved";
           else if(this.reservations[i].requestStatus == "DECLINED") this.reservations[i].requestStatus = "declined";
           const date = new Date(parseInt(this.reservations[i].dateRequested) * 1000);
+
           const formatter = new Intl.DateTimeFormat('en-US', {
             day: '2-digit',
             month: 'long',
             year: 'numeric'
           });
+
           this.reservations[i].date = formatter.format(date);
           this.reservations[i].postedAgo = this.getPostedAgo(date);
           this.getDetailsForReservations();
         }
-
       },
       error: (err) => {
       }
@@ -191,4 +200,10 @@ export class GuestReservationsComponent implements OnInit{
     });
   }
 
+  isCancellationDisabled(startDate: string, cancellationDeadline: number): boolean {
+    const today = new Date();
+    const reservationStartDate = new Date(startDate);
+    const deadlineDate = new Date(reservationStartDate.getTime() - cancellationDeadline * 24 * 60 * 60 * 1000);
+    return today >= deadlineDate;
+  }
 }
