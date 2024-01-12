@@ -108,7 +108,8 @@ export class CreateAccommodationComponent implements AfterViewInit{
       availability: availabilityData,
       pricePerNight : this.price,
      pricePerGuest : true,
-      cancellationDeadline:this.cancellationDeadline
+      cancellationDeadline:this.cancellationDeadline,
+      automatic:true
     };
     this.accommodationService.addAccommodation(accommodationData).subscribe(
       (response) => {

@@ -1,60 +1,39 @@
-import {Component, ElementRef, Input, OnInit, signal, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, signal, ViewChild} from '@angular/core';
 import {ReservationService} from "./reservation.service";
 
 import {AccommodationDetailsService} from "../accommodation-details.service";
 import {UserService} from "../../login/user.service";
+import {AvailabilityDTO} from "../../shared/accommodation-details.model";
 
-/*
-interface Availability{
-  id: number;
-  startDate: string;
-  endDate: string;
-  specialPrice: number;
-}
-
-interface Reservation{
-  accommodationId:number;
-  ownerId:number;
-  accommodationName:string,
-  accommodationType:string,
-  accommodationRating:number,
-  pricePerNight:number;
-  minGuests:number;
-  maxGuests:number;
-  cancellationDeadline:number;
-  pricePerGuest:boolean;
-}
-*/
 @Component({
   selector: 'app-reservation',
   templateUrl: './reservation.component.html',
   styleUrl: './reservation.component.css'
 })
-export class ReservationComponent implements OnInit {
+export class ReservationComponent implements AfterViewInit {
   @ViewChild('guestsInput') guestsInput!: ElementRef;
-  @Input() availabilities: any[];
+  @Input() availabilities!: AvailabilityDTO[];
   private userAccount:any
-  avail:any[]=[
-    { id: 1, startDate: '2024-01-01', endDate: '2024-01-10', specialPrice: 120 },
-    { id: 2, startDate: '2024-01-11', endDate: '2024-01-20', specialPrice: 140 },
-    { id: 3, startDate: '2024-01-21', endDate: '2024-01-31', specialPrice: 125},
-    { id: 4, startDate: '2024-02-01', endDate: '2024-02-10', specialPrice: 130 },
-    { id: 5, startDate: '2024-02-11', endDate: '2024-02-20', specialPrice: 135 },
-    { id: 6, startDate: '2024-02-21', endDate: '2024-02-29', specialPrice: 150 },
-    { id: 7, startDate: '2024-03-01', endDate: '2024-03-15', specialPrice: 150 },
-    { id: 8, startDate: '2024-03-16', endDate: '2024-03-31', specialPrice: 160 },
-    { id: 9, startDate: '2024-04-01', endDate: '2024-04-10', specialPrice: 165 },
-    { id: 10, startDate: '2024-04-11', endDate: '2024-04-20', specialPrice: 145 },
-    { id: 11, startDate: '2024-04-21', endDate: '2024-04-30', specialPrice: 150 },
-    { id: 12, startDate: '2024-12-20', endDate: '2024-12-31', specialPrice: 180 }]
+  avail:AvailabilityDTO[]=[
+    { id: 1, startDate: '2024-01-01', endDate: '2024-01-10', specialPrice: 120, accommodationId:7 },
+    { id: 2, startDate: '2024-01-11', endDate: '2024-01-20', specialPrice: 140, accommodationId:7 },
+    { id: 3, startDate: '2024-01-21', endDate: '2024-01-31', specialPrice: 125, accommodationId:7 },
+    { id: 4, startDate: '2024-02-01', endDate: '2024-02-10', specialPrice: 130, accommodationId:7  },
+    { id: 5, startDate: '2024-02-11', endDate: '2024-02-20', specialPrice: 135, accommodationId:7  },
+    { id: 6, startDate: '2024-02-21', endDate: '2024-02-29', specialPrice: 150, accommodationId:7  },
+    { id: 7, startDate: '2024-03-01', endDate: '2024-03-15', specialPrice: 150, accommodationId:7  },
+    { id: 8, startDate: '2024-03-16', endDate: '2024-03-31', specialPrice: 160, accommodationId:7  },
+    { id: 9, startDate: '2024-04-01', endDate: '2024-04-10', specialPrice: 165, accommodationId:7  },
+    { id: 10, startDate: '2024-04-11', endDate: '2024-04-20', specialPrice: 145, accommodationId:7  },
+    { id: 11, startDate: '2024-04-21', endDate: '2024-04-30', specialPrice: 150, accommodationId:7  },
+    { id: 12, startDate: '2024-12-20', endDate: '2024-12-31', specialPrice: 180, accommodationId:7  }]
   @Input() reservationRequirement: any;
   defaultCheckInDate: string;
   defaultCheckOutDate: string;
-  totalPrice: number = this.avail[0].specialPrice;
+  totalPrice: number;
   private guestId: number;
-  availableDates: any[] = [];
+  availableDates: AvailabilityDTO[] = [];
   userRole: string ='';
-
 
   constructor( private reservationService: ReservationService,private accService: AccommodationDetailsService,  private userService: UserService) {
     this.userService.userRole$.subscribe(role => {
@@ -62,10 +41,8 @@ export class ReservationComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     console.log(this.reservationRequirement);
-
-    //console.log('Availabilities received in ReservationComponent:', this.availabilities);
     const today = new Date();
     const nextDay = new Date();
     nextDay.setDate(today.getDate() + 1);
@@ -73,7 +50,6 @@ export class ReservationComponent implements OnInit {
     twoDaysAfter.setDate(today.getDate() + 2);
     this.reservationService.getGuestId().subscribe(
       (userId: number) => {
-
         this.guestId = userId;
         console.log(this.guestId);
       },
@@ -85,7 +61,7 @@ export class ReservationComponent implements OnInit {
 
     this.defaultCheckInDate = this.formatDate(nextDay);
     this.defaultCheckOutDate = this.formatDate(twoDaysAfter);
-    this.avail.forEach((availability: any) => {
+    this.availabilities.forEach((availability: AvailabilityDTO) => {
       const startDate = new Date(availability.startDate);
       const endDate = new Date(availability.endDate);
 
@@ -94,15 +70,14 @@ export class ReservationComponent implements OnInit {
           id: availability.id,
           startDate: this.formatDate(startDate),
           endDate: this.formatDate(endDate),
-          specialPrice: availability.specialPrice
+          specialPrice: availability.specialPrice,
+          accommodationId: availability.accommodationId
         });
         startDate.setDate(startDate.getDate() + 1);
       }
     });
     this.calculateTotalPrice();
     }
-
-
   private formatDate(date: Date): string {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -170,7 +145,7 @@ export class ReservationComponent implements OnInit {
     let totalPrice = 0;
     const oneDayInMillis = 24 * 60 * 60 * 1000;
 
-    while (checkIn < checkOut) {
+    while (checkIn <= checkOut) {
       const formattedDate = this.formatDate(checkIn);
       const foundAvailability = this.availableDates.find(date => date.startDate === formattedDate);
 

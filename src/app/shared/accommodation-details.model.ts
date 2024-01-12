@@ -57,6 +57,7 @@ export interface AvailabilityDTO {
   startDate: string;
   endDate: string;
   specialPrice: number;
+  accommodationId:number;
 }
 
 export interface AmenityDTO {

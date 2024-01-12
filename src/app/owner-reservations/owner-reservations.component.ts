@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ReservationService} from "../accommodation-details/reservation/reservation.service";
 
@@ -7,10 +7,9 @@ import {ReservationService} from "../accommodation-details/reservation/reservati
   templateUrl: './owner-reservations.component.html',
   styleUrl: './owner-reservations.component.css'
 })
-export class OwnerReservationsComponent {
+export class OwnerReservationsComponent implements AfterViewInit {
 
   type: string = "fiber_sent";
-
   reservations: any[];
   filteredReservations: any[];
   //private id: number;
@@ -19,11 +18,10 @@ export class OwnerReservationsComponent {
   startDateFilter: Date;
   endDateFilter: Date;
   minEndDate: string;
-
+ handling:boolean;
   constructor(private http: HttpClient,private reservationService:ReservationService) {
   }
-
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.reservationService.getOwnerInfo().subscribe(
       (userInfo: string) => {
         //this.id = userInfo.id;
@@ -36,59 +34,62 @@ export class OwnerReservationsComponent {
     );
   }
 
+
   fetchReservations(): void {
     this.http.get(`http://localhost:8080/api/requests/owner/${this.username}`).subscribe({
       next: (reservations: any[]) => {
         this.reservations = reservations;
         for (let i = 0; i < this.reservations.length; i++) {
-          if(this.reservations[i].requestStatus == "SENT") this.reservations[i].requestStatus = "fiber_sent";
-          else if(this.reservations[i].requestStatus == "ACCEPTED") this.reservations[i].requestStatus = "fiber_approved";
-          else if(this.reservations[i].requestStatus == "DECLINED") this.reservations[i].requestStatus = "fiber_declined";
-          const date = new Date(parseInt(this.reservations[i].dateRequested) * 1000);
-          const formatter = new Intl.DateTimeFormat('en-US', {
-            day: '2-digit',
-            month: 'long',
-            year: 'numeric'
-          });
-          this.reservations[i].date = formatter.format(date);
-          this.getDetailsForReservations();
-          this.filteredReservations = this.reservations;
-          this.applyFilters();
-        }
+          this.http.get(`http://localhost:8080/api/accommodations/${this.reservations[i].accommodationId}`).subscribe({
+            next: (accommodation: any) => {
+              this.reservations[i].accommodation = accommodation;
+              this.getDetailsForReservations(this.reservations[i]);
+              if (this.reservations[i].requestStatus == "SENT") {
+                if (this.reservations[i].accommodation.automatic) {
+                  console.log("Automatically approving reservation with ID:", this.reservations[i].id);
+                  this.approveAutomatically(this.reservations[i].id);
+                }
+              }
+              if(this.reservations[i].requestStatus == "SENT") this.reservations[i].requestStatus = "fiber_sent";
+              else if(this.reservations[i].requestStatus == "ACCEPTED") this.reservations[i].requestStatus = "fiber_approved";
+              else if(this.reservations[i].requestStatus == "DECLINED") this.reservations[i].requestStatus = "fiber_declined";
+              const date = new Date(parseInt(this.reservations[i].dateRequested) * 1000);
+              const formatter = new Intl.DateTimeFormat('en-US', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric'
+              });
+              this.reservations[i].date = formatter.format(date);
 
+              this.filteredReservations = this.reservations;
+              this.applyFilters();
+            },
+            error: (err) => {
+              console.error(err);
+              alert("Error while fetching accommodation details!");
+            }
+          });
+        }
       },
+
       error: (err) => {
         console.error(err);
         alert("Error while fetching reservations requests!");
       }
     });
   }
-
-  getDetailsForReservations(): void {
-    for (let i = 0; i < this.reservations.length; i++) {
-      this.http.get(`http://localhost:8080/api/accommodations/${this.reservations[i].accommodationId}`).subscribe({
-        next: (accommodation: any) => {
-          this.reservations[i].accommodation = accommodation;
-          console.log( this.reservations[i].accommodation);
-        },
-        error: (err) => {
-          console.error(err);
-          alert("Error while fetching accommodation details!");
-        }
-      });
-
-      this.http.get(`http://localhost:8080/api/users/${this.reservations[i].guestId}`).subscribe({
+  getDetailsForReservations(reservation:any): void
+  {
+     this.http.get(`http://localhost:8080/api/users/${reservation.guestId}`).subscribe({
         next: (user: any) => {
-          this.reservations[i].user = user;
+          reservation.user = user;
         },
         error: (err) => {
           console.error(err);
           alert("Error while fetching user details!");
         }
       });
-    }
   }
-
   applyAccommodationNameFilter(): void {
     if (this.accommodationNameFilter) {
       const filterValue = this.accommodationNameFilter.toLowerCase();
@@ -149,7 +150,7 @@ export class OwnerReservationsComponent {
     });
   }
 
-  reject(reservationId: number) {  
+  reject(reservationId: number) {
     this.http.put(`http://localhost:8080/api/requests/reject/${reservationId}`, {}).subscribe({
       next: () => {
         alert("Request rejected!");
@@ -163,4 +164,15 @@ export class OwnerReservationsComponent {
     });
   }
 
+  approveAutomatically(reservationId: number): void {
+    this.http.put(`http://localhost:8080/api/requests/approve/${reservationId}`, {}).subscribe(
+      () => {
+        this.fetchReservations();
+      },
+      (error) => {
+        console.error('Error during automatic approval:', error);
+        this.fetchReservations();
+      }
+    );
+  }
 }

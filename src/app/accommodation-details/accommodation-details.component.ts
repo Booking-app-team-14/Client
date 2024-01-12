@@ -64,8 +64,11 @@ export class AccommodationDetailsComponent implements OnInit {
               startDate: availability.startDate,
               endDate: availability.endDate,
               specialPrice: availability.specialPrice,
+              accommodationId: availability.accommodationId
             }
           });
+
+            console.log(this.availableDates);
 
           this.reservationRequirements = {
             accommodationId:this.accommodation.id,
@@ -90,20 +93,7 @@ export class AccommodationDetailsComponent implements OnInit {
           };
 
 
-          this.availableDates=[
-            { id: 1, startDate: '2024-01-01', endDate: '2024-01-10', specialPrice: 120 },
-            { id: 2, startDate: '2024-01-11', endDate: '2024-01-20', specialPrice: 140 },
-            { id: 3, startDate: '2024-01-21', endDate: '2024-01-31', specialPrice: null},
-            { id: 4, startDate: '2024-02-01', endDate: '2024-02-10', specialPrice: 130 },
-            { id: 5, startDate: '2024-02-11', endDate: '2024-02-20', specialPrice: 135 },
-            { id: 6, startDate: '2024-02-21', endDate: '2024-02-28', specialPrice: null },
-            { id: 7, startDate: '2024-03-01', endDate: '2024-03-15', specialPrice: 150 },
-            { id: 8, startDate: '2024-03-16', endDate: '2024-03-31', specialPrice: null },
-            { id: 9, startDate: '2024-04-01', endDate: '2024-04-10', specialPrice: null },
-            { id: 10, startDate: '2024-04-11', endDate: '2024-04-20', specialPrice: 145 },
-            { id: 11, startDate: '2024-04-21', endDate: '2024-04-30', specialPrice: 150 },
-            { id: 12, startDate: '2024-12-20', endDate: '2024-12-31', specialPrice: 180 }
-          ];
+
 
           this.location = {
             address: this.accommodation.location.address,
