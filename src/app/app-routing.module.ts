@@ -17,6 +17,10 @@ import {OwnerReservationsComponent} from "./owner-reservations/owner-reservation
 import {FavoriteComponent} from "./favorite/favorite.component";
 import {OwnerReviewComponent} from "./owner-review/owner-review.component";
 import {ReportModalComponent} from "./report-modal/report-modal.component";
+import {
+  EachAccommodationReportComponent
+} from "./accommodation-reports/each-accommodation/each-accommodation-report.component";
+import {MonthlyReportComponent} from "./accommodation-reports/monthly-report/monthly-report.component";
 
 const routes: Routes = [
   {component: UpdateAccommodationComponent, path: 'update-accommodation/:id'},
@@ -39,6 +43,8 @@ const routes: Routes = [
   {component: GuestReservationsComponent, path:'guest-requests'},
   {component: OwnerReservationsComponent, path:'owner-requests'},
   {component: FavoriteComponent, path:'favorite'},
+  {component: EachAccommodationReportComponent, path:'profile/accommodation/report'},
+  {component:MonthlyReportComponent, path:'monthly'},
   { path: 'verify', component: VerificationComponent },
   {path:'search/details/:id/owner-review', component:OwnerReviewComponent},
   {path:'report-modal', component:ReportModalComponent},
