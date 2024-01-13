@@ -16,6 +16,7 @@ export class GuestReservationsComponent implements OnInit{
   type: string = "sent";
   ownerId:number;
   reservations: any[];
+  filteredReservations: any[];
   private id: number;
   accommodationNameFilter: string = '';
   startDateFilter: Date;
@@ -26,22 +27,9 @@ export class GuestReservationsComponent implements OnInit{
   constructor(private http: HttpClient,private router: Router,private reservationService:ReservationService, private dialog: MatDialog, private snackBar: MatSnackBar) {
   }
   openCancelDialog(reservationId:number, guestId:number): void {
-    const dialogRef = this.dialog.open(CancelDialogComponent, {
-      width: '400px',
-      data: { reservationId: reservationId,
-              guestId: guestId}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'Yes') {
-
-        console.log(guestId);
-        this.sendCancelRequest(reservationId, guestId);
-      }
-
-
-      dialogRef.close();
-    });
+    if(confirm("Are you sure you want to cancel this reservation?")) {
+      this.sendCancelRequest(reservationId, guestId);
+    }
   }
 
   sendCancelRequest(reservationId: number, guestId: number): void {
@@ -53,7 +41,7 @@ export class GuestReservationsComponent implements OnInit{
 
       },
       (deleteError) => {
-        alert('Request successfully canceled!');
+        alert('Successfully canceled!');
         this.http.put(guestUrl, {}).subscribe(
           () => {
             console.log('Guest account updated successfully');
@@ -71,25 +59,6 @@ export class GuestReservationsComponent implements OnInit{
       }
     );
   }
-
-
-
-  getPostedAgo(date: Date) {
-    const now = Date.now();
-    const difference = now - date.getTime();
-    const seconds = difference / 1000;
-    if (seconds < 60) {
-      return "just now";
-    } else if (seconds < 60 * 60) {
-      return Math.floor(seconds / 60) + " minutes ago";
-    } else if (seconds < 24 * 60 * 60) {
-      return Math.floor(seconds / (60 * 60)) + " hours ago";
-    } else {
-      return Math.floor(seconds / (24 * 60 * 60)) + " days ago";
-    }
-  }
-
-
 
   ngOnInit(): void {
     this.reservationService.getGuestId().subscribe(
@@ -121,8 +90,9 @@ export class GuestReservationsComponent implements OnInit{
           });
 
           this.reservations[i].date = formatter.format(date);
-          this.reservations[i].postedAgo = this.getPostedAgo(date);
           this.getDetailsForReservations();
+          this.filteredReservations = this.reservations;
+          this.applyFilters();
         }
       },
       error: (err) => {
@@ -153,17 +123,17 @@ export class GuestReservationsComponent implements OnInit{
           alert("Error while fetching accommodation details!");
         }
       });
-  }
     }
+  }
 
-  applyAccommodationFilter(): void {
+  applyAccommodationNameFilter(): void {
     if (this.accommodationNameFilter) {
       const filterValue = this.accommodationNameFilter.toLowerCase();
-      this.reservations = this.reservations.filter(reservation =>
+      this.filteredReservations = this.reservations.filter(reservation =>
         reservation.accommodation.name.toLowerCase().includes(filterValue)
       );
     } else {
-      this.fetchReservations();
+      this.filteredReservations = this.reservations;
     }
   }
 
@@ -171,33 +141,31 @@ export class GuestReservationsComponent implements OnInit{
     if (this.startDateFilter) {
       const minDate = new Date(this.startDateFilter);
       minDate.setDate(minDate.getDate() + 1);
-      this.filterReservations();
+      this.minEndDate = minDate.toISOString().split('T')[0];
     } else {
-      this.filterReservations();
+      this.minEndDate = null;
     }
   }
 
-  clearFilters(): void {
-    this.accommodationNameFilter = '';
-    this.startDateFilter = null;
-    this.fetchReservations();
+  filterReservations(): void {
+    this.applyAccommodationNameFilter();
+    this.filteredReservations = this.filteredReservations.filter((reservation) => {
+      // Provera za opseg datuma
+      if (this.startDateFilter && this.endDateFilter) {
+        const resStartDate = new Date(reservation.startDate);
+        const resEndDate = new Date(reservation.endDate);
+        const startRange = new Date(this.startDateFilter);
+        const endRange = new Date(this.endDateFilter);
+        if (resStartDate < startRange || resEndDate > endRange) {
+          return false;
+        }
+      }
+      return true;
+    });
   }
 
-  filterReservations(): void {
-    this.reservations = this.reservations.filter((reservation) => {
-
-      if (this.type && reservation.requestStatus !== this.type) {
-        return false;
-      }
-
-
-      if (this.startDateFilter && new Date(reservation.startDate) < new Date(this.startDateFilter)) {
-        return false;
-      }
-
-      return !(this.accommodationNameFilter && !reservation.accommodation.name.toLowerCase().includes(this.accommodationNameFilter.toLowerCase()));
-
-    });
+  applyFilters(): void {
+    this.filterReservations();
   }
 
   isCancellationDisabled(startDate: string, cancellationDeadline: number): boolean {

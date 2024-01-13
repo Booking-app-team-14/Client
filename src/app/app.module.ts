@@ -49,6 +49,7 @@ import { OwnerReservationsComponent } from './owner-reservations/owner-reservati
 import { FavoriteComponent } from './favorite/favorite.component';
 import { EachAccommodationReportComponent } from './accommodation-reports/each-accommodation/each-accommodation-report.component';
 import { MonthlyReportComponent } from './accommodation-reports/monthly-report/monthly-report.component';
+import { ApproveReviewsComponent } from './admin-functions/approve-reviews/approve-reviews.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { MonthlyReportComponent } from './accommodation-reports/monthly-report/m
     DeleteReviewDialogComponent,
     EachAccommodationReportComponent,
     MonthlyReportComponent,
+    ApproveReviewsComponent,
 
   ],
     imports: [

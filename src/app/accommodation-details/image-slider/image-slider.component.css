@@ -9,6 +9,8 @@
 .carousel-container img{
    display: none;
   border-radius: 15px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .carousel-container img.image-active{
