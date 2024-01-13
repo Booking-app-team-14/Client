@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {MonthlyReportService} from "./monthly-report.service";
 import {AccommodationDetailsService} from "../../accommodation-details/accommodation-details.service";
 import jsPDF from 'jspdf';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-monthly-report',
@@ -14,15 +15,18 @@ export class MonthlyReportComponent implements OnInit {
   accommodationReports: any[];
   accommodationDetails: any;
 
-  constructor(private fb: FormBuilder, private reportService: MonthlyReportService,  private accommodationService: AccommodationDetailsService) {}
+  constructor(private fb: FormBuilder, private reportService: MonthlyReportService,
+              private accommodationService: AccommodationDetailsService, private route: ActivatedRoute,) {}
 
   ngOnInit(): void {
     this.reportForm = this.fb.group({
       year: [null, Validators.required],
     });
+    this.route.params.subscribe(params => {
+      const id = +params['id'];
 
-    const accommodationId = 1;
-    this.loadAccommodationDetails(accommodationId);
+      this.loadAccommodationDetails(id);
+    })
   }
 
   generateReport() {

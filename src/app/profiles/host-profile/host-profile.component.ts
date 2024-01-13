@@ -62,5 +62,7 @@ export class HostProfileComponent {
   editAccommodationDetails(id: number) {
     this._router.navigateByUrl('update-accommodation/' + id);
   }
-
+  goToMonthlyReport(id:number) {
+    this._router.navigateByUrl('monthly_report/' + id);
+  }
 }

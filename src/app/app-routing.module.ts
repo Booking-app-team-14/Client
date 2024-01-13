@@ -46,12 +46,11 @@ const routes: Routes = [
   {component: OwnerReservationsComponent, path:'owner-requests'},
   {component: FavoriteComponent, path:'favorite'},
   {component: EachAccommodationReportComponent, path:'profile/accommodation/report'},
-  {component:MonthlyReportComponent, path:'monthly'},
+  {component:MonthlyReportComponent, path:'monthly_report/:id'},
   { path: 'verify', component: VerificationComponent },
   {path:'search/details/:id/owner-review', component:OwnerReviewComponent},
   {path:'report-modal', component:ReportModalComponent},
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]

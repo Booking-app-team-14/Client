@@ -2,8 +2,8 @@
 
 <div class="action-btns">
     <button class="action-btn" routerLink="/owner-requests">Check reservations</button>
-    <button class="action-btn" routerLink="/profile/accommodation/report">Generate reports</button>
-    <button class="action-btn" routerLink="/monthly">My reviews</button>
+    <button class="action-btn" routerLink="/profile/accommodation/report">Generate accommodations reports</button>
+    <button class="action-btn" routerLink="">My reviews</button>
 </div>
 
 <h2 class="titles">My accommodations</h2>
@@ -66,5 +66,8 @@
         <button mat-icon-button class="fav-btn go-to-page-button" (click)="goToAccommodationPage(accommodation.id)">
             <span>Go to the accommodation page</span>
         </button>
+      <button mat-icon-button class="fav-btn go-to-page-button" (click)="goToMonthlyReport(accommodation.id)">
+        <span>Monthly report for accommodation</span>
+      </button>
 
 </div>
