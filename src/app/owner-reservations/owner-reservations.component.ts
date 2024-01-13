@@ -44,12 +44,6 @@ export class OwnerReservationsComponent implements AfterViewInit {
             next: (accommodation: any) => {
               this.reservations[i].accommodation = accommodation;
               this.getDetailsForReservations(this.reservations[i]);
-              if (this.reservations[i].requestStatus == "SENT") {
-                if (this.reservations[i].accommodation.automatic) {
-                  console.log("Automatically approving reservation with ID:", this.reservations[i].id);
-                  this.approveAutomatically(this.reservations[i].id);
-                }
-              }
               if(this.reservations[i].requestStatus == "SENT") this.reservations[i].requestStatus = "fiber_sent";
               else if(this.reservations[i].requestStatus == "ACCEPTED") this.reservations[i].requestStatus = "fiber_approved";
               else if(this.reservations[i].requestStatus == "DECLINED") this.reservations[i].requestStatus = "fiber_declined";
