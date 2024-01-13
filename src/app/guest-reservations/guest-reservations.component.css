@@ -243,3 +243,10 @@ input[type="radio"]:focus {
   background-color: var(--color_white);
   box-shadow: 0 0 3px var(--color_red) inset;
 }
+
+.cancel:disabled {
+  background-color: #ccc;
+  color: #777;
+  box-shadow: none;
+  cursor: not-allowed;
+}
