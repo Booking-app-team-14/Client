@@ -7,10 +7,9 @@
         <span class="location-sign">📍</span> {{ place.address }}
       </p>
     </div>
-
     <div class="owner-details">
-      <img [src]="owner.picture" alt="Owner Picture" routerLink="/search/details/{{place.id}}/owner-review">
-      <p>{{ owner.name }}</p>
+      <img [src]="'data:image/' + userAccount.profilePictureType + ';base64,' + userAccount.profilePictureBytes" alt="Owner" routerLink="/search/details/{{place.id}}/owner-review">
+      <p>{{ userAccount.firstName  }}  {{userAccount.lastName}}</p>
     </div>
   </div>
 

@@ -24,6 +24,8 @@ export class ReservationService {
     );
   }
 
+
+
   getOwnerInfo(): Observable<string> {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
