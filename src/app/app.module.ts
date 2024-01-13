@@ -47,6 +47,7 @@ import { GuestReservationsComponent } from './guest-reservations/guest-reservati
 import {MatSelectModule} from "@angular/material/select";
 import { OwnerReservationsComponent } from './owner-reservations/owner-reservations.component';
 import { FavoriteComponent } from './favorite/favorite.component';
+import { ApproveReviewsComponent } from './admin-functions/approve-reviews/approve-reviews.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { FavoriteComponent } from './favorite/favorite.component';
     OwnerReviewComponent,
     ReportModalComponent,
     DeleteReviewDialogComponent,
+    ApproveReviewsComponent,
 
   ],
     imports: [
