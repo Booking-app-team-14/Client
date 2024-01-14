@@ -22,7 +22,75 @@
       <ng-container *ngIf="type === 'accommodation'">
         <ng-container *ngFor="let accommodationReview of accommodationsReviews">
         
+          <div class="card" id="accommodation-card-{{accommodationReview.id}}">
+
+            <div class="card-content-accommodation">
+
+              <div class="guest-side">
+
+                <div class="guest-data">
+                  <h3>{{accommodationReview.reviewType}}</h3>
+                  <span class="date">({{accommodationReview.sentAt}})</span>
+                </div>
+
+                <div class="guest-data">
+      
+                  <div class="guest">
+                    <img [src]="'data:image/' + accommodationReview.guestProfilePictureType + ';base64,' + accommodationReview.guestProfilePictureBytes" alt="Guest profile picture">
+                    <span class="username">{{accommodationReview.guestUsername}}</span>
+                  </div>
+      
+                </div>
+
+                <div class="span-div">
+                  <span>"{{accommodationReview.comment}}"</span>
+                </div>
+
+                <div *ngIf="accommodationReview.rating!==0" class="guests-accommodation-rating">
+                  <div class="stars">
+                    <mat-icon *ngFor="let star of [].constructor(accommodationReview.rating)">star</mat-icon>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="accommodation-side">
+
+                <div class="info">
+
+                  <img [src]="'data:image/' + accommodationReview.accommodationPictureType + ';base64,' + accommodationReview.accommodationPictureBytes" alt="Accommodation main picture">
+      
+                  <div class="sub-info">
+                    <div>
+                      <div class="accommodation-type-rating">
+                        <span class="accommodation-type">{{accommodationReview.accommodationType}}</span>
+                        <div class="stars">
+                          <mat-icon *ngFor="let star of [].constructor(accommodationReview.accommodationRating)">star</mat-icon>
+                        </div>
+                      </div>
+  
+                      <div class="name">{{accommodationReview.accommodationName}}</div>
+                    </div>
+
+                    <div class="view-details">
+                      <button (click)="viewDetails(accommodationReview.accommodationId)">View details</button>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="buttons accommodation-btns">
+                  <button (click)="binAccommodationReview(accommodationReview.id)" class="bin">Bin</button>
+                  <button (click)="acceptAccommodationReview(accommodationReview.id)" class="accept">Accept</button>
+                </div>
+
+              </div>
+
+            </div>
           
+          </div>
         
         </ng-container>
       </ng-container>
