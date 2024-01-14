@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {map, Observable, switchMap} from 'rxjs';
+import {catchError, map, Observable, switchMap, throwError} from 'rxjs';
 import {UserService} from "../../login/user.service";
 
 @Injectable({
@@ -46,6 +46,10 @@ export class ReservationService {
   }
 
   sendReservation(reservationData: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/requests`, reservationData);
+    return this.http.post<any>(`${this.apiUrl}/requests`, reservationData) .pipe(
+      catchError((error: any) => {
+        return throwError(error);
+      })
+    );
   }
 }

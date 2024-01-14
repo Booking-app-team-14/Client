@@ -16,6 +16,7 @@ export class AccommodationDetailsComponent implements OnInit {
   location: any;
   reservationRequirements: any;
   amenitiesList: AmenityDTO[] = [];
+  owner1: { name: string, picture: string, pictureBytes: string }
   owner: { name: string, picture: string } = { name: "Nick Jefferson", picture: 'assets/BG.png' };
   //owner: { name: any, picture: string };
   //ownerId: { ownerId: number };
@@ -92,7 +93,22 @@ export class AccommodationDetailsComponent implements OnInit {
             id: this.accommodation.id,
           };
 
+          this.accommodationService.getUserById(this.places.ownerId).subscribe(
+            (response) => {
+              this.userAccount = response;
+              console.log('User Account:', this.userAccount);
+              this.owner1 = {
+                name : this.userAccount.firstName + ' ' + this.userAccount.lastName,
+                picture : this.userAccount.profilePictureType,
+                pictureBytes : this.userAccount.profilePictureBytes,
+              }
 
+            },
+            (error) => {
+              console.error('Error fetching user account:', error);
+              // Handle error appropriately
+            }
+          );
 
 
           this.location = {

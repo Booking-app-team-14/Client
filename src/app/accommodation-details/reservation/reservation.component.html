@@ -2,8 +2,6 @@
 <div class="reservation-container">
   <h2>Make a Reservation</h2>
 
-
-
   <!-- Date Selection -->
   <div class="date-selection">
     <label for="check-in">Check-in:</label>
@@ -22,13 +20,29 @@
            (change)="onGuestsChange()" (keyup)="onGuestsChange()" (keydown)="onGuestsChange()" (input)="onGuestsChange()">
   </div>
 
+
   <!-- Reserve Button -->
   <button class="reserve-button" (click)="makeReservation()">Reserve</button>
 
   <!-- Price Details -->
   <div class="price-details">
-    <p>Price per night: ${{availabilities[0].specialPrice}}</p>
     <p>Total price:  ${{ totalPrice }} </p>
+  </div>
+
+    <div class="availability-header">
+      <h3>Available Dates:</h3>
+    </div>
+    <div class="availability-scroll">
+    <div class="availability-details">
+      <ul>
+        <li *ngFor="let availability of availableDates" class="availability-item">
+          <div class="availability-info">
+            <p class="date-range">{{ availability.startDate }} - {{ availability.endDate }}</p>
+            <p class="price">Price: ${{ availability.specialPrice }} per night</p>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 </ng-container>
