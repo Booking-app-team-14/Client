@@ -8,8 +8,8 @@
       </p>
     </div>
     <div class="owner-details">
-      <img [src]="'data:image/' + userAccount.profilePictureType + ';base64,' + userAccount.profilePictureBytes" alt="Owner" routerLink="/search/details/{{place.id}}/owner-review">
-      <p>{{ userAccount.firstName  }}  {{userAccount.lastName}}</p>
+      <img [src]="'data:image/' + owner.picture + ';base64,' + owner.pictureBytes" alt="Owner" routerLink="/search/details/{{place.id}}/owner-review">
+      <p>{{owner.name}}</p>
     </div>
   </div>
 

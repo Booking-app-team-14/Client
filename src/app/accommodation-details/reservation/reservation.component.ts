@@ -12,21 +12,9 @@ import {AvailabilityDTO} from "../../shared/accommodation-details.model";
 })
 export class ReservationComponent implements AfterViewInit {
   @ViewChild('guestsInput') guestsInput!: ElementRef;
-  @Input() availabilities!: AvailabilityDTO[];
+  @Input() availabilities: AvailabilityDTO[];
   private userAccount:any
-  avail:AvailabilityDTO[]=[
-    { id: 1, startDate: '2024-01-01', endDate: '2024-01-10', specialPrice: 120, accommodationId:7 },
-    { id: 2, startDate: '2024-01-11', endDate: '2024-01-20', specialPrice: 140, accommodationId:7 },
-    { id: 3, startDate: '2024-01-21', endDate: '2024-01-31', specialPrice: 125, accommodationId:7 },
-    { id: 4, startDate: '2024-02-01', endDate: '2024-02-10', specialPrice: 130, accommodationId:7  },
-    { id: 5, startDate: '2024-02-11', endDate: '2024-02-20', specialPrice: 135, accommodationId:7  },
-    { id: 6, startDate: '2024-02-21', endDate: '2024-02-29', specialPrice: 150, accommodationId:7  },
-    { id: 7, startDate: '2024-03-01', endDate: '2024-03-15', specialPrice: 150, accommodationId:7  },
-    { id: 8, startDate: '2024-03-16', endDate: '2024-03-31', specialPrice: 160, accommodationId:7  },
-    { id: 9, startDate: '2024-04-01', endDate: '2024-04-10', specialPrice: 165, accommodationId:7  },
-    { id: 10, startDate: '2024-04-11', endDate: '2024-04-20', specialPrice: 145, accommodationId:7  },
-    { id: 11, startDate: '2024-04-21', endDate: '2024-04-30', specialPrice: 150, accommodationId:7  },
-    { id: 12, startDate: '2024-12-20', endDate: '2024-12-31', specialPrice: 180, accommodationId:7  }]
+
   @Input() reservationRequirement: any;
   defaultCheckInDate: string;
   defaultCheckOutDate: string;
@@ -64,8 +52,6 @@ export class ReservationComponent implements AfterViewInit {
     this.availabilities.forEach((availability: AvailabilityDTO) => {
       const startDate = new Date(availability.startDate);
       const endDate = new Date(availability.endDate);
-
-      while (startDate <= endDate) {
         this.availableDates.push({
           id: availability.id,
           startDate: this.formatDate(startDate),
@@ -74,7 +60,6 @@ export class ReservationComponent implements AfterViewInit {
           accommodationId: availability.accommodationId
         });
         startDate.setDate(startDate.getDate() + 1);
-      }
     });
     this.calculateTotalPrice();
     }
@@ -176,10 +161,9 @@ export class ReservationComponent implements AfterViewInit {
   }
 
   makeReservation(): void {
-
     this.reservationService.getUserAccount(this.reservationRequirement.ownerId).subscribe(
       (userAccount: any) => {
-        this.userAccount=userAccount;
+        this.userAccount = userAccount;
 
         const reservationData = {
           startDate: this.defaultCheckInDate,
@@ -187,17 +171,18 @@ export class ReservationComponent implements AfterViewInit {
           numberOfGuests: +this.guestsInput.nativeElement.value,
           requestStatus: 'SENT',
           totalPrice: this.totalPrice,
-          accommodationId:this.reservationRequirement.accommodationId ,
+          accommodationId: this.reservationRequirement.accommodationId,
           guestId: this.guestId,
           name: this.reservationRequirement.accommodationName,
           type: this.reservationRequirement.accommodationType,
           stars: this.reservationRequirement.accommodationRating,
           dateRequested: new Date().toLocaleDateString(),
-          userUsername:this.userAccount.username,
-          userImageType:/*this.userAccount.userImageType*/"png",
-          userProfilePictureBytes:/*this.userAccount.userProfilePictureBytes*/"tdfhgjgh",
-          imageType:/*this.userAccount.userImageType*/"png",
-          mainPictureBytes:/*this.userAccount.userProfilePictureBytes*/"tdfhgjgh"};
+          userUsername: this.userAccount.username,
+          userImageType: /*this.userAccount.userImageType*/ "png",
+          userProfilePictureBytes: /*this.userAccount.userProfilePictureBytes*/ "tdfhgjgh",
+          imageType: /*this.userAccount.userImageType*/ "png",
+          mainPictureBytes: /*this.userAccount.userProfilePictureBytes*/ "tdfhgjgh"
+        };
 
         this.reservationService.sendReservation(reservationData).subscribe(
           (response) => {
@@ -205,7 +190,11 @@ export class ReservationComponent implements AfterViewInit {
           },
           (error) => {
             console.error('Reservation failed:', error);
-            alert('Reservation request failed to send. The accommodation is taken in chosen date range!');
+            if (error.status === 400) {
+              alert('Invalid reservation request. ' + error.error.message);
+            } else {
+              alert('Reservation request failed. Please try again later.');
+            }
           }
         );
       },

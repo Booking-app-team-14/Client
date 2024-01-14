@@ -33,18 +33,15 @@ interface owner{
 })
 export class RoundUpDetailsComponent implements OnInit {
   @Input() place: place;
-  @Input() owner!: owner1;
+  @Input() owner: Owner;
   userAccount:any;
   owner1:Owner;
 
   constructor(private accommodationService:RoundUpDetailsService) {}
 
   ngOnInit(): void {
-    this.getUserAccount();
 
-  }
-  getUserAccount(): void {
-    this.accommodationService.getUserById(/*this.place.ownerId*/3).subscribe(
+    this.accommodationService.getUserById(this.place.ownerId).subscribe(
       (response) => {
         this.userAccount = response;
         console.log('User Account:', this.userAccount);
@@ -56,5 +53,6 @@ export class RoundUpDetailsComponent implements OnInit {
         // Handle error appropriately
       }
     );
+
   }
 }
