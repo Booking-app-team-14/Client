@@ -121,111 +121,80 @@
 .card {
   flex: 0 0 calc(25% - 20px);
   border: 1px solid var(--color_primary_blue);
-  border-radius: 18px;
-  padding: 20px;
-  background-color: var(--color_white);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
-
+  position: relative;
+  background-color: var(--color_white);
   margin-bottom: 20px;
 }
 
 .card img {
-  width: 18.75rem;
-  height: 9.375rem;
+  width: 100%;
+  height: 200px;
   object-fit: cover;
-  border-radius: 18px;
-  margin-bottom: 10px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 .card h3 {
-  font-size: 16px; /* Increased font size for accommodation type */
-  margin-bottom: 10px; /* Added margin for spacing */
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.card .details {
+  padding: 15px;
 }
 
 .card .name {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 10px; /* Added margin for spacing */
+  margin-bottom: 10px;
 }
-
-.card .details p,
-.card .description {
-  margin: 5px 0;
-}
-
 
 .card .guests {
-  text-align: right;
-  padding-left: 32%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--color_primary_blue);
   font-weight: bold;
-  display: inline-block;
-  align-items: center;
-}
-
-.card .guests-icon {
-  margin-right: 5px;
+  margin-bottom: 10px;
 }
 
 .card .guests-icon img {
-
   width: 16px;
   height: auto;
+  margin-right: 5px;
 }
 
 .card .guests-number {
   font-weight: bold;
 }
 
-.card .name,
-.card .guests {
-  display: inline;
-  margin-right: 10px;
-}
 .card .description {
-  text-align: left;
-  font-size: 12px;
-  margin: 3px 0;
-}
-
-.card .price {
-  text-align: center;
-  font-size: x-large;
-  margin-top: 20px;
-  font-weight: bold;
-  display: flex;
-  color:var(--color_primary_blue);
-  align-items: center;
-  justify-content: center; /* Center price */
-}
-
-.card .price::before {
-  content: '$';
-  margin-right: 5px;
-}
-.card .price::after {
-  content: '/night';
-  margin-right: 5px;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.card .details,
-.card .guests,
-.card .description,
-.card .price {
+  font-size: 16px;
   margin-bottom: 10px;
 }
 
-.card .details p,
-.card .description {
-  margin: 5px 0;
+.card .price {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--color_primary_blue);
+  margin-bottom: 20px;
 }
 
-.card .price::before,
-.card .price::after {
-  font-size: 14px;
+.button-details {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color_primary_blue);
+  color: var(--color_white);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button-details:hover {
+  background-color: #4a8bd6;
 }
