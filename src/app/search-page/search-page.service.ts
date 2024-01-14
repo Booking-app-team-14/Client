@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, map, Observable, switchMap} from "rxjs";
 import {Accommodation} from "../shared/accommodation.model";
 import {FilterModel} from "../shared/Filter.model";
 
@@ -16,7 +16,7 @@ export class SearchPageService {
   constructor(private http: HttpClient) { }
 
   getAllAccommodations(): Observable<Accommodation[]> {
-    return this.http.get<Accommodation[]>('http://localhost:8080/api/accommodations/get');
+    return this.http.get<Accommodation[]>('http://localhost:8080/api/accommodations/sort/price/asc');
   }
   getAllAccommodationsByPriceASC(): Observable<Accommodation[]> {
     return this.http.get<Accommodation[]>('http://localhost:8080/api/accommodations/sort/price/asc');
@@ -100,5 +100,21 @@ export class SearchPageService {
 
   getFavouriteAccommodations(id: number) {
     return this.http.get<any>(`http://localhost:8080/api/users/favorite/${id}`);
+  }
+
+  getOwnerInfo(): Observable<string> {
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    return this.http.get<any>(`http://localhost:8080/api/users/token/${currentUser.token}`).pipe(
+      switchMap((info: any) => {
+        return this.getUserAccount(info).pipe(
+          map((userData: any) => userData.username)
+        );
+      })
+    );
+  }
+
+  getUserAccount(userId: number): Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/api/users/${userId}`);
   }
 }

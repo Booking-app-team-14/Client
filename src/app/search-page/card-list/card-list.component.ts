@@ -79,7 +79,6 @@ export class CardListComponent implements AfterViewInit {
     this.service.getAllAccommodations().subscribe({
       next: (result: Accommodation[]) => {
         this.apartments = result;
-        console.log('Fetched default accommodations:', result);
       },
       error: (error: any) => {
         console.log('Error fetching default accommodations:', error);
@@ -191,5 +190,21 @@ export class CardListComponent implements AfterViewInit {
         console.log('Invalid sorting option');
         break;
     }
+  }
+
+  isApartmentFavorite(apartment: any): boolean {
+    this.service.getOwnerInfo().subscribe(
+      (userInfo: any) => {
+        if (userInfo.favouriteAccommodationsIds) {
+          return userInfo.favouriteAccommodationsIds.includes(apartment.id);
+        }
+        return false;
+      },
+      (error) => {
+        console.error('Error fetching user info:', error);
+        return false;
+      }
+    );
+    return false;
   }
 }
