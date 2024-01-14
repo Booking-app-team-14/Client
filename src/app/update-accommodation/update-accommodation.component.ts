@@ -45,7 +45,8 @@ export class UpdateAccommodationComponent implements OnInit, AfterViewInit {
         this.price = res['defaultPrice'];
         this.enteredAddress = res['location']['address'] + ', ' + res['location']['city'] + ', ' + res['location']['country'];
         this.message = res['message'];
-        this.selectedPriceType = res['pricePerGuest'] ? 'PerGuest' : 'PerNight';
+        this.selectedPriceType = res['pricePerGuest'] ? 'PerGuest' : 'PerNight'; 
+        this.confirmationType = res['automaticHandling'] ? 'automatic' : 'manual';
         this.specialPrices = res['availability'].map(availability => {
           return {
             startDate: availability['startDate'],
@@ -140,6 +141,7 @@ export class UpdateAccommodationComponent implements OnInit, AfterViewInit {
   }
 
   selectedPriceType: string;
+  confirmationType: string;
 
   @ViewChild('amenitiesFieldset') amenitiesFieldset: ElementRef;
 
@@ -177,6 +179,8 @@ export class UpdateAccommodationComponent implements OnInit, AfterViewInit {
 
     let perGuest = true;
     if (this.selectedPriceType === 'PerNight') perGuest = false;
+    let automatic = false;
+    if (this.confirmationType === 'automatic') automatic = true;
 
     if (!this.name || !this.description || !this.type || !this.minNumberOfGuests || !this.maxNumberOfGuests || !this.cancellationDeadline || !this.price || !this.enteredAddress || !this.message) {
       alert('Please fill in all the fields.');
@@ -228,6 +232,7 @@ export class UpdateAccommodationComponent implements OnInit, AfterViewInit {
         address: this.enteredAddress.split(',')[0].trim()
       },
       pricePerGuest: perGuest,
+      automaticHandling: automatic,
       defaultPrice: this.price,
       availability: availabilityData,
       cancellationDeadline: this.cancellationDeadline,
@@ -236,18 +241,19 @@ export class UpdateAccommodationComponent implements OnInit, AfterViewInit {
 
     console.log(availabilityData);
 
-    // TODO: submit (change the accommodation details)
-
     this.http.put(`http://localhost:8080/api/accommodations/update`, accommodationData).subscribe(
       (res) => {
-        alert('Accommodation updated successfully.');
       },
       (err) => {
         alert('An error occurred while updating the accommodation.');
       }
     );
 
-    this._router.navigateByUrl('profile');
+    alert('The request for the accommodation update has been successfully sent.');
+
+    this._router.navigate(['/'], { skipLocationChange: true }).then(() => {
+      this._router.navigate(['/']);
+    });
 
   }
 

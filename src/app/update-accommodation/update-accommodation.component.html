@@ -40,7 +40,7 @@
         </div>
 
         <fieldset class="amenities-fieldset" #amenitiesFieldset>
-            <legend id="amenities">Amenities:</legend>
+            <legend id="amenities">Amenities</legend>
             <ng-container *ngFor="let amenity of amenities">
                 <label class="checkbox-label">
                     <input type="checkbox" name="{{ amenity.id }}" value="{{ amenity.name }}" [checked]="amenity.checked">
@@ -70,7 +70,11 @@
             <br>
         </div>
 
-
+        <fieldset class="confirmation-fieldset">
+            <legend>Confirmation of reservations</legend>
+            <label><input type="radio" name="confirmation" value="automatic" [(ngModel)]="confirmationType">Automatic</label> <br>
+            <label><input type="radio" name="confirmation" value="manual" [(ngModel)]="confirmationType">Manual</label>
+        </fieldset>
 
         <div class="availability-container">
 

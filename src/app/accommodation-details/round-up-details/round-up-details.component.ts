@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {AccommodationDetailsService} from "../accommodation-details.service";
 import {RoundUpDetailsService} from "./round-up-details.service";
 
@@ -41,16 +41,14 @@ export class RoundUpDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserAccount();
-    this.owner1.name= this.userAccount.firstName+" " +this.userAccount.lastName;
-    this.owner1.picture = this.userAccount.imageType;
-    this.owner1.pictureBytes=this.userAccount.imageBytes;
-  }
 
+  }
   getUserAccount(): void {
-    this.accommodationService.getUserAccountById(this.place.ownerId).subscribe(
+    this.accommodationService.getUserById(/*this.place.ownerId*/3).subscribe(
       (response) => {
         this.userAccount = response;
         console.log('User Account:', this.userAccount);
+        this.owner1.name= this.userAccount.firstName+" " +this.userAccount.lastName;
 
       },
       (error) => {

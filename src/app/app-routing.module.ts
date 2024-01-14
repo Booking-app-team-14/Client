@@ -17,6 +17,11 @@ import {OwnerReservationsComponent} from "./owner-reservations/owner-reservation
 import {FavoriteComponent} from "./favorite/favorite.component";
 import {OwnerReviewComponent} from "./owner-review/owner-review.component";
 import {ReportModalComponent} from "./report-modal/report-modal.component";
+import {
+  EachAccommodationReportComponent
+} from "./accommodation-reports/each-accommodation/each-accommodation-report.component";
+import {MonthlyReportComponent} from "./accommodation-reports/monthly-report/monthly-report.component";
+import { ApproveReviewsComponent } from './admin-functions/approve-reviews/approve-reviews.component';
 
 const routes: Routes = [
   {component: UpdateAccommodationComponent, path: 'update-accommodation/:id'},
@@ -36,14 +41,16 @@ const routes: Routes = [
   {component:AccommodationDetailsComponent, path:'search/details/:id'},
   {component:CreateAccommodationComponent, path:'create-accommodation'},
   {component: ApproveAccommodationsComponent, path: 'approve-accommodations'},
+  {component: ApproveReviewsComponent, path: 'approve-reviews'},
   {component: GuestReservationsComponent, path:'guest-requests'},
   {component: OwnerReservationsComponent, path:'owner-requests'},
   {component: FavoriteComponent, path:'favorite'},
+  {component: EachAccommodationReportComponent, path:'profile/accommodation/report'},
+  {component:MonthlyReportComponent, path:'monthly_report/:id'},
   { path: 'verify', component: VerificationComponent },
   {path:'search/details/:id/owner-review', component:OwnerReviewComponent},
   {path:'report-modal', component:ReportModalComponent},
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]

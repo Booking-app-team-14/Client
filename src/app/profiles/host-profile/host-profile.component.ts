@@ -24,6 +24,17 @@ export class HostProfileComponent {
 
   constructor(private http: HttpClient, private _router: Router) {
 
+  }
+
+  ngOnInit(): void {
+    this.loadMyAccommodations();
+  }
+
+  ngOnChanges(): void {
+    this.loadMyAccommodations();
+  }
+
+  loadMyAccommodations() {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.http.get(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe({
           next: (userId: any) => {
@@ -42,7 +53,6 @@ export class HostProfileComponent {
             alert("Error while fetching user data from token!");
           }
     });
-
   }
 
   goToAccommodationPage(id: number) {
@@ -52,5 +62,7 @@ export class HostProfileComponent {
   editAccommodationDetails(id: number) {
     this._router.navigateByUrl('update-accommodation/' + id);
   }
-
+  goToMonthlyReport(id:number) {
+    this._router.navigateByUrl('monthly_report/' + id);
+  }
 }

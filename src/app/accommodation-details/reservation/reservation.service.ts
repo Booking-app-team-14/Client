@@ -24,6 +24,8 @@ export class ReservationService {
     );
   }
 
+
+
   getOwnerInfo(): Observable<string> {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -36,6 +38,9 @@ export class ReservationService {
     );
   }
 
+  getAvailabilityForAccommodation(id:number):Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/users/availabilities/accommodations/${id}`);
+  }
   getUserAccount(userId: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/users/${userId}`);
   }

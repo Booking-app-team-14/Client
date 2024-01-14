@@ -1,0 +1,102 @@
+<div class="container">
+
+    <h1>Comments & reviews requests</h1>
+  
+    <mat-radio-group [(ngModel)]="type">
+      <mat-radio-button value="accommodation">
+        <div class="radio-container">
+          <span>Accommodation comments & reviews</span>
+          <mat-icon>font_download</mat-icon>
+        </div>
+      </mat-radio-button>
+      <mat-radio-button value="owner">
+        <div class="radio-container">
+          <span>Owner comments & reviews</span>
+          <mat-icon>portrait</mat-icon>
+        </div>
+      </mat-radio-button>
+    </mat-radio-group>
+  
+    <div class="card-container">
+  
+      <ng-container *ngIf="type === 'accommodation'">
+        <ng-container *ngFor="let accommodationReview of accommodationsReviews">
+        
+          
+        
+        </ng-container>
+      </ng-container>
+  
+      <ng-container *ngIf="type === 'owner'">
+        <ng-container *ngFor="let ownerReview of ownerReviews">
+        
+          <div class="card" id="owner-card-{{ownerReview.id}}">
+
+            <div class="card-content">
+
+              <div class="guest-side">
+
+                <div class="guest-data">
+                  <h3>Guest</h3>
+                  <span class="date">({{ownerReview.timestamp}})</span>
+                </div>
+
+                <div class="guest-data">
+      
+                  <div class="guest">
+                    <img [src]="'data:image/' + ownerReview.guestProfilePictureType + ';base64,' + ownerReview.guestProfilePictureBytes" alt="Guest profile picture">
+                    <span class="username">{{ownerReview.guestUsername}}</span>
+                  </div>
+      
+                </div>
+
+                <div class="span-div">
+                  <span>"{{ownerReview.comment}}"</span>
+                </div>
+
+              </div>
+      
+              <div class="divider"></div>
+      
+              <div class="owner-side">
+
+                <h3>Owner</h3>
+
+                <div class="owner-data">
+                  <div class="owner">
+                    <img [src]="'data:image/' + ownerReview.ownerProfilePictureType + ';base64,' + ownerReview.ownerProfilePictureBytes" alt="Owner profile picture">
+                    <span class="username">{{ownerReview.ownerUsername}}</span>
+                  </div>
+                </div>
+
+                <div class="owner-rating">
+                  <h4>Owner's rating:</h4>
+                  <div class="stars">
+                    <mat-icon *ngFor="let star of [].constructor(ownerReview.ratingBefore)">star</mat-icon>
+                  </div>
+                  <ng-container *ngIf="ownerReview.rating != -1">
+                    <h4>Guest's rating for owner:</h4>
+                    <div class="stars">
+                      <mat-icon *ngFor="let star of [].constructor(ownerReview.rating)">star</mat-icon>
+                    </div>
+                  </ng-container>
+                </div>
+                
+              </div>
+
+            </div>
+
+            <div class="buttons">
+              <button (click)="binOwnerReview(ownerReview.id)" class="bin">Bin</button>
+              <button (click)="acceptOwnerReview(ownerReview.id)" class="accept">Accept</button>
+            </div>
+
+          </div>
+        
+        </ng-container> 
+      </ng-container>
+
+    </div>
+  
+  </div>
+  

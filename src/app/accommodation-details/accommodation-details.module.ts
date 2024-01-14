@@ -12,6 +12,7 @@ import {FormsModule} from "@angular/forms";
 import {RouterLink} from "@angular/router";
 
 
+
 @NgModule({
   declarations: [
     ImageSliderComponent,
