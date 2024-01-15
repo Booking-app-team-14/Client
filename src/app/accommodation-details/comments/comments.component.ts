@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
-import { Observable } from 'rxjs';
+import {catchError, Observable, of} from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
+import {ReservationService} from "../reservation/reservation.service";
 @Component({
   selector: 'app-comments',
   templateUrl: './comments.component.html',
@@ -17,8 +18,8 @@ export class CommentsComponent {
   averageRating: any;
   userComment: any;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
-    this.displayedComments = this.comments.slice(0, 10); //
+  constructor(private http: HttpClient, private route: ActivatedRoute, private reservationService: ReservationService) {
+    //this.displayedComments = this.comments.slice(0, 10); //
   }
 
   loadMoreComments() {
@@ -45,13 +46,18 @@ export class CommentsComponent {
 
   accommodationId: number = 0;
 
+  //private accommodationId: number;
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.accommodationId = params['id'];
       //const id=2;
       /*this.fetchOwnerDetails(id);
       this.fetchCommentsByOwnerId(this.ownerId);*/
+      this.fetchAverageRatingByAccommodationId(this.accommodationId);
       this.fetchCommentsByAccommodationId(this.accommodationId);
+
+        //this.isCurrentUser(this.review.user.id);
     });
   }
 
@@ -83,6 +89,10 @@ export class CommentsComponent {
     });
   }
 
+  //private currentUserId: number =2;
+
+  //hasSentReview: boolean;
+
   fetchCommentsByAccommodationId(accommodationId: number): void {
 
     this.http.get(`http://localhost:8080/api/accommodations/${this.accommodationId}/accommodationReviews/pending`).subscribe(
@@ -93,9 +103,12 @@ export class CommentsComponent {
           image: 'assets/BG.jpg',
           commentText: review.comment,
           rating:review.rating,
-          id: review.id
+          id: review.id,
 
         }));
+
+        //this.hasSentReview = this.comments.some(comment => comment.user.id === 2);
+
         this.displayedComments = this.comments.slice(0, 4);
         /*if (this.comments.length > 0) {
           this.updateFilledStars(this.comments[0].rating);
@@ -120,7 +133,7 @@ export class CommentsComponent {
           console.log('Review deleted successfully!');
           alert('Review deleted successfully!')
           this.fetchCommentsByAccommodationId(this.accommodationId);
-          //this.fetchAverageRatingByOwnerId(this.ownerId);
+          this.fetchAverageRatingByAccommodationId(this.accommodationId);
         },
         error: (err) => {
           console.error('Error deleting review:', err);
@@ -132,11 +145,48 @@ export class CommentsComponent {
     }
   }
 
+    /*isCurrentUser(commentUser: any): Observable<boolean> {
+    return new Observable<boolean>((observer) => {
+      let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-  isCurrentUserResult: boolean = false;
+      this.http.get(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe({
+        next: (userId: any) => {
+          if (userId === commentUser.id) {
+            observer.next(true);
+          } else {
+            observer.next(false);
+          }
+          observer.complete();
+        },
+        error: (error) => {
+          console.error('Error fetching user data', error);
+          observer.error(error);
+        }
+      });
+    });
+  }*/
+  isCurrentUser(commentUser: any): Observable<boolean> {
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-  isCurrentUser(commentUser: any): boolean {
-    return true
+    return this.http.get(`http://localhost:8080/api/users/token/${currentUser.token}`).pipe(
+      map((userId: any) => userId === commentUser.id),
+      catchError(error => {
+        console.error('Error fetching user data', error);
+        return of(false);
+      })
+    );
   }
+
+  fetchAverageRatingByAccommodationId(accommodationId: number): void {
+    this.http.get<number>(`http://localhost:8080/api/accommodation/${accommodationId}/average-rating`).subscribe(
+      (averageRating) => {
+        this.averageRating = averageRating;
+      },
+      (error) => {
+        console.error('Error fetching average rating for owner', error);
+      }
+    );
+  }
+
 
 }

@@ -65,7 +65,8 @@ mat-icon {
     flex-direction: row;
     justify-content: space-between;
     gap: 1rem;
-    height: 14rem;
+    min-height: 12rem;
+    max-height: 18rem;
   }
   
   .divider {
@@ -74,35 +75,28 @@ mat-icon {
     background-color: #E4E4E7;
   }
   
-  .guest-side {
-    width: 20rem;
+  .left-side {
+    max-width: 40rem;
   }
   
-  .guest-side .span-div {
-    height: 100%;
-    overflow: auto;
-    text-align: justify;
-  }
-  
-  .guest-data img {
+  .left-data img {
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
     border: 1px solid var(--color_black_text);
   }
   
-  .guest-side {
+  .left-side {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
   
-  .guest-data {
+  .left-data {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
   }
   
   .date {
@@ -110,52 +104,52 @@ mat-icon {
     color: var(--color_gray_text);
   }
   
-  .guest {
+  .left {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 1rem;
-    width: 100%;
+    /* width: 100%; */
   }
   
   .username {
     font-size: 1rem;
     font-weight: 500;
-    width: auto;
     overflow-x: auto;
   }
 
-  .owner-side {
-    width: 20rem;
+  .right-side {
+    min-width: 20rem;
+    max-width: 40rem;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 1rem;
   }
 
-.owner-data {
+.right-data {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
     width: 100%;
 }
 
-.owner {
+.right {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 1rem;
-    width: 100%;
 }
 
-.owner-data img {
+.right-data img {
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
     border: 1px solid var(--color_black_text);
 }
 
-.owner-rating {
+.right-rating {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -173,7 +167,7 @@ mat-icon {
     color: var(--color_primary_blue)
 }
 
-.owner-side h4 {
+.right-side h4 {
     font-size: 1rem;
     font-weight: 500;
     color: var(--color_gray_text);
@@ -196,6 +190,7 @@ mat-icon {
     font-weight: 500;
     padding: 0.5rem;
     color: var(--color_white);
+    height: 5rem;
 }
 
 .buttons button:hover {
@@ -325,4 +320,30 @@ mat-icon {
 
 .card-content-accommodation .span-div {
   max-height: 10rem;
+}
+
+#reason-header {
+    margin-bottom: 0.2rem;
+}
+
+#reason {
+    font-size: 1rem;
+    color: var(--color_gray_text);
+    letter-spacing: 0.05rem;
+    overflow-x: auto;
+    overflow-y: auto;
+    height: 100%;
+    display: block;
+    width: 100%;
+    text-align: justify;
+}
+
+.previous-reports {
+    font-size: 0.8rem;
+    color: var(--color_gray_text);
+    letter-spacing: 0.05rem;
+    font-weight: 500;
+    position: relative;
+    top: -1.8rem;
+    left: 5.9rem;
 }

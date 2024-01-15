@@ -14,17 +14,19 @@
   <div class="best-offers">
     <div class="card" *ngFor="let offer of offers">
       <img [src]="'data:image/' + offer.imageType + ';base64,' + offer.imageBytes" alt="avatar">
-  <h3>{{ offer.accommodationType }}</h3>
-  <div class="details">
-    <p class="name">{{ offer.name }}</p>
-    <p class="guests">
-      <span class="guests-icon"><img src="/assets/people.png" alt="Guests Icon"></span>
-      <span class="guests-number">{{ offer.maxNumberOfGuests }}</span>
-    </p>
-    <p class="description">{{ offer.description }}</p>
-  </div>
-  <p class="price">{{ offer.pricePerNight }}</p>
-</div>
+      <h3>{{ offer.accommodationType }}</h3>
+      <div class="details">
+        <p class="name">{{ offer.name }}</p>
+        <p class="guests">
+          <span class="guests-icon"><img src="/assets/people.png" alt="Guests Icon"></span>
+          <span class="guests-number">{{ offer.maxNumberOfGuests }}</span>
+        </p>
+        <p class="description">{{ offer.description }}</p>
+        <p class="price">${{ offer.pricePerNight }} /night</p>
+      </div>
+      <br>
+      <button class="button-details" (click)="redirectToDetailsPage(offer.id)">Details</button>
+    </div>
   </div>
 </div>
 

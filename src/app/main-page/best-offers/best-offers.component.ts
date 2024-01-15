@@ -31,4 +31,7 @@ export class BestOffersComponent implements OnInit{
   }
 
 
+  redirectToDetailsPage(id: number) {
+    this.router.navigate(['/search/details',id]);
+  }
 }

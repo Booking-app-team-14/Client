@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {Accommodation} from "../../shared/accommodation.model";
 import {SearchPageService} from "../search-page.service";
@@ -12,7 +12,7 @@ import {ReservationService} from "../../accommodation-details/reservation/reserv
   templateUrl: './card-list.component.html',
   styleUrl: './card-list.component.css'
 })
-export class CardListComponent implements OnInit {
+export class CardListComponent implements AfterViewInit {
   apartmentsPerPage = 4;
   @Input() apartments: Accommodation[] = [];
   subscription: Subscription;
@@ -68,7 +68,7 @@ export class CardListComponent implements OnInit {
       }
     );
   }
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.getAccommodations();
     this.listenToSearchQueryChanges();
     this.filterAccommodations();
@@ -79,7 +79,6 @@ export class CardListComponent implements OnInit {
     this.service.getAllAccommodations().subscribe({
       next: (result: Accommodation[]) => {
         this.apartments = result;
-        console.log('Fetched default accommodations:', result);
       },
       error: (error: any) => {
         console.log('Error fetching default accommodations:', error);
@@ -191,5 +190,21 @@ export class CardListComponent implements OnInit {
         console.log('Invalid sorting option');
         break;
     }
+  }
+
+  isApartmentFavorite(apartment: any): boolean {
+    this.service.getOwnerInfo().subscribe(
+      (userInfo: any) => {
+        if (userInfo.favouriteAccommodationsIds) {
+          return userInfo.favouriteAccommodationsIds.includes(apartment.id);
+        }
+        return false;
+      },
+      (error) => {
+        console.error('Error fetching user info:', error);
+        return false;
+      }
+    );
+    return false;
   }
 }

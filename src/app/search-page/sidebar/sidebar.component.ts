@@ -17,12 +17,11 @@ export class SidebarComponent {
   selectedAmenities: number[] = [];
 
   amenityMap: { [key: string]: number } = {
-    AirCondition: 1,
-    breakfast: 2,
-    spa: 3,
-    Pool:4,
-    BeachFront:5,
-    Wifi: 6
+    FreeParking: 1,
+    WiFi: 2,
+    Jacuzzi: 3,
+    GymCenter:4,
+    VideoGames:5,
 
   };
 

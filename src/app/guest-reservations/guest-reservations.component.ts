@@ -42,20 +42,6 @@ export class GuestReservationsComponent implements OnInit{
       },
       (deleteError) => {
         alert('Successfully canceled!');
-        this.http.put(guestUrl, {}).subscribe(
-          () => {
-            console.log('Guest account updated successfully');
-            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-              this.router.navigate([this.router.url]);
-            });
-          },
-          (putError) => {
-            console.error('Error updating guest account:', putError);
-            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-              this.router.navigate([this.router.url]);
-            });
-          }
-        );
       }
     );
   }
@@ -96,6 +82,7 @@ export class GuestReservationsComponent implements OnInit{
         }
       },
       error: (err) => {
+        console.error(err);
       }
     });
   }

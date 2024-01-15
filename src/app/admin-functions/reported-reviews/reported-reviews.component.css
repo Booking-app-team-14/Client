@@ -55,7 +55,7 @@ mat-icon {
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     margin-bottom: 3rem;
     transition: all 0.8s;
   }
@@ -316,13 +316,36 @@ mat-icon {
 }
 
 .accommodation-btns {
-  gap: 1rem;
+    margin-top: 0.5rem;
+  gap: 1.5rem;
 }
 
 .accommodation-btns button {
-  height: 5rem;
+  height: 2.5rem;
 }
 
 .card-content-accommodation .span-div {
   max-height: 10rem;
+}
+
+.horizontal-divider {
+  width: 100%;
+  height: 2px;
+  background-color: #E4E4E7;
+}
+
+#reason-header {
+    margin-bottom: 0.2rem;
+}
+
+#reason {
+    font-size: 1rem;
+    color: var(--color_gray_text);
+    letter-spacing: 0.05rem;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 10rem;
+    display: block;
+    width: 100%;
+    text-align: justify;
 }
