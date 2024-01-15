@@ -88,9 +88,9 @@
         <label >Availability {{ i + 1 }}:</label>
         <div class="special-price-dates">
           <label>From:</label>
-          <input type="date" [(ngModel)]="specialPrice.startDate" name="startDate{{i}}"  required format="yyyy-MM-dd">
+          <input type="date" [(ngModel)]="specialPrice.startDate" name="startDate{{i}}"  required format="yyyy-MM-dd" [attr.min]="getTodayDate(i)">
           <label>To:</label>
-          <input type="date" [(ngModel)]="specialPrice.endDate" name="endDate{{i}}" required format="yyyy-MM-dd" >
+          <input type="date" [(ngModel)]="specialPrice.endDate" name="endDate{{i}}" required format="yyyy-MM-dd" [attr.min]="getDateFromDatePicker(i)" [disabled]="isStartDateSelected(i)">
         </div>
         <label id="specialPriceAmount">Price:</label>
         <input type="number" [(ngModel)]="specialPrice.amount" name="amount{{i}}"  >

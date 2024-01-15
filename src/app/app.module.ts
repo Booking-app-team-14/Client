@@ -82,7 +82,7 @@ import { ReportedUsersComponent } from './admin-functions/reported-users/reporte
     EachAccommodationReportComponent,
     MonthlyReportComponent,
     ApproveReviewsComponent,
-    OwnerNotificationsComponent
+    OwnerNotificationsComponent,
     ReportedReviewsComponent,
     ReportedUsersComponent,
 

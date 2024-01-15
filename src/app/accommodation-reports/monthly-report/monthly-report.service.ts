@@ -10,7 +10,7 @@ export class MonthlyReportService {
 
   constructor(private http: HttpClient) { }
 
-  getMonthlyAccommodationReports(ownerId: number, accommodationId: number, year: number): Observable<Map<string, any>> {
+  getMonthlyAccommodationReports(accommodationId: number, year: number): Observable<Map<string, any>> {
     const url = `${this.baseUrl}/${accommodationId}/monthly-report`;
     const params = new HttpParams().set('year', year.toString());
 

@@ -82,6 +82,7 @@ export class GuestReservationsComponent implements OnInit{
         }
       },
       error: (err) => {
+        console.error(err);
       }
     });
   }

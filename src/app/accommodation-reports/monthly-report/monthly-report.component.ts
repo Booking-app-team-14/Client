@@ -14,6 +14,7 @@ export class MonthlyReportComponent implements OnInit {
   reportForm: FormGroup;
   accommodationReports: any[];
   accommodationDetails: any;
+  accommodationId: number;
 
   constructor(private fb: FormBuilder, private reportService: MonthlyReportService,
               private accommodationService: AccommodationDetailsService, private route: ActivatedRoute,) {}
@@ -24,17 +25,17 @@ export class MonthlyReportComponent implements OnInit {
     });
     this.route.params.subscribe(params => {
       const id = +params['id'];
+      this.accommodationId = id;
 
       this.loadAccommodationDetails(id);
     })
   }
 
-  generateReport() {
+  generateReport(accommodationId: number) {
     if (this.reportForm.valid) {
       const year = this.reportForm.get('year').value;
-      const accommodationId = 1;
 
-      this.reportService.getMonthlyAccommodationReports(3, accommodationId, year).subscribe(
+      this.reportService.getMonthlyAccommodationReports(accommodationId, year).subscribe(
         (data) => {
           this.accommodationReports = Object.values(data);
         },

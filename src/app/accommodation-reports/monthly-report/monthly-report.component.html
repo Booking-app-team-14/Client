@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <h2 class="mb-4">Monthly Accommodation Report</h2>
 
-  <form [formGroup]="reportForm" (ngSubmit)="generateReport()">
+  <form [formGroup]="reportForm" (ngSubmit)="generateReport(accommodationId)">
     <div class="form-group row">
       <label for="year" class="col-sm-2 col-form-label">Select Year:</label>
       <div class="col-sm-4">
