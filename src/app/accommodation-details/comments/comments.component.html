@@ -19,7 +19,7 @@
             <br>
             <p class="ratin"> Rating: {{ comment.rating }}
             </p>
-            <button *ngIf="isCurrentUser(comment.user) "   (click)="deleteComment()">Delete</button>
+            <button *ngIf="(isCurrentUser(comment.user)  )"   (click)="deleteComment()">Delete</button>
 
 
           </div>
