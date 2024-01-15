@@ -50,6 +50,8 @@ import { FavoriteComponent } from './favorite/favorite.component';
 import { EachAccommodationReportComponent } from './accommodation-reports/each-accommodation/each-accommodation-report.component';
 import { MonthlyReportComponent } from './accommodation-reports/monthly-report/monthly-report.component';
 import { ApproveReviewsComponent } from './admin-functions/approve-reviews/approve-reviews.component';
+import { ReportedReviewsComponent } from './admin-functions/reported-reviews/reported-reviews.component';
+import { ReportedUsersComponent } from './admin-functions/reported-users/reported-users.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +81,8 @@ import { ApproveReviewsComponent } from './admin-functions/approve-reviews/appro
     EachAccommodationReportComponent,
     MonthlyReportComponent,
     ApproveReviewsComponent,
+    ReportedReviewsComponent,
+    ReportedUsersComponent,
 
   ],
     imports: [

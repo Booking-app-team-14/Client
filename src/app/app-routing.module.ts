@@ -22,6 +22,8 @@ import {
 } from "./accommodation-reports/each-accommodation/each-accommodation-report.component";
 import {MonthlyReportComponent} from "./accommodation-reports/monthly-report/monthly-report.component";
 import { ApproveReviewsComponent } from './admin-functions/approve-reviews/approve-reviews.component';
+import { ReportedReviewsComponent } from './admin-functions/reported-reviews/reported-reviews.component';
+import { ReportedUsersComponent } from './admin-functions/reported-users/reported-users.component';
 
 const routes: Routes = [
   {component: UpdateAccommodationComponent, path: 'update-accommodation/:id'},
@@ -42,6 +44,8 @@ const routes: Routes = [
   {component:CreateAccommodationComponent, path:'create-accommodation'},
   {component: ApproveAccommodationsComponent, path: 'approve-accommodations'},
   {component: ApproveReviewsComponent, path: 'approve-reviews'},
+  {component: ReportedReviewsComponent, path: 'reported-reviews'},
+  {component: ReportedUsersComponent, path: 'reported-users'},
   {component: GuestReservationsComponent, path:'guest-requests'},
   {component: OwnerReservationsComponent, path:'owner-requests'},
   {component: FavoriteComponent, path:'favorite'},
