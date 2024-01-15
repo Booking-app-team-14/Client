@@ -50,6 +50,7 @@ import { FavoriteComponent } from './favorite/favorite.component';
 import { EachAccommodationReportComponent } from './accommodation-reports/each-accommodation/each-accommodation-report.component';
 import { MonthlyReportComponent } from './accommodation-reports/monthly-report/monthly-report.component';
 import { ApproveReviewsComponent } from './admin-functions/approve-reviews/approve-reviews.component';
+import {OwnerNotificationsComponent} from "./notifications/owner-notifications/owner-notifications.component";
 
 @NgModule({
   declarations: [
@@ -79,38 +80,39 @@ import { ApproveReviewsComponent } from './admin-functions/approve-reviews/appro
     EachAccommodationReportComponent,
     MonthlyReportComponent,
     ApproveReviewsComponent,
+    OwnerNotificationsComponent
 
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatButtonModule,
-        MatIconModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        ReactiveFormsModule,
-        SlickCarouselModule,
-        NgOptimizedImage,
-        FormsModule,
-        MatRadioModule,
-        HttpClientModule,
-        MatSnackBarModule,
-        MainPageModule,
-        SearchPageModule,
-        AccommodationDetailsModule,
-        SharedModule,
-        MatDialogContent,
-        MatDialogActions,
-        MatDialogClose,
-        FormsModule,
-        SharedModule,
-        MatOptionModule,
-        MatSelectModule,
-        MatDialogTitle
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    SlickCarouselModule,
+    NgOptimizedImage,
+    FormsModule,
+    MatRadioModule,
+    HttpClientModule,
+    MatSnackBarModule,
+    MainPageModule,
+    SearchPageModule,
+    AccommodationDetailsModule,
+    SharedModule,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+    FormsModule,
+    SharedModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatDialogTitle
+  ],
   providers: [
     provideClientHydration(),
 
