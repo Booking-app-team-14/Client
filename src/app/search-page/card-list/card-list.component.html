@@ -8,37 +8,37 @@
       </select>
     </div>
 
-  <div class="card-list1">
-    <div class="card" *ngFor="let apartment of apartments">
-      <div class="card-image">
-        <img [src]="'data:image/' + apartment.imageType + ';base64,' + apartment.imageBytes" alt="avatar">
-      </div>
-      <div class="card-details">
-        <ng-container *ngIf="userRole === 'guest'">
-        <mat-icon
-          class="favorite-icon"
-          [class.filled]="apartment.isFavorite"
-          (click)="toggleFavorite(apartment)"
-        >
-          {{ apartment.isFavorite ? 'favorite' : 'favorite_border' }}
-        </mat-icon>
-          </ng-container>
-        <div class="card-name">{{ apartment.name }}</div>
-        <div class="card-rating" color= var(--color_primary_blue);>
-          ★  {{ apartment.rating }}   ({{ apartment.id }} reviews)
+    <div class="card-list1">
+      <div class="card" *ngFor="let apartment of apartments">
+        <div class="card-image">
+          <img [src]="'data:image/' + apartment.imageType + ';base64,' + apartment.imageBytes" alt="avatar">
         </div>
-        <div class="card-description">{{ apartment.description }}</div>
-        <div class="card-footer">
-          <button class="details-btn" (click)="redirectToAccomodationDetailsPage(apartment.id)">Details</button>
-          <div class="price-per-night">${{ apartment.pricePerNight }}</div>
+        <div class="card-details">
+          <ng-container *ngIf="userRole === 'guest'">
+            <mat-icon
+              class="favorite-icon"
+              [class.filled]="apartment.isFavorite"
+              (click)="toggleFavorite(apartment)"
+            >
+              {{ apartment.isFavorite ? 'favorite' : 'favorite_border' }}
+            </mat-icon>
+          </ng-container>
+          <div class="card-name">{{ apartment.name }}</div>
+          <div class="card-rating" color= var(--color_primary_blue);>
+            ★  {{ apartment.rating }}   ({{ apartment.id }} reviews)
+          </div>
+          <div class="card-description">{{ apartment.description }}</div>
+          <div class="card-footer">
+            <button class="details-btn" (click)="redirectToAccomodationDetailsPage(apartment.id)">Details</button>
+            <div class="price-per-night">${{ apartment.pricePerNight }}</div>
+          </div>
         </div>
       </div>
     </div>
+    <div class="pagination">
+      <button *ngFor="let page of totalPages" (click)="changePage(page)" [class.active]="page === currentPage">
+        {{ page }}
+      </button>
+    </div>
   </div>
-  <div class="pagination">
-    <button *ngFor="let page of totalPages" (click)="changePage(page)" [class.active]="page === currentPage">
-      {{ page }}
-    </button>
-  </div>
-</div>
 </div>

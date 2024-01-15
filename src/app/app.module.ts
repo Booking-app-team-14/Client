@@ -50,6 +50,7 @@ import { FavoriteComponent } from './favorite/favorite.component';
 import { EachAccommodationReportComponent } from './accommodation-reports/each-accommodation/each-accommodation-report.component';
 import { MonthlyReportComponent } from './accommodation-reports/monthly-report/monthly-report.component';
 import { ApproveReviewsComponent } from './admin-functions/approve-reviews/approve-reviews.component';
+import {OwnerNotificationsComponent} from "./notifications/owner-notifications/owner-notifications.component";
 import { ReportedReviewsComponent } from './admin-functions/reported-reviews/reported-reviews.component';
 import { ReportedUsersComponent } from './admin-functions/reported-users/reported-users.component';
 
@@ -81,40 +82,41 @@ import { ReportedUsersComponent } from './admin-functions/reported-users/reporte
     EachAccommodationReportComponent,
     MonthlyReportComponent,
     ApproveReviewsComponent,
+    OwnerNotificationsComponent
     ReportedReviewsComponent,
     ReportedUsersComponent,
 
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatButtonModule,
-        MatIconModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        ReactiveFormsModule,
-        SlickCarouselModule,
-        NgOptimizedImage,
-        FormsModule,
-        MatRadioModule,
-        HttpClientModule,
-        MatSnackBarModule,
-        MainPageModule,
-        SearchPageModule,
-        AccommodationDetailsModule,
-        SharedModule,
-        MatDialogContent,
-        MatDialogActions,
-        MatDialogClose,
-        FormsModule,
-        SharedModule,
-        MatOptionModule,
-        MatSelectModule,
-        MatDialogTitle
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    SlickCarouselModule,
+    NgOptimizedImage,
+    FormsModule,
+    MatRadioModule,
+    HttpClientModule,
+    MatSnackBarModule,
+    MainPageModule,
+    SearchPageModule,
+    AccommodationDetailsModule,
+    SharedModule,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+    FormsModule,
+    SharedModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatDialogTitle
+  ],
   providers: [
     provideClientHydration(),
 

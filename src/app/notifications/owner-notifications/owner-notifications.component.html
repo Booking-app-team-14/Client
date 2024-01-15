@@ -1,0 +1,14 @@
+<div class="notification-wall">
+  <div *ngFor="let notification of notifications" class="notification">
+    <div class="notification-header">
+      <span class="notification-type">Notification</span>
+      <span class="notification-date">{{ notification.sentBefore | date: 'medium' }}</span>
+    </div>
+    <div class="notification-content">
+      <p><strong>From:</strong> {{ notification.from }}</p>
+      <p><strong>To:</strong> {{ notification.to }}</p>
+      <p><strong>Description:</strong> {{ notification.description }}</p>
+      <p><strong>Seen:</strong> {{ notification.seen ? 'Yes' : 'No' }}</p>
+    </div>
+  </div>
+</div>
