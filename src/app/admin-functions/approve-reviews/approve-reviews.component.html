@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="span-div">
-                  <span>"{{accommodationReview.comment}}"</span>
+                  <span *ngIf="accommodationReview.comment">"{{accommodationReview.comment}}"</span>
                 </div>
 
                 <div *ngIf="accommodationReview.rating!==0" class="guests-accommodation-rating">
@@ -142,7 +142,7 @@
                   <div class="stars">
                     <mat-icon *ngFor="let star of [].constructor(ownerReview.ratingBefore)">star</mat-icon>
                   </div>
-                  <ng-container *ngIf="ownerReview.rating != -1">
+                  <ng-container *ngIf="ownerReview.rating != 0">
                     <h4>Guest's rating for owner:</h4>
                     <div class="stars">
                       <mat-icon *ngFor="let star of [].constructor(ownerReview.rating)">star</mat-icon>

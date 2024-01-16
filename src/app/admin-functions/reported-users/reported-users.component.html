@@ -15,14 +15,14 @@
                         <div class="left-data">
                 
                             <div class="left">
-                                <img [src]="'data:image/' + userReport.guestProfilePictureType + ';base64,' + userReport.guestProfilePictureBytes" alt="Guest profile picture">
-                                <span class="username">{{userReport.guestUsername}}</span>
+                                <img [src]="'data:image/' + userReport.reportingUserProfilePictureType + ';base64,' + userReport.reportingUserProfilePictureBytes" alt="Guest profile picture">
+                                <span class="username">{{userReport.reportingUserUsername}}</span>
                             </div>
                 
                         </div>
 
                         <h3 id="reason-header">Reason:</h3>
-                        <span id="reason">{{userReport.reason}}</span>
+                        <span id="reason">{{userReport.description}}</span>
 
                     </div>
             
@@ -33,13 +33,13 @@
                         <div>
                             <div class="right-data">
                                 <div class="right">
-                                    <img [src]="'data:image/' + userReport.ownerProfilePictureType + ';base64,' + userReport.ownerProfilePictureBytes" alt="Owner profile picture">
-                                    <span class="username">{{userReport.ownerUsername}}</span>
+                                    <img [src]="'data:image/' + userReport.reportedUserProfilePictureType + ';base64,' + userReport.reportedUserProfilePictureBytes" alt="Owner profile picture">
+                                    <span class="username">{{userReport.reportedUserUsername}}</span>
                                 </div>
-                                <span class="date">({{userReport.timestamp}})</span>
+                                <span class="date">({{userReport.date}})</span>
                             </div>
 
-                            <span class="previous-reports">(2 previous reports)</span>
+                            <span class="previous-reports">({{userReport.reportedUserNumberOfReports}} previous reports)</span>
                         </div>
 
 

@@ -12,38 +12,74 @@ export class ReportedUsersComponent {
   userReports: any[];
 
   constructor(private http: HttpClient, private _router: Router) {
-    this.userReports = [
-      {
-        id: 1,
-        name: "John Doe",
-        email: "johndoe@gmail.com",
-        reason: "Spam",
-        review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "2021-03-01",
-        ownerUsername: "janedoe",
-        timestamp: "2021-03-01",
-        guestUsername: "johndoe"
+    
+    this.http.get('http://localhost:8080/api/userReports').subscribe({
+      next: (data: any) => {
+        this.userReports = data;
+
+        for (let i = 0; i < this.userReports.length; i++) {
+          const formatter = new Intl.DateTimeFormat('en-US', {
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric'
+          });
+          this.userReports[i].date = formatter.format(this.userReports[i].date);
+
+          this.http.get('http://localhost:8080/api/users/' + this.userReports[i].reportingUserId + '/image-type-username', {responseType: 'text'}).subscribe({
+            next: (data: any) => {
+              this.userReports[i].reportingUserUsername = data.split(' | ')[0];
+              this.userReports[i].reportingUserProfilePictureType = data.split(' | ')[1];
+              this.userReports[i].reportingUserProfilePictureBytes = data.split(' | ')[2];
+            },
+            error: (err) => {
+              console.error(err);
+            }
+          });
+
+          this.http.get('http://localhost:8080/api/users/' + this.userReports[i].reportedUserId + '/image-type-username', {responseType: 'text'}).subscribe({
+            next: (data: any) => {
+              this.userReports[i].reportedUserUsername = data.split(' | ')[0];
+              this.userReports[i].reportedUserProfilePictureType = data.split(' | ')[1];
+              this.userReports[i].reportedUserProfilePictureBytes = data.split(' | ')[2];
+            },
+            error: (err) => {
+              console.error(err);
+            }
+          });
+
+        }
+
       },
-      {
-        id: 2,
-        name: "Jane Doe",
-        email: "janedoe@gmail.com",
-        reason: "Spamsdfsdfds sfdsdfdsfdsfsdfsdfdsfssdfsdfdsfsdfdfdsfsdfdsfsdfdsfsdfdsfsdfdsfsdfdsfsdfdsfsdfdsfsdfdsfsdfdsfsdfsdfdsfsdfsdfsd\ndsfsdfdsfsdfsddfssdf\nsdfsdfsdfdsfsdfdsfsdfsddfssdf\nsdfsdfsdfdsfsdfdsfsdfsddfssdf\nsdfsdfsdfdsfsdfdsfsdfsddfssdf\nsdfsdfsdfdsfsdfdsfsdfsddfssdf\nsdfsdfsdfdsfsdfdsfsdfsddfssdf\nsdfsdfsdfdsfsdfdsfsdfsddfssdf\nsdfsdfsdfdsfsdfdsfsdfsddfssdf\nsdfsdfsdfdsfsdfdsfsdfsddfssdf\nsdfsdfsdf",
-        review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        date: "2021-03-01",
-        ownerUsername: "janedoe",
-        timestamp: "2021-03-01",
-        guestUsername: "johndoe"
+      error: (err) => {
+        console.error(err);
       }
-    ];
+    });
+
   }
 
   blockReportedUser(reportId: number) {
-    // TODO: Block user
+    this.http.put('http://localhost:8080/api/userReports/block-user/' + reportId, {}).subscribe({
+      next: (data: any) => {
+        console.log(data);
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+    alert("User successfully blocked!");
     this.deleteUserReportWithAnimation(reportId);
   }
 
   removeReport(reportId: number) {
+    this.http.delete('http://localhost:8080/api/userReports/' + reportId).subscribe({
+      next: (data: any) => {
+        alert("Report ignored.");
+        console.log(data);
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
     this.deleteUserReportWithAnimation(reportId);
   }
 
