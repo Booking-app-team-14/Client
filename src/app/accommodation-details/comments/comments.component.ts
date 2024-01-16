@@ -4,6 +4,8 @@ import {ActivatedRoute} from "@angular/router";
 import {catchError, Observable, of} from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import {ReservationService} from "../reservation/reservation.service";
+import {AccommodationDetailsService} from "../accommodation-details.service";
+import {UserService} from "../../login/user.service";
 @Component({
   selector: 'app-comments',
   templateUrl: './comments.component.html',
@@ -17,9 +19,14 @@ export class CommentsComponent {
   displayedComments: any[];
   averageRating: any;
   userComment: any;
+  userRole: string ='';
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private reservationService: ReservationService) {
-    //this.displayedComments = this.comments.slice(0, 10); //
+
+
+  constructor(private http: HttpClient, private route: ActivatedRoute, private reservationService: ReservationService, private userService: UserService) {
+    this.userService.userRole$.subscribe(role => {
+      this.userRole = role;
+    });
   }
 
   loadMoreComments() {
@@ -28,13 +35,6 @@ export class CommentsComponent {
     this.displayedComments = [...this.displayedComments, ...remainingComments];
   }
   private reviewId: number;
-  /*selectReview(comment: any): void {
-    this.reviewId = comment.id;
-  }*/
-  /*isCurrentUser(commentUser: any):  boolean  {
-    return true;
-
-  }*/
 
   openDeleteReviewDialog(comment: any) {
 
@@ -88,11 +88,6 @@ export class CommentsComponent {
       }
     });
   }
-
-  //private currentUserId: number =2;
-
-  //hasSentReview: boolean;
-
   fetchCommentsByAccommodationId(accommodationId: number): void {
 
     this.http.get(`http://localhost:8080/api/accommodations/${this.accommodationId}/accommodationReviews/pending`).subscribe(
@@ -187,6 +182,38 @@ export class CommentsComponent {
       }
     );
   }
+  selectedReview: any = null;
+  showButton: boolean=true;
+  showReportInput(review: any) {
+    this.comments.forEach(comment => {
+      comment.showReport = false;
+    });
 
+    review.showReport = true;
+    this.selectedReview = review;
+  }
+
+  submitReport() {
+    const reportDTO = {
+      accommodationReviewId: this.selectedReview.id,
+      reason: this.selectedReview.reportReason
+    };
+
+    this.http.post('http://localhost:8080/api/reviewReports/accommodationReviews/report', reportDTO)
+        .subscribe(
+            (response: any) => {
+              // Handle successful response
+              this.selectedReview.showReport = false;
+              this.selectedReview.showButton=true;
+              this.selectedReview.reportReason = '';
+              //this.selectedReview = null;
+              alert("Successfully reported review!");
+            },
+            (error) => {
+              // Handle error
+              console.error(error);
+            }
+        );
+  }
 
 }
