@@ -48,13 +48,14 @@ export class GuestReservationsComponent implements OnInit{
 
   ngOnInit(): void {
     this.reservationService.getGuestId().subscribe(
-      (userId: number) => {
-        this.id = userId;
-        this.fetchReservations();
-      },
-      (error) => {
-        console.error('Error fetching user ID:', error);
-      }
+        (userId: number) => {
+          this.id = userId;
+           //this.checkIfUserReported(this.ownerId);
+          this.fetchReservations();
+        },
+        (error) => {
+          console.error('Error fetching user ID:', error);
+        }
     );
   }
 
@@ -63,7 +64,7 @@ export class GuestReservationsComponent implements OnInit{
       next: (reservations: any[]) => {
         this.reservations = reservations;
         for (let i = 0; i < this.reservations.length; i++) {
-          console.log(this.reservations[i].id);
+           console.log(this.reservations[i].id);
           if(this.reservations[i].requestStatus == "SENT") this.reservations[i].requestStatus = "sent";
           else if(this.reservations[i].requestStatus == "ACCEPTED") this.reservations[i].requestStatus = "approved";
           else if(this.reservations[i].requestStatus == "DECLINED") this.reservations[i].requestStatus = "declined";
@@ -93,6 +94,8 @@ export class GuestReservationsComponent implements OnInit{
         next: (accommodation: any) => {
           this.reservations[i].accommodation = accommodation;
           this.ownerId=this.reservations[i].accommodation.owner_Id;
+          this.checkIfUserReported(this.reservations[i].accommodation.owner_Id);
+
           console.log(this.ownerId);
           this.http.get(`http://localhost:8080/api/users/${this.ownerId}`).subscribe({
 
@@ -161,4 +164,57 @@ export class GuestReservationsComponent implements OnInit{
     const deadlineDate = new Date(reservationStartDate.getTime() - cancellationDeadline * 24 * 60 * 60 * 1000);
     return today >= deadlineDate;
   }
+
+  selectedReview: any = null;
+  showButton: boolean=true;
+  showReportInput(reservation: any) {
+    this.reservations.forEach(reservation => {
+      reservation.showReport = false;
+    });
+
+    reservation.showReport = true;
+    this.selectedReview = reservation;
+  }
+
+  submitReport() {
+    const reportDTO = {
+      reportedUserId: this.ownerId,
+      description: this.selectedReview.reportReason
+    };
+
+    this.http.post('http://localhost:8080/api/userReports/report', reportDTO)
+        .subscribe(
+            (response: any) => {
+
+
+            },
+            (error) => {
+              // Handle error
+              //console.error(error);
+              //this.checkIfUserReported(this.ownerId);
+              this.isUserReported=true;
+              this.selectedReview.showReport = false;
+              this.selectedReview.showButton=true;
+              this.selectedReview.reportReason = '';
+              //this.selectedReview = null;
+              alert("Successfully reported review!");
+
+
+            }
+        );
+  }
+
+  isUserReported: boolean = false;
+
+   checkIfUserReported(userId: number) {
+    this.http.get<boolean>(`http://localhost:8080/api/userReports/isReported/${userId}`).subscribe(
+        (isReported) => {
+          this.isUserReported = isReported;
+        },
+        (error) => {
+          console.error('Error checking if user reported:', error);
+        }
+    );
+  }
+
 }

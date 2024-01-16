@@ -34,6 +34,7 @@
     </div>
 
     <br>
+      <h3 class="average" *ngIf="userRole === 'host'">Average rating: {{ averageRating }} </h3>
 
     <div class="ratings-container" *ngIf="userRole === 'guest'">
       <div class="average-rating"></div>

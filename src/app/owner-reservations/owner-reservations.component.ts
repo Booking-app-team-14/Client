@@ -26,6 +26,7 @@ export class OwnerReservationsComponent implements AfterViewInit {
       (userInfo: string) => {
         //this.id = userInfo.id;
         this.username = userInfo;
+          //this.checkIfUserReported(this.selectedReview.guestId);
         this.fetchReservations();
       },
       (error) => {
@@ -77,6 +78,7 @@ export class OwnerReservationsComponent implements AfterViewInit {
      this.http.get(`http://localhost:8080/api/users/${reservation.guestId}`).subscribe({
         next: (user: any) => {
           reservation.user = user;
+           this.checkIfUserReported(reservation.guestId);
         },
         error: (err) => {
           console.error(err);
@@ -165,4 +167,66 @@ export class OwnerReservationsComponent implements AfterViewInit {
       }
     );
   }
+    selectedReview: any = null;
+    showButton: boolean=true;
+
+    showReportInput(reservation: any) {
+        this.reservations.forEach(reservation => {
+            reservation.showReport = false;
+        });
+
+        reservation.showReport = true;
+        this.selectedReview = reservation;
+    }
+
+    submitReport() {
+        const reportDTO = {
+            reportedUserId: this.selectedReview.guestId,
+            description: this.selectedReview.reportReason
+        };
+
+        this.http.post('http://localhost:8080/api/userReports/report', reportDTO)
+            .subscribe(
+                (response: any) => {
+                    /*this.isUserReported=true;
+                    this.selectedReview.showReport = false;
+                    this.selectedReview.showButton=true;
+                    this.selectedReview.reportReason = '';
+                    //this.selectedReview = null;
+                    alert("Successfully reported review!");*/
+
+                },
+                (error) => {
+                    // Handle error
+                     //console.error(error);
+                    this.isUserReported=true;
+                    this.selectedReview.showReport = false;
+                    this.selectedReview.showButton=true;
+                    this.selectedReview.reportReason = '';
+                    //this.selectedReview = null;
+                    alert("Successfully reported review!");
+
+                }
+            );
+    }
+
+    isCancellationDisabled(startDate: string, cancellationDeadline: number): boolean {
+        const today = new Date();
+        const reservationStartDate = new Date(startDate);
+        const deadlineDate = new Date(reservationStartDate.getTime() - cancellationDeadline * 24 * 60 * 60 * 1000);
+        return today >= deadlineDate;
+    }
+    isUserReported: boolean = false;
+
+    checkIfUserReported(userId: number) {
+        this.http.get<boolean>(`http://localhost:8080/api/userReports/isReported/${userId}`).subscribe(
+            (isReported) => {
+                this.isUserReported = isReported;
+            },
+            (error) => {
+                console.error('Error checking if user reported:', error);
+            }
+        );
+    }
+
 }

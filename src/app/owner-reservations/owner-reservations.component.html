@@ -58,7 +58,9 @@
                 <ng-container *ngFor="let star of [].constructor(reservation.stars)">
                   <mat-icon>star</mat-icon>
                 </ng-container>
+
               </div>
+
             </div>
             <div class="additional-info">
               <div class="dates">
@@ -72,6 +74,18 @@
             </div>
           </div>
         </div>
+
+
+        <div class="comment-text" >
+
+
+          <button class="cancel" *ngIf="type === 'fiber_approved'"  (click)="showReportInput(reservation)" [disabled]="!(isCancellationDisabled(reservation.startDate, reservation.accommodation.cancellationDeadline)) ||  isUserReported">Report User</button>
+          <div *ngIf="reservation.showReport" class="report-input">
+            <input [(ngModel)]="reservation.reportReason" placeholder="Enter reason...">
+            <button (click)="submitReport()">Submit</button>
+          </div>
+        </div>
+
 
         <ng-container *ngIf="reservation.requestStatus === 'fiber_sent'">
           <div class="actions">
