@@ -17,7 +17,7 @@
     <div class="guest-selection">
       <label for="guests">Guests:</label>
       <input type="number" #guestsInput id="guests" name="guests"
-             [(ngModel)]="reservationRequirement.numberOfGuests"
+             [(ngModel)]="reservationRequirement.minGuests"
              [attr.min]="reservationRequirement.minGuests"
              [attr.max]="reservationRequirement.maxGuests"
              required
@@ -27,9 +27,12 @@
         <div *ngIf="guestForm.controls['guests'].errors['required']">Guests are required.</div>
         <div *ngIf="guestForm.controls['guests'].errors['pattern']">Invalid input. Please enter a valid number.</div>
       </div>
+      <div class="guest-range-info">
+        Min Guests: {{ reservationRequirement.minGuests }} |
+        Max Guests: {{ reservationRequirement.maxGuests }}
+      </div>
     </div>
   </form>
-
 
   <!-- Reserve Button -->
   <button class="reserve-button" (click)="makeReservation()" [disabled]="!isDateAvailable(defaultCheckInDate)">Reserve</button>
