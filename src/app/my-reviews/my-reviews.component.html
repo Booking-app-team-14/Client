@@ -48,7 +48,7 @@
                 <p class="ratin"> Rating: {{ comment.rating }}
                 </p>
 
-                <button *ngIf=" !comment.showButton" (click)="showReportInput(comment)">Report</button>
+                <button *ngIf=" !comment.showButton &&  !comment.isReported" (click)="showReportInput(comment)">Report</button>
                 <div *ngIf="comment.showReport" class="report-input">
                   <input [(ngModel)]="comment.reportReason" placeholder="Enter reason...">
                   <button (click)="submitReport()">Submit</button>

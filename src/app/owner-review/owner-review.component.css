@@ -271,3 +271,13 @@
 }
 
 
+
+.comment .comment-text button {
+  background-color: #ff6347;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
