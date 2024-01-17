@@ -217,4 +217,11 @@ export class GuestReservationsComponent implements OnInit{
     );
   }
 
+  isReservationPasted(endDate: string ): boolean {
+    const today = new Date();
+    const reservationEndDate = new Date(endDate);
+    const deadlineDate = new Date(reservationEndDate.getTime() );
+    return today >= deadlineDate;
+  }
+
 }

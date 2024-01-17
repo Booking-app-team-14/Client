@@ -79,7 +79,7 @@
         <div class="comment-text" >
 
 
-          <button class="cancel" *ngIf="type === 'fiber_approved'"  (click)="showReportInput(reservation)" [disabled]="!(isCancellationDisabled(reservation.startDate, reservation.accommodation.cancellationDeadline)) ||  isUserReported">Report User</button>
+          <button class="cancel" *ngIf="type === 'fiber_approved'"  (click)="showReportInput(reservation)" [disabled]="!isReservationPasted(reservation.endDate) || isUserReported">Report User</button>
           <div *ngIf="reservation.showReport" class="report-input">
             <input [(ngModel)]="reservation.reportReason" placeholder="Enter reason...">
             <button (click)="submitReport()">Submit</button>

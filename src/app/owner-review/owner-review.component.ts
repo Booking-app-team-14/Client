@@ -229,7 +229,7 @@ export class OwnerReviewComponent implements OnInit{
   showRateSection: boolean = false;
 
   checkAcceptedReservation(ownerId:number): void {
-    this.http.get<boolean>(`http://localhost:8080/api/reviews/hasAcceptedReservationForOwner?ownerId=${ownerId}`)
+    this.http.get<boolean>(`http://localhost:8080/api/reviews/hasAcceptedReservationForOwner/${ownerId}`)
         .subscribe(
             (result: boolean) => {
               this.showRateSection = result;
