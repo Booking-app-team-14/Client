@@ -19,16 +19,12 @@
         <h3>{{user.phone}}</h3>
       </div>
 
-      <button class="delete-comment" (click)="openDialog()">
-        <mat-icon>close</mat-icon>Report The Owner
-      </button>
-
     </div>
 
     <br>
     <div class="comments-background">
       <div class="comments-section">
-        <h2>Comments</h2>
+        <h2 *ngIf="displayedComments.length">Comments</h2>
 
         <div class="comments-container"  >
           <div class="comments-grid">
@@ -45,6 +41,7 @@
                 <br>
                 <p class="ratin"> Rating: {{ comment.rating }}
                 </p>
+                <button *ngIf="( comment.isCurrentUser  )" (click)="deleteReview( comment.id)">Delete</button>
               </div>
             </div>
           </div>
@@ -61,6 +58,7 @@
     <div class="rating-form">
       <h3 class="average">Average rating: {{ averageRating }} </h3>
       <br>
+      <div *ngIf="showRateSection">
       <div class="your-rate">Give your rate</div>
       <div class="rate">
         <input type="radio" id="star5" name="rate" value="5" (click)="onStarClick(5)"  />
@@ -78,6 +76,7 @@
       <textarea [(ngModel)]="userComment" name="userComment" placeholder="Leave a comment..."></textarea>
 
       <button (click)="submitRating()">SUBMIT</button>
+    </div>
     </div>
   </div>
 </div>

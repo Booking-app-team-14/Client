@@ -76,6 +76,7 @@ mat-icon {
   }
   
   .left-side {
+    min-width: 20rem;
     max-width: 40rem;
   }
   
@@ -84,6 +85,8 @@ mat-icon {
     height: 5rem;
     border-radius: 50%;
     border: 1px solid var(--color_black_text);
+    object-fit: cover;
+    object-position: center;  
   }
   
   .left-side {
@@ -102,6 +105,9 @@ mat-icon {
   .date {
     font-size: 0.7rem;
     color: var(--color_gray_text);
+    position: absolute;
+    top: 0;
+    right: 0;
   }
   
   .left {
@@ -133,6 +139,7 @@ mat-icon {
     justify-content: space-between;
     align-items: start;
     width: 100%;
+    position: relative;
 }
 
 .right {
@@ -147,6 +154,8 @@ mat-icon {
     height: 5rem;
     border-radius: 50%;
     border: 1px solid var(--color_black_text);
+    object-fit: cover;
+    object-position: center;
 }
 
 .right-rating {

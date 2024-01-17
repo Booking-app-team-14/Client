@@ -262,6 +262,24 @@
   margin-top: 10px;
 }
 
+.report-input input {
+  width: 100%;
+  height: 70px;
+  padding: 10px;
+  box-sizing: border-box;
+
+}
+
+.report-input button {
+  margin-top: 10px;
+
+}
+
+.comment .comment-text button:hover {
+  background-color: #ff4c35;
+}
+
+
 .comment .comment-text button:hover {
   background-color: #ff4c35;
 }

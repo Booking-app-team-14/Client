@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component } from '@angular/core';
 //import { userRole } from '../../app.component';
 import {UserService} from "../../login/user.service";
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements AfterViewInit{
 
   //userRole: string = userRole;
   userRole: string = '';
@@ -19,14 +19,10 @@ export class NavbarComponent {
     });
   }
 
-
-  ngOnInit(): void {
-    
+  ngAfterViewInit(): void {
     try {
       this.userRole = this.userService.getUserRole();
     } catch (error) { }
-
   }
-
 
 }

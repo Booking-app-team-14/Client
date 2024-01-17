@@ -53,6 +53,7 @@ import { ApproveReviewsComponent } from './admin-functions/approve-reviews/appro
 import {OwnerNotificationsComponent} from "./notifications/owner-notifications/owner-notifications.component";
 import { ReportedReviewsComponent } from './admin-functions/reported-reviews/reported-reviews.component';
 import { ReportedUsersComponent } from './admin-functions/reported-users/reported-users.component';
+import { MyReviewsComponent } from './my-reviews/my-reviews.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { ReportedUsersComponent } from './admin-functions/reported-users/reporte
     OwnerNotificationsComponent,
     ReportedReviewsComponent,
     ReportedUsersComponent,
+    MyReviewsComponent,
 
   ],
   imports: [

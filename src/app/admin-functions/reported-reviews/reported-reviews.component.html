@@ -29,26 +29,25 @@
                     <div class="guest-side">
 
                         <div class="guest-data">
-                            <h3>{{accommodationReviewReport.reviewType}}</h3>
                             <span class="date">({{accommodationReviewReport.sentAt}})</span>
                         </div>
 
                         <div class="guest-data">
                 
                             <div class="guest">
-                                <img [src]="'data:image/' + accommodationReviewReport.guestProfilePictureType + ';base64,' + accommodationReviewReport.guestProfilePictureBytes" alt="Guest profile picture">
-                                <span class="username">{{accommodationReviewReport.guestUsername}}</span>
+                                <img [src]="'data:image/' + accommodationReviewReport.review.guestProfilePictureType + ';base64,' + accommodationReviewReport.review.guestProfilePictureBytes" alt="Guest profile picture">
+                                <span class="username">{{accommodationReviewReport.review.guestUsername}}</span>
                             </div>
                 
                         </div>
 
                         <div class="span-div">
-                            <span>"{{accommodationReviewReport.comment}}"</span>
+                            <span *ngIf="accommodationReviewReport.review.comment">"{{accommodationReviewReport.review.comment}}"</span>
                         </div>
 
-                        <div *ngIf="accommodationReviewReport.rating!==0" class="guests-accommodation-rating">
+                        <div *ngIf="accommodationReviewReport.review.rating!==0" class="guests-accommodation-rating">
                             <div class="stars">
-                                <mat-icon *ngFor="let star of [].constructor(accommodationReviewReport.rating)">star</mat-icon>
+                                <mat-icon *ngFor="let star of [].constructor(accommodationReviewReport.review.rating)">star</mat-icon>
                             </div>
                         </div>
 
@@ -60,22 +59,22 @@
 
                         <div class="info">
 
-                        <img [src]="'data:image/' + accommodationReviewReport.accommodationPictureType + ';base64,' + accommodationReviewReport.accommodationPictureBytes" alt="Accommodation main picture">
+                        <img [src]="'data:image/' + accommodationReviewReport.review.accommodationPictureType + ';base64,' + accommodationReviewReport.review.accommodationPictureBytes" alt="Accommodation main picture">
             
                         <div class="sub-info">
                             <div>
                                 <div class="accommodation-type-rating">
-                                    <span class="accommodation-type">{{accommodationReviewReport.accommodationType}}</span>
+                                    <span class="accommodation-type">{{accommodationReviewReport.review.accommodationType}}</span>
                                     <div class="stars">
-                                        <mat-icon *ngFor="let star of [].constructor(accommodationReviewReport.accommodationRating)">star</mat-icon>
+                                        <mat-icon *ngFor="let star of [].constructor(accommodationReviewReport.review.accommodationRating)">star</mat-icon>
                                     </div>
                                 </div>
 
-                                <div class="name">{{accommodationReviewReport.accommodationName}}</div>
+                                <div class="name">{{accommodationReviewReport.review.accommodationName}}</div>
                             </div>
 
                             <div class="view-details">
-                                <button (click)="viewDetails(accommodationReviewReport.accommodationId)">View details</button>
+                                <button (click)="viewDetails(accommodationReviewReport.review.accommodationId)">View details</button>
                             </div>
                         </div>
 
@@ -92,7 +91,7 @@
 
                 <div class="buttons accommodation-btns">
                     <button (click)="removeAccommodationReview(accommodationReviewReport.id)" class="bin">Remove</button>
-                    <button (click)="acceptAccommodationReview(accommodationReviewReport.id)" class="accept">OK</button>
+                    <button (click)="ignoreAccommodationReviewReport(accommodationReviewReport.id)" class="accept">OK</button>
                 </div>
           
             </div>
@@ -111,20 +110,20 @@
 
                 <div class="guest-data">
                   <h3>Guest</h3>
-                  <span class="date">({{ownerReviewReport.timestamp}})</span>
+                  <span class="date">({{ownerReviewReport.sentAt}})</span>
                 </div>
 
                 <div class="guest-data">
       
                   <div class="guest">
-                    <img [src]="'data:image/' + ownerReviewReport.guestProfilePictureType + ';base64,' + ownerReviewReport.guestProfilePictureBytes" alt="Guest profile picture">
-                    <span class="username">{{ownerReviewReport.guestUsername}}</span>
+                    <img [src]="'data:image/' + ownerReviewReport.review.senderProfilePictureType + ';base64,' + ownerReviewReport.review.senderProfilePictureBytes" alt="Sender profile picture">
+                    <span class="username">{{ownerReviewReport.review.senderUsername}}</span>
                   </div>
       
                 </div>
 
                 <div class="span-div">
-                  <span>"{{ownerReviewReport.comment}}"</span>
+                  <span *ngIf="ownerReviewReport.review.comment">"{{ownerReviewReport.review.comment}}"</span>
                 </div>
 
               </div>
@@ -137,8 +136,8 @@
 
                 <div class="owner-data">
                   <div class="owner">
-                    <img [src]="'data:image/' + ownerReviewReport.ownerProfilePictureType + ';base64,' + ownerReviewReport.ownerProfilePictureBytes" alt="Owner profile picture">
-                    <span class="username">{{ownerReviewReport.ownerUsername}}</span>
+                    <img [src]="'data:image/' + ownerReviewReport.review.recipientProfilePictureType + ';base64,' + ownerReviewReport.review.recipientProfilePictureBytes" alt="Recipient profile picture">
+                    <span class="username">{{ownerReviewReport.review.recipientUsername}}</span>
                   </div>
                 </div>
 
@@ -147,10 +146,10 @@
                   <div class="stars">
                     <mat-icon *ngFor="let star of [].constructor(ownerReviewReport.ratingBefore)">star</mat-icon>
                   </div>
-                  <ng-container *ngIf="ownerReviewReport.rating != -1">
+                  <ng-container *ngIf="ownerReviewReport.rating != 0">
                     <h4>Guest's rating for owner:</h4>
                     <div class="stars">
-                      <mat-icon *ngFor="let star of [].constructor(ownerReviewReport.rating)">star</mat-icon>
+                      <mat-icon *ngFor="let star of [].constructor(ownerReviewReport.review.rating)">star</mat-icon>
                     </div>
                   </ng-container>
                 </div>
@@ -168,7 +167,7 @@
 
             <div class="buttons">
                 <button (click)="removeOwnerReview(ownerReviewReport.id)" class="bin">Remove</button>
-                <button (click)="acceptOwnerReview(ownerReviewReport.id)" class="accept">OK</button>
+                <button (click)="ignoreOwnerReviewReport(ownerReviewReport.id)" class="accept">OK</button>
             </div>
 
           </div>
