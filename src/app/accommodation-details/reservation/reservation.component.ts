@@ -4,6 +4,7 @@ import {ReservationService} from "./reservation.service";
 import {AccommodationDetailsService} from "../accommodation-details.service";
 import {UserService} from "../../login/user.service";
 import {AvailabilityDTO} from "../../shared/accommodation-details.model";
+import {DomEvent} from "leaflet";
 
 @Component({
   selector: 'app-reservation',
@@ -50,6 +51,18 @@ export class ReservationComponent implements AfterViewInit {
     this.defaultCheckInDate = this.formatDate(nextDay);
     this.defaultCheckOutDate = this.formatDate(twoDaysAfter);
     this.availabilities.forEach((availability: AvailabilityDTO) => {
+      const today = new Date();
+      const startDate1 = new Date(availability.startDate);
+      const endDate1 = new Date(availability.endDate);
+
+
+      if (endDate1 < today) {
+        return;
+      }
+
+      if (startDate1 < today) {
+        availability.startDate = today.toISOString();
+      }
       const startDate = new Date(availability.startDate);
       const endDate = new Date(availability.endDate);
         this.availableDates.push({
@@ -61,7 +74,7 @@ export class ReservationComponent implements AfterViewInit {
         });
         startDate.setDate(startDate.getDate() + 1);
     });
-    this.calculateTotalPrice();
+
     }
   private formatDate(date: Date): string {
     const year = date.getFullYear();
@@ -76,12 +89,12 @@ export class ReservationComponent implements AfterViewInit {
   updateCheckOutMinDate(): void {
     const checkIn = new Date(this.defaultCheckInDate);
     this.defaultCheckOutDate = this.defaultCheckInDate;
+    this.calculateTotalPrice();
   }
 
   validateDates(): void {
     const checkIn = new Date(this.defaultCheckInDate);
     const checkOut = new Date(this.defaultCheckOutDate);
-    //console.log(this.availabilities);
     if (checkOut < checkIn || checkOut.getTime() === checkIn.getTime()) {
       alert('Check-out date should be after the check-in date');
       this.defaultCheckOutDate = this.defaultCheckInDate;
@@ -204,4 +217,5 @@ export class ReservationComponent implements AfterViewInit {
       }
     );
   }
+
 }
