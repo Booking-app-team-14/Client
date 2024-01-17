@@ -5,11 +5,14 @@
 
     <div class="input-row">
       <label>Upload Images</label>
-      <input type="file" (change)="onFileSelected($event)">
+      <input type="file" multiple (change)="onFileSelected($event)">
     </div>
 
-    <div *ngIf="selectedImage" class="image-container" name="selectedImage">
-      <img [src]="selectedImage.url" alt="Selected Image"  >
+    <div class="image-container" name="selectedImage">
+    <div *ngFor="let image of selectedImages" class="image-wrapper"   >
+
+      <img [src]="image.url" alt="Selected Image">
+    </div>
     </div>
 
 
@@ -59,11 +62,13 @@
       </div>
       <br>
       <div class="input-button-container">
-        <input type="text" id="enteredAddress" placeholder="Enter location" [(ngModel)]="enteredAddress" name="enteredAddress">
-        <button mat-icon-button class="fav-btn" (click)="locateOnMap()">
+        <input type="text" id="enteredAddress" placeholder="Enter location" [(ngModel)]="enteredAddress"
+               name="enteredAddress">
+        <button mat-icon-button class="fav-btn" (click)="locateOnMap()" class="search-location-btn">
           <mat-icon>search</mat-icon>
         </button>
       </div>
+      <br>
       <br>
     </div>
 

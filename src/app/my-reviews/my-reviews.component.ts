@@ -13,7 +13,7 @@ export class MyReviewsComponent implements OnInit {
   ownerId: number;
   //showReport: boolean = false;
   reportReason: string = '';
-
+isReported: boolean;
   user = {
     firstName: '',
     lastName: '',
@@ -39,7 +39,6 @@ export class MyReviewsComponent implements OnInit {
         next: (userId: any) => {
           this.ownerId = userId;
           this.fetchCommentsByOwnerId(this.ownerId);
-
           this.http.get(`http://localhost:8080/api/users/${userId}`).subscribe({
             next: (userDTO: any) => {
               this.user.firstName = userDTO.firstName;
@@ -72,8 +71,10 @@ export class MyReviewsComponent implements OnInit {
           image: 'assets/BG.jpg',
           commentText: review.comment,
           rating: review.rating,
-          id: review.id
+          id: review.id,
+            isReported: review.reported
         }));
+
         this.displayedComments = this.comments.slice(0, 4);
       },
       (error) => {
@@ -114,6 +115,7 @@ export class MyReviewsComponent implements OnInit {
       .subscribe(
         (response: any) => {
           // Handle successful response
+          this.isReviewReported=true;
           this.selectedReview.showReport = false;
           this.selectedReview.showButton=true;
           this.selectedReview.reportReason = '';
@@ -126,4 +128,18 @@ export class MyReviewsComponent implements OnInit {
         }
       );
   }
+
+  isReviewReported: boolean = false ;
+
+    checkIfReviewReported(reviewId: number) {
+        this.http.get<boolean>(`http://localhost:8080/api/ownerReviewReports/reviews/isReported/${reviewId}`).subscribe(
+            (isReported) => {
+                this.isReviewReported = isReported;
+            },
+            (error) => {
+                console.error('Error checking if review reported:', error);
+            }
+        );
+    }
+
 }

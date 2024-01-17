@@ -8,7 +8,7 @@
     background-color: #f9f9f9;
     box-shadow: 0 0 2rem 0 var(--color_gray_icon);
   }
-  
+
   form {
     margin-top: 1rem;
     display: flex;
@@ -33,12 +33,12 @@
   textarea{
     height: 125px;
   }
-  
+
   .guests-container {
     padding: 15px;
     gap: 8px;
   }
-  
+
   .guests-container input {
     width: 100px;
     margin-bottom: 0 !important;
@@ -85,7 +85,7 @@
     box-shadow: inset 0px 0px 0px 1px var(--color_red);
     cursor: pointer;
   }
-  
+
   #map {
     width: 100%;
     height: 200px;
@@ -109,7 +109,7 @@
   .confirmation-fieldset input {
     margin-right: 1rem !important;
   }
-  
+
   button {
     background-color: #65AEF2;
     color: #fff;
@@ -119,11 +119,11 @@
     cursor: pointer;
     border: white;
   }
-  
+
   button:hover {
     background-color: #0056b3;
   }
-  
+
   .image-container {
     margin-top: 0 !important;
     display: flex;
@@ -131,8 +131,6 @@
     justify-content: start;
     gap: 1rem;
   }
-
-  
   .image-preview {
     width: 20rem;
     aspect-ratio: 12/9;
@@ -140,7 +138,7 @@
     object-position: center;
     transition: all 0.5s;
   }
-  
+
   .location-container {
     width: 100%;
     border: 2px solid #ddd;
@@ -148,31 +146,31 @@
     overflow: hidden;
     margin-bottom: 10px;
   }
-  
+
   .location-header {
     display: flex;
     align-items: center;
     padding: 15px;
     background-color: #f5f5f5;
     border-bottom: 1px solid #ddd;
-  
+
   }
-  
+
   .location-sign {
     font-size: 22px;
     margin-right: 10px;
   }
-  
+
   .location-caption {
     margin: 0;
   }
-  
+
   .map-frame {
     margin: 15px;
     margin-bottom: 0;
     border: 2px solid black;
   }
-  
+
   #address {
     margin-right: 10px;
     margin-bottom: 5px;
@@ -197,17 +195,17 @@
     display: flex;
     align-items: center;
   }
-  
+
   button[mat-icon-button] {
     background-color: var(--color_primary_blue);
     cursor: pointer;
     transition: all 0.1s;
   }
-  
+
   button[mat-icon-button]:hover {
     background-color: rgba(101, 174, 242, 0.8);
   }
-  
+
   button mat-icon {
     color: var(--color_white);
   }
@@ -217,35 +215,35 @@
     border-radius: 5px;
     background-color: #f9f9f9;
   }
-  
+
   .availability-container h2 {
     font-size: 18px;
     margin-bottom: 10px;
   }
-  
+
   .availability-container fieldset {
     margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
   }
-  
+
   .availability-container label {
     display: block;
     margin-bottom: 8px;
   }
-  
+
   .availability-dates,
   .special-price-dates {
     display: flex;
     gap: 10px;
   }
-  
+
   .availability-dates label,
   .special-price-dates label {
     flex: 1;
   }
-  
+
   .availability-dates input,
   .special-price-dates input,
   .availability-container input[type="number"] {
@@ -254,7 +252,7 @@
     box-sizing: border-box;
     margin-bottom: 10px;
   }
-  
+
   .availability-container button {
     background-color: var(--color_primary_blue);
     color: white;
@@ -264,11 +262,11 @@
     cursor: pointer;
     transition: background-color 0.3s;
   }
-  
+
   .availability-container button:hover {
     background-color: rgba(101, 174, 242, 0.8);
   }
-  
+
   .special-price-container {
     margin-bottom: 15px;
     padding: 10px;
@@ -276,7 +274,7 @@
     border-radius: 5px;
     text-align: center;
   }
-  
+
   .special-price-container label {
     display: block;
     margin-bottom: 8px;
@@ -297,7 +295,7 @@
     margin: 0 !important;
     margin-right: 0.5rem !important;
   }
-  
+
   .special-price-container input[type="number"] {
     width: 40%;
     padding: 8px;
@@ -315,7 +313,7 @@
     border: 1px solid var(--color_black_text);
     box-shadow: 0 0 8px 0 rgba(30, 30, 30, 0.3);
   }
-  
+
   .availability-fieldset {
     padding: 1rem !important;
   }
@@ -340,7 +338,7 @@
   .update-btn {
     border-radius: 0.5rem;
   }
-  
+
   .checkbox-label img {
     margin-right: 0.5rem !important;
     width: 1rem;

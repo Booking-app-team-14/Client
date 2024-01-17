@@ -18,9 +18,9 @@
                 <p>{{ comment.commentText }}</p>
                 <br>
                 <p class="ratin"> Rating: {{ comment.rating }}</p>
-                <button *ngIf="(isCurrentUser(comment.user) && userRole === 'guest')" (click)="deleteComment()">Delete</button>
+                <button *ngIf="(  comment.isCurrentUser  && userRole === 'guest' )" (click)="deleteComment()">Delete</button>
 
-                <button *ngIf="(!comment.showButton)   &&  userRole === 'host' " (click)="showReportInput(comment)">Report</button>
+                <button *ngIf="(!comment.showButton)   &&  userRole === 'host' &&  !comment.isReported  " (click)="showReportInput(comment)">Report</button>
                 <div *ngIf="comment.showReport" class="report-input">
                   <input [(ngModel)]="comment.reportReason" placeholder="Enter reason...">
                   <button (click)="submitReport()">Submit</button>
@@ -42,6 +42,7 @@
       <div class="rating-form">
         <h3 class="average">Average rating: {{ averageRating }} </h3>
         <br>
+        <div *ngIf="showRateSection">
         <div class="your-rate">Give your rate</div>
         <div class="rate">
           <input type="radio" id="star5" name="rate" value="5" (click)="onStarClick(5)"  />
@@ -59,9 +60,10 @@
         <textarea [(ngModel)]="userComment" name="userComment" placeholder="Leave a comment..."></textarea>
 
         <button (click)="submitRating()">SUBMIT</button>
+        </div>
       </div>
     </div>
 
   </div>
 </div>
-
+</div>
