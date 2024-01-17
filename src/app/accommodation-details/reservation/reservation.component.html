@@ -17,11 +17,11 @@
     <div class="guest-selection">
       <label for="guests">Guests:</label>
       <input type="number" #guestsInput id="guests" name="guests"
-             [(ngModel)]="reservationRequirement.minGuests"
+             [(ngModel)]="reservationRequirement.guests"
              [attr.min]="reservationRequirement.minGuests"
              [attr.max]="reservationRequirement.maxGuests"
              required
-             pattern="\d+"
+             pattern="\d"
              (change)="onGuestsChange()">
       <div *ngIf="guestForm.controls['guests'].invalid">
         <div *ngIf="guestForm.controls['guests'].errors['required']">Guests are required.</div>
