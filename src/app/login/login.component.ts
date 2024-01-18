@@ -65,7 +65,7 @@ export class LoginComponent {
       },
       error: (err) => {
         console.error(err);
-        alert("Error while sending the POST request!");
+        alert(err.error);
       }
     });
 
