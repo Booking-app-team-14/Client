@@ -1,0 +1,80 @@
+<h2>Notifications</h2>
+
+<div class="container">
+
+    <div class="notif-type-container">
+        <h4>Enable / Disable notification type<ng-container *ngIf="role==='host'">s:</ng-container><ng-container *ngIf="role==='guest'">:</ng-container></h4>
+        <div class="notWantedNotificationsContainer">
+            <div class="notificationOptions">
+                <ng-container *ngIf="role==='host'">
+                    <div class="input-row">
+                        <input type="checkbox" [(ngModel)]="checkboxCreated" id="RESERVATION_REQUEST_CREATED" name="RESERVATION_REQUEST_CREATED" value="Accommodation reservation made">
+                        <label for="RESERVATION_REQUEST_CREATED">Accommodation reservation made</label>
+                    </div>
+                    
+                    <div class="input-row">
+                        <input type="checkbox" [(ngModel)]="checkboxCancelled" id="RESERVATION_REQUEST_CANCELLED" name="RESERVATION_REQUEST_CANCELLED" value="Accommodation reservation cancelled">
+                        <label for="RESERVATION_REQUEST_CANCELLED">Accommodation reservation cancelled</label>
+                    </div>
+                    
+                    <div class="input-row">
+                        <input type="checkbox" [(ngModel)]="checkboxOwnerReviewed" id="OWNER_REVIEWED" name="OWNER_REVIEWED" value="Your reviews">
+                        <label for="OWNER_REVIEWED">Your reviews</label>
+                    </div>
+
+                    <div class="input-row">
+                        <input type="checkbox" [(ngModel)]="checkboxAccommodationReviewed" id="ACCOMMODATION_REVIEWED" name="ACCOMMODATION_REVIEWED" value="Your accommodation reviews">
+                        <label for="ACCOMMODATION_REVIEWED">Your accommodation reviews</label>
+                    </div>  
+                </ng-container>
+                <ng-container *ngIf="role==='guest'">
+                    <div>
+                        <input type="checkbox" [(ngModel)]="checkboxResponse" id="RESERVATION_REQUEST_RESPONSE" name="RESERVATION_REQUEST_RESPONSE" value="Reservation request response">
+                        <label for="RESERVATION_REQUEST_RESPONSE">Reservation request response</label>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification-container">
+
+        <div class="notification" *ngFor="let notification of notifications">
+            <ng-container *ngIf="notification.type === 'RESERVATION_REQUEST_CREATED'">
+                <span>{{notification.seen}}</span>
+                <span>{{notification.sentAt}}</span>
+                <span>{{notification.senderId}}</span>
+                <span>{{notification.receiverId}}</span>
+            </ng-container>
+
+            <ng-container *ngIf="notification.type === 'RESERVATION_REQUEST_CANCELLED'">
+                <span>{{notification.seen}}</span>
+                <span>{{notification.sentAt}}</span>
+                <span>{{notification.senderId}}</span>
+                <span>{{notification.receiverId}}</span>
+            </ng-container>
+
+            <ng-container *ngIf="notification.type === 'OWNER_REVIEWED'">
+                <span>{{notification.seen}}</span>
+                <span>{{notification.sentAt}}</span>
+                <span>{{notification.senderId}}</span>
+                <span>{{notification.receiverId}}</span>
+            </ng-container>
+
+            <ng-container *ngIf="notification.type === 'ACCOMMODATION_REVIEWED'">
+                <span>{{notification.seen}}</span>
+                <span>{{notification.sentAt}}</span>
+                <span>{{notification.senderId}}</span>
+                <span>{{notification.receiverId}}</span>
+            </ng-container>
+
+            <ng-container *ngIf="notification.type === 'RESERVATION_REQUEST_RESPONSE'">
+                <span>{{notification.seen}}</span>
+                <span>{{notification.sentAt}}</span>
+                <span>{{notification.senderId}}</span>
+                <span>{{notification.receiverId}}</span>
+            </ng-container>
+        </div>
+    </div>
+
+</div>

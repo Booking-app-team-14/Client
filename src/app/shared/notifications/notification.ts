@@ -1,4 +1,5 @@
 export class NotificationDTO {
+  id: number;
   senderId: number;
   receiverId: number;
   sentAt: string; // epoch seconds
@@ -14,21 +15,19 @@ export enum NotificationType {
   RESERVATION_REQUEST_RESPONSE
 }
 
-export  class NotificationReservationCreated extends NotificationDTO {
-  request:any;
+export class NotificationReservationCreatedDTO extends NotificationDTO {
+  reservationRequestDTO: any;
 }
-export  class NotificationReservationCancelled extends NotificationDTO {
-    request:any;
+export class NotificationReservationCancelledDTO extends NotificationDTO {
+  reservationRequestDTO: any;
 }
-
-export  class NotificationReservationRequestResponse extends NotificationDTO {
-  request:any;
+export class NotificationReservationRequestResponseDTO extends NotificationDTO {
+  reservationRequestDTO: any;
+  approved: boolean;
 }
-
-export class NotificationOwnerReviewed extends NotificationDTO {
-  review:any;
+export class NotificationOwnerReviewedDTO extends NotificationDTO {
+  reviewDTO: any;
 }
-
-export class NotificationAcommodationReviewed extends NotificationDTO {
-  review:any;
+export class NotificationAcommodationReviewedDTO extends NotificationDTO {
+  reviewDTO: any;
 }

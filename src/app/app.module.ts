@@ -50,10 +50,10 @@ import { FavoriteComponent } from './favorite/favorite.component';
 import { EachAccommodationReportComponent } from './accommodation-reports/each-accommodation/each-accommodation-report.component';
 import { MonthlyReportComponent } from './accommodation-reports/monthly-report/monthly-report.component';
 import { ApproveReviewsComponent } from './admin-functions/approve-reviews/approve-reviews.component';
-import {OwnerNotificationsComponent} from "./notifications/owner-notifications/owner-notifications.component";
 import { ReportedReviewsComponent } from './admin-functions/reported-reviews/reported-reviews.component';
 import { ReportedUsersComponent } from './admin-functions/reported-users/reported-users.component';
 import { MyReviewsComponent } from './my-reviews/my-reviews.component';
+import { NotificationWallComponent } from './notifications/notification-wall/notification-wall.component';
 
 @NgModule({
   declarations: [
@@ -83,10 +83,10 @@ import { MyReviewsComponent } from './my-reviews/my-reviews.component';
     EachAccommodationReportComponent,
     MonthlyReportComponent,
     ApproveReviewsComponent,
-    OwnerNotificationsComponent,
     ReportedReviewsComponent,
     ReportedUsersComponent,
     MyReviewsComponent,
+    NotificationWallComponent,
 
   ],
   imports: [
