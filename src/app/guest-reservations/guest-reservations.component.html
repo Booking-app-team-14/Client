@@ -77,7 +77,7 @@
           <ng-container *ngIf="type !== 'declined'">
           <button class="cancel" (click)="openCancelDialog(reservation.id, reservation.guestId)" [disabled]="isCancellationDisabled(reservation.startDate, reservation.accommodation.cancellationDeadline)">CANCEL</button>
 
-            <button class="cancel"  *ngIf="type === 'approved'" (click)="showReportInput(reservation)" [disabled]="!isReservationPasted(reservation.endDate) || isUserReported">REPORT OWNER</button>
+            <button class="cancel"  *ngIf="type === 'approved'" (click)="showReportInput(reservation)" [disabled]="!isReservationPasted(reservation.endDate) || reservation.isUserReported">REPORT OWNER</button>
             <div *ngIf="reservation.showReport && !isUserReported" class="report-input">
               <input [(ngModel)]="reservation.reportReason" placeholder="Enter reason...">
               <button (click)="submitReport()">Submit</button>
