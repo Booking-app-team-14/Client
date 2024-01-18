@@ -34,7 +34,6 @@ export class GuestReservationsComponent implements OnInit{
 
   sendCancelRequest(reservationId: number, guestId: number): void {
     const deleteUrl = `http://localhost:8080/api/requests/${reservationId}`;
-    const guestUrl = `http://localhost:8080/api/guest/${guestId}`;
 
     this.http.delete(deleteUrl).subscribe(
       () => {
