@@ -38,10 +38,11 @@ export class GuestReservationsComponent implements OnInit{
 
     this.http.delete(deleteUrl).subscribe(
       () => {
-
+        this.fetchReservations();
       },
       (deleteError) => {
         alert('Successfully canceled!');
+        this.fetchReservations();
       }
     );
   }
@@ -162,7 +163,7 @@ export class GuestReservationsComponent implements OnInit{
     const today = new Date();
     const reservationStartDate = new Date(startDate);
     const deadlineDate = new Date(reservationStartDate.getTime() - cancellationDeadline * 24 * 60 * 60 * 1000);
-    return today >= deadlineDate;
+    return today > deadlineDate;
   }
 
   selectedReview: any = null;
