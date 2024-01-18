@@ -1,6 +1,7 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ReservationService} from "../accommodation-details/reservation/reservation.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-owner-reservations',
@@ -19,6 +20,7 @@ export class OwnerReservationsComponent implements AfterViewInit {
   endDateFilter: Date;
   minEndDate: string;
  handling:boolean;
+   isUserReported: boolean
   constructor(private http: HttpClient,private reservationService:ReservationService) {
   }
   ngAfterViewInit(): void {
@@ -41,10 +43,12 @@ export class OwnerReservationsComponent implements AfterViewInit {
       next: (reservations: any[]) => {
         this.reservations = reservations;
         for (let i = 0; i < this.reservations.length; i++) {
+
           this.http.get(`http://localhost:8080/api/accommodations/${this.reservations[i].accommodationId}`).subscribe({
             next: (accommodation: any) => {
               this.reservations[i].accommodation = accommodation;
               this.getDetailsForReservations(this.reservations[i]);
+              //this.checkIfUserReported(this.reservations[i].guestId);
               if(this.reservations[i].requestStatus == "SENT") this.reservations[i].requestStatus = "fiber_sent";
               else if(this.reservations[i].requestStatus == "ACCEPTED") this.reservations[i].requestStatus = "fiber_approved";
               else if(this.reservations[i].requestStatus == "DECLINED") this.reservations[i].requestStatus = "fiber_declined";
@@ -73,19 +77,31 @@ export class OwnerReservationsComponent implements AfterViewInit {
       }
     });
   }
-  getDetailsForReservations(reservation:any): void
-  {
-     this.http.get(`http://localhost:8080/api/users/${reservation.guestId}`).subscribe({
-        next: (user: any) => {
-          reservation.user = user;
-           this.checkIfUserReported(reservation.guestId);
-        },
-        error: (err) => {
-          console.error(err);
-          alert("Error while fetching user details!");
-        }
-      });
+  getDetailsForReservations(reservation: any): void {
+    this.http.get(`http://localhost:8080/api/users/${reservation.guestId}`).subscribe({
+      next: (user: any) => {
+        reservation.user = user;
+        this.checkIfUserReported(reservation.guestId).subscribe(
+          (isReported) => {
+            reservation.isUserReported = isReported;
+          },
+          (error) => {
+            console.error('Error checking if user reported:', error);
+          }
+        );
+      },
+      error: (err) => {
+        console.error(err);
+        alert("Error while fetching user details!");
+      }
+    });
   }
+
+  checkIfUserReported(userId: number): Observable<boolean> {
+
+    return this.http.get<boolean>(`http://localhost:8080/api/userReports/isReported/${userId}`);
+  }
+
   applyAccommodationNameFilter(): void {
     if (this.accommodationNameFilter) {
       const filterValue = this.accommodationNameFilter.toLowerCase();
@@ -199,12 +215,14 @@ export class OwnerReservationsComponent implements AfterViewInit {
                 (error) => {
                     // Handle error
                      //console.error(error);
-                    this.isUserReported=true;
+                     //this.isUserReported=true;
+                   //this.checkIfUserReported(4);
+                  this.fetchReservations();
                     this.selectedReview.showReport = false;
                     this.selectedReview.showButton=true;
                     this.selectedReview.reportReason = '';
                     //this.selectedReview = null;
-                    alert("Successfully reported review!");
+                    alert("Successfully reported review!" );
 
                 }
             );
@@ -216,18 +234,7 @@ export class OwnerReservationsComponent implements AfterViewInit {
         const deadlineDate = new Date(reservationStartDate.getTime() - cancellationDeadline * 24 * 60 * 60 * 1000);
         return today >= deadlineDate;
     }
-    isUserReported: boolean = false;
 
-    checkIfUserReported(userId: number) {
-        this.http.get<boolean>(`http://localhost:8080/api/userReports/isReported/${userId}`).subscribe(
-            (isReported) => {
-                this.isUserReported = isReported;
-            },
-            (error) => {
-                console.error('Error checking if user reported:', error);
-            }
-        );
-    }
 
     isReservationPasted(endDate: string ): boolean {
       const today = new Date();

@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {CancelDialogComponent} from "../shared/cancel-dialog/cancel-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-guest-reservations',
@@ -22,6 +23,7 @@ export class GuestReservationsComponent implements OnInit{
   startDateFilter: Date;
   endDateFilter: Date;
   minEndDate: string;
+  isUserReported: boolean
 
 
   constructor(private http: HttpClient,private router: Router,private reservationService:ReservationService, private dialog: MatDialog, private snackBar: MatSnackBar) {
@@ -94,8 +96,16 @@ export class GuestReservationsComponent implements OnInit{
         next: (accommodation: any) => {
           this.reservations[i].accommodation = accommodation;
           this.ownerId=this.reservations[i].accommodation.owner_Id;
-          this.checkIfUserReported(this.reservations[i].accommodation.owner_Id);
+          //this.reservations[i].isUserReported=this.checkIfUserReported(this.reservations[i].accommodation.owner_Id);
 
+          this.checkIfUserReported(this.reservations[i].accommodation.owner_Id).subscribe(
+            (isReported) => {
+              this.reservations[i].isUserReported = isReported;
+            },
+            (error) => {
+              console.error('Error checking if user reported:', error);
+            }
+          );
           console.log(this.ownerId);
           this.http.get(`http://localhost:8080/api/users/${this.ownerId}`).subscribe({
 
@@ -114,6 +124,12 @@ export class GuestReservationsComponent implements OnInit{
         }
       });
     }
+  }
+
+
+  checkIfUserReported(userId: number): Observable<boolean> {
+
+    return this.http.get<boolean>(`http://localhost:8080/api/userReports/isReported/${userId}`);
   }
 
   applyAccommodationNameFilter(): void {
@@ -181,41 +197,29 @@ export class GuestReservationsComponent implements OnInit{
       reportedUserId: this.ownerId,
       description: this.selectedReview.reportReason
     };
-
     this.http.post('http://localhost:8080/api/userReports/report', reportDTO)
         .subscribe(
             (response: any) => {
-
-
-            },
-            (error) => {
-              // Handle error
-              //console.error(error);
-              //this.checkIfUserReported(this.ownerId);
-              this.isUserReported=true;
+              //console.log(this.reservations[this.selectedReview.id].accommodation.id);
+              this.getDetailsForReservations();
+              //this.isUserReported=true;
               this.selectedReview.showReport = false;
               this.selectedReview.showButton=true;
               this.selectedReview.reportReason = '';
-              //this.selectedReview = null;
-              alert("Successfully reported review!");
 
+            },
+            (error) => {
+              //console.log(this.reservations[this.selectedReview.id] );
+               this.getDetailsForReservations();
+              this.selectedReview.showReport = false;
+              this.selectedReview.showButton=true;
+              this.selectedReview.reportReason = '';
+               alert("Successfully reported review! "  );
 
             }
         );
   }
 
-  isUserReported: boolean = false;
-
-   checkIfUserReported(userId: number) {
-    this.http.get<boolean>(`http://localhost:8080/api/userReports/isReported/${userId}`).subscribe(
-        (isReported) => {
-          this.isUserReported = isReported;
-        },
-        (error) => {
-          console.error('Error checking if user reported:', error);
-        }
-    );
-  }
 
   isReservationPasted(endDate: string ): boolean {
     const today = new Date();
