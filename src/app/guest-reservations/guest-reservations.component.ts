@@ -16,6 +16,7 @@ export class GuestReservationsComponent implements OnInit{
 
   type: string = "sent";
   ownerId:number;
+  ownerIds: number[] = [];
   reservations: any[];
   filteredReservations: any[];
   private id: number;
@@ -106,7 +107,7 @@ export class GuestReservationsComponent implements OnInit{
               console.error('Error checking if user reported:', error);
             }
           );
-          console.log(this.ownerId);
+          if (!this.ownerIds.includes(this.ownerId)) this.ownerIds.push(this.ownerId);
           this.http.get(`http://localhost:8080/api/users/${this.ownerId}`).subscribe({
 
             next: (user: any) => {
@@ -193,8 +194,10 @@ export class GuestReservationsComponent implements OnInit{
   }
 
   submitReport() {
+    console.log("OWNE IDS:", this.ownerIds);
     const reportDTO = {
-      reportedUserId: this.ownerId,
+      // reportedUserId: this.ownerId,
+      reportedUserId: this.ownerIds[this.reservations.indexOf(this.selectedReview)],
       description: this.selectedReview.reportReason
     };
     this.http.post('http://localhost:8080/api/userReports/report', reportDTO)
