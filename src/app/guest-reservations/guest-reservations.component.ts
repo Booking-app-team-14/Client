@@ -36,14 +36,14 @@ export class GuestReservationsComponent implements OnInit{
 
   sendCancelRequest(reservationId: number, guestId: number): void {
     const deleteUrl = `http://localhost:8080/api/requests/${reservationId}`;
-    const guestUrl = `http://localhost:8080/api/guest/${guestId}`;
 
     this.http.delete(deleteUrl).subscribe(
       () => {
-
+        this.fetchReservations();
       },
       (deleteError) => {
         alert('Successfully canceled!');
+        this.fetchReservations();
       }
     );
   }
@@ -178,7 +178,7 @@ export class GuestReservationsComponent implements OnInit{
     const today = new Date();
     const reservationStartDate = new Date(startDate);
     const deadlineDate = new Date(reservationStartDate.getTime() - cancellationDeadline * 24 * 60 * 60 * 1000);
-    return today >= deadlineDate;
+    return today > deadlineDate;
   }
 
   selectedReview: any = null;
