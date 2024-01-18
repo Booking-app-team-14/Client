@@ -101,7 +101,7 @@
                     <input type="date" [(ngModel)]="specialPrice.endDate" name="endDate{{i}}" required
                         format="yyyy-MM-dd" [attr.min]="getDateFromDatePicker(i)" [disabled]="isStartDateSelected(i)">
                 </div>
-                <label id="specialPriceAmount">Special price (leave empty if default):</label>
+                <label id="specialPriceAmount">Price:</label>
                 <input type="number" [(ngModel)]="specialPrice.amount" name="amount{{i}}">
 
 

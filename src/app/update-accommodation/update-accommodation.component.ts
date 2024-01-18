@@ -157,7 +157,7 @@ export class UpdateAccommodationComponent implements OnInit, AfterViewInit {
       return {
         startDate: specialPrice.startDate,
         endDate: specialPrice.endDate,
-        specialPrice: specialPrice.amount
+        specialPrice: specialPrice.amount ? specialPrice.amount : this.price
       };
     });
     for (let availability of availabilityData) {
