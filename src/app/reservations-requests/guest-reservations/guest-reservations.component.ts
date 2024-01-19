@@ -1,8 +1,8 @@
 import {Component, OnInit, signal} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {ReservationService} from "../accommodation-details/reservation/reservation.service";
+import {ReservationService} from "../../accommodation-details/reservation/reservation.service";
 import { MatDialog } from '@angular/material/dialog';
-import {CancelDialogComponent} from "../shared/cancel-dialog/cancel-dialog.component";
+import {CancelDialogComponent} from "../../shared/cancel-dialog/cancel-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
@@ -13,7 +13,6 @@ import {Observable} from "rxjs";
   styleUrl: './guest-reservations.component.css'
 })
 export class GuestReservationsComponent implements OnInit{
-
   type: string = "sent";
   ownerId:number;
   ownerIds: number[] = [];
@@ -25,7 +24,6 @@ export class GuestReservationsComponent implements OnInit{
   endDateFilter: Date;
   minEndDate: string;
   isUserReported: boolean
-
 
   constructor(private http: HttpClient,private router: Router,private reservationService:ReservationService, private dialog: MatDialog, private snackBar: MatSnackBar) {
   }

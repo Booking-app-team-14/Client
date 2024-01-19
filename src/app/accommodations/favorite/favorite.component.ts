@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Accommodation} from "../shared/accommodation.model";
+import {Accommodation} from "../../shared/models/accommodation.model";
 import {Router} from "@angular/router";
-import {SearchPageService} from "../search-page/search-page.service";
-import {FilterService} from "../shared/filter.service";
-import {UserService} from "../login/user.service";
-import {ReservationService} from "../accommodation-details/reservation/reservation.service";
+import {SearchPageService} from "../../search-page/search-page.service";
+import {FilterService} from "../../shared/services/filter.service";
+import {UserService} from "../../user-credentials/login/user.service";
+import {ReservationService} from "../../accommodation-details/reservation/reservation.service";
 
 @Component({
   selector: 'app-favorite',

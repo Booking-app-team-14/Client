@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AccommodationDetailsService } from './accommodation-details.service';
-import {AccommodationDTO, AmenityDTO, AvailabilityDTO} from '../shared/accommodation-details.model';
+import {AccommodationDTO, AmenityDTO, AvailabilityDTO} from '../shared/models/accommodation-details.model';
 
 @Component({
   selector: 'app-accommodation-details',

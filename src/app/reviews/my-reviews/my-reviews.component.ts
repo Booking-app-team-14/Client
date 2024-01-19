@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-import {UserService} from "../login/user.service";
+import {UserService} from "../../user-credentials/login/user.service";
 
 @Component({
   selector: 'app-my-reviews',

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import {FilterModel} from "../../shared/Filter.model";
-import {FilterService} from "../../shared/filter.service";
-import {Accommodation} from "../../shared/accommodation.model";
+import {FilterModel} from "../../shared/models/Filter.model";
+import {FilterService} from "../../shared/services/filter.service";
+import {Accommodation} from "../../shared/models/accommodation.model";
 
 @Component({
   selector: 'app-search-section',

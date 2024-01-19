@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {MainPageService} from "../main-page.service";
-import {PagedResult} from "../../shared/paged-result.model";
-import {Accommodation} from "../../shared/accommodation.model";
+import {PagedResult} from "../../shared/models/paged-result.model";
+import {Accommodation} from "../../shared/models/accommodation.model";
 
 
 @Component({

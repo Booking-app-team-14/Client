@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {PagedResult} from "../shared/paged-result.model";
+import {PagedResult} from "../shared/models/paged-result.model";
 import {Observable} from "rxjs";
-import {Accommodation} from "../shared/accommodation.model";
+import {Accommodation} from "../shared/models/accommodation.model";
 
 
 @Injectable({

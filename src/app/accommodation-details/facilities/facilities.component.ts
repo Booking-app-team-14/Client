@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {AmenityDTO} from "../../shared/accommodation-details.model";
+import {AmenityDTO} from "../../shared/models/accommodation-details.model";
 
 interface  Amenities{
   id: number;

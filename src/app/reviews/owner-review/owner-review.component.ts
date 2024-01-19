@@ -1,15 +1,15 @@
 import {AfterViewChecked, Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import { HttpClient } from '@angular/common/http';
-import {UserService} from "../login/user.service";
+import {UserService} from "../../user-credentials/login/user.service";
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
-import {ReportModalComponent} from "../report-modal/report-modal.component";
+import {ReportModalComponent} from "../../report-modal/report-modal.component";
 import {Dialog} from "@angular/cdk/dialog";
 import { ActivatedRoute } from '@angular/router';
 import {filter, map, Observable, of, switchMap} from "rxjs";
-import {DeleteReviewDialogComponent} from "../delete-review-dialog/delete-review-dialog.component";
-import {ReservationService} from "../accommodation-details/reservation/reservation.service";
+import {DeleteReviewDialogComponent} from "../../delete-review-dialog/delete-review-dialog.component";
+import {ReservationService} from "../../accommodation-details/reservation/reservation.service";
 
 @Component({
   selector: 'app-owner-review',

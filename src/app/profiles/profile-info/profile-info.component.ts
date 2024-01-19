@@ -1,6 +1,6 @@
 import { AfterViewChecked, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import {UserService} from "../../login/user.service";
+import {UserService} from "../../user-credentials/login/user.service";
 import { HttpClient } from '@angular/common/http';
 
 @Component({

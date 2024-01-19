@@ -1,5 +1,5 @@
 import { AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import {UserService} from "../../login/user.service";
+import {UserService} from "../../user-credentials/login/user.service";
 import { Router } from '@angular/router';
 import { WebSocketService } from '../../shared/notifications/websocket.service';
 import { Observable, map, switchMap } from 'rxjs';
@@ -24,13 +24,30 @@ export class NavbarComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.http.get<any>(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe(userId => {
+      this.http.get<any>(`http://localhost:8080/api/notifications/` + userId /*+`/`+ false*/).subscribe(notificationDTOs => {
+      //TODO uncomment
+        for (let notification of notificationDTOs) {
+          if (notification.seen == false) {
+            if (this.notificationsNumber == "9+") return;
+            if (Number(this.notificationsNumber) == 9) {
+              this.notificationsNumber = "9+";
+            }
+            this.notificationsNumber = String(Number(this.notificationsNumber) + 1);
+          }
+        }
+
+      });
+    });
+
     this.getUserInfo().subscribe(username => {
       this.socket = this.webSocketService.subscribeToSocket('/topic/notifications', username, () => {
 
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.http.get<any>(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe(userId => {
-          this.http.get<any>(`http://localhost:8080/api/notifications/` + userId).subscribe(notificationDTOs => {
-
+          this.http.get<any>(`http://localhost:8080/api/notifications/` + userId /*+`/`+ false*/).subscribe(notificationDTOs => {
+              //TODO uncomment
             for (let notification of notificationDTOs) {
               if (notification.seen == false) {
                 if (this.notificationsNumber == "9+") return;
@@ -40,7 +57,7 @@ export class NavbarComponent implements AfterViewInit, OnDestroy, OnInit {
                 this.notificationsNumber = String(Number(this.notificationsNumber) + 1);
               }
             }
-    
+
           });
         });
       });

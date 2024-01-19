@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {Accommodation} from "../../shared/accommodation.model";
+import {Accommodation} from "../../shared/models/accommodation.model";
 import {SearchPageService} from "../search-page.service";
 import {Observable, Subscription} from "rxjs";
-import {FilterService} from "../../shared/filter.service";
-import {UserService} from "../../login/user.service";
+import {FilterService} from "../../shared/services/filter.service";
+import {UserService} from "../../user-credentials/login/user.service";
 import {ReservationService} from "../../accommodation-details/reservation/reservation.service";
 
 @Component({

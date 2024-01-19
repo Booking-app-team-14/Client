@@ -2,8 +2,8 @@ import {AfterViewInit, Component, ElementRef, Input, OnInit, signal, ViewChild} 
 import {ReservationService} from "./reservation.service";
 
 import {AccommodationDetailsService} from "../accommodation-details.service";
-import {UserService} from "../../login/user.service";
-import {AvailabilityDTO} from "../../shared/accommodation-details.model";
+import {UserService} from "../../user-credentials/login/user.service";
+import {AvailabilityDTO} from "../../shared/models/accommodation-details.model";
 import {DomEvent} from "leaflet";
 
 @Component({

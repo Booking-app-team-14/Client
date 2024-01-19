@@ -63,10 +63,10 @@ export class NotificationWallComponent implements OnInit, OnDestroy {
 
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.http.get<any>(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe(userId => {
-          this.http.get<any>(`http://localhost:8080/api/notifications/` + userId).subscribe(notificationDTOs => {
-    
+          this.http.get<any>(`http://localhost:8080/api/notifications/` + userId /*+`/`+ true*/).subscribe(notificationDTOs => {
+
             this.notifications = notificationDTOs;
-    
+
           });
         });
       });
@@ -98,13 +98,13 @@ export class NotificationWallComponent implements OnInit, OnDestroy {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.http.get<any>(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe(userId => {
       this.http.put<any>(`http://localhost:8080/api/users/${userId}/not-wanted-notifications`, type).subscribe(response => {
-        
+
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.http.get<any>(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe(userId => {
           this.http.get<any>(`http://localhost:8080/api/notifications/` + userId).subscribe(notificationDTOs => {
-    
+
             this.notifications = notificationDTOs;
-    
+
           });
         });
 

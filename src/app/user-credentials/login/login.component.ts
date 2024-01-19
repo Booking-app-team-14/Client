@@ -65,8 +65,7 @@ export class LoginComponent {
       },
       error: (err) => {
         console.error(err);
-        if (err.error) alert(err.error);
-        else alert("Bad credentials!");
+        alert("Bad credentials!");
       }
     });
 

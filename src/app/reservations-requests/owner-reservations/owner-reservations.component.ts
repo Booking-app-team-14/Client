@@ -1,6 +1,6 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {ReservationService} from "../accommodation-details/reservation/reservation.service";
+import {ReservationService} from "../../accommodation-details/reservation/reservation.service";
 import {Observable} from "rxjs";
 
 @Component({

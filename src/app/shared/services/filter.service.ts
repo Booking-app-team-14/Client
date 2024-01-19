@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { FilterModel } from './Filter.model';
-import { Accommodation } from './accommodation.model';
-import { SearchPageService } from '../search-page/search-page.service';
+import { FilterModel } from '../models/Filter.model';
+import { Accommodation } from '../models/accommodation.model';
+import { SearchPageService } from '../../search-page/search-page.service';
 
 @Injectable({
   providedIn: 'root'

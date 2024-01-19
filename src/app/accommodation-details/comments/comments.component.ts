@@ -5,7 +5,7 @@ import {catchError, Observable, of} from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import {ReservationService} from "../reservation/reservation.service";
 import {AccommodationDetailsService} from "../accommodation-details.service";
-import {UserService} from "../../login/user.service";
+import {UserService} from "../../user-credentials/login/user.service";
 @Component({
   selector: 'app-comments',
   templateUrl: './comments.component.html',
