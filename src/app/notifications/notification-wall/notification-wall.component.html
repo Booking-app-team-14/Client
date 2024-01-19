@@ -51,7 +51,7 @@
               </div>
               <div class="notification-content">
                 <span class="name">{{notification.reservation.name}}</span> <br> <br>
-                <span>{{notification.reservation.requestStatus+ " "+"RESERVATION"}}</span> <br> <br>
+                <span>SENT RESERVATION</span> <br> <br>
                 <img [src]="'data:image/' + notification.reservation.imageType + ';base64,' + notification.reservation.mainPictureBytes" alt="Accommodation main picture">
                 <br>
                 <span class="status">{{"Status:" + (notification.seen ? 'SEEN' : 'UNREAD')}}</span>
@@ -129,7 +129,7 @@
               </div>
               <div class="notification-content">
                 <span>{{notification.reservation.name}}</span> <br> <br>
-                <span>  {{ notification.reservation.accepted ? 'APPROVED' : 'CANCELED' }} RESERVATION REQUEST
+                <span>  {{ notification.reservation.accepted ? 'APPROVED' : 'REJECTED' }} RESERVATION REQUEST
                   </span>
 
                 <br> <br>
