@@ -26,8 +26,8 @@ export class NavbarComponent implements AfterViewInit, OnDestroy, OnInit {
   ngOnInit(): void {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.http.get<any>(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe(userId => {
-      this.http.get<any>(`http://localhost:8080/api/notifications/` + userId /*+`/`+ false*/).subscribe(notificationDTOs => {
-      //TODO uncomment
+      this.http.get<any>(`http://localhost:8080/api/notifications/` + userId +`/`+ false).subscribe(notificationDTOs => {
+        this.notificationsNumber = "0";
         for (let notification of notificationDTOs) {
           if (notification.seen == false) {
             if (this.notificationsNumber == "9+") return;
@@ -46,8 +46,8 @@ export class NavbarComponent implements AfterViewInit, OnDestroy, OnInit {
 
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.http.get<any>(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe(userId => {
-          this.http.get<any>(`http://localhost:8080/api/notifications/` + userId /*+`/`+ false*/).subscribe(notificationDTOs => {
-              //TODO uncomment
+          this.http.get<any>(`http://localhost:8080/api/notifications/` + userId +`/`+ false).subscribe(notificationDTOs => {
+            this.notificationsNumber = "0";
             for (let notification of notificationDTOs) {
               if (notification.seen == false) {
                 if (this.notificationsNumber == "9+") return;
