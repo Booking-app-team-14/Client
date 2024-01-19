@@ -18,15 +18,25 @@
             <button mat-icon-button class="fav-btn" routerLink="/favorite">
                 <mat-icon>favorite</mat-icon>
             </button>
-            <button mat-icon-button class="fav-btn" routerLink="/notifications">
+            <button mat-icon-button class="fav-btn" routerLink="/notifications" (click)="resetNotificationNumber()">
                 <mat-icon>notifications</mat-icon>
+                <ng-container *ngIf="numberOfNotifications()">
+                    <div class="notificationNumber">
+                        <span>{{ notificationsNumber }}</span>
+                    </div>
+                </ng-container>
             </button>
             <button routerLink="/profile">Profile</button>
         </ng-container>
 
         <ng-container *ngIf="userRole === 'host'">
-            <button mat-icon-button class="fav-btn" routerLink="/notifications">
+            <button mat-icon-button class="fav-btn" routerLink="/notifications" (click)="resetNotificationNumber()">
                 <mat-icon>notifications</mat-icon>
+                <ng-container *ngIf="numberOfNotifications()">
+                    <div class="notificationNumber">
+                        <span>{{ notificationsNumber }}</span>
+                    </div>
+                </ng-container>
             </button>
             <button id="non-primary-btn2" routerLink="/create-accommodation">Post</button>
             <button routerLink="/profile">Profile</button>

@@ -101,3 +101,23 @@ a:hover {
     border: 1px solid rgba(101, 174, 242, 0);
     color: var(--color_white);
 }
+
+.notificationNumber {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--color_red);
+    border-radius: 50%;
+    border: 2px solid var(--color_white);
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.notificationNumber span {
+    position: relative;
+    top: -42%;
+    left: 2%;
+    color: var(--color_white);
+    font-size: 0.8rem;
+    font-weight: 500;
+}

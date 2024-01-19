@@ -8,28 +8,28 @@
             <div class="notificationOptions">
                 <ng-container *ngIf="role==='host'">
                     <div class="input-row">
-                        <input type="checkbox" [(ngModel)]="checkboxCreated" id="RESERVATION_REQUEST_CREATED" name="RESERVATION_REQUEST_CREATED" value="Accommodation reservation made">
+                        <input type="checkbox" (ngModelChange)="updatePrefrences('RESERVATION_REQUEST_CREATED')" [(ngModel)]="checkboxCreated" id="RESERVATION_REQUEST_CREATED" name="RESERVATION_REQUEST_CREATED" value="Accommodation reservation made">
                         <label for="RESERVATION_REQUEST_CREATED">Accommodation reservation made</label>
                     </div>
                     
                     <div class="input-row">
-                        <input type="checkbox" [(ngModel)]="checkboxCancelled" id="RESERVATION_REQUEST_CANCELLED" name="RESERVATION_REQUEST_CANCELLED" value="Accommodation reservation cancelled">
+                        <input type="checkbox" (ngModelChange)="updatePrefrences('RESERVATION_REQUEST_CANCELLED')" [(ngModel)]="checkboxCancelled" id="RESERVATION_REQUEST_CANCELLED" name="RESERVATION_REQUEST_CANCELLED" value="Accommodation reservation cancelled">
                         <label for="RESERVATION_REQUEST_CANCELLED">Accommodation reservation cancelled</label>
                     </div>
                     
                     <div class="input-row">
-                        <input type="checkbox" [(ngModel)]="checkboxOwnerReviewed" id="OWNER_REVIEWED" name="OWNER_REVIEWED" value="Your reviews">
+                        <input type="checkbox" (ngModelChange)="updatePrefrences('OWNER_REVIEWED')" [(ngModel)]="checkboxOwnerReviewed" id="OWNER_REVIEWED" name="OWNER_REVIEWED" value="Your reviews">
                         <label for="OWNER_REVIEWED">Your reviews</label>
                     </div>
 
                     <div class="input-row">
-                        <input type="checkbox" [(ngModel)]="checkboxAccommodationReviewed" id="ACCOMMODATION_REVIEWED" name="ACCOMMODATION_REVIEWED" value="Your accommodation reviews">
+                        <input type="checkbox" (ngModelChange)="updatePrefrences('ACCOMMODATION_REVIEWED')" [(ngModel)]="checkboxAccommodationReviewed" id="ACCOMMODATION_REVIEWED" name="ACCOMMODATION_REVIEWED" value="Your accommodation reviews">
                         <label for="ACCOMMODATION_REVIEWED">Your accommodation reviews</label>
                     </div>  
                 </ng-container>
                 <ng-container *ngIf="role==='guest'">
                     <div>
-                        <input type="checkbox" [(ngModel)]="checkboxResponse" id="RESERVATION_REQUEST_RESPONSE" name="RESERVATION_REQUEST_RESPONSE" value="Reservation request response">
+                        <input type="checkbox" (ngModelChange)="updatePrefrences('RESERVATION_REQUEST_RESPONSE')" [(ngModel)]="checkboxResponse" id="RESERVATION_REQUEST_RESPONSE" name="RESERVATION_REQUEST_RESPONSE" value="Reservation request response">
                         <label for="RESERVATION_REQUEST_RESPONSE">Reservation request response</label>
                     </div>
                 </ng-container>
