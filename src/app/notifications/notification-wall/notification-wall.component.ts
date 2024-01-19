@@ -57,16 +57,17 @@ export class NotificationWallComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
     this.getUserInfo().subscribe(username => {
       this.socket = this.webSocketService.subscribeToSocket('/topic/notifications', username, () => {
 
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.http.get<any>(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe(userId => {
           this.http.get<any>(`http://localhost:8080/api/notifications/` + userId).subscribe(notificationDTOs => {
-    
+
             this.notifications = notificationDTOs;
-    
+            //this.notifications.n
+
           });
         });
       });
@@ -78,7 +79,7 @@ export class NotificationWallComponent implements OnInit, OnDestroy {
     if (this.socket) this.socket.close();
   }
 
-  getUserInfo(): Observable<string> {
+   getUserInfo(): Observable<string> {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
     return this.http.get<any>(`http://localhost:8080/api/users/token/${currentUser.token}`).pipe(
@@ -90,6 +91,7 @@ export class NotificationWallComponent implements OnInit, OnDestroy {
     );
   }
 
+
   getUserAccount(userId: number): Observable<any> {
     return this.http.get<any>(`http://localhost:8080/api/users/${userId}`);
   }
@@ -98,13 +100,13 @@ export class NotificationWallComponent implements OnInit, OnDestroy {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.http.get<any>(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe(userId => {
       this.http.put<any>(`http://localhost:8080/api/users/${userId}/not-wanted-notifications`, type).subscribe(response => {
-        
+
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.http.get<any>(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe(userId => {
           this.http.get<any>(`http://localhost:8080/api/notifications/` + userId).subscribe(notificationDTOs => {
-    
+
             this.notifications = notificationDTOs;
-    
+
           });
         });
 

@@ -92,3 +92,65 @@ h2 {
     box-shadow: 0 0 5px var(--color_gray_icon);
     border-radius: 2rem;
 }
+
+.notification-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.notification-status-container {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.notification-content {
+  flex-shrink: 1;
+  width: 60%;
+  padding-left: 10px;
+}
+
+.notification-content span {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.status {
+  color: #888;
+}
+
+.sent-at {
+  color: #888;
+}
+.name {
+  font-size: 20px;
+  font-weight: bold;
+}
+.notification-content img {
+  max-width: 100%;
+  width: 200px;
+  height: 150px;
+  border-radius: 10%;
+}
+.user-info img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+}
