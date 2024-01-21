@@ -1,13 +1,13 @@
 import {AfterViewChecked, Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import { HttpClient } from '@angular/common/http';
-import {UserService} from "../../user-credentials/login/user.service";
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
-import {ReportModalComponent} from "../../report-modal/report-modal.component";
 import {Dialog} from "@angular/cdk/dialog";
 import { ActivatedRoute } from '@angular/router';
 import {filter, map, Observable, of, switchMap} from "rxjs";
+import {UserService} from "../../user-credentials/login/user.service";
+import {ReportModalComponent} from "../../report-modal/report-modal.component";
 import {DeleteReviewDialogComponent} from "../../delete-review-dialog/delete-review-dialog.component";
 import {ReservationService} from "../../accommodation-details/reservation/reservation.service";
 
@@ -79,7 +79,7 @@ export class OwnerReviewComponent implements OnInit{
       this.fetchAverageRatingByOwnerId(this.ownerId);
       this.checkAcceptedReservation(this.ownerId);
     });
-    }
+  }
 
   private ownerId: number;
 
@@ -111,40 +111,40 @@ export class OwnerReviewComponent implements OnInit{
   }
   isCurrentUser:boolean=true;
 
-   fetchCommentsByOwnerId(ownerId: number): void {
+  fetchCommentsByOwnerId(ownerId: number): void {
     this.reservationService.getGuestId().subscribe(
-        (userId: number) => {
-          this.guestId = userId;
-          console.log(this.guestId);
+      (userId: number) => {
+        this.guestId = userId;
+        console.log(this.guestId);
 
-          this.http.get(`http://localhost:8080/api/reviews/owner/${ownerId}`).subscribe(
-              (reviews: any[]) => {
-                this.comments = reviews.map(review => {
-                  const currentUserMatches = this.guestId === review.sender.id;
+        this.http.get(`http://localhost:8080/api/reviews/owner/${ownerId}`).subscribe(
+          (reviews: any[]) => {
+            this.comments = reviews.map(review => {
+              const currentUserMatches = this.guestId === review.sender.id;
 
-                  return {
-                    isCurrentUser: currentUserMatches,
-                    name: review.sender.firstName + " " + review.sender.lastName,
-                    sentAt: review.timestamp,
-                    image: 'assets/BG.jpg',
-                    commentText: review.comment,
-                    rating: review.rating,
-                    id: review.id
-                  };
-                });
+              return {
+                isCurrentUser: currentUserMatches,
+                name: review.sender.firstName + " " + review.sender.lastName,
+                sentAt: review.timestamp,
+                image: 'assets/slika.png',
+                commentText: review.comment,
+                rating: review.rating,
+                id: review.id
+              };
+            });
 
-                this.displayedComments = this.comments.slice(0, 4);
-              },
-              (error) => {
-                console.error('Error fetching reviews:', error);
+            this.displayedComments = this.comments.slice(0, 4);
+          },
+          (error) => {
+            console.error('Error fetching reviews:', error);
 
-              }
-          );
-        },
-        (error) => {
-          console.error('Error fetching user ID:', error);
+          }
+        );
+      },
+      (error) => {
+        console.error('Error fetching user ID:', error);
 
-        }
+      }
     );
   }
 
@@ -180,6 +180,8 @@ export class OwnerReviewComponent implements OnInit{
         alert('Review submitted successfully:')
         this.fetchCommentsByOwnerId(this.ownerId);
         this.fetchAverageRatingByOwnerId(this.ownerId);
+        this.userRating = 0;
+        this.userComment = '';
       },
       error: (err) => {
         console.error('Error while submitting review:', err);
@@ -230,14 +232,14 @@ export class OwnerReviewComponent implements OnInit{
 
   checkAcceptedReservation(ownerId:number): void {
     this.http.get<boolean>(`http://localhost:8080/api/reviews/hasAcceptedReservationForOwner/${ownerId}`)
-        .subscribe(
-            (result: boolean) => {
-              this.showRateSection = result;
-            },
-            (error) => {
-              console.error('Error checking reservation:', error);
-            }
-        );
+      .subscribe(
+        (result: boolean) => {
+          this.showRateSection = result;
+        },
+        (error) => {
+          console.error('Error checking reservation:', error);
+        }
+      );
   }
 
 

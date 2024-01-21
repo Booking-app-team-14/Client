@@ -68,7 +68,7 @@ isReported: boolean;
         this.comments = reviews.map(review => ({
           name: review.sender.firstName + " " + review.sender.lastName,
           sentAt: review.timestamp,
-          image: 'assets/BG.jpg',
+          image: 'assets/slika.png',
           commentText: review.comment,
           rating: review.rating,
           id: review.id,
