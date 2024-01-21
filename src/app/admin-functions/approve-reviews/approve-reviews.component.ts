@@ -81,6 +81,7 @@ export class ApproveReviewsComponent {
       next: (ownerReviews: any[]) => {
 
         this.ownerReviews = ownerReviews;
+        console.log(this.ownerReviews);
 
         for (let i = 0; i < this.ownerReviews.length; i++) {
           const date = new Date(this.ownerReviews[i].timestamp);
@@ -90,6 +91,7 @@ export class ApproveReviewsComponent {
             year: 'numeric'
           });
           this.ownerReviews[i].timestamp = formatter.format(date);
+          if (this.ownerReviews[i].rating === -1) this.ownerReviews[i].rating = 0;
 
           this.http.get('http://localhost:8080/api/users/' + this.ownerReviews[i].senderId + '/image-type-username', {responseType: 'text'}).subscribe({
             next: (data: any) => {

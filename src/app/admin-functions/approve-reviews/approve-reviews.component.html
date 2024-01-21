@@ -1,7 +1,7 @@
 <div class="container">
 
     <h1>Comments & reviews requests</h1>
-  
+
     <mat-radio-group [(ngModel)]="type">
       <mat-radio-button value="accommodation">
         <div class="radio-container">
@@ -16,12 +16,12 @@
         </div>
       </mat-radio-button>
     </mat-radio-group>
-  
+
     <div class="card-container">
-  
+
       <ng-container *ngIf="type === 'accommodation'">
         <ng-container *ngFor="let accommodationReview of accommodationsReviews">
-        
+
           <div class="card" id="accommodation-card-{{accommodationReview.id}}">
 
             <div class="card-content-accommodation">
@@ -34,12 +34,12 @@
                 </div>
 
                 <div class="guest-data">
-      
+
                   <div class="guest">
                     <img [src]="'data:image/' + accommodationReview.guestProfilePictureType + ';base64,' + accommodationReview.guestProfilePictureBytes" alt="Guest profile picture">
                     <span class="username">{{accommodationReview.guestUsername}}</span>
                   </div>
-      
+
                 </div>
 
                 <div class="span-div">
@@ -61,7 +61,7 @@
                 <div class="info">
 
                   <img [src]="'data:image/' + accommodationReview.accommodationPictureType + ';base64,' + accommodationReview.accommodationPictureBytes" alt="Accommodation main picture">
-      
+
                   <div class="sub-info">
                     <div>
                       <div class="accommodation-type-rating">
@@ -70,7 +70,7 @@
                           <mat-icon *ngFor="let star of [].constructor(accommodationReview.accommodationRating)">star</mat-icon>
                         </div>
                       </div>
-  
+
                       <div class="name">{{accommodationReview.accommodationName}}</div>
                     </div>
 
@@ -89,15 +89,15 @@
               </div>
 
             </div>
-          
+
           </div>
-        
+
         </ng-container>
       </ng-container>
-  
+
       <ng-container *ngIf="type === 'owner'">
         <ng-container *ngFor="let ownerReview of ownerReviews">
-        
+
           <div class="card" id="owner-card-{{ownerReview.id}}">
 
             <div class="card-content">
@@ -110,12 +110,12 @@
                 </div>
 
                 <div class="guest-data">
-      
+
                   <div class="guest">
                     <img [src]="'data:image/' + ownerReview.guestProfilePictureType + ';base64,' + ownerReview.guestProfilePictureBytes" alt="Guest profile picture">
                     <span class="username">{{ownerReview.guestUsername}}</span>
                   </div>
-      
+
                 </div>
 
                 <div class="span-div">
@@ -123,9 +123,9 @@
                 </div>
 
               </div>
-      
+
               <div class="divider"></div>
-      
+
               <div class="owner-side">
 
                 <h3>Owner</h3>
@@ -138,8 +138,8 @@
                 </div>
 
                 <div class="owner-rating">
-                  <h4>Owner's rating:</h4>
-                  <div class="stars">
+                  <h4 *ngIf="ownerReview.ratingBefore != -1">Owner's rating: </h4>
+                  <div class="stars" *ngIf="ownerReview.ratingBefore != -1">
                     <mat-icon *ngFor="let star of [].constructor(ownerReview.ratingBefore)">star</mat-icon>
                   </div>
                   <ng-container *ngIf="ownerReview.rating != 0">
@@ -149,7 +149,7 @@
                     </div>
                   </ng-container>
                 </div>
-                
+
               </div>
 
             </div>
@@ -160,11 +160,10 @@
             </div>
 
           </div>
-        
-        </ng-container> 
+
+        </ng-container>
       </ng-container>
 
     </div>
-  
+
   </div>
-  

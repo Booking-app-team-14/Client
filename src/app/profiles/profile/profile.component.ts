@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 //import { userRole } from '../../app.component';
-import {UserService} from "../../login/user.service";
+import {UserService} from "../../user-credentials/login/user.service";
 import { HttpClient } from '@angular/common/http';
 
 @Component({

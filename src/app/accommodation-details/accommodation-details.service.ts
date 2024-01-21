@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
-import {AccommodationDTO, OwnerDTO} from "../shared/accommodation-details.model";
-import {Accommodation} from "../shared/accommodation.model";
+import {AccommodationDTO, OwnerDTO} from "../shared/models/accommodation-details.model";
+import {Accommodation} from "../shared/models/accommodation.model";
 
 
 @Injectable({

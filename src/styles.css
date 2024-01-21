@@ -27,3 +27,7 @@ body {
     min-height: 100vh;
     padding-bottom: 15rem;
 }
+
+.mat-snack-bar-container {
+    z-index: 9999;
+}

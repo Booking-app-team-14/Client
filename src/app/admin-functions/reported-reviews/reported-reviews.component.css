@@ -67,23 +67,23 @@ mat-icon {
     gap: 1rem;
     height: 14rem;
   }
-  
+
   .divider {
     width: 2px;
     height: auto;
     background-color: #E4E4E7;
   }
-  
+
   .guest-side {
     width: 20rem;
   }
-  
+
   .guest-side .span-div {
     height: 100%;
     overflow: auto;
     text-align: justify;
   }
-  
+
   .guest-data img {
     width: 5rem;
     height: 5rem;
@@ -92,13 +92,13 @@ mat-icon {
     object-fit: cover;
     object-position: center;
   }
-  
+
   .guest-side {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .guest-data {
     display: flex;
     flex-direction: row;
@@ -106,12 +106,12 @@ mat-icon {
     align-items: center;
     width: 100%;
   }
-  
+
   .date {
     font-size: 0.7rem;
     color: var(--color_gray_text);
   }
-  
+
   .guest {
     display: flex;
     flex-direction: row;
@@ -119,7 +119,7 @@ mat-icon {
     gap: 1rem;
     width: 100%;
   }
-  
+
   .username {
     font-size: 1rem;
     font-weight: 500;
@@ -352,4 +352,20 @@ mat-icon {
     display: block;
     width: 100%;
     text-align: justify;
+}
+
+#reason-header1 {
+  margin-bottom: 0.2rem;
+}
+
+#reason1 {
+  font-size: 1rem;
+  color: var(--color_gray_text);
+  letter-spacing: 0.05rem;
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 10rem;
+  display: block;
+  width: 100%;
+  text-align: justify;
 }

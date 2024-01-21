@@ -1,6 +1,6 @@
 import { AfterViewChecked, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import {UserService} from "../../login/user.service";
+import {UserService} from "../../user-credentials/login/user.service";
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -41,9 +41,16 @@ export class ProfileInfoComponent {
             this._router.navigateByUrl("");
           },
           error: (err) => {
-            alert("Account closed!");
-            this.userService.logout();
-            this._router.navigateByUrl("");
+            if (err.error.message.split(", \"")[1][0] === "O") {
+              alert("You have active requests! Account cannot be closed.");
+            }
+            else if (err.error.message.split(", \"")[1][0] === "G") {
+              alert("You have active requests! Account cannot be closed.");
+            } else {
+              alert("Account closed!");
+              this.userService.logout();
+              this._router.navigateByUrl("");
+            }
           }
         });
       }

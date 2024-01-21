@@ -1,8 +1,8 @@
 import {Component, signal} from '@angular/core';
 import {SearchPageService} from "../search-page.service";
-import {Accommodation} from "../../shared/accommodation.model";
-import {FilterService} from "../../shared/filter.service";
-import {FilterModel} from "../../shared/Filter.model";
+import {Accommodation} from "../../shared/models/accommodation.model";
+import {FilterService} from "../../shared/services/filter.service";
+import {FilterModel} from "../../shared/models/Filter.model";
 
 @Component({
   selector: 'app-sidebar',
@@ -94,4 +94,5 @@ export class SidebarComponent {
     });
     return selectedPrices.length > 0 ? Math.max(...selectedPrices) : undefined;
   }
+
 }

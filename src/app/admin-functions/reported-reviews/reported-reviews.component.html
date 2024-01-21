@@ -1,7 +1,7 @@
 <div class="container">
 
     <h1>Reported comments & reviews</h1>
-  
+
     <mat-radio-group [(ngModel)]="type">
       <mat-radio-button value="accommodation">
         <div class="radio-container">
@@ -16,12 +16,12 @@
         </div>
       </mat-radio-button>
     </mat-radio-group>
-  
+
     <div class="card-container">
-  
+
       <ng-container *ngIf="type === 'accommodation'">
         <ng-container *ngFor="let accommodationReviewReport of accommodationReviewReports">
-        
+
             <div class="card" id="accommodation-card-{{accommodationReviewReport.id}}">
 
                 <div class="card-content-accommodation">
@@ -33,12 +33,12 @@
                         </div>
 
                         <div class="guest-data">
-                
+
                             <div class="guest">
                                 <img [src]="'data:image/' + accommodationReviewReport.review.guestProfilePictureType + ';base64,' + accommodationReviewReport.review.guestProfilePictureBytes" alt="Guest profile picture">
                                 <span class="username">{{accommodationReviewReport.review.guestUsername}}</span>
                             </div>
-                
+
                         </div>
 
                         <div class="span-div">
@@ -60,7 +60,7 @@
                         <div class="info">
 
                         <img [src]="'data:image/' + accommodationReviewReport.review.accommodationPictureType + ';base64,' + accommodationReviewReport.review.accommodationPictureBytes" alt="Accommodation main picture">
-            
+
                         <div class="sub-info">
                             <div>
                                 <div class="accommodation-type-rating">
@@ -81,8 +81,8 @@
                         </div>
 
                         <div>
-                            <h3 id="reason-header">Reason:</h3>
-                            <span id="reason">text texxt<br>text text texxt</span>
+                            <h3 id="reason-header1">Reason:</h3>
+                            <span id="reason1">text texxt<br>text text texxt</span>
                         </div>
 
                     </div>
@@ -93,15 +93,15 @@
                     <button (click)="removeAccommodationReview(accommodationReviewReport.id)" class="bin">Remove</button>
                     <button (click)="ignoreAccommodationReviewReport(accommodationReviewReport.id)" class="accept">OK</button>
                 </div>
-          
+
             </div>
-        
+
         </ng-container>
       </ng-container>
-  
+
       <ng-container *ngIf="type === 'owner'">
         <ng-container *ngFor="let ownerReviewReport of ownerReviewReports">
-        
+
           <div class="card" id="owner-card-{{ownerReviewReport.id}}">
 
             <div class="card-content">
@@ -114,12 +114,12 @@
                 </div>
 
                 <div class="guest-data">
-      
+
                   <div class="guest">
                     <img [src]="'data:image/' + ownerReviewReport.review.senderProfilePictureType + ';base64,' + ownerReviewReport.review.senderProfilePictureBytes" alt="Sender profile picture">
                     <span class="username">{{ownerReviewReport.review.senderUsername}}</span>
                   </div>
-      
+
                 </div>
 
                 <div class="span-div">
@@ -127,9 +127,9 @@
                 </div>
 
               </div>
-      
+
               <div class="divider"></div>
-      
+
               <div class="owner-side">
 
                 <h3>Owner</h3>
@@ -153,7 +153,7 @@
                     </div>
                   </ng-container>
                 </div>
-                
+
               </div>
 
             </div>
@@ -171,11 +171,10 @@
             </div>
 
           </div>
-        
-        </ng-container> 
+
+        </ng-container>
       </ng-container>
 
     </div>
-  
+
   </div>
-  

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {BehaviorSubject, map, Observable, switchMap} from "rxjs";
-import {Accommodation} from "../shared/accommodation.model";
-import {FilterModel} from "../shared/Filter.model";
+import {Accommodation} from "../shared/models/accommodation.model";
+import {FilterModel} from "../shared/models/Filter.model";
 
 @Injectable({
   providedIn: 'root'

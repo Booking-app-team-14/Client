@@ -1,0 +1,144 @@
+<h2>Notifications</h2>
+
+<div class="container">
+
+    <div class="notif-type-container">
+        <h4>Enable / Disable notification type<ng-container *ngIf="role==='host'">s:</ng-container><ng-container *ngIf="role==='guest'">:</ng-container></h4>
+        <div class="notWantedNotificationsContainer">
+            <div class="notificationOptions">
+                <ng-container *ngIf="role==='host'">
+                    <div class="input-row">
+                        <input type="checkbox" (ngModelChange)="updatePrefrences('RESERVATION_REQUEST_CREATED')" [(ngModel)]="checkboxCreated" id="RESERVATION_REQUEST_CREATED" name="RESERVATION_REQUEST_CREATED" value="Accommodation reservation made">
+                        <label for="RESERVATION_REQUEST_CREATED">Accommodation reservation made</label>
+                    </div>
+
+                    <div class="input-row">
+                        <input type="checkbox" (ngModelChange)="updatePrefrences('RESERVATION_REQUEST_CANCELLED')" [(ngModel)]="checkboxCancelled" id="RESERVATION_REQUEST_CANCELLED" name="RESERVATION_REQUEST_CANCELLED" value="Accommodation reservation cancelled">
+                        <label for="RESERVATION_REQUEST_CANCELLED">Accommodation reservation cancelled</label>
+                    </div>
+
+                    <div class="input-row">
+                        <input type="checkbox" (ngModelChange)="updatePrefrences('OWNER_REVIEWED')" [(ngModel)]="checkboxOwnerReviewed" id="OWNER_REVIEWED" name="OWNER_REVIEWED" value="Your reviews">
+                        <label for="OWNER_REVIEWED">Your reviews</label>
+                    </div>
+
+                    <div class="input-row">
+                        <input type="checkbox" (ngModelChange)="updatePrefrences('ACCOMMODATION_REVIEWED')" [(ngModel)]="checkboxAccommodationReviewed" id="ACCOMMODATION_REVIEWED" name="ACCOMMODATION_REVIEWED" value="Your accommodation reviews">
+                        <label for="ACCOMMODATION_REVIEWED">Your accommodation reviews</label>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="role==='guest'">
+                    <div>
+                        <input type="checkbox" (ngModelChange)="updatePrefrences('RESERVATION_REQUEST_RESPONSE')" [(ngModel)]="checkboxResponse" id="RESERVATION_REQUEST_RESPONSE" name="RESERVATION_REQUEST_RESPONSE" value="Reservation request response">
+                        <label for="RESERVATION_REQUEST_RESPONSE">Reservation request response</label>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification-container">
+
+        <div class="notification" *ngFor="let notification of notifications">
+            <ng-container *ngIf="notification.type === 'RESERVATION_REQUEST_CREATED'">
+              <div class="user-info">
+                <span class="username">{{ notification.reservation.userUsername }}</span>
+                <img [src]="'data:image/' + notification.reservation.userImageType  + ';base64,' + notification.reservation.userProfilePictureBytes" alt="Owner profile picture">
+              </div>
+              <div class="notification-status-container">
+
+                <span class="sent-at">{{notification.sentAt | date:'medium'}}</span>
+              </div>
+              <div class="notification-content">
+                <span class="name">{{notification.reservation.name}}</span> <br> <br>
+                <span>SENT RESERVATION</span> <br> <br>
+                <img [src]="'data:image/' + notification.reservation.imageType + ';base64,' + notification.reservation.mainPictureBytes" alt="Accommodation main picture">
+                <br>
+                <span class="status">{{"Status:" + (notification.seen ? 'SEEN' : 'UNREAD')}}</span>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="notification.type === 'RESERVATION_REQUEST_CANCELLED'">
+              <div class="user-info">
+                <span class="username">{{ notification.reservation.userUsername }}</span>
+                <img [src]="'data:image/' + notification.reservation.userImageType  + ';base64,' + notification.reservation.userProfilePictureBytes" alt="Owner profile picture">
+              </div>
+              <div class="notification-status-container">
+
+                <span class="sent-at">{{notification.sentAt | date:'medium'}}</span>
+              </div>
+              <div class="notification-content">
+                <span>{{notification.reservation.name}}</span> <br> <br>
+                <span>{{notification.reservation.requestStatus+ " "+"RESERVATION"}}</span> <br> <br>
+                <img [src]="'data:image/' + notification.reservation.imageType + ';base64,' + notification.reservation.mainPictureBytes" alt="Accommodation main picture">
+                <br>
+                <span class="status">{{"Status:" + (notification.seen ? 'SEEN' : 'UNREAD')}}</span>
+
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="notification.type === 'OWNER_REVIEWED'">
+              <div class="user-info">
+                <span class="username">{{notification.username}}</span>
+                <img [src]="'data:image/' + notification.userType  + ';base64,' + notification.userBytes" alt="User profile picture">
+              </div>
+              <div class="notification-status-container">
+
+                <span class="sent-at">{{notification.sentAt | date:'medium'}}</span>
+              </div>
+              <div class="notification-content">
+
+                <span>GUEST MADE A REVIEW ON YOU</span> <br> <br>
+                <span>Comment: {{notification.review.comment}}</span> <br>
+                <span *ngIf="notification.review.rating != -1">Rating: {{notification.review.rating}}</span> <br>
+
+                <span class="status">{{"Status:" + (notification.seen ? 'SEEN' : 'UNREAD')}}</span>
+
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="notification.type === 'ACCOMMODATION_REVIEWED'">
+              <div class="user-info">
+                <span class="username">{{ notification.username }}</span>
+                <img [src]="'data:image/' + notification.userType  + ';base64,' + notification.userBytes" alt="Owner profile picture">
+              </div>
+              <div class="notification-status-container">
+
+                <span class="sent-at">{{notification.sentAt | date:'medium'}}</span>
+              </div>
+              <div class="notification-content">
+                <span>{{notification.reservation.name}}</span> <br> <br>
+                <span>GUEST MADE A REVIEW FOR YOUR ACCOMMODATION</span> <br> <br>
+                <!-- <img [src]="'data:image/' + notification.reservation.imageType + ';base64,' + notification.reservation.mainPictureBytes" alt="Accommodation main picture"> -->
+                <br>
+                <span>{{notification.review.comment}}</span> <br>
+                <span>{{notification.review.rating}}</span> <br>
+                <span class="status">{{"Status:" + (notification.seen ? 'SEEN' : 'UNREAD')}}</span>
+
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="notification.type === 'RESERVATION_REQUEST_RESPONSE'">
+              <div class="user-info">
+                <span class="username">{{ notification.reservation.userUsername }}</span>
+                <img [src]="'data:image/' + notification.reservation.userImageType  + ';base64,' + notification.reservation.userProfilePictureBytes" alt="Owner profile picture">
+              </div>
+              <div class="notification-status-container">
+
+                <span class="sent-at">{{notification.sentAt | date:'medium'}}</span>
+              </div>
+              <div class="notification-content">
+                <span>{{notification.reservation.name}}</span> <br> <br>
+                <span>  {{ notification.reservation.accepted ? 'APPROVED' : 'REJECTED' }} RESERVATION REQUEST
+                  </span>
+
+                <br> <br>
+                <img [src]="'data:image/' + notification.reservation.imageType + ';base64,' + notification.reservation.mainPictureBytes" alt="Accommodation main picture">
+                <br>
+                <span class="status">{{"Status:" + (notification.seen ? 'SEEN' : 'UNREAD')}}</span>
+              </div>
+            </ng-container>
+        </div>
+    </div>
+
+</div>

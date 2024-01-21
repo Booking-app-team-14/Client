@@ -2,9 +2,13 @@ import {AfterViewInit, Component, ElementRef, Input, OnInit, signal, ViewChild} 
 import {ReservationService} from "./reservation.service";
 
 import {AccommodationDetailsService} from "../accommodation-details.service";
-import {UserService} from "../../login/user.service";
-import {AvailabilityDTO} from "../../shared/accommodation-details.model";
+import {UserService} from "../../user-credentials/login/user.service";
+import {AvailabilityDTO} from "../../shared/models/accommodation-details.model";
 import {DomEvent} from "leaflet";
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { CancelDialogComponent } from '../../shared/cancel-dialog/cancel-dialog.component';
+import { tick } from '@angular/core/testing';
 
 @Component({
   selector: 'app-reservation',
@@ -24,7 +28,7 @@ export class ReservationComponent implements AfterViewInit {
   availableDates: AvailabilityDTO[] = [];
   userRole: string ='';
 
-  constructor( private reservationService: ReservationService,private accService: AccommodationDetailsService,  private userService: UserService) {
+  constructor( private reservationService: ReservationService, private userService: UserService, private snackBar: MatSnackBar) {
     this.userService.userRole$.subscribe(role => {
       this.userRole = role;
     });
@@ -199,7 +203,7 @@ export class ReservationComponent implements AfterViewInit {
 
         this.reservationService.sendReservation(reservationData).subscribe(
           (response) => {
-            alert('Reservation request successful sent!');
+            this.snackBar.open("Reservation request successful sent!", "OK", { duration: 2000 });
           },
           (error) => {
             console.error('Reservation failed:', error);

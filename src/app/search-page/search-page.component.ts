@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {FilterModel} from "../shared/Filter.model";
+import {FilterModel} from "../shared/models/Filter.model";
 import {SearchPageService} from "./search-page.service";
-import {FilterService} from "../shared/filter.service";
-import {Accommodation} from "../shared/accommodation.model";
+import {FilterService} from "../shared/services/filter.service";
+import {Accommodation} from "../shared/models/accommodation.model";
 
 @Component({
   selector: 'app-search-page',

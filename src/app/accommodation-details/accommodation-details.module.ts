@@ -10,6 +10,7 @@ import { FacilitiesComponent } from './facilities/facilities.component';
 import {AccommodationDetailsComponent} from "./accommodation-details.component";
 import {FormsModule} from "@angular/forms";
 import {RouterLink} from "@angular/router";
+import {RangeValidatorDirective} from "./reservation/appRangeValue.directive";
 
 
 
@@ -22,7 +23,8 @@ import {RouterLink} from "@angular/router";
     RatingsComponent,
     CommentsComponent,
     FacilitiesComponent,
-    AccommodationDetailsComponent
+    AccommodationDetailsComponent,
+    RangeValidatorDirective
   ],
   exports: [
     ImageSliderComponent,
@@ -32,7 +34,8 @@ import {RouterLink} from "@angular/router";
     ReservationComponent,
     RatingsComponent,
     CommentsComponent,
-    AccommodationDetailsComponent
+    AccommodationDetailsComponent,
+
   ],
     imports: [
         CommonModule,
