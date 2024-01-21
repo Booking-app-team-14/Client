@@ -28,7 +28,7 @@ export class ReservationComponent implements AfterViewInit {
   availableDates: AvailabilityDTO[] = [];
   userRole: string ='';
 
-  constructor( private reservationService: ReservationService, private userService: UserService, private snackBar: MatSnackBar) {
+  constructor(private reservationService: ReservationService, public userService: UserService, private snackBar: MatSnackBar) {
     this.userService.userRole$.subscribe(role => {
       this.userRole = role;
     });
