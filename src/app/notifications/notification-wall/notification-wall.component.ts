@@ -29,6 +29,35 @@ export class NotificationWallComponent implements OnInit, OnDestroy {
 
       this.http.get<any>(`http://localhost:8080/api/notifications/` + userId + "/" + true).subscribe(notificationDTOs => {
         this.notifications = notificationDTOs;
+
+        for (let notification of this.notifications) {
+          if (notification.type === 'OWNER_REVIEWED') {
+            
+            http.get('http://localhost:8080/api/users/' + notification.senderId + '/image-type-username', {responseType: 'text'}).subscribe({
+                next: (data: any) => {
+                  notification.username = data.split(' | ')[0];
+                  notification.userType = data.split(' | ')[1];
+                  notification.userBytes = data.split(' | ')[2];
+                },
+                error: (err) => {
+                  console.error(err);
+                }
+              });
+          }
+          else if (notification.type === 'ACCOMMODATION_REVIEWED') {
+            http.get('http://localhost:8080/api/users/' + notification.senderId + '/image-type-username', {responseType: 'text'}).subscribe({
+                next: (data: any) => {
+                  notification.username = data.split(' | ')[0];
+                  notification.userType = data.split(' | ')[1];
+                  notification.userBytes = data.split(' | ')[2];
+                },
+                error: (err) => {
+                  console.error(err);
+                }
+              });
+          }
+        }
+
       });
 
       this.http.get<any>(`http://localhost:8080/api/users/${userId}/not-wanted-notifications`).subscribe(notWantedNotifications => {
