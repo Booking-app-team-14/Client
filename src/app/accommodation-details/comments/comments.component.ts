@@ -77,7 +77,7 @@ export class CommentsComponent {
         alert('Review submitted successfully:')
         this.fetchCommentsByAccommodationId(this.accommodationId);
 
-        this.userRating = 0;
+        // this.userRating = 0;
         this.userComment = '';
       },
       error: (err) => {

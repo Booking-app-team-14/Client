@@ -3,6 +3,8 @@ import { isPlatformBrowser } from "@angular/common";
 import {AccommodationService} from "./createaccommodation.service";
 import {HttpClient} from "@angular/common/http";
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-create-accommodation',
   templateUrl: './create-accommodation.component.html',
@@ -12,7 +14,7 @@ export class CreateAccommodationComponent implements AfterViewInit{
   enteredAddress: string = '';
   map: any;
   marker: any;
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,private http: HttpClient, private accommodationService: AccommodationService) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,private http: HttpClient, private accommodationService: AccommodationService, private router: Router) {}
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
       setTimeout(() => {
@@ -146,6 +148,9 @@ export class CreateAccommodationComponent implements AfterViewInit{
               });
 
         }
+
+        this.router.navigate(['/']);
+
       });
   }
   private loadLeaflet() {

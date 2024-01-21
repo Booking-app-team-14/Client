@@ -180,7 +180,7 @@ export class OwnerReviewComponent implements OnInit{
         alert('Review submitted successfully:')
         this.fetchCommentsByOwnerId(this.ownerId);
         this.fetchAverageRatingByOwnerId(this.ownerId);
-        this.userRating = 0;
+        // this.userRating = 0;
         this.userComment = '';
       },
       error: (err) => {
