@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="profile-container">
+    <div class="comments-background">
+      <div class="comments-section">
+        <h2 *ngIf="displayedComments.length">Comments</h2>
+
+        <div class="comments-container"  >
+          <div class="comments-grid">
+            <div *ngFor="let comment of displayedComments; let i = index" class="comment" (click)="selectReview(comment)">
+              <div class="user-info">
+                <img [src]="comment.image" alt="User Image" (click)="openDeleteReviewDialog(comment)">
+                <div class="user-details">
+                  <p class="username">{{ comment.name }}</p>
+                  <p class="sent-at">{{ comment.sentAt | date: 'medium' }}</p>
+                </div>
+              </div>
+              <div class="comment-text" >
+                <p>{{ comment.commentText?.trim() || ' ' }}</p>
+
+                <br>
+                <p class="ratin" *ngIf="comment.rating !== -1"> Rating: {{ comment.rating }}</p>
+
+                <button *ngIf="(  comment.isCurrentUser  && userRole === 'guest' )" (click)="deleteComment()">Delete</button>
+
+                <button *ngIf="(!comment.showButton)   &&  userRole === 'host' &&  !comment.isReported  " (click)="showReportInput(comment)">Report</button>
+                <div *ngIf="comment.showReport" class="report-input">
+                  <input [(ngModel)]="comment.reportReason" placeholder="Enter reason...">
+                  <button (click)="submitReport()">Submit</button>
+                </div>
+              </div>
+            </div>
+
+            <button *ngIf="comments.length > displayedComments.length" (click)="loadMoreComments()" class="more-btn">MORE COMMENTS</button>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <h3 class="average" *ngIf="userRole === 'host'">Average rating: {{ averageRating }} </h3>
+
+      <div class="ratings-container" *ngIf="userRole === 'guest'">
+        <div class="average-rating"></div>
+
+        <div class="rating-form">
+          <h3 class="average">Average rating: {{ averageRating }} </h3>
+          <br>
+          <div *ngIf="showRateSection">
+            <div class="your-rate">Give your rate</div>
+            <div class="rate">
+              <input type="radio" id="star5" name="rate" value="5" (click)="onStarClick(5)"  />
+              <label for="star5" title="text">5 stars</label>
+              <input type="radio" id="star4" name="rate" value="4" (click)="onStarClick(4)" />
+              <label for="star4" title="text">4 stars</label>
+              <input type="radio" id="star3" name="rate" value="3" (click)="onStarClick(3)" />
+              <label for="star3" title="text">3 stars</label>
+              <input type="radio" id="star2" name="rate" value="2" (click)="onStarClick(2)"  />
+              <label for="star2" title="text">2 stars</label>
+              <input type="radio" id="star1" name="rate" value="1" (click)="onStarClick(1)" />
+              <label for="star1" title="text">1 star</label>
+            </div>
+
+            <textarea [(ngModel)]="userComment" name="userComment" placeholder="Leave a comment..."></textarea>
+
+            <button (click)="submitRating()">SUBMIT</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

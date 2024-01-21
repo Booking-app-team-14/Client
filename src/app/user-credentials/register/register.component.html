@@ -1,0 +1,63 @@
+<router-outlet></router-outlet>
+
+<div class="container-register">
+  <form method="post" class="login-form" (ngSubmit)="register()">
+    <div class="container">
+      <h1>Register</h1>
+      <p class="subtitle">Please fill in this form to create an account.</p>
+      <hr>
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" id="email" [(ngModel)]="username" required>
+
+      <div class="input-row">
+        <label> <b>Password </b></label>
+        <input [type]="passwordType" placeholder="Enter password" name="password" id="password" class="password" [(ngModel)]="password">
+        <mat-icon *ngIf="passwordVisibility" (click)="passwordVisibility=false;passwordType='text'">visibility</mat-icon>
+        <mat-icon *ngIf="!passwordVisibility" (click)="passwordVisibility=true;passwordType='password'">visibility_off</mat-icon>
+      </div>
+
+      <div class="input-row">
+        <label> <b>Confirm Password </b></label>
+        <input [type]="passwordConfirmType" placeholder="Confirm password"  name="confirmPassword" id="confirmPassword"  class="password" [(ngModel)]="confirmPassword">
+        <mat-icon *ngIf="passwordConfirmVisibility" (click)="passwordConfirmVisibility=false;passwordConfirmType='text'">visibility</mat-icon>
+        <mat-icon *ngIf="!passwordConfirmVisibility" (click)="passwordConfirmVisibility=true;passwordConfirmType='password'">visibility_off</mat-icon>
+      </div>
+
+      <label for="first"><b>First Name</b></label>
+      <input type="text" placeholder="Enter first name" name="first" id="first" [(ngModel)]="firstName" required>
+
+      <label for="last"><b>Last Name</b></label>
+      <input type="text" placeholder="Enter last name" name="last" id="last" [(ngModel)]="lastName" required>
+
+      <label for="phone"><b>Phone Number</b></label>
+      <input type="text" placeholder="Enter phone number" name="phone" id="phone" [(ngModel)]="phoneNumber" required>
+
+      <label for="address"><b>Address</b></label>
+      <input type="text" placeholder="Enter address number" name="address" id="address" [(ngModel)]="address" required>
+
+      <br>
+      <br>
+      <div class="radio-container">
+        <div class="radio1">
+          <input type="radio" id="guest" name="role" value="GUEST" [(ngModel)]="role" checked>
+          <label for="guest">Guest</label>
+        </div>
+
+        <div class="2">
+          <input type="radio" id="owner" name="role" value="OWNER" [(ngModel)]="role">
+          <label for="owner">Owner</label>
+        </div>
+      </div>
+      <br>
+      <hr>
+      <p>By creating an account you agree to our <a href="#" class="terms">Terms & Privacy</a>.</p>
+
+      <button class="registerbtn" type="submit">Register</button>
+    </div>
+
+    <p class="signin-text">Already have an account? <a routerLink="/login" class="signin-link">Log in</a></p>
+
+    <br>
+  </form>
+</div>

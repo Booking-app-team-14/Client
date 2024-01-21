@@ -1,0 +1,63 @@
+<div class="container">
+
+    <h1>Reported users</h1>
+  
+    <div class="card-container">
+
+        <ng-container *ngFor="let userReport of userReports">
+        
+            <div class="card" id="card-{{userReport.id}}">
+
+                <div class="card-content">
+
+                    <div class="left-side">
+
+                        <div class="left-data">
+                
+                            <div class="left">
+                                <img [src]="'data:image/' + userReport.reportingUserProfilePictureType + ';base64,' + userReport.reportingUserProfilePictureBytes" alt="Guest profile picture">
+                                <span class="username">{{userReport.reportingUserUsername}}</span>
+                            </div>
+                
+                        </div>
+
+                        <h3 id="reason-header">Reason:</h3>
+                        <span id="reason">{{userReport.description}}</span>
+
+                    </div>
+            
+                    <div class="divider"></div>
+            
+                    <div class="right-side">
+
+                        <div>
+                            <div class="right-data">
+                                <div class="right">
+                                    <img [src]="'data:image/' + userReport.reportedUserProfilePictureType + ';base64,' + userReport.reportedUserProfilePictureBytes" alt="Owner profile picture">
+                                    <span class="username">{{userReport.reportedUserUsername}}</span>
+                                </div>
+                                <span class="date">({{userReport.date}})</span>
+                            </div>
+
+                            <span class="previous-reports">({{userReport.reportedUserNumberOfReports}} previous reports)</span>
+                        </div>
+
+
+                        <div class="buttons">
+                            <button (click)="blockReportedUser(userReport.id)" class="bin">Block</button>
+                            <button (click)="removeReport(userReport.id)" class="accept">OK</button>
+                        </div>
+    
+                    
+                    </div>
+
+                </div>
+
+            </div>
+        
+        </ng-container> 
+
+    </div>
+  
+  </div>
+  

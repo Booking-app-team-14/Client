@@ -1,0 +1,128 @@
+<div class="container">
+
+    <h1>Update accommodation details</h1>
+
+    <form>
+
+        <label>Images:</label>
+        <input type="file" multiple accept="image/*" class="form-control" id="images" placeholder="Enter images"
+            (change)="handleImageUpload($event)">
+        <div *ngIf="selectedImages" class="image-container" style="margin-top: 1rem;">
+            <div *ngFor="let image of selectedImages" class="image-item">
+                <img [src]="image.url" alt="Accommodation image" class="image-preview">
+                <button type="button" (click)="removeImage(image)" class="remove-image-btn">Remove</button>
+            </div>
+        </div>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" [(ngModel)]="name" name="name" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" [(ngModel)]="description" name="description" style="resize: none;" required></textarea>
+
+        <label for="type">Type:</label>
+        <select id="type" [(ngModel)]="type" name="type">
+            <option value="STUDIO">STUDIO</option>
+            <option value="ROOM">ROOM</option>
+            <option value="APARTMENT">APARTMENT</option>
+            <option value="VILLA">VILLA</option>
+            <option value="HOTEL">HOTEL</option>
+        </select>
+
+        <div class="guests-container">
+            <label for="minNumberOfGuests">Min Guests:</label>
+            <input type="number" id="minNumberOfGuests" min="1" [(ngModel)]="minNumberOfGuests"
+                name="minNumberOfGuests">
+
+            <label for="maxNumberOfGuests">Max Guests:</label>
+            <input type="number" id="maxNumberOfGuests" min="1" [(ngModel)]="maxNumberOfGuests"
+                name="maxNumberOfGuests">
+        </div>
+
+        <fieldset class="amenities-fieldset" #amenitiesFieldset>
+            <legend id="amenities">Amenities</legend>
+            <ng-container *ngFor="let amenity of amenities">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="{{ amenity.id }}" value="{{ amenity.name }}" [checked]="amenity.checked">
+                    <img [src]="'data:image/' + amenity.iconType + ';base64,' + amenity.iconBytes" alt="Amenity Icon" class="amenity-icon" />
+                    {{ amenity.name }}
+                </label>
+            </ng-container>
+        </fieldset>
+
+        <div class="location-container">
+            <div class="location-header">
+                <span class="location-sign">📍</span>
+                <h2 class="location-caption">Location</h2>
+            </div>
+
+            <div class="map-frame">
+                <div id="mapContainer" style="height: 400px;"></div>
+            </div>
+            <br>
+            <div class="input-button-container">
+                <input type="text" id="enteredAddress" placeholder="Enter location" [(ngModel)]="enteredAddress"
+                    name="enteredAddress">
+                <button mat-icon-button class="fav-btn" (click)="locateOnMap()" class="search-location-btn">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+            <br>
+        </div>
+
+        <fieldset class="confirmation-fieldset">
+            <legend>Confirmation of reservations</legend>
+            <label><input type="radio" name="confirmation" value="automatic" [(ngModel)]="confirmationType">Automatic</label> <br>
+            <label><input type="radio" name="confirmation" value="manual" [(ngModel)]="confirmationType">Manual</label>
+        </fieldset>
+
+        <div class="availability-container">
+
+            <h2>Availability And Prices</h2>
+
+            <fieldset class="availability-fieldset">
+                <legend>Define Price</legend>
+                <label><input type="radio" name="priceType" value="PerNight" [(ngModel)]="selectedPriceType"> Per Night</label> <br>
+                <label><input type="radio" name="priceType" value="PerGuest" [(ngModel)]="selectedPriceType"> Per Guest</label>
+            </fieldset>
+            <label for="price">Default Price</label>
+            <input type="number" id="price" [(ngModel)]="price" name="price" required>
+
+
+            <br>
+
+            <div *ngFor="let specialPrice of specialPrices; let i = index" class="special-price-container">
+                <label>Availability {{ i + 1 }}:</label>
+                <div class="special-price-dates">
+                    <label>From:</label>
+                    <input type="date" [(ngModel)]="specialPrice.startDate" name="startDate{{i}}" required
+                        format="yyyy-MM-dd" [attr.min]="getTodayDate(i)">
+                    <label>To:</label>
+                    <input type="date" [(ngModel)]="specialPrice.endDate" name="endDate{{i}}" required
+                        format="yyyy-MM-dd" [attr.min]="getDateFromDatePicker(i)" [disabled]="isStartDateSelected(i)">
+                </div>
+                <label id="specialPriceAmount">Price:</label>
+                <input type="number" [(ngModel)]="specialPrice.amount" name="amount{{i}}">
+
+
+                <button type="button" (click)="removeSpecialPrice(i)" class="remove-availability-btn">Remove</button>
+            </div>
+
+
+            <button type="button" (click)="addSpecialPrice()" class="add-availability-btn">Add Availability</button>
+
+
+            <label for="cancellationDeadline">Cancellation Deadline:</label>
+            <input type="number" id="cancellationDeadline" [(ngModel)]="cancellationDeadline"
+                name="cancellationDeadline" required>
+
+        </div>
+
+        <label for="message">Reason for updating:</label>
+        <textarea id="message" [(ngModel)]="message" name="message" style="resize: none;" required></textarea>
+
+        <button type="button" (click)="onSubmit()" class="update-btn">Update Accommodation</button>
+
+    </form>
+
+</div>

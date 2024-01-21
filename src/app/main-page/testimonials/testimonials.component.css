@@ -1,0 +1,71 @@
+.testimonials {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.testimonials h2 {
+  font-size: 18px;
+  color: var(--color_primary_blue);
+  margin-bottom: 10px;
+}
+
+.testimonials-title {
+  font-size: 48px;
+  color: #000;
+  margin-bottom: 30px;
+}
+
+.owners {
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+  margin-top: 30px;
+  margin-left: 16%;
+}
+
+.owner {
+  width: calc(50% - 10px);
+  margin-bottom: 20px;
+}
+
+.owner-details {
+  display: flex;
+  align-items: center;
+}
+
+.owner-info {
+  display: flex;
+  align-items: center;
+}
+
+.owner-image {
+  width: 100px;
+  height: 100px;
+}
+
+.owner-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5%;
+}
+
+.owner-text {
+  text-align: left;
+  margin-left: 20px;
+}
+.rating {
+  color:var(--color_primary_blue);
+}
+
+.comment {
+
+}
+
+.name {
+  font-weight: bold;
+
+}

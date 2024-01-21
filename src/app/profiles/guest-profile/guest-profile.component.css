@@ -1,0 +1,65 @@
+.action-btn {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 0.5rem;
+  color: var(--color_primary_blue);
+  background-color: var(--color_white);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border: 2px solid var(--color_black_text);
+  transition: all 0.1s;
+}
+
+.action-btn:hover {
+  cursor: pointer;
+  background-color: rgba(101, 174, 242, 0.8);
+  border: 2px solid rgba(101, 174, 242, 0);
+  color: var(--color_white);
+}
+
+.titles {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.datepicker-container {
+  width: 17rem;
+  height: 3.52rem;
+  overflow: hidden;
+  border: 1px solid var(--color_black_text);
+  border-radius: 8px;
+}
+
+button[mat-icon-button] {
+  background-color: var(--color_primary_blue);
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+button[mat-icon-button]:hover {
+  background-color: rgba(101, 174, 242, 0.8);
+}
+
+button mat-icon {
+  color: var(--color_white);
+}
+
+.filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 1rem;
+  align-items: center;
+}
+
+
+.history {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

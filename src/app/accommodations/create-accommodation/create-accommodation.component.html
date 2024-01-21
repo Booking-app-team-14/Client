@@ -1,0 +1,120 @@
+<div class="container">
+  <br>
+  <h1>Create Accommodation</h1>
+  <form>
+
+    <div class="input-row">
+      <label>Upload Images</label>
+      <input type="file" multiple (change)="onFileSelected($event)">
+    </div>
+
+    <div class="image-container" name="selectedImage">
+    <div *ngFor="let image of selectedImages" class="image-wrapper"   >
+
+      <img [src]="image.url" alt="Selected Image">
+    </div>
+    </div>
+
+
+    <label for="name">Name:</label>
+    <input type="text" id="name"   [(ngModel)]="name" name="name" required>
+
+    <label for="description"  >Description:</label>
+    <textarea id="description"  [(ngModel)]="description"  name="description" required></textarea>
+
+    <label for="type"  >Type:</label>
+    <select id="type"  [(ngModel)]="type" name="type" >
+      <option value="STUDIO">STUDIO</option>
+      <option value="ROOM">ROOM</option>
+      <option value="APARTMENT">APARTMENT</option>
+      <option value="VILLA">VILLA</option>
+      <option value="HOTEL">HOTEL</option>
+    </select>
+
+    <div class="guests-container">
+      <label for="minNumberOfGuests">Min Guests:</label>
+      <input type="number" id="minNumberOfGuests" min="1" [(ngModel)]="minNumberOfGuests" name="minNumberOfGuests">
+
+      <label for="maxNumberOfGuests">Max Guests:</label>
+      <input type="number" id="maxNumberOfGuests" min="1" [(ngModel)]="maxNumberOfGuests" name="maxNumberOfGuests">
+    </div>
+
+    <fieldset>
+      <legend id="amenities" [(ngModel)]="amenities">Amenities:</legend>
+       <input type="checkbox" value=4 [(ngModel)]="amenities.amenity1" name="amenity"> <label class="checkbox-parking checkbox-label"> Free parking</label> <br>
+
+       <input type="checkbox" value=1 [(ngModel)]="amenities.wifi" name="wifi" > <label class="checkbox-wifi checkbox-label"> WI-FI </label>
+       <br>
+
+      <input type="checkbox" value=2 [(ngModel)]="amenities.jacuzzi" name="jacuzzi"> <label class="checkbox-jacuzzi checkbox-label"> Jacuzzi</label> <br>
+       <input type="checkbox" value=5 [(ngModel)]="amenities.gymCenter" name="gymCenter"> <label class="checkbox-center checkbox-label"> Gym center</label> <br>
+      <input type="checkbox" value=3 [(ngModel)]="amenities.videoGames" name="videoGames"> <label class="checkbox-video checkbox-label"> Video games</label>
+    </fieldset>
+
+    <div class="location-container">
+      <div class="location-header">
+        <span class="location-sign">📍</span>
+        <h2 class="location-caption">Location</h2>
+      </div>
+
+      <div class="map-frame">
+        <div id="mapContainer" style="height: 400px;"></div>
+      </div>
+      <br>
+      <div class="input-button-container">
+        <input type="text" id="enteredAddress" placeholder="Enter location" [(ngModel)]="enteredAddress"
+               name="enteredAddress">
+        <button mat-icon-button class="fav-btn" (click)="locateOnMap()" class="search-location-btn">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+      <br>
+      <br>
+    </div>
+
+
+
+    <div class="availability-container">
+      <h2>Availability And Prices</h2>
+
+
+      <fieldset>
+        <legend>Define Price</legend>
+        <label><input type="radio" name="priceType" value="PerNight"> Per Night</label> <br>
+        <label><input type="radio" name="priceType" value="PerGuest"> Per Guest</label>
+      </fieldset>
+      <label for="price">Default Price</label>
+      <input type="number" id="price"   [(ngModel)]="price" name="price" required>
+
+
+      <br>
+
+      <div *ngFor="let specialPrice of specialPrices; let i = index" class="special-price-container">
+        <label >Availability {{ i + 1 }}:</label>
+        <div class="special-price-dates">
+          <label>From:</label>
+          <input type="date" [(ngModel)]="specialPrice.startDate" name="startDate{{i}}"  required format="yyyy-MM-dd" [attr.min]="getTodayDate(i)">
+          <label>To:</label>
+          <input type="date" [(ngModel)]="specialPrice.endDate" name="endDate{{i}}" required format="yyyy-MM-dd" [attr.min]="getDateFromDatePicker(i)" [disabled]="isStartDateSelected(i)">
+        </div>
+        <label id="specialPriceAmount">Price:</label>
+        <input type="number" [(ngModel)]="specialPrice.amount" name="amount{{i}}"  >
+
+
+        <button type="button" (click)="removeSpecialPrice(i)">Remove</button>
+      </div>
+
+
+      <button type="button" (click)="addSpecialPrice()">Add Availability</button>
+
+
+      <label for="cancellationDeadline">Cancellation Deadline:</label>
+      <input type="number" id="cancellationDeadline"  [(ngModel)]="cancellationDeadline" name="cancellationDeadline" required>
+
+    </div>
+    <br>
+
+
+    <button type="button" (click)="onSubmit()">Create Accommodation</button>
+  </form>
+</div>

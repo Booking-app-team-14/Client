@@ -1,0 +1,74 @@
+<app-profile-info [user]="user"></app-profile-info>
+
+<div class="action-btns">
+    <button class="action-btn" routerLink="/owner-requests">Check reservations</button>
+    <button class="action-btn" routerLink="/profile/accommodation/report">Accommodations reports</button>
+    <button class="action-btn" routerLink="/my-reviews">My reviews</button>
+</div>
+
+<h2 class="titles">My accommodations</h2>
+
+<div class="filter">
+    <div class="filter-component">
+        <h3>Search by name</h3>
+        <input type="text" placeholder="eg. Lea">
+    </div>
+    <div class="filter-component">
+        <h3>Search by address</h3>
+        <input type="text" placeholder="eg. Some Address 123">
+    </div>
+    <button mat-icon-button class="fav-btn">
+        <mat-icon>search</mat-icon>
+    </button>
+</div>
+
+<div>
+    <h2 class="no-accommodations-title" *ngIf="!myAccommodations.length">You currently have no accommodations</h2>
+</div>
+
+<div class="accommodations">
+
+    <div class="accommodation" *ngFor="let accommodation of myAccommodations">
+
+        <div class="accommodation-image">
+            <img [src]="'data:image/' + accommodation.imageType + ';base64,' + accommodation.mainPictureBytes" alt="Accommodation main picture">
+        </div>
+
+        <div class="type-stars">
+            <div class="accommodation-type">
+                <span>{{accommodation.type}}</span>
+            </div>
+            <div class="accommodation-stars">
+                <mat-icon *ngFor="let star of [].constructor(accommodation.stars)">star</mat-icon>
+            </div>
+        </div>
+
+        <div class="accommodation-name">
+            <span>{{accommodation.name}}</span>
+        </div>
+        <div class="guests">
+            <span>Max guests: {{accommodation.maxGuests}}</span>
+        </div>
+        <div class="accommodation-address">
+            <span>Address: {{accommodation.address}}</span>
+        </div>
+
+        <div class="update-details-price">
+            <button mat-icon-button class="fav-btn update-details-button" (click)="editAccommodationDetails(accommodation.id)">
+                <!-- /{{accommodation.accommodationId}}"> -->
+                <span>Update details</span>
+            </button>
+            <div class="accommodation-price">
+                <span>${{accommodation.price}}</span><span> /night</span>
+            </div>
+        </div>
+
+        <button mat-icon-button class="fav-btn go-to-page-button" (click)="goToAccommodationPage(accommodation.id)">
+            <span>Go to the accommodation page</span>
+        </button>
+      <button mat-icon-button class="fav-btn go-to-page-button" (click)="goToMonthlyReport(accommodation.id)">
+        <span>Monthly report for accommodation</span>
+      </button>
+
+</div>
+</div>

@@ -1,0 +1,71 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Monthly Accommodation Report</h2>
+
+  <form [formGroup]="reportForm" (ngSubmit)="generateReport(accommodationId)">
+    <div class="form-group row">
+      <label for="year" class="col-sm-2 col-form-label">Select Year:</label>
+      <div class="col-sm-4">
+        <input type="number" id="year" formControlName="year" class="form-control" required>
+      </div>
+      <div class="col-sm-2">
+        <button type="submit" class="btn btn-primary">Load Reports</button>
+
+        <button type="button" class="btn btn-success" style="padding-left: 2px" (click)="downloadPDF()">Download PDF</button>
+      </div>
+    </div>
+  </form>
+
+  <div  class="accommodation-container">
+    <div  class="accommodation-card">
+      <div class="header">
+        <h2>{{ accommodationDetails.name }}</h2>
+      </div>
+      <div class="accommodation-image-container">
+        <img [src]="'data:image/' + accommodationDetails.imageTypes[0] + ';base64,' + accommodationDetails.imageBytes[0]" alt="Accommodation Picture">
+      </div>
+      <div class="accommodation-content">
+        <div class="accommodation-details">
+          <div class="accommodation-detail">
+            <span class="label">Type:</span>
+            <span>{{ accommodationDetails.type }}</span>
+          </div>
+          <div class="accommodation-detail">
+            <span class="label">Rating:</span>
+            <span>{{ accommodationDetails.rating }}</span>
+          </div>
+          <div class="accommodation-detail">
+            <span class="label">Min Guests:</span>
+            <span>{{ accommodationDetails.minNumberOfGuests }}</span>
+          </div>
+          <div class="accommodation-detail">
+            <span class="label">Max Guests:</span>
+            <span>{{ accommodationDetails.maxNumberOfGuests }}</span>
+          </div>
+          <div class="accommodation-detail">
+            <span class="label">Price Per Night:</span>
+            <span>{{ accommodationDetails.pricePerNight }}</span>
+          </div>
+        </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="accommodationReports && accommodationReports.length > 0" class="reports-container">
+    <div *ngFor="let reportMonth of accommodationReports" class="report-card">
+      <div class="header">
+        <h2>{{ reportMonth.month }}</h2>
+      </div>
+      <div class="content">
+          <div class="detail">
+            <span class="label">Number of Reservations:</span>
+            <span>{{ reportMonth.numberOfReservations }}</span>
+          </div>
+          <div class="detail">
+            <span class="label">Total Profit:</span>
+            <span>{{ reportMonth.totalProfit }} $</span>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</div>

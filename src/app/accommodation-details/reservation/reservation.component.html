@@ -1,0 +1,63 @@
+<ng-container *ngIf="userRole === 'guest'">
+<div class="reservation-container">
+  <h2>Make a Reservation</h2>
+
+  <!-- Date Selection -->
+  <div class="date-selection">
+    <label for="check-in">Check-in:</label>
+    <input type="date" id="check-in" name="check-in" [(ngModel)]="defaultCheckInDate" [attr.min]="getTodayDate()"
+           [ngModelOptions]="{standalone: true}" (change)="updateCheckOutMinDate()" [ngClass]="{'unavailable': !isDateAvailable(defaultCheckInDate)}">
+
+    <label for="check-out">Check-out:</label>
+    <input type="date" id="check-out" name="check-out" [(ngModel)]="defaultCheckOutDate" [attr.min]="defaultCheckInDate"
+           [ngModelOptions]="{standalone: true}" (change)="validateDates()" [ngClass]="{'unavailable': !isDateAvailable(defaultCheckOutDate)}"> </div>
+
+  <!-- Guest Selection -->
+  <form #guestForm="ngForm">
+    <div class="guest-selection">
+      <label for="guests">Guests:</label>
+      <input type="number" #guestsInput id="guests" name="guests"
+             [(ngModel)]="reservationRequirement.guests"
+             [attr.min]="reservationRequirement.minGuests"
+             [attr.max]="reservationRequirement.maxGuests"
+             required
+             pattern="\d"
+             appRangeValidator [range]="{min: reservationRequirement.minGuests, max: reservationRequirement.maxGuests}"
+             (change)="onGuestsChange()">
+      <div *ngIf="guestForm.controls['guests'].invalid">
+        <div *ngIf="guestForm.controls['guests'].errors['required']">Guests are required.</div>
+        <div *ngIf="guestForm.controls['guests'].errors['pattern']">Invalid input. Please enter a valid number.</div>
+        <div *ngIf="guestForm.controls['guests'].errors['rangeError']">Guests must be within the specified range.</div>
+      </div>
+      <div class="guest-range-info">
+        Min Guests: {{ reservationRequirement.minGuests }} |
+        Max Guests: {{ reservationRequirement.maxGuests }}
+      </div>
+    </div>
+  </form>
+
+  <!-- Reserve Button -->
+  <button class="reserve-button" (click)="makeReservation()" [disabled]="!isDateAvailable(defaultCheckInDate)">Reserve</button>
+
+  <!-- Price Details -->
+  <div class="price-details">
+    <p>Total price:  ${{ totalPrice }} </p>
+  </div>
+
+    <div class="availability-header">
+      <h3>Available Dates:</h3>
+    </div>
+    <div class="availability-scroll">
+    <div class="availability-details">
+      <ul>
+        <li *ngFor="let availability of availableDates" class="availability-item">
+          <div class="availability-info">
+            <p class="date-range">{{ availability.startDate }} to {{ availability.endDate }}</p>
+            <p class="price">Price: ${{ availability.specialPrice }} per night</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</ng-container>

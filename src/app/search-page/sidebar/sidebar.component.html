@@ -1,0 +1,88 @@
+<div class="sidebar">
+  <div class="filter-card">
+    <h3>Search by property name</h3>
+    <div class="filter-section">
+      <input type="text" [(ngModel)]="propertyName" name="propertyName" class="input-field" placeholder="e.g. Luna" style="width: 70%;">
+      <button class="search-button" (click)="onSearch()" style="width: 30%;">Search</button>
+    </div>
+    </div>
+
+  <div class="filter-card">
+    <h3>Price range (per night)</h3>
+    <div class="filter-section">
+      <div class="checkbox-list">
+        <div class="checkbox-option">
+          <input type="checkbox" id="price0-40" name="priceRange" value="0-40" (change)="onPriceRangeChange($event)">
+          <label for="price0-40"> $0 - $40</label>
+        </div>
+
+        <div class="checkbox-option">
+          <input type="checkbox" id="price40-100" name="priceRange" value="40-100" (change)="onPriceRangeChange($event)">
+          <label for="price40-100"> $40 - $100</label>
+        </div>
+
+        <div class="checkbox-option">
+          <input type="checkbox" id="price100-200" name="priceRange" value="100-200" (change)="onPriceRangeChange($event)">
+          <label for="price100-200"> $100 - $200</label>
+        </div>
+
+        <div class="checkbox-option">
+          <input type="checkbox" id="price200-500" name="priceRange" value="200-500" (change)="onPriceRangeChange($event)">
+          <label for="price200-500"> $200 - $500</label>
+        </div>
+
+        <div class="checkbox-option">
+          <input type="checkbox" id="price500-1000" name="priceRange" value="500-1000" (change)="onPriceRangeChange($event)" >
+          <label for="price500-1000"> $500 - $1000</label>
+        </div>
+
+        <div class="checkbox-option">
+          <input type="checkbox" id="price1000+" name="priceRange" value="1000-100000" (change)="onPriceRangeChange($event)">
+          <label for="price1000-100000">$1000 - $100000</label>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-card">
+    <h3>Minimum rating</h3>
+    <div class="filter-section">
+      <select name="minRating" class="select-field"  (change)="onMinRatingChange($event)">
+        <option value="1">★ 1</option>
+        <option value="2">★ 2</option>
+        <option value="3">★ 3</option>
+        <option value="4">★ 4</option>
+        <option value="5">★ 5</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="filter-card">
+    <h3>Amenities</h3>
+    <div class="filter-section">
+      <div class="checkbox-list">
+        <div class="checkbox-option">
+          <input type="checkbox" id="FreeParking" name="amenities" value="FreeParking" (change)="onAmenityChange($event)">
+          <label for="FreeParking"> Free parking </label><br>
+        </div>
+        <div class="checkbox-option">
+          <input type="checkbox" id="Wifi" name="amenities" value="Wifi" (change)="onAmenityChange($event)">
+          <label for="WiFi"> Wi-fi</label><br>
+        </div>
+        <div class="checkbox-option">
+          <input type="checkbox" id="Jacuzzi" name="amenities" value="Jacuzzi" (change)="onAmenityChange($event)">
+          <label for="Jacuzzi"> Jacuzzi </label><br>
+        </div>
+        <div class="checkbox-option">
+          <input type="checkbox" id="GymCenter" name="amenities" value="GymCenter" (change)="onAmenityChange($event)">
+          <label for="GymCenter"> Gym Center</label><br>
+        </div>
+        <div class="checkbox-option">
+          <input type="checkbox" id="VideoGames" name="amenities" value="VideoGames" (change)="onAmenityChange($event)">
+          <label for="VideoGames">Video Games</label><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

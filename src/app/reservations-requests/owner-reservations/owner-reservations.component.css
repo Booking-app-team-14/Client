@@ -1,0 +1,328 @@
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Stilizacija filter sekcije */
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+.filter-section {
+  flex: 1;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filter-section label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.filter-button {
+  background-color: var(--color_primary_blue);
+  color: var(--color_white);
+  border: none;
+  border-radius: 5px;
+  padding: 9px 16px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 !important;
+  transition: all 0.1s ease-in-out;
+}
+
+.filter-button:hover {
+  cursor: pointer;
+  color: var(--color_primary_blue);
+  background-color: var(--color_white);
+  box-shadow: 0 0 3px var(--color_primary_blue) inset;
+}
+
+#accommodationName {
+  margin-bottom: 0 !important;
+}
+
+.radio-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.mat-radio-button {
+  margin-right: 5px;
+}
+
+.date-filter {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.date-filter input[type="date"] {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin: 0 !important;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="radio"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="radio"]:focus {
+  outline: none;
+  border-color: #6a9cff;
+  box-shadow: 0 0 5px rgba(106, 156, 255, 0.5);
+}
+
+.date-filter .filter-item:nth-child(1) input[type="date"],
+.date-filter .filter-item:nth-child(2) input[type="date"] {
+  width: calc(50% - 7.5px);
+}
+
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 2rem;
+}
+
+.reservation-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 30%;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.header img {
+  width: 50px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 2rem;
+  margin-right: 10px;
+}
+
+.owner-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.owner-details .username {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.date {
+  color: #777;
+}
+
+.accommodation-details {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.accommodation-details img {
+  text-align: center;
+  aspect-ratio: 12/9;
+  object-fit: cover;
+  object-position: center;
+  width: 80%;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.info {
+
+}
+
+.additional-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.basic-info .accommodation-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.basic-info .accommodation-type {
+  color: #777;
+  margin-bottom: 5px;
+}
+
+.stars {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.stars span {
+  margin-right: 5px;
+}
+
+.stars mat-icon {
+  color: var(--color_primary_blue);
+  /* position: relative;
+  top: 3px; */
+}
+
+.stars span {
+  display: inline-block;
+  vertical-align: middle;
+}
+.dates span,
+.price-guests span {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.actions button {
+  width: 50%;
+  border: none;
+  border-radius: 5px;
+  padding: 9px 16px;
+}
+
+.actions button.reject {
+  background-color: var(--color_red);
+  color: var(--color_white);
+  transition: all 0.1s ease-in-out;
+}
+
+.actions button.approve {
+  background-color: var(--color_green);
+  color: var(--color_white);
+  transition: all 0.1s ease-in-out;
+}
+
+.actions button.approve:hover {
+  cursor: pointer;
+  color: var(--color_green);
+  background-color: var(--color_white);
+  box-shadow: 0 0 3px var(--color_green) inset;
+}
+
+.actions button.reject:hover {
+  cursor: pointer;
+  color: var(--color_red);
+  background-color: var(--color_white);
+  box-shadow: 0 0 3px var(--color_red) inset;
+}
+
+ .comment-text button {
+  background-color: #ff6347;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.report-input button {
+  background-color: #ff6347;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.report-input button:hover {
+  background-color: #ff4c35;
+}
+
+
+.report-input input {
+  width: calc(100% - 20px);
+  height: 60px;
+  padding: 10px;
+  margin-top: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.report-input input:focus {
+  outline: none;
+  border-color: #ff4c35;
+}
+
+.cancel {
+  text-align: center;
+  background-color: var(--color_red);
+  color: var(--color_white);
+  border: none;
+  border-radius: 5px;
+  padding: 9px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.1s ease-in-out;
+}
+
+.cancel:hover {
+  cursor: pointer;
+  color: var(--color_red);
+  background-color: var(--color_white);
+  box-shadow: 0 0 3px var(--color_red) inset;
+}
+
+.comment-text .cancel:disabled {
+  background-color: #ccc;
+  color: #777;
+  box-shadow: none;
+  cursor: not-allowed;
+}

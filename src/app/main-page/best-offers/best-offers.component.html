@@ -1,0 +1,32 @@
+<div class="middle_main">
+  <div class="titles-button">
+    <div class="titles">
+      <h2>Featured places</h2>
+      <h1>Best offers of the month</h1>
+    </div>
+    <div class="view-all">
+      <button (click)="redirectToSearchPage()">View all</button>
+    </div>
+  </div>
+  <div class="main-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id pellentesque nisl. Maecenas id nisi eget elit rutrum rhoncus sed ac ipsum. Maecenas ultricies ex dolor, malesuada lobortis felis placerat eget.</div>
+</div>
+<div class="offers-container">
+  <div class="best-offers">
+    <div class="card" *ngFor="let offer of offers">
+      <img [src]="'data:image/' + offer.imageType + ';base64,' + offer.imageBytes" alt="avatar">
+      <h3>{{ offer.accommodationType }}</h3>
+      <div class="details">
+        <p class="name">{{ offer.name }}</p>
+        <p class="guests">
+          <span class="guests-icon"><img src="/assets/people.png" alt="Guests Icon"></span>
+          <span class="guests-number">{{ offer.maxNumberOfGuests }}</span>
+        </p>
+        <p class="description">{{ offer.description }}</p>
+        <p class="price">${{ offer.pricePerNight }} /night</p>
+      </div>
+      <br>
+      <button class="button-details" (click)="redirectToDetailsPage(offer.id)">Details</button>
+    </div>
+  </div>
+</div>
+

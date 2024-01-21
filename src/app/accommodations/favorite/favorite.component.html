@@ -1,0 +1,39 @@
+<h2 class="favorite-heading">YOUR FAVORITE ACCOMMODATIONS</h2>
+
+<!-- <div class="filter">
+  <div class="filter-component">
+    <h3>Search by name</h3>
+    <input type="text" placeholder="eg. Lea">
+  </div>
+  <button mat-icon-button class="fav-btn">
+    <mat-icon>search</mat-icon>
+  </button>
+</div> -->
+
+<div class="favorite-list">
+  <div *ngIf="favoriteApartments.length > 0">
+    <div class="card-list">
+      <div class="row">
+        <div class="col-md-6" *ngFor="let apartment of favoriteApartments">
+          <div class="card">
+            <div class="card-image">
+              <img [src]="'data:image/' + apartment.imageType + ';base64,' + apartment.imageBytes" alt="avatar">
+            </div>
+            <div class="card-details">
+
+              <div class="card-name">{{ apartment.name }}</div>
+              <div class="card-rating">
+                ★  {{ apartment.rating }}   ({{ apartment.id }} reviews)
+              </div>
+              <div class="card-description">{{ apartment.location.address }}</div>
+              <div class="card-footer">
+                <button class="details-btn" (click)="redirectToAccomodationDetailsPage(apartment.id)">Details</button>
+                <div class="price-per-night">${{ apartment.pricePerNight }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

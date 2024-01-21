@@ -1,0 +1,40 @@
+.header_main {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  overflow: hidden;
+}
+
+.header_main img {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  height: auto;
+}
+
+.highlight-text {
+  color: var(--color_primary_blue);
+}
+
+.header_main h1 {
+  position: absolute;
+  margin-top: -50px;
+  text-align: left;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: xxx-large;
+  color: var(--color_white);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.header_main h2 {
+  position: absolute;
+  text-align: left;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: large;
+  color: var(--color_white);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}

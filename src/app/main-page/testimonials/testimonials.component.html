@@ -1,0 +1,22 @@
+<div class="testimonials">
+  <h2>Testimonials</h2>
+  <div class="testimonials-title">
+    <p>Don't just take our words</p>
+  </div>
+  <div class="owners">
+    <div class="owner" *ngFor="let owner of owners">
+      <div class="owner-details">
+        <div class="owner-info">
+          <div class="owner-image">
+            <img [src]="owner.image" alt="{{ owner.name }}">
+          </div>
+          <div class="owner-text">
+            <div class="rating">{{ owner.rating }}</div>
+            <p class="comment">{{ owner.comment }}</p>
+            <p class="name">{{ owner.name }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

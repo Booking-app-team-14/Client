@@ -1,0 +1,10 @@
+.row {
+  display: flex;
+}
+
+app-sidebar {
+  width: 25%;
+}
+app-card-list{
+  width: 75%;
+}

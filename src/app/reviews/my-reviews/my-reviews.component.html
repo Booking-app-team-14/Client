@@ -1,0 +1,65 @@
+<div class="container">
+  <h2 class="titles">My Reviews</h2>
+
+  <div class="profile-container">
+    <div class="user-info-container">
+      <img [src]="'data:image/' + user.avatarImageType + ';base64,' + user.avatarBytes" alt="avatar">
+      <div class="info labels">
+        <h3>Email:</h3>
+        <h3>First name:</h3>
+        <h3>Last name:</h3>
+        <h3>Address:</h3>
+        <h3>Phone number:</h3>
+      </div>
+      <div class="info">
+        <h3>{{user.email}}</h3>
+        <h3>{{user.firstName}}</h3>
+        <h3>{{user.lastName}}</h3>
+        <h3>{{user.address}}</h3>
+        <h3>{{user.phone}}</h3>
+      </div>
+
+      <button class="delete-comment" >
+        <mat-icon>close</mat-icon>Close
+      </button>
+
+    </div>
+
+    <br>
+    <div class="comments-background">
+      <div class="comments-section">
+        <h2>Comments</h2>
+
+        <div class="comments-container"  >
+          <div class="comments-grid">
+            <div *ngFor="let comment of displayedComments; let i = index" class="comment" (click)="selectReview(comment)">
+              <div class="user-info">
+                <img [src]="comment.image" alt="User Image" >
+                <div class="user-details">
+                  <p class="username">{{ comment.name }}</p>
+                  <p class="sent-at">{{ comment.sentAt | date: 'medium' }}</p>
+
+
+                </div>
+              </div>
+              <div class="comment-text" >
+                <p>{{ comment.commentText }}</p>
+                <br>
+                <p class="ratin"> Rating: {{ comment.rating }}
+                </p>
+
+                <button *ngIf=" !comment.showButton &&  !comment.isReported" (click)="showReportInput(comment)">Report</button>
+                <div *ngIf="comment.showReport" class="report-input">
+                  <input [(ngModel)]="comment.reportReason" placeholder="Enter reason...">
+                  <button (click)="submitReport()">Submit</button>
+                </div>
+              </div>
+            </div>
+
+            <button *ngIf="comments.length > displayedComments.length" (click)="loadMoreComments()" class="more-btn">MORE COMMENTS</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,169 @@
+<div class="container">
+
+    <h1>Comments & reviews requests</h1>
+
+    <mat-radio-group [(ngModel)]="type">
+      <mat-radio-button value="accommodation">
+        <div class="radio-container">
+          <span>Accommodation comments & reviews</span>
+          <mat-icon>font_download</mat-icon>
+        </div>
+      </mat-radio-button>
+      <mat-radio-button value="owner">
+        <div class="radio-container">
+          <span>Owner comments & reviews</span>
+          <mat-icon>portrait</mat-icon>
+        </div>
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <div class="card-container">
+
+      <ng-container *ngIf="type === 'accommodation'">
+        <ng-container *ngFor="let accommodationReview of accommodationsReviews">
+
+          <div class="card" id="accommodation-card-{{accommodationReview.id}}">
+
+            <div class="card-content-accommodation">
+
+              <div class="guest-side">
+
+                <div class="guest-data">
+                  <h3>{{accommodationReview.reviewType}}</h3>
+                  <span class="date">({{accommodationReview.sentAt}})</span>
+                </div>
+
+                <div class="guest-data">
+
+                  <div class="guest">
+                    <img [src]="'data:image/' + accommodationReview.guestProfilePictureType + ';base64,' + accommodationReview.guestProfilePictureBytes" alt="Guest profile picture">
+                    <span class="username">{{accommodationReview.guestUsername}}</span>
+                  </div>
+
+                </div>
+
+                <div class="span-div">
+                  <span *ngIf="accommodationReview.comment">"{{accommodationReview.comment}}"</span>
+                </div>
+
+                <div *ngIf="accommodationReview.rating!==0" class="guests-accommodation-rating">
+                  <div class="stars">
+                    <mat-icon *ngFor="let star of [].constructor(accommodationReview.rating)">star</mat-icon>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="accommodation-side">
+
+                <div class="info">
+
+                  <img [src]="'data:image/' + accommodationReview.accommodationPictureType + ';base64,' + accommodationReview.accommodationPictureBytes" alt="Accommodation main picture">
+
+                  <div class="sub-info">
+                    <div>
+                      <div class="accommodation-type-rating">
+                        <span class="accommodation-type">{{accommodationReview.accommodationType}}</span>
+                        <div class="stars">
+                          <mat-icon *ngFor="let star of [].constructor(accommodationReview.accommodationRating)">star</mat-icon>
+                        </div>
+                      </div>
+
+                      <div class="name">{{accommodationReview.accommodationName}}</div>
+                    </div>
+
+                    <div class="view-details">
+                      <button (click)="viewDetails(accommodationReview.accommodationId)">View details</button>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="buttons accommodation-btns">
+                  <button (click)="binAccommodationReview(accommodationReview.id)" class="bin">Bin</button>
+                  <button (click)="acceptAccommodationReview(accommodationReview.id)" class="accept">Accept</button>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="type === 'owner'">
+        <ng-container *ngFor="let ownerReview of ownerReviews">
+
+          <div class="card" id="owner-card-{{ownerReview.id}}">
+
+            <div class="card-content">
+
+              <div class="guest-side">
+
+                <div class="guest-data">
+                  <h3>Guest</h3>
+                  <span class="date">({{ownerReview.timestamp}})</span>
+                </div>
+
+                <div class="guest-data">
+
+                  <div class="guest">
+                    <img [src]="'data:image/' + ownerReview.guestProfilePictureType + ';base64,' + ownerReview.guestProfilePictureBytes" alt="Guest profile picture">
+                    <span class="username">{{ownerReview.guestUsername}}</span>
+                  </div>
+
+                </div>
+
+                <div class="span-div">
+                  <span *ngIf="ownerReview.comment">"{{ownerReview.comment}}"</span>
+                </div>
+
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="owner-side">
+
+                <h3>Owner</h3>
+
+                <div class="owner-data">
+                  <div class="owner">
+                    <img [src]="'data:image/' + ownerReview.ownerProfilePictureType + ';base64,' + ownerReview.ownerProfilePictureBytes" alt="Owner profile picture">
+                    <span class="username">{{ownerReview.ownerUsername}}</span>
+                  </div>
+                </div>
+
+                <div class="owner-rating">
+                  <h4 *ngIf="ownerReview.ratingBefore != -1">Owner's rating: </h4>
+                  <div class="stars" *ngIf="ownerReview.ratingBefore != -1">
+                    <mat-icon *ngFor="let star of [].constructor(ownerReview.ratingBefore)">star</mat-icon>
+                  </div>
+                  <ng-container *ngIf="ownerReview.rating != 0">
+                    <h4>Guest's rating for owner:</h4>
+                    <div class="stars">
+                      <mat-icon *ngFor="let star of [].constructor(ownerReview.rating)">star</mat-icon>
+                    </div>
+                  </ng-container>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="buttons">
+              <button (click)="binOwnerReview(ownerReview.id)" class="bin">Bin</button>
+              <button (click)="acceptOwnerReview(ownerReview.id)" class="accept">Accept</button>
+            </div>
+
+          </div>
+
+        </ng-container>
+      </ng-container>
+
+    </div>
+
+  </div>
