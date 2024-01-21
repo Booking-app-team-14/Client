@@ -4,51 +4,51 @@
     
     <div class="input-row">
         <label>New password</label>
-        <input [type]="passwordType" placeholder="Enter password" class="password" [(ngModel)]="password">
+        <input [type]="passwordType" placeholder="Enter password" class="password" [(ngModel)]="password" id="password-input">
         <mat-icon *ngIf="passwordVisibility" (click)="passwordVisibility=false;passwordType='text'">visibility</mat-icon>
         <mat-icon *ngIf="!passwordVisibility" (click)="passwordVisibility=true;passwordType='password'">visibility_off</mat-icon>
     </div>
 
     <div class="input-row"> 
         <label>Confirm password</label>
-        <input [type]="passwordConfirmType" placeholder="Enter password" class="password" [(ngModel)]="passwordConfirm">
+        <input [type]="passwordConfirmType" placeholder="Enter password" class="password" [(ngModel)]="passwordConfirm" id="password-confirm-input">
         <mat-icon *ngIf="passwordConfirmVisibility" (click)="passwordConfirmVisibility=false;passwordConfirmType='text'">visibility</mat-icon>
         <mat-icon *ngIf="!passwordConfirmVisibility" (click)="passwordConfirmVisibility=true;passwordConfirmType='password'">visibility_off</mat-icon>
     </div>
 
     <div class="input-row">
         <label>New phone number</label>
-        <input type="text" placeholder="Enter phone number" [(ngModel)]="phone">
+        <input type="text" placeholder="Enter phone number" [(ngModel)]="phone" id="phone-number-input">
         <p>Current: {{ user.phoneNumber }}</p>
     </div>
 
     <div class="input-row">
         <label>New address</label>
-        <input type="text" placeholder="Enter address" [(ngModel)]="address">
+        <input type="text" placeholder="Enter address" [(ngModel)]="address" id="address-input">
         <p>Current: {{ user.address }}</p>
     </div>
 
     <div class="input-row">
         <label>First name</label>
-        <input type="text" placeholder="Enter first name" [(ngModel)]="firstName">
+        <input type="text" placeholder="Enter first name" [(ngModel)]="firstName" id="first-name-input">
         <p>Current: {{ user.firstName }}</p>
     </div>
 
     <div class="input-row">
         <label>Last name</label>
-        <input type="text" placeholder="Enter last name" [(ngModel)]="lastName">
+        <input type="text" placeholder="Enter last name" [(ngModel)]="lastName" id="last-name-input">
         <p>Current: {{ user.lastName }}</p>
     </div>
 
     <div class="input-row">
         <label>Profile Image</label>
-        <input type="file" (change)="onFileSelected($event)">
+        <input type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/png" id="file-input">
     </div>
 
     <div *ngIf="selectedImage" class="image-container">
         <img [src]="selectedImage.url" alt="Selected Image">
     </div>
 
-    <button (click)="updateDetails()">Update changed details</button>
+    <button (click)="updateDetails()" id="update-details-btn">Update changed details</button>
 
 </div>

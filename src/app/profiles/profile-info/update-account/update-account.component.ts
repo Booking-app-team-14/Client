@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UpdateAccountService } from './update-account.service';
 
 @Component({
   selector: 'app-update-account',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class UpdateAccountComponent {
 
-  constructor(private _router: Router, private http: HttpClient) { }
+  constructor(private _router: Router, private http: HttpClient, private accountService: UpdateAccountService) { }
 
   passwordVisibility : boolean = true;
   passwordConfirmVisibility : boolean = true;
@@ -19,7 +20,6 @@ export class UpdateAccountComponent {
   lastName : string = "";
 
   user: {
-    username: string,
     password: string,
     firstName: string,
     lastName: string,
@@ -29,7 +29,6 @@ export class UpdateAccountComponent {
     isBlocked: false,
     numberOfReports: 0
   } = {
-    username: '',
     password: null,
     firstName: '',
     lastName: '',
@@ -41,62 +40,62 @@ export class UpdateAccountComponent {
   };
 
   updatedUser: {
-    username: string,
     password: string,
     firstName: string,
     lastName: string,
     address: string,
-    phoneNumber: string,
-    role: string,
-    isBlocked: false,
-    numberOfReports: 0
+    phoneNumber: string
   };
 
   avatarBytes: string;
   avatarImageType: string;
-
-  email: string;
   password: string;
   passwordConfirm: string;
   phone: string;
   address: string;
-
   userId: number;
+
   ngOnInit(): void {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.http.get(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe({
-          next: (userId: any) => {
-            this.userId = userId;
-            this.http.get(`http://localhost:8080/api/users/${userId}`).subscribe({
-              next: (userDTO: any) => {
-                this.user.firstName = userDTO.firstName;
-                this.user.lastName = userDTO.lastName;
-                this.user.username = userDTO.username;
-                this.user.address = userDTO.address;
-                this.user.phoneNumber = userDTO.phoneNumber;
-                this.user.role = userDTO.role;
-                this.user.isBlocked = userDTO.isBlocked;
-                this.user.numberOfReports = userDTO.numberOfReports;
+    this.accountService.getUserIdFromToken(currentUser.token).subscribe({
+      next: (userId: any) => {
+        this.userId = userId;
+        this.accountService.getUserFromId(userId).subscribe({
+          next: (userDTO: any) => {
+            this.user.firstName = userDTO.firstName;
+            this.user.lastName = userDTO.lastName;
+            this.user.address = userDTO.address;
+            this.user.phoneNumber = userDTO.phoneNumber;
+            this.user.role = userDTO.role;
+            this.user.isBlocked = userDTO.isBlocked;
+            this.user.numberOfReports = userDTO.numberOfReports;
 
-                this.updatedUser = this.user;
-              },
-              error: (err) => {
-                console.error(err);
-                alert("Error while fetching user data!");
-              }
-            });
+            this.updatedUser = this.user;
           },
           error: (err) => {
             console.error(err);
-            alert("Error while fetching user data from token!");
+            alert("Error while fetching user data!");
           }
         });
+      },
+      error: (err) => {
+        console.error(err);
+        alert("Error while fetching user data from token!");
+      }
+    });
   }
 
   selectedImage: { url: string, file: File } = null;
   fileUploaded: boolean = false;
+
   onFileSelected(event: any) {
     const file = event.target.files[0];
+
+    if (file && !(file.type === "image/jpeg" || file.type === "image/png")) {
+      alert("File must be PNG or JPEG!");
+      return;
+    }
+
     const reader = new FileReader();
 
     const url = URL.createObjectURL(file);
@@ -114,7 +113,7 @@ export class UpdateAccountComponent {
   updateDetails() {
 
     if (this.fileUploaded) {
-      this.http.post(`http://localhost:8080/api/users/${this.userId}/image`, this.avatarBytes, { responseType: 'text' }).subscribe({
+      this.accountService.uploadImage(this.avatarBytes, this.userId).subscribe({
         next: (r: any) => { },
         error: (err) => {
           console.error(err);
@@ -124,6 +123,10 @@ export class UpdateAccountComponent {
     }
 
     if (this.password != null && this.password != "") {
+      if (this.password.length < 8) {
+        alert("Password must be at least 8 characters long!");
+        return;
+      }
       if (this.password != this.passwordConfirm) {
         alert("Passwords do not match!");
         return;
@@ -133,36 +136,43 @@ export class UpdateAccountComponent {
     if (this.phone != null && this.phone != "") {
       const phoneRegex = new RegExp('^\\+\\d{1,2}\\s?\\d{3}\\s?\\d{3}\\s?\\d{4}$');
       if (!phoneRegex.test(this.phone)) {
-        alert("Phone number is not valid!");
+        alert("Phone number is not valid!\nExample: +381012345678");
         return;
       }
       this.updatedUser.phoneNumber = this.phone;
     } else {
       this.updatedUser.phoneNumber = this.user.phoneNumber;
     }
-    if (this.email != null && this.email != "") {
-      this.updatedUser.username = this.email;
-    } else {
-      this.updatedUser.username = this.user.username;
-    }
     if (this.address != null && this.address != "") {
+      if (this.address.length < 5) {
+        alert("Address must be at least 5 characters long!");
+        return;
+      }
       this.updatedUser.address = this.address;
     } else {
       this.updatedUser.address = this.user.address;
     }
     if (this.firstName != null && this.firstName != "") {
+      if (this.firstName.length < 2) {
+        alert("First name must be at least 2 characters long!");
+        return;
+      }
       this.updatedUser.firstName = this.firstName;
     } else {
       this.updatedUser.firstName = this.user.firstName;
     }
     if (this.lastName != null && this.lastName != "") {
+      if (this.lastName.length < 2) {
+        alert("Last name must be at least 2 characters long!");
+        return;
+      }
       this.updatedUser.lastName = this.lastName;
     } else {
       this.updatedUser.lastName = this.user.lastName;
     }
 
     console.log(this.updatedUser);
-    this.http.put(`http://localhost:8080/api/users/${this.userId}`, this.updatedUser, { responseType: 'text' }).subscribe({
+    this.accountService.updateAccount(this.updatedUser, this.userId).subscribe({
       next: (r: any) => {
         alert("User data updated successfully!");
         this._router.navigate(['/profile'], { skipLocationChange: true }).then(() => {
@@ -174,8 +184,6 @@ export class UpdateAccountComponent {
         alert("Error while updating user data!");
       }
     });
-
-
 
   }
 
