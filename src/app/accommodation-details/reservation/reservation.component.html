@@ -1,6 +1,6 @@
 <ng-container *ngIf="userRole === 'guest'">
 <div class="reservation-container">
-  <h2>Make a Reservation</h2>
+  <h2 id="reservation-header">Make a Reservation</h2>
 
   <!-- Date Selection -->
   <div class="date-selection">
@@ -10,7 +10,7 @@
 
     <label for="check-out">Check-out:</label>
     <input type="date" id="check-out" name="check-out" [(ngModel)]="defaultCheckOutDate" [attr.min]="defaultCheckInDate"
-           [ngModelOptions]="{standalone: true}" (change)="validateDates()" [ngClass]="{'unavailable': !isDateAvailable(defaultCheckOutDate)}"> </div>
+           [ngModelOptions]="{standalone: true}" (submit)="validateDates()" [ngClass]="{'unavailable': !isDateAvailable(defaultCheckOutDate)}"> </div>
 
   <!-- Guest Selection -->
   <form #guestForm="ngForm">

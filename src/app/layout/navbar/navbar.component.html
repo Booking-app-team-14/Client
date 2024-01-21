@@ -26,7 +26,7 @@
                     </div>
                 </ng-container>
             </button>
-            <button routerLink="/profile">Profile</button>
+            <button routerLink="/profile" class="profile-button">Profile</button>
         </ng-container>
 
         <ng-container *ngIf="userRole === 'host'">
@@ -39,11 +39,11 @@
                 </ng-container>
             </button>
             <button id="non-primary-btn2" routerLink="/create-accommodation">Post</button>
-            <button routerLink="/profile">Profile</button>
+            <button routerLink="/profile" class="profile-button">Profile</button>
         </ng-container>
 
         <ng-container *ngIf="userRole === 'admin'">
-            <button routerLink="/profile">Profile</button>
+            <button routerLink="/profile" class="profile-button">Profile</button>
         </ng-container>
 
     </div>

@@ -203,7 +203,7 @@ export class ReservationComponent implements AfterViewInit {
 
         this.reservationService.sendReservation(reservationData).subscribe(
           (response) => {
-            this.snackBar.open("Reservation request successful sent!", "OK", { duration: 2000 });
+            alert('Reservation request successful sent!');
           },
           (error) => {
             console.error('Reservation failed:', error);

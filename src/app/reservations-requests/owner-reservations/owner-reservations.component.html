@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Reservation Requests</h1>
+  <h1 id="reservation-requests-header">Reservation Requests</h1>
 
   <div class="row">
     <!-- Filter section on the left side -->
@@ -7,9 +7,9 @@
       <label>Status</label>
       <mat-radio-group [(ngModel)]="type">
         <div class="radio-container">
-          <mat-radio-button value="fiber_sent">On Wait</mat-radio-button>
-          <mat-radio-button value="fiber_approved">Approved</mat-radio-button>
-          <mat-radio-button value="fiber_declined">Declined</mat-radio-button>
+          <mat-radio-button value="fiber_sent" id="on-wait-radio-button">On Wait</mat-radio-button>
+          <mat-radio-button value="fiber_approved" id="approved-radio-button">Approved</mat-radio-button>
+          <mat-radio-button value="fiber_declined" id="declined-radio-button">Declined</mat-radio-button>
         </div>
       </mat-radio-group>
 
@@ -64,8 +64,8 @@
             </div>
             <div class="additional-info">
               <div class="dates">
-                <span><strong>From:</strong> {{ reservation.startDate | date: 'mediumDate' }}</span>
-                <span><strong>To:</strong> {{ reservation.endDate | date: 'mediumDate' }}</span>
+                <span class="request-start-date"><strong>From: </strong>{{ reservation.startDate | date: 'mediumDate' }}</span>
+                <span class="request-end-date"><strong>To: </strong>{{ reservation.endDate | date: 'mediumDate' }}</span>
               </div>
               <div class="price-guests">
                 <span><strong>Price:</strong> {{ reservation.totalPrice }}RSD</span>

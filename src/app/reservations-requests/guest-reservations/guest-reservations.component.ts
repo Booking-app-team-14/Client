@@ -43,6 +43,12 @@ export class GuestReservationsComponent implements OnInit{
       (deleteError) => {
         alert('Successfully canceled!');
         this.fetchReservations();
+        setTimeout(() => {
+          const cancelledRequestSpan = document.getElementById('cancelled-request-confirmation');
+          if (cancelledRequestSpan) {
+            cancelledRequestSpan.style.display = 'inline';
+          }
+        }, 1000);
       }
     );
   }

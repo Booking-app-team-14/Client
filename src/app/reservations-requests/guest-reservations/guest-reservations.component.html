@@ -1,5 +1,7 @@
 <div class="container">
-  <h1>Reservation Requests</h1>
+  <h1 id="reservation-requests-header">Reservation Requests</h1>
+
+  <div id="cancelled-request-confirmation" style="display: none; color: #f9f9f9; font-size: xx-small;">cancelled confirmation</div>
 
   <div class="row">
     <!-- Filter section on the left side -->
@@ -61,8 +63,8 @@
             </div>
             <div class="additional-info">
               <div class="dates">
-                <span><strong>From:</strong> {{ reservation.startDate | date: 'mediumDate' }}</span>
-                <span><strong>To:</strong> {{ reservation.endDate | date: 'mediumDate' }}</span>
+                <span class="request-start-date"><strong>From: </strong>{{ reservation.startDate | date: 'mediumDate' }}</span>
+                <span class="request-end-date"><strong>To: </strong>{{ reservation.endDate | date: 'mediumDate' }}</span>
               </div>
               <div class="price-guests">
                 <span><strong>Price:</strong> {{ reservation.totalPrice }}</span>
