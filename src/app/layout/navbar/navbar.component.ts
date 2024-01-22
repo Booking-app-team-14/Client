@@ -41,28 +41,28 @@ export class NavbarComponent implements AfterViewInit, OnDestroy, OnInit {
       });
     });
 
-    this.getUserInfo().subscribe(username => {
-      this.socket = this.webSocketService.subscribeToSocket('/topic/notifications', username, () => {
+    // this.getUserInfo().subscribe(username => {
+    //   this.socket = this.webSocketService.subscribeToSocket('/topic/notifications', username, () => {
 
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.http.get<any>(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe(userId => {
-          this.http.get<any>(`http://localhost:8080/api/notifications/` + userId +`/`+ false).subscribe(notificationDTOs => {
-            this.notificationsNumber = "0";
-            for (let notification of notificationDTOs) {
-              if (notification.seen == false) {
-                if (this.notificationsNumber == "9+") return;
-                if (Number(this.notificationsNumber) == 9) {
-                  this.notificationsNumber = "9+";
-                }
-                this.notificationsNumber = String(Number(this.notificationsNumber) + 1);
-              }
-            }
+    //     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    //     this.http.get<any>(`http://localhost:8080/api/users/token/${currentUser.token}`).subscribe(userId => {
+    //       this.http.get<any>(`http://localhost:8080/api/notifications/` + userId +`/`+ false).subscribe(notificationDTOs => {
+    //         this.notificationsNumber = "0";
+    //         for (let notification of notificationDTOs) {
+    //           if (notification.seen == false) {
+    //             if (this.notificationsNumber == "9+") return;
+    //             if (Number(this.notificationsNumber) == 9) {
+    //               this.notificationsNumber = "9+";
+    //             }
+    //             this.notificationsNumber = String(Number(this.notificationsNumber) + 1);
+    //           }
+    //         }
 
-          });
-        });
-      });
+    //       });
+    //     });
+    //   });
 
-    });
+    // });
   }
 
   ngAfterViewInit(): void {

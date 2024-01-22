@@ -55,9 +55,10 @@ export class UpdateAccountComponent {
   address: string;
   userId: number;
 
+  currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
   ngOnInit(): void {
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.accountService.getUserIdFromToken(currentUser.token).subscribe({
+    this.accountService.getUserIdFromToken(this.currentUser.token).subscribe({
       next: (userId: any) => {
         this.userId = userId;
         this.accountService.getUserFromId(userId).subscribe({
@@ -122,9 +123,10 @@ export class UpdateAccountComponent {
       });
     }
 
+    let detailsChanged: boolean = false;
     if (this.password != null && this.password != "") {
       if (this.password.length < 8) {
-        alert("Password must be at least 8 characters long!");
+        window.alert("Password must be at least 8 characters long!");
         return;
       }
       if (this.password != this.passwordConfirm) {
@@ -132,6 +134,7 @@ export class UpdateAccountComponent {
         return;
       }
       this.updatedUser.password = this.password;
+      detailsChanged = true;
     }
     if (this.phone != null && this.phone != "") {
       const phoneRegex = new RegExp('^\\+\\d{1,2}\\s?\\d{3}\\s?\\d{3}\\s?\\d{4}$');
@@ -140,6 +143,7 @@ export class UpdateAccountComponent {
         return;
       }
       this.updatedUser.phoneNumber = this.phone;
+      detailsChanged = true;
     } else {
       this.updatedUser.phoneNumber = this.user.phoneNumber;
     }
@@ -149,6 +153,7 @@ export class UpdateAccountComponent {
         return;
       }
       this.updatedUser.address = this.address;
+      detailsChanged = true;
     } else {
       this.updatedUser.address = this.user.address;
     }
@@ -158,6 +163,7 @@ export class UpdateAccountComponent {
         return;
       }
       this.updatedUser.firstName = this.firstName;
+      detailsChanged = true;
     } else {
       this.updatedUser.firstName = this.user.firstName;
     }
@@ -167,11 +173,21 @@ export class UpdateAccountComponent {
         return;
       }
       this.updatedUser.lastName = this.lastName;
+      detailsChanged = true;
     } else {
       this.updatedUser.lastName = this.user.lastName;
     }
 
-    console.log(this.updatedUser);
+    if (!detailsChanged) {
+      if (this.fileUploaded) {
+        alert("Avatar updated successfully!");
+        return;
+      } else {
+        alert("No changes made!");
+        return;
+      }
+    }
+
     this.accountService.updateAccount(this.updatedUser, this.userId).subscribe({
       next: (r: any) => {
         alert("User data updated successfully!");

@@ -1,4 +1,4 @@
-declare module 'stompjs';
+// declare module 'stompjs';
 
 declare namespace SockJSN {
     type CONNECTING = 0;
