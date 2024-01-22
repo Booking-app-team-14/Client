@@ -58,7 +58,9 @@ export class NotificationWallComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
     this.getUserInfo().subscribe(username => {
+      /*
       this.socket = this.webSocketService.subscribeToSocket('/topic/notifications', username, () => {
 
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -70,8 +72,10 @@ export class NotificationWallComponent implements OnInit, OnDestroy {
           });
         });
       });
-
+*/
     });
+
+
   }
 
   ngOnDestroy(): void {

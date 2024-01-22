@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { CancelDialogComponent } from '../../shared/cancel-dialog/cancel-dialog.component';
 import { tick } from '@angular/core/testing';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-reservation',
@@ -27,6 +28,7 @@ export class ReservationComponent implements AfterViewInit {
   private guestId: number;
   availableDates: AvailabilityDTO[] = [];
   userRole: string ='';
+  guestForm: NgForm;
 
   constructor(private reservationService: ReservationService, public userService: UserService, private snackBar: MatSnackBar) {
     this.userService.userRole$.subscribe(role => {

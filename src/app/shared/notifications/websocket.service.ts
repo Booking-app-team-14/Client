@@ -6,7 +6,7 @@ import * as Stomp from 'stompjs';
     providedIn: 'root'
 })
 export class WebSocketService {
-
+/*
     public subscribeToSocket(topic: string, subscriberUsername: string, callback: () => void): any {
 
         const socket = new SockJS("http://localhost:8080/socket");
@@ -21,5 +21,5 @@ export class WebSocketService {
 
         return socket;
     }
-
+*/
 }

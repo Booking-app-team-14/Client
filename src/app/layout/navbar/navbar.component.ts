@@ -40,7 +40,7 @@ export class NavbarComponent implements AfterViewInit, OnDestroy, OnInit {
 
       });
     });
-
+/*
     this.getUserInfo().subscribe(username => {
       this.socket = this.webSocketService.subscribeToSocket('/topic/notifications', username, () => {
 
@@ -63,6 +63,7 @@ export class NavbarComponent implements AfterViewInit, OnDestroy, OnInit {
       });
 
     });
+  */
   }
 
   ngAfterViewInit(): void {
